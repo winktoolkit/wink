@@ -1,10 +1,13 @@
 WINK
 
+Wink Toolkit is a lightweight JavaScript toolkit which will help you build great 
+mobile web apps. It is designed and developed to meet the specific constraints 
+of the mobile environment.
 
 Components
 ----------
 
-The "map.xml" file at the root of the project lists all the components of WINK.
+View the index.html file to have an overview of the  various components included in Wink.
 
 
 Build
