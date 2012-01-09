@@ -1,0 +1,71 @@
+.ap_container
+{
+	padding: 10px;
+	-webkit-box-shadow: 5px 5px 5px #888;
+}
+
+.ap_progress_container
+{
+	height: 44px;
+	margin: 0 10px;
+}
+
+.ap_progress
+{
+	top: 16px;
+}
+
+.w_bar .w_bar_progress.ap_buffering_bar
+{
+	background: rgba(255, 55, 0, 0.4);
+}
+
+.ap_cursor
+{
+	position: absolute;
+	
+	top: -14px;
+	left: -18px;
+}
+
+.ap_duration
+{
+	height: 44px;
+	line-height: 44px;
+	
+	min-width: 50px;
+	
+	margin: 0 10px;
+	
+	text-align: center;
+}
+
+.ap_lyrics
+{
+	text-align: center;
+}
+
+.no_flex_box
+{
+	position: relative;
+	height: 45px;
+}
+
+.no_flex_box .ap_controls
+{
+	position: absolute;
+	
+}
+
+.no_flex_box .ap_progress_container
+{
+	position: absolute;
+	left: 44px;
+	right: 76px;
+}
+
+.no_flex_box .ap_duration
+{
+	position: absolute;
+	right: 0;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/opener.css" type="text/css">
+		
+		<style>
+			#container
+			{
+				position: relative;
+				
+				border: 1px #fff solid;
+				
+				height: 185px;
+				width: 185px;
+				
+				margin: 50px auto;
+			}
+			
+			#content
+			{
+				position: absolute;
+				
+				top: 0;
+				left: 0;
+				
+				overflow: hidden;
+				
+				height: 100%;
+				width: 100%;
+				
+				z-index: 998;
+			}
+			
+			#image
+			{
+				position: absolute;
+				
+				top: 0;
+				left: 0;
+				
+				z-index: 999;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../fx/_xyz/js/3dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../../math/_matrix/js/matrix.js"></script>
+				
+		<script type="text/javascript" src="../js/opener.js"></script>
+		
+		<script>	
+			var opener;
+
+			var properties = 
+			{
+				'image': './img/wink.png',
+				'height': 185,
+				'width': 185,
+				'panelsAngle': 200,
+				'panelHeight': 5,
+				'openerXAngle': 5,
+				'openerYAngle': -50,
+				'duration': 300
+			}
+
+			init = function()
+			{
+				opener = new wink.ui.xyz.Opener(properties);
+				
+				wink.fx.apply(opener._panelsNode, {'transform-origin': '0 0'});
+				
+				$('image').appendChild(opener.getDomNode());		
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">opener</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			Click on the image to open it. Click on it again to close it.
+		</div>
+		
+		<div id="container">
+			
+			<div id="image">
+			</div>
+			
+			<div id="content" class="w_bg_light" >
+				<div class="w_bloc">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu euismod purus. In leo neque, hendrerit sit amet venenatis sed, egestas nec nisl. Suspendisse lobortis convallis velit, sed tempus neque convallis a. Phasellus odio lectus, dictum molestie dignissim non, fringilla et nisi. Fusce sed magna ac erat malesuada imperdiet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eget tristique turpis. Nam malesuada suscipit ipsum sed pulvinar. Nulla facilisi. Ut tellus nisl, mattis vel lacinia at, interdum nec velit. Curabitur condimentum, sapien ac auctor pharetra, lacus quam varius erat, non porta ante nulla in nunc.
+				</div> 
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,204 @@
+/*--------------------------------------------------------
+ * Copyright (c) 2011, The Dojo Foundation
+ * This software is distributed under the "Simplified BSD license",
+ * the text of which is available at http://www.winktoolkit.org/licence.txt
+ * or see the "license.txt" file for more details.
+ *--------------------------------------------------------*/
+ 
+.chocolate .w_icon.w_icon_warning
+{
+	background-image: url(../img/icons.png);
+	background-position: 0px 0px;
+}
+
+.chocolate .w_icon.w_icon_play
+{
+	background-image: url(../img/icons.png);
+	background-position: -44px 0px;
+}
+
+.chocolate .w_icon.w_icon_pause
+{
+	background-image: url(../img/icons.png);
+	background-position: -88px 0px;
+}
+
+.chocolate .w_icon.w_icon_stop
+{
+	background-image: url(../img/icons.png);
+	background-position: -132px 0px;
+}
+
+.chocolate .w_icon.w_icon_previous
+{
+	background-image: url(../img/icons.png);
+	background-position: -176px 0px;
+}
+
+.chocolate .w_icon.w_icon_next
+{
+	background-image: url(../img/icons.png);
+	background-position: -220px 0px;
+}
+
+.chocolate .w_icon.w_icon_wip
+{
+	background-image: url(../img/icons.png);
+	background-position: -264px 0px;
+}
+
+.chocolate .w_icon.w_icon_video
+{
+	background-image: url(../img/icons.png);
+	background-position: -308px 0px;
+}
+
+.chocolate .w_icon.w_icon_map
+{
+	background-image: url(../img/icons.png);
+	background-position: -352px 0px;
+}
+
+.chocolate .w_icon.w_icon_print
+{
+	background-image: url(../img/icons.png);
+	background-position: -396px 0px;
+}
+
+.chocolate .w_icon.w_icon_info
+{
+	background-image: url(../img/icons.png);
+	background-position: 0px -44px;
+}
+
+.chocolate .w_icon.w_icon_add
+{
+	background-image: url(../img/icons.png);
+	background-position: -44px -44px;
+}
+
+.chocolate .w_icon.w_icon_remove
+{
+	background-image: url(../img/icons.png);
+	background-position: -88px -44px;
+}
+
+.chocolate .w_icon.w_icon_unmute
+{
+	background-image: url(../img/icons.png);
+	background-position: -132px -44px;
+}
+
+.chocolate .w_icon.w_icon_mute
+{
+	background-image: url(../img/icons.png);
+	background-position: -176px -44px;
+}
+
+.chocolate .w_icon.w_icon_light_on
+{
+	background-image: url(../img/icons.png);
+	background-position: -220px -44px;
+}
+
+.chocolate .w_icon.w_icon_light_off
+{
+	background-image: url(../img/icons.png);
+	background-position: -264px -44px;
+}
+
+.chocolate .w_icon.w_icon_trash_empty
+{
+	background-image: url(../img/icons.png);
+	background-position: -308px -44px;
+}
+
+.chocolate .w_icon.w_icon_trash_full
+{
+	background-image: url(../img/icons.png);
+	background-position: -352px -44px;
+}
+
+.chocolate .w_icon.w_icon_question
+{
+	background-image: url(../img/icons.png);
+	background-position: -396px -44px;
+}
+
+.chocolate .w_icon.w_icon_edit
+{
+	background-image: url(../img/icons.png);
+	background-position: 0px -88px;
+}
+
+.chocolate .w_icon.w_icon_calendar
+{
+	background-image: url(../img/icons.png);
+	background-position: -44px -88px;
+}
+
+.chocolate .w_icon.w_icon_task
+{
+	background-image: url(../img/icons.png);
+	background-position: -88px -88px;
+}
+
+.chocolate .w_icon.w_icon_mail
+{
+	background-image: url(../img/icons.png);
+	background-position: -132px -88px;
+}
+
+.chocolate .w_icon.w_icon_save
+{
+	background-image: url(../img/icons.png);
+	background-position: -176px -88px;
+}
+
+.chocolate .w_icon.w_icon_tray_full
+{
+	background-image: url(../img/icons.png);
+	background-position: -220px -88px;
+}
+
+.chocolate .w_icon.w_icon_tray_empty
+{
+	background-image: url(../img/icons.png);
+	background-position: -264px -88px;
+}
+
+.chocolate .w_icon.w_icon_tag
+{
+	background-image: url(../img/icons.png);
+	background-position: -308px -88px;
+}
+
+.chocolate .w_icon.w_icon_search
+{
+	background-image: url(../img/icons.png);
+	background-position: -352px -88px;
+}
+
+.chocolate .w_icon.w_icon_calculator
+{
+	background-image: url(../img/icons.png);
+	background-position: -396px -88px;
+}
+
+.chocolate .w_icon.w_icon_lock
+{
+	background-image: url(../img/icons.png);
+	background-position: 0px -132px;
+}
+
+.chocolate .w_icon.w_icon_home
+{
+	background-image: url(../img/icons.png);
+	background-position: -44px -132px;
+}
+
+.chocolate .w_icon.w_icon_identity
+{
+	background-image: url(../img/icons.png);
+	background-position: -88px -132px;
+}

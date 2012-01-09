@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_scrolltoload2</title>
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../../../plugins/scrolltoload/css/scrolltoload.css" type="text/css">
+
+		<style>
+			#wrapper {
+				position: relative;
+				z-index: 1;
+				width: 100%;
+				overflow: hidden;
+			}
+			
+			#title {
+				margin-right: 20px;
+			}
+			
+			#scrollContent {
+				position: relative;
+				width: 100%;
+			}
+			
+			#scrollContent .w_list {
+				margin: 0;
+			}
+			
+			.w_list_item.preselected, .w_list_item.selected 
+			{
+				background: -webkit-gradient(linear, left top, left bottom, from(#2f2f2f), to(#000), color-stop(50%, #151515));
+				color: #dedede;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../ux/window/js/window.js"></script>
+		
+		<script type="text/javascript" src="../../../ux/movementtracker/js/movementtracker.js"></script>
+		<script type="text/javascript" src="../../../ux/inertia/js/inertia.js"></script>
+		<script type="text/javascript" src="../../../ui/layout/scroller/js/scroller.js"></script>
+		
+		<script type="text/javascript" src="../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/cspinner/js/cspinner.js"></script>
+		<script type="text/javascript" src="../../../plugins/scrolltoload/js/scrolltoload.js"></script>
+		
+		<script type="text/javascript">
+			var init = function() 
+			{
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+
+				helper.addItems(10, false);
+
+				var headerHeight = 55;
+				var heightRemains = wink.ux.window.height - headerHeight;
+				$('wrapper').style.height = heightRemains + "px";
+
+				var ctx = {};
+				var scrollToLoad = new wink.plugins.ScrollToLoad({
+					scroller: new wink.ui.layout.Scroller({
+						target: 'scrollContent',
+						direction: 'y',
+						callbacks: {
+							stopSliding:	{ context: ctx, method: 'onScroll' },
+							endScrolling:	{ context: ctx, method: 'onScroll' }
+						}
+					}),
+					content: $('scrollContent'),
+					waitText: 'Click here to load more',
+					loadingText: 'Loading...',
+					spinner: new wink.ui.xy.CSpinner({
+						size: 25,
+						radius: 4,
+						thickness: 8,
+						count: 15,
+						space: 17,
+						fromcolor: '#eee',
+						tocolor: '#f00',
+						stopcolor: 0.1,
+						linewidth: 0,
+						refreshRate: 60
+					}),
+					pageSize: 600,
+					onPageChanged: function(pageindex, pagecount, onLoading, onEnd) {
+						if (pageindex == pagecount) {
+							onLoading();
+							helper.simulateXhr(10, false, "New ", 1500, onEnd);
+						}
+					},
+					onLoadMore: function(onLoading, onEnd) {
+						onLoading();
+						helper.simulateXhr(10, false, "New ", 1500, onEnd);
+					}
+				});
+				ctx.onScroll = wink.bind(scrollToLoad.onScroll, scrollToLoad);
+			};
+
+			var helper = 
+			{
+				index: 0,
+				addItems: function(n, atbegin, prefix)
+				{
+					for (var i = 0; i < n; i++) {
+						var li = document.createElement('li');
+						li.innerHTML = (prefix ? prefix : "") + "message " + this.index;
+						this.index++;
+						wink.addClass(li, "w_list_item w_border_bottom w_bg_light");
+						if (atbegin) {
+							$('content').insertBefore(li, $('content').childNodes[0]);
+						} else {
+							$('content').appendChild(li);
+						}
+					}
+				},
+				simulateXhr: function(n, atbegin, prefix, delay, callback)
+				{
+					var delayed = function() {
+						this.addItems(n, atbegin, prefix);
+						callback();
+					};
+					setTimeout(function () {
+						delayed.call(helper);
+					}, delay);
+				}
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div id="header" class="w_box w_header w_bg_dark">
+			<span id="title">scroll to load</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="wrapper">
+			<div id="scrollContent">
+				<ul id="content" class="w_list w_border">
+				
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

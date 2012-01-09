@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../../../plugins/completion/css/completion.css" type="text/css">
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../ux/window/js/window.js"></script>
+		
+		<script type="text/javascript" src="../../../plugins/completion/js/component.js"></script>
+		<script type="text/javascript" src="../../../plugins/completion/js/tools.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/searchTools.js"></script>
+		<script type="text/javascript" src="../../../plugins/completion/js/manager/helper.js"></script>
+		<script type="text/javascript" src="../../../plugins/completion/js/manager/data/remote.js"></script>
+		<script type="text/javascript" src="../../../plugins/completion/js/manager/dom/simple.js"></script>
+		<script type="text/javascript" src="../../../plugins/completion/js/manager/event/simple.js"></script>
+		<script type="text/javascript" src="../../../plugins/completion/js/module/data/default.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/module/data/directlink.js"></script>
+		<script type="text/javascript" src="../../../plugins/completion/js/module/dom/default.js"></script>
+		<script type="text/javascript" src="../../../plugins/completion/js/module/dom/label.js"></script>
+		<script type="text/javascript" src="../../../plugins/completion/js/module/event/default.js"></script>
+		<script type="text/javascript" src="../../../plugins/completion/js/module/event/directlink.js"></script>
+		<script type="text/javascript" src="../../../plugins/completion/js/module/event/label.js"></script>
+		
+		<script>
+		var completer;
+		var properties = null; 
+	
+		wink.error.logLevel = 1;
+
+		init = function()
+		{
+			properties = 
+			{
+				"input": $('myInput'),
+				"managers": {
+
+					"data": {
+						"name": "RemoteDataManager",
+						"callbacks": {
+							"getDataContent" : { method: "filterDataContent" }
+						}, 
+						"url": "./completionServer.php",
+						"queryParamName": "q",
+						"sendMethod": "GET",
+						"minQueryLength": 1,
+						"modules": {
+							"default": {
+								"mapping": {
+									"value" : "v",
+									"type"  : "t"
+								}
+							},
+							"directLink": {
+                                "mapping": {
+                                    "clickUrl" : "u",
+                                    "value"    : "vo"
+							    }
+							}
+						}
+					},
+
+					"dom": {
+						"name": "SimpleDomManager",
+						"callbacks": {
+							"show" : { method: "catchShow" },
+							"hide" : { method: "catchHide" }
+						},
+                        "borderSize": 1,
+                        "modules": {
+							"name": "directLinkDataModule"
+						}
+					},
+                    
+					"event": {
+						"name": "SimpleEventManager",
+                        "closeOnBlur": true
+					}
+			   }
+			};
+			completer = new wink.plugins.completion.Component(properties);
+			completer.start();
+		},
+		
+		filterDataContent = function(data)
+        {
+			return data.content;
+		};
+
+		catchShow = function()
+		{
+		};
+        
+		catchHide = function()
+		{
+		};
+
+		changeUrl = function(url)
+		{
+			// restart with changing only 
+            properties.managers.data.url = url;            
+            completer.restart(properties);
+		};
+
+		</script>
+		
+		<style type="text/css">
+			
+            input[type="text"] {
+                width: 60%;  
+            }
+            
+            .w_bloc {
+                margin-top: 20px;
+                height: 400px;
+            }
+
+		</style>
+	</head>
+	
+	<body onload="init()">
+		<div class="w_box w_header w_bg_dark">
+            <input type="button" class="w_button w_radius w_bg_light" id="back" value="back" style="visibility: visible; " onclick="document.location.href='index.html'" />
+            remote completion
+        </div>
+		
+		<div class="w_bloc" style="text-align: center">
+            <form method="GET" action="">
+			    Remote server URL (mandatory) :
+                <br/>
+                <input onblur="changeUrl(this.value);" type="text" value="./completionServer.php" style="height:36px;" class="w_input w_border w_radius"/>
+                <br/>
+                <br/>
+                
+                <input id="myInput" name="query" autocomplete="off" autocorrect="off" type="text" value="" style="height:36px;" class="w_input w_border w_radius"/>
+                <input type="submit" name="submit" class="w_button w_border w_radius w_bg_dark" value="ok" onclick="" />
+                <br/>
+		    </form>
+		</div>
+        
+	</body>
+</html>

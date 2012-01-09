@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Loader Test 2</title>
+		<script type="text/javascript" src="../loader.js"></script>
+		<script type="text/javascript">	
+			var loadLib = function() {
+				winkloader.load({
+					buildPath: '../../build/wink/js/',
+					profile: 'all',
+					version: '1.4.0',
+					callback: function() {
+						var buf = "";
+						buf += "wink defined : " + (typeof wink != "undefined") + "<br/>";
+						document.getElementById("info").innerHTML = buf;
+					}
+				});
+			};
+		</script>
+	</head>
+	<body onload="loadLib();">
+		<div>
+			<span id="info">Loader process ...</span>
+		</div>
+	</body>
+</html>

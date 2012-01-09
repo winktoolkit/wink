@@ -1,0 +1,255 @@
+#content 
+{
+	background-color: #f3f3f3;
+	width: auto;
+	height: auto;
+	margin: 0;
+	padding: 1em;
+	background-position: top left;
+	background-repeat: repeat-y;
+	background-color: white;
+	color: black;
+}
+
+.infobox
+{
+	background-color:#F9F9F9;
+	border:1px solid #AAAAAA;
+	clear:right;
+	color:black;
+	float:right;
+	margin:0.5em 0 0.5em 1em;
+	padding:0.2em;
+}
+
+#content 
+{
+	line-height: 1.5em;
+}
+
+#bodyContent 
+{
+	font-size: 0.8em;
+}
+/* Links */
+			a 
+			{
+				text-decoration: none;
+				color: #0645ad;
+				background: none;
+			}
+			a:visited 
+			{
+				color: #0b0080;
+			}
+			a:active 
+			{
+				color: #faa700;
+			}
+			a:hover 
+			{
+				text-decoration: underline;
+			}
+			a.stub 
+			{
+				color: #772233;
+			}
+			a.new, #p-personal a.new 
+			{
+				color: #ba0000;
+			}
+			a.new:visited, #p-personal a.new:visited
+{
+				color: #a55858;
+			}
+			
+			img 
+			{
+				border: none;
+				vertical-align: middle;
+			}
+			hr 
+			{
+				height: 1px;
+				color: #aaa;
+				background-color: #aaa;
+				border: 0;
+				margin: .2em 0 .2em 0;
+			}
+
+			.toccolours 
+			{
+				border: 1px solid #aaa;
+				background-color: #f9f9f9;
+				padding: 5px;
+				font-size: 95%;
+			}
+			div#bodyContent 
+			{
+				line-height: 1.5em;
+			}
+			
+			.editsection 
+			{
+				float: right;
+				margin-left: 5px;		
+			}
+			
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				color: black;
+				background: none;
+				font-weight: normal;
+				margin: 0;
+				padding-top: .5em;
+				padding-bottom: .17em;
+				border-bottom: 1px solid #aaa;
+				width: auto;
+			}
+			h1 { font-size: 188%; }
+			h1 .editsection { font-size: 53%; }
+			h2 { font-size: 150%; }
+			h2 .editsection { font-size: 67%; }
+			h3,
+			h4,
+			h5,
+			h6 {
+				border-bottom: none;
+				font-weight: bold;
+			}
+			h3 { font-size: 132%; }
+			h3 .editsection { font-size: 76%; font-weight: normal; }
+			h4 { font-size: 116%; }
+			h4 .editsection { font-size: 86%; font-weight: normal; }
+			h5 { font-size: 100%; }
+			h5 .editsection { font-weight: normal; }
+			h6 { font-size: 80%;  }
+			h6 .editsection { font-size: 125%; font-weight: normal; }
+			h1, h2 {
+				margin-bottom: .6em;
+			}
+			h3, h4, h5 {
+				margin-bottom: .3em;
+			}
+			p {
+				margin: .4em 0 .5em 0;
+				line-height: 1.5em;
+			}
+				p img {
+					margin: 0;
+				}
+			
+			ul {
+				line-height: 1.5em;
+				list-style-type: square;
+				margin: .3em 0 0 1.5em;
+				padding: 0;
+				list-style-image: url(images/bullet-icon.png?1);
+			}
+			ol {
+				line-height: 1.5em;
+				margin: .3em 0 0 3.2em;
+				padding: 0;
+				list-style-image: none;
+			}
+			li {
+				margin-bottom: .1em;
+			}
+			
+			/* Sub-navigation */
+#siteSub {
+	display: none;
+}
+#jump-to-nav {
+	display: none;
+}
+#contentSub, #contentSub2 {
+	font-size: 84%;
+	line-height: 1.2em;
+	margin: 0 0 1.4em 1em;
+	color: #7d7d7d;
+	width: auto;
+}
+/* Edge Cases for Content */
+
+#firstHeading {
+	padding-top: 0;
+	margin-top: 0;
+	padding-top: 0;
+	margin-bottom: 0.1em;
+	line-height: 1.2em;
+	font-size: 1.6em;
+	padding-bottom: 0;
+}
+#content a.external,
+#content a[href ^="gopher://"] {
+	background: url(images/external-link-ltr-icon.png?2) center right no-repeat;
+	padding: 0 13px 0 0;
+}
+#content a[href ^="https://"],
+.link-https {
+	background: url(images/lock-icon.png?2) center right no-repeat;
+	padding: 0 13px 0 0;
+}
+#content a[href ^="mailto:"],
+.link-mailto {
+	background: url(images/mail-icon.png?2) center right no-repeat;
+	padding: 0 13px 0 0;
+}
+#content a[href ^="news://"] {
+	background: url(images/news-icon.png?2) center right no-repeat;
+	padding: 0 13px 0 0;
+}
+#content a[href ^="ftp://"],
+.link-ftp {
+	background: url(images/file-icon.png?2) center right no-repeat;
+	padding: 0 13px 0 0;
+}
+#content a[href ^="irc://"],
+#content a.extiw[href ^="irc://"],
+.link-irc {
+	background: url(images/talk-icon.png?2) center right no-repeat;
+	padding: 0 13px 0 0;
+}
+#content a.external[href $=".ogg"], #content a.external[href $=".OGG"],
+#content a.external[href $=".mid"], #content a.external[href $=".MID"],
+#content a.external[href $=".midi"], #content a.external[href $=".MIDI"],
+#content a.external[href $=".mp3"], #content a.external[href $=".MP3"],
+#content a.external[href $=".wav"], #content a.external[href $=".WAV"],
+#content a.external[href $=".wma"], #content a.external[href $=".WMA"],
+.link-audio {
+	background: url("images/audio-icon.png?2") center right no-repeat;
+	padding: 0 13px 0 0;
+}
+#content a.external[href $=".ogm"], #content a.external[href $=".OGM"],
+#content a.external[href $=".avi"], #content a.external[href $=".AVI"],
+#content a.external[href $=".mpeg"], #content a.external[href $=".MPEG"],
+#content a.external[href $=".mpg"], #content a.external[href $=".MPG"],
+.link-video {
+	background: url("images/video-icon.png?2") center right no-repeat;
+	padding: 0 13px 0 0;
+}
+#content a.external[href $=".pdf"], #content a.external[href $=".PDF"],
+#content a.external[href *=".pdf#"], #content a.external[href *=".PDF#"],
+#content a.external[href *=".pdf?"], #content a.external[href *=".PDF?"],
+.link-document {
+	background: url("images/document-icon.png?2") center right no-repeat;
+	padding: 0 13px 0 0;
+}
+/* Interwiki Styling  (Disabled) */
+#content a.extiw,
+#content a.extiw:active {
+	color: #36b;
+	background: none;
+	padding: 0;
+}
+#content a.external {
+	color: #36b;
+}
+#content .printfooter {
+	display: none;
+}

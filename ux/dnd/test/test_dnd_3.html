@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html manifest='puzzle.manifest'>
+    <head>
+        <title>Puzzle</title>
+        
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        
+        <style>
+			html, body{
+				margin: 0;
+				padding: 0;
+				
+				height: 360px;
+				
+				-webkit-user-select: none;
+			}
+		</style>
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/dnd.js"></script>
+		
+        <script>
+			var dndmanager = null;
+
+			var puzzleSize = 25;
+
+			var sources    = new Array();
+			var targets    = new Array();
+			
+			init = function()
+            {
+            	var pieces = new Array('1', '2', '3','4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25');
+				
+				/************************************************/
+				/*                   STEP 1                     */
+				/************************************************/
+				
+				// Sort pieces randomly
+				for ( var i=1; i<=puzzleSize; i++)
+				{
+					pieces.sort(function(){return 0.5 - Math.random()});
+					$('piece' + i).src = './img/piece' + pieces.pop() + '.jpg';
+				}
+
+				/************************************************/
+				/*                   STEP 2                     */
+				/************************************************/
+				
+				// Initialize the dnd manager
+            	dnd = new wink.ux.Dnd();
+
+            	/************************************************/
+				/*                   STEP 3                     */
+				/************************************************/
+				
+            	// Initialize the dnd sources and their methods
+            	for ( var i=1; i<=puzzleSize; i++)
+				{
+					var id = 'piece' + i;
+
+            		var source = new wink.ux.dnd.Source({'id': id});
+
+            		source.registerEvent('/dnd/events/drop', source, 'drop');
+					
+            		sources.push(source)
+				}
+            	
+            	wink.ux.dnd.Source.prototype.drop = function(params)
+				{
+					params.target.onSourceOut();
+
+					var targetId = params.target.id;
+					var sourceId = params.source.id;
+					
+					var from = $(sourceId).src;
+					var to = $(targetId).childNodes[1].src;
+					
+					$(sourceId).src = to;
+					$(targetId).childNodes[1].src = from;
+				}
+
+            	wink.ux.dnd.Source.prototype.getAvatar = function()
+				{
+					var X = $(this.id).getLeftPosition();
+					var Y = $(this.id).getTopPosition();
+					
+					var avatar = $(this.id).cloneNode(true);
+					
+					avatar.style.top = Y + 'px';
+					avatar.style.left = X + 'px';
+
+					avatar.style.position = 'absolute';
+
+					avatar.style.opacity = 0.5;
+
+					return avatar;
+				}
+
+            	/************************************************/
+				/*                   STEP 4                     */
+				/************************************************/
+				
+            	// Initialize the dnd targets and their methods
+            	for ( var i=1; i<=puzzleSize; i++)
+				{
+            		var id = 'target' + i;
+            		var target = new wink.ux.dnd.Target({'id': id, 'event': '/dnd/events/drop'});
+
+            		targets.push(target);
+				}
+				
+            	wink.ux.dnd.Target.prototype.over = wink.ux.dnd.Target.prototype.onSourceOver;
+            	wink.ux.dnd.Target.prototype.out = wink.ux.dnd.Target.prototype.onSourceOut;
+
+            	wink.ux.dnd.Target.prototype.onSourceOver = function()
+				{
+					if(!this._isOver)
+					{
+						this.over();
+						$(this.id).childNodes[1].style.display = 'none';
+					}
+				} 
+
+            	wink.ux.dnd.Target.prototype.onSourceOut = function()
+				{
+					if(this._isOver)
+					{
+						this.out();
+						$(this.id).childNodes[1].style.display = 'block';
+					}
+				}
+
+				/************************************************/
+				/*                   STEP 5                     */
+				/************************************************/
+				
+				// Add sources and targets
+				for ( var i=0; i< sources.length; i++ )
+				{
+					dnd.addSource(sources[i]); 
+					dnd.addTarget(targets[i]);
+				}
+            }
+        </script>
+    </head>
+
+	<body onload="init()">
+	    <div>
+	        <div id="target1" style="position: absolute; left: 0px; top: 0px; width: 64px; height: 92px">
+	            <img id="piece1" src="./img/piece1.jpg" alt="piece1" />
+	        </div>
+	        <div id="target2" style="position: absolute; left: 64px; top: 0px; width: 64px; height: 92px">
+	            <img id="piece2" src="./img/piece2.jpg" alt="piece2" />
+	        </div>
+	        <div id="target3" style="position: absolute; left: 128px; top: 0px; width: 64px; height: 92px">
+	            <img id="piece3" src="./img/piece3.jpg" alt="piece3" />
+	        </div>
+	        <div id="target4" style="position: absolute; left: 192px; top: 0px; width: 64px; height: 92px">
+	            <img id="piece4" src="./img/piece4.jpg" alt="piece4" />
+	        </div>
+	        <div id="target5" style="position: absolute; left: 256px; top: 0px; width: 64px; height: 92px">
+	            <img id="piece5" src="./img/piece5.jpg" alt="piece5" />
+	        </div>
+	    </div>
+	    <div>
+	        <div id="target6" style="position: absolute; left: 0px; top: 92px; width: 64px; height: 92px">
+	            <img id="piece6" src="./img/piece6.jpg" alt="piece6" />
+	        </div>
+	        <div id="target7" style="position: absolute; left: 64px; top: 92px; width: 64px; height: 92px">
+	            <img id="piece7" src="./img/piece7.jpg" alt="piece7" />
+	        </div>
+	        <div id="target8" style="position: absolute; left: 128px; top: 92px; width: 64px; height: 92px">
+	            <img id="piece8" src="./img/piece8.jpg" alt="piece8" />
+	        </div>
+	        <div id="target9" style="position: absolute; left: 192px; top: 92px; width: 64px; height: 92px">
+	            <img id="piece9" src="./img/piece9.jpg" alt="piece9" />
+	        </div>
+	        <div id="target10" style="position: absolute; left: 256px; top: 92px; width: 64px; height: 92px">
+	            <img id="piece10" src="./img/piece10.jpg" alt="piece10" />
+	        </div>
+	    </div>
+	    <div>
+	        <div id="target11" style="position: absolute; left: 0px; top: 184px; width: 64px; height: 92px">
+	            <img id="piece11" src="./img/piece11.jpg" alt="piece11" />
+	        </div>
+	        <div id="target12" style="position: absolute; left: 64px; top: 184px; width: 64px; height: 92px">
+	            <img id="piece12" src="./img/piece12.jpg" alt="piece12" />
+	        </div>
+	        <div id="target13" style="position: absolute; left: 128px; top: 184px; width: 64px; height: 92px">
+	            <img id="piece13" src="./img/piece13.jpg" alt="piece13" />
+	        </div>
+	        <div id="target14" style="position: absolute; left: 192px; top: 184px; width: 64px; height: 92px">
+	            <img id="piece14" src="./img/piece14.jpg" alt="piece14" />
+	        </div>
+	        <div id="target15" style="position: absolute; left: 256px; top: 184px; width: 64px; height: 92px">
+	            <img id="piece15" src="./img/piece15.jpg" alt="piece15" />
+	        </div>
+	    </div>
+	    <div>
+	        <div id="target16" style="position: absolute; left: 0px; top: 276px; width: 64px; height: 92px">
+	            <img id="piece16" src="./img/piece16.jpg" alt="piece16" />
+	        </div>
+	        <div id="target17" style="position: absolute; left: 64px; top: 276px; width: 64px; height: 92px">
+	            <img id="piece17" src="./img/piece17.jpg" alt="piece17" />
+	        </div>
+	        <div id="target18" style="position: absolute; left: 128px; top: 276px; width: 64px; height: 92px">
+	            <img id="piece18" src="./img/piece18.jpg" alt="piece18" />
+	        </div>
+	        <div id="target19" style="position: absolute; left: 192px; top: 276px; width: 64px; height: 92px">
+	            <img id="piece19" src="./img/piece19.jpg" alt="piece19" />
+	        </div>
+	        <div id="target20" style="position: absolute; left: 256px; top: 276px; width: 64px; height: 92px">
+	            <img id="piece20" src="./img/piece20.jpg" alt="piece20" />
+	        </div>
+	    </div>
+	    <div>
+	        <div id="target21" style="position: absolute; left: 0px; top: 368px; width: 64px; height: 92px">
+	            <img id="piece21" src="./img/piece21.jpg" alt="piece21" />
+	        </div>
+	        <div id="target22" style="position: absolute; left: 64px; top: 368px; width: 64px; height: 92px">
+	            <img id="piece22" src="./img/piece22.jpg" alt="piece22" />
+	        </div>
+	        <div id="target23" style="position: absolute; left: 128px; top: 368px; width: 64px; height: 92px">
+	            <img id="piece23" src="./img/piece23.jpg" alt="piece23" />
+	        </div>
+	        <div id="target24" style="position: absolute; left: 192px; top: 368px; width: 64px; height: 92px">
+	            <img id="piece24" src="./img/piece24.jpg" alt="piece25" />
+	        </div>
+	        <div id="target25" style="position: absolute; left: 256px; top: 368px; width: 64px; height: 92px">
+	            <img id="piece25" src="./img/piece25.jpg" alt="piece25" />
+	        </div>
+	    </div>
+	</body>
+</html>

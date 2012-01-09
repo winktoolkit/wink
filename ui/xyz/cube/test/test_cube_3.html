@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_cube_nav</title>
+
+		<style>
+			#container 
+			{
+				position: relative;
+				width: 315px;
+				height: 315px;
+				margin: auto;
+			}
+			
+			.faces 
+			{
+				display: none;
+			}
+			
+			.face 
+			{
+				background-color: rgba(255, 255, 255, 0.9);
+				border: 0px solid rgba(0, 0, 0, 0.95);
+				
+				width: 315px;
+				height: 315px;
+				
+				-webkit-box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
+			}
+			
+			.face .title 
+			{
+				text-align: center;
+				font-size: 14px;
+				-webkit-box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.5);
+			}
+			
+			.summary 
+			{
+				font-size: 12px;
+				padding: 20px 10px;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../../math/_matrix/js/matrix.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xyz/js/3dfx.js"></script>
+		<script type="text/javascript" src="../../../../ux/movementtracker/js/movementtracker.js"></script>
+		
+		<script type="text/javascript" src="../../../../ui/xyz/cube/js/cube.js"></script>
+
+		<script type="text/javascript">
+			var cube;
+
+			var handleRotation = function(rotation) {
+				cube.rotate(rotation.x, 0, 0);
+			};
+			var handleRotationEnd = function(rotation) {
+				if (rotation.x > 20) {
+					cube.rotate(25, 0, 0);
+					cube.faceFocus(500);
+				} else if (rotation.x < -20) {
+					cube.rotate(-25, 0, 0);
+					cube.faceFocus(500);
+				} else {
+					cube.faceFocus(500);
+				}
+			};
+		
+			var init = function() {
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+				
+				var properties = {
+					faces: [
+						{ id: 1, faceId: "face1" },
+						{ id: 2, faceId: "face2" },
+						{ id: 3, faceId: "face3" },
+						{ id: 4, faceId: "face4" },
+						{ id: 5, faceId: "face5" },
+						{ id: 6, faceId: "face6" }
+					],
+					size: 315,
+					shiftX: 0,
+					shiftY: 0,
+					shiftZ: -160,
+					observerX: 160,
+					observerY: 160,
+					rotationCallback: { context: window, method: 'handleRotation' },
+					rotationEndCallback: { context: window, method: 'handleRotationEnd' }
+				};
+				cube = new wink.ui.xyz.Cube(properties);
+				$("container").appendChild(cube.getDomNode());
+			};
+		</script>
+	</head>
+	
+	<body onload="setTimeout(init, 1);">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">cube</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container"></div>
+		<div id="faces" class="faces">
+			<div id="face1" class="face" style="background-color: rgba(255, 255, 255, 0.9);">
+				<div class="w_bg_dark title">WINK - The Best Mobile Toolkit</div>
+				<div class="summary">
+					A very best way to improve your mobile web applications.
+					For instance, the cube allows you to navigate between pages.
+					<br/>
+					<br/>
+					<div id="commentsPage1" style="border: 1px solid #666; width: 300px;">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+						Ut sed odio at ipsum lobortis aliquet. Morbi id lectus non erat fermentum adipiscing. 
+						Etiam sit amet luctus augue.
+						<br/>
+						<br/>
+						Nullam at lacus tortor, quis imperdiet mi. 
+						Integer mattis mollis nulla eget dignissim. Fusce mi tellus, mollis eget cursus ut, 
+						euismod id tellus.
+						<br/>
+						In accumsan, est id aliquet tristique, arcu augue malesuada nibh, 
+						eleifend scelerisque felis augue ac lectus.
+					</div>
+				</div>
+				<div class="footer"></div>
+			</div>
+			<div id="face2" class="face" style="background-color: rgba(255, 255, 255, 0.9);">
+				<div class="w_bg_dark title">you said "WINK"?</div>
+				<div class="summary">A powerful toolkit makes its appearance on the mobile web</div>
+				<div class="footer"></div>
+			</div>
+			<div id="face3" class="face" style="background-color: rgba(255, 255, 255, 0.9);">
+				<div class="w_bg_dark title">Wink on the mobile market</div>
+				<div class="summary">It seems that the WINK team has decided to launch its highly anticipated Toolkit</div>
+				<div class="footer"></div>
+			</div>
+			<div id="face4" class="face" style="background-color: rgba(255, 255, 255, 0.9);">
+				<div class="w_bg_dark title">Organize the information flow</div>
+				<div class="summary">Stay informed and up to date everyday</div>
+				<div class="footer"></div>
+			</div>
+			<div id="face5" class="face" style="background-color: rgba(90, 105, 200, 1.0);"></div>
+			<div id="face6" class="face" style="background-color: rgba(200, 200, 200, 1.0);"></div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/audioplayer.css" type="text/css">
+		
+		<style>
+			#audio
+			{
+				width: 95%;
+				margin: 15px auto
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+				
+		<script type="text/javascript" src="../js/audioplayer.js"></script>
+		
+		<script type="text/javascript" src="../resources/fr_FR/audioplayer.js"></script>
+		<script type="text/javascript" src="../resources/en_EN/audioplayer.js"></script>
+		
+		<script>		
+			var audioPlayer;
+
+			init = function()
+			{
+				var properties =
+				{
+					source:
+					{
+						type: 'file',
+						url: './files/track.mp3'
+					},
+					displayControls: 1,
+					displayDuration: 1,
+					displayCursor: 1,
+					silentSeeking: 1
+				};
+				
+				audioPlayer = new wink.mm.AudioPlayer(properties);
+	
+				$('audio').appendChild(audioPlayer.getDomNode());
+			}
+
+			forward = function(seconds)
+			{
+				audioPlayer.forward(seconds);
+			}
+
+			changeToMusic = function()
+			{
+				audioPlayer.changeSource('file', './files/track.mp3');
+			}
+
+			changeToRadio = function()
+			{
+				audioPlayer.changeSource('stream', 'http://81.173.24.2:80');
+			}
+		</script>
+	</head>
+	<body onload="init()">
+
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">audio player</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="audio">
+		</div>
+		
+		<div style="margin: 15px 0; text-align: center">
+			<input type="button" class="w_button w_radius w_bg_dark" value="+10s" onclick="forward(10)" />
+			<input type="button" class="w_button w_radius w_bg_dark" value="-10s" onclick="forward(-10)" />
+			<br />
+			<br />
+			<input type="button" class="w_button w_radius w_bg_dark" value="music" onclick="changeToMusic()" />
+			<input type="button" class="w_button w_radius w_bg_dark" value="radio" onclick="changeToRadio()" />
+		</div>
+
+	</body>
+</html>

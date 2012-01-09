@@ -1,0 +1,395 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_cube_actu</title>
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+
+		<style>
+			a
+			{
+				color: #ff0000;
+				text-decoration: none;
+			}
+			
+			#container 
+			{
+				position: relative;
+				width: 320px;
+				height: 500px;
+				margin: auto;
+				overflow: hidden;
+			}
+			
+			.faces 
+			{
+				display: none;
+			}
+			
+			.dark
+			{
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, rgba(51, 51, 51, 0.8)), color-stop(1.0, rgba(0, 0, 0, 1)));
+				color: #dedede
+			}
+			
+			.light
+			{
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, rgba(200, 200, 200, 0.8)), color-stop(1.0, rgba(255, 255, 255, 1)));
+			}
+			
+			.cubeFace
+			{
+
+				background-color: rgba(200, 200, 200, 0.5);
+				text-align: left;
+
+				width: 170px;
+				height: 170px;
+			}
+			
+			.content
+			{
+				padding: 5px;
+			}
+			
+			.title 
+			{
+				font-size: 18px;
+			}
+			
+			.summary 
+			{
+				font-size: 12px;
+				margin-top: 10px;
+			}
+			
+			.link 
+			{
+				font-size: 12px;
+				text-align: center;
+				line-height: 16px;
+				margin-top: 10px;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../../math/_matrix/js/matrix.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xyz/js/3dfx.js"></script>
+		<script type="text/javascript" src="../../../../ux/movementtracker/js/movementtracker.js"></script>
+		
+		<script type="text/javascript" src="../../../../ui/xyz/cube/js/cube.js"></script>
+
+		<script type="text/javascript">
+			var cube1;
+			var cube2;
+			var cube3;
+			var cube4;
+
+			var timerCube1;
+			var timerCube2;
+
+			var rotateCube1 = function()
+			{
+				cube1.rotate(0, 90, 1000);
+				cube4.rotate(0, 90, 1000);
+				timerCube1 = wink.setTimeout(window, 'rotateCube1', 3000);
+			};
+
+			var rotateCube2 = function()
+			{
+				cube2.rotate(0, 90, 1000);
+				cube3.rotate(0, 90, 1000);
+				timerCube2 = wink.setTimeout(window, 'rotateCube2', 3000);
+			};
+
+			var init = function()
+			{
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+				
+				var properties = {
+					faces: [
+						{ id: 1, faceId: "cube1_face1" },
+						{ id: 2, faceId: "cube1_face2" },
+						{ id: 3, faceId: "cube1_face3" },
+						{ id: 4, faceId: "cube1_face4" },
+						{ id: 5, faceId: "cube1_face5" },
+						{ id: 6, faceId: "cube1_face6" }
+					],
+					size: 170,
+					shiftX: -20,
+					shiftY: 0,
+					shiftZ: -300,
+					observerX: 170,
+					observerY: 170,
+					axis: null
+				};
+				
+				cube1 = new wink.ui.xyz.Cube(properties);
+				
+				$("containerCube1").appendChild(cube1.getDomNode());
+				
+				var properties = {
+					faces: [
+						{ id: 1, faceId: "cube2_face1" },
+						{ id: 2, faceId: "cube2_face2" },
+						{ id: 3, faceId: "cube2_face3" },
+						{ id: 4, faceId: "cube2_face4" },
+						{ id: 5, faceId: "cube2_face5" },
+						{ id: 6, faceId: "cube2_face6" }
+					],
+					size: 170,
+					shiftX: 170,
+					shiftY: 0,
+					shiftZ: -300,
+					observerX: 0,
+					observerY: 170,
+					axis: null
+				};
+				
+				cube2 = new wink.ui.xyz.Cube(properties);
+				
+				$("containerCube2").appendChild(cube2.getDomNode());
+				
+				var properties = {
+					faces: [
+						{ id: 1, faceId: "cube3_face1" },
+						{ id: 2, faceId: "cube3_face2" },
+						{ id: 3, faceId: "cube3_face3" },
+						{ id: 4, faceId: "cube3_face4" },
+						{ id: 5, faceId: "cube3_face5" },
+						{ id: 6, faceId: "cube3_face6" }
+					],
+					size: 170,
+					shiftX: -20,
+					shiftY: 170,
+					shiftZ: -300,
+					observerX: 170,
+					observerY: 170,
+					axis: null
+				};
+				
+				cube3 = new wink.ui.xyz.Cube(properties);
+				
+				$("containerCube3").appendChild(cube3.getDomNode());
+				
+				var properties = {
+					faces: [
+						{ id: 1, faceId: "cube4_face1" },
+						{ id: 2, faceId: "cube4_face2" },
+						{ id: 3, faceId: "cube4_face3" },
+						{ id: 4, faceId: "cube4_face4" },
+						{ id: 5, faceId: "cube4_face5" },
+						{ id: 6, faceId: "cube4_face6" }
+					],
+					size: 170,
+					shiftX: 170,
+					shiftY: 170,
+					shiftZ: -300,
+					observerX: 0,
+					observerY: 170,
+					axis: null
+				};
+				
+				cube4 = new wink.ui.xyz.Cube(properties);
+				
+				$("containerCube4").appendChild(cube4.getDomNode());
+				
+				cube1.getDomNode().style.zIndex = 1;
+				cube2.getDomNode().style.zIndex = 1;
+				cube3.getDomNode().style.zIndex = 1;
+				cube4.getDomNode().style.zIndex = 1;
+
+				wink.setTimeout(window, 'rotateCube1', 500);
+				wink.setTimeout(window, 'rotateCube2', 2000);
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">cube</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container">
+			<div id="containerCube1"></div>
+			<div id="containerCube2"></div>
+			<br/>
+			<div id="containerCube3"></div>
+			<div id="containerCube4"></div>
+		</div>
+		<div id="faces" class="faces">
+			<div id="cube1_face1" class="dark cubeFace">
+				<div class="content">
+					<div class="title">Organize the information flow</div>
+					<div class="summary">Stay informed and up to date everyday
+					<div class="link"><a class="linkSource" href="#">Rss Feed Viewer</a></div>
+					</div>
+				</div>
+				
+			</div>
+			<div id="cube1_face2" class="dark cubeFace"></div>
+			<div id="cube1_face3" class="dark cubeFace" style="-webkit-transform: rotateZ(180deg);">
+				<div class="content">
+					<div class="title">Welcome to the WINK cube</div>
+					<div class="summary">Stay updated with various websites, blogs and journals in one place with a good feed reader
+					<div class="link"><a class="linkSource" href="#">The cube sample</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube1_face4" class="dark cubeFace"></div>
+			<div id="cube1_face5" class="dark cubeFace">
+				<div class="content">
+					<div class="title">WINK - The Best Mobile Toolkit</div>
+					<div class="summary">A very best way to improve your mobile web applications
+					<div class="link"><a class="linkSource" href="#">WINK Site</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube1_face6" class="dark cubeFace">
+				<div class="content">
+					<div class="title">The Slider</div>
+					<div class="summary">Can you imagine sliding nicely between pages using a simple JS component that helps you gracefully on the development ? It's now possible !
+					<div class="link"><a class="linkSource" href="#">Slider Demo</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube2_face1" class="light cubeFace" >
+				<div class="content">
+					<div class="title">The Scroller</div>
+					<div class="summary">Can you imagine a slide out easily on the web content, thanks to a component that manages the inertia of your movement ? It's now possible !
+					<div class="link"><a class="linkSource" href="#">Scroller Demo</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube2_face2" class="light cubeFace"></div>
+			<div id="cube2_face3" class="light cubeFace" style="-webkit-transform: rotateZ(180deg);">
+				<div class="content">
+					<div class="title">Wink on the mobile market</div>
+					<div class="summary">It seems that the WINK team has decided to launch its highly anticipated Toolkit
+					<div class="link"><a class="linkSource" href="#">Source Article</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube2_face4" class="light cubeFace"></div>
+			<div id="cube2_face5" class="light cubeFace">
+				<div class="content">
+					<div class="title">Wink vs Apple</div>
+					<div class="summary">The Wink team made a partnership with Apple ...
+					<div class="link"><a class="linkSource" href="#">Source Article</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube2_face6" class="light cubeFace">
+				<div class="content">
+					<div class="title">you said "WINK"?</div>
+					<div class="summary">A powerful toolkit makes its appearance on the mobile web
+					<div class="link"><a class="linkSource" href="#">Source Article</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube3_face1" class="light cubeFace">
+				<div class="content">
+					<div class="title">Organize the information flow</div>
+					<div class="summary">Stay informed and up to date everyday
+					<div class="link"><a class="linkSource" href="#">Rss Feed Viewer</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube3_face2" class="light cubeFace" style=""></div>
+			<div id="cube3_face3" class="light cubeFace" style="-webkit-transform: rotateZ(180deg);">
+				<div class="content">
+					<div class="title">Welcome to the WINK cube</div>
+					<div class="summary">Stay updated with various websites, blogs and journals in one place with a good feed reader
+					<div class="link"><a class="linkSource" href="#">The cube sample</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube3_face4" class="light cubeFace"></div>
+			<div id="cube3_face5" class="light cubeFace">
+				<div class="content">
+					<div class="title">WINK - The Best Mobile Toolkit</div>
+					<div class="summary">A very best way to improve your mobile web applications
+					<div class="link"><a class="linkSource" href="#">WINK Site</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube3_face6" class="light cubeFace">
+				<div class="content">
+					<div class="title">The Slider</div>
+					<div class="summary">Can you imagine sliding nicely between pages using a simple JS component that helps you gracefully on the development ? It's now possible !
+					<div class="link"><a class="linkSource" href="#">Slider Demo</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube4_face1" class="dark cubeFace">
+				<div class="content">
+					<div class="title">Organize the information flow</div>
+					<div class="summary">Stay informed and up to date everyday
+					<div class="link"><a class="linkSource" href="#">Rss Feed Viewer</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube4_face2" class="dark cubeFace"></div>
+			<div id="cube4_face3" class="dark cubeFace" style="-webkit-transform: rotateZ(180deg);">
+				<div class="content">
+					<div class="title">Welcome to the WINK cube</div>
+					<div class="summary">Stay updated with various websites, blogs and journals in one place with a good feed reader
+					<div class="link"><a class="linkSource" href="#">The cube sample</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube4_face4" class="dark cubeFace"></div>
+			<div id="cube4_face5" class="dark cubeFace">
+				<div class="content">
+					<div class="title">WINK - The Best Mobile Toolkit</div>
+					<div class="summary">A very best way to improve your mobile web applications
+					<div class="link"><a class="linkSource" href="#">WINK Site</a></div>
+					</div>
+				</div>
+			</div>
+			<div id="cube4_face6" class="dark cubeFace">
+				<div class="content">
+					<div class="title">The Slider</div>
+					<div class="summary">Can you imagine sliding nicely between pages using a simple JS component that helps you gracefully on the development ? It's now possible !
+					<div class="link"><a class="linkSource" href="#">Slider Demo</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/accordion.css" type="text/css">
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/accordion.js"></script>
+		
+		<script>	
+			var accordion, section1, section2, section3;
+			
+			init = function()
+			{
+				accordion = new wink.ui.layout.Accordion();
+				
+				section1 = accordion.addSection('section1', '<br /><input type="button" onclick="deleteSection()" class="w_button w_border w_bg_light" value="delete section 2" /><br /><br />Hac ita persuasione reducti intra moenia bellatores obseratis undique portarum aditibus, propugnaculis insistebant et pinnis, congesta undique saxa telaque habentes in promptu, ut si quis se proripuisset interius, multitudine missilium sterneretur et lapidum.Omitto iuris dictionem in libera civitate contra leges senatusque consulta; caedes relinquo; libidines praetereo, quarum acerbissimum extat indicium et ad insignem memoriam turpitudinis et paene ad iustum odium imperii nostri, quod constat nobilissimas virgines se in puteos abiecisse et morte voluntaria necessariam turpitudinem depulisse. Nec haec idcirco omitto, quod non gravissima sint, sed quia nunc sine teste dico.Principium autem unde latius se funditabat, emersit ex negotio tali. Chilo ex vicario et coniux eius Maxima nomine, questi apud Olybrium ea tempestate urbi praefectum, vitamque suam venenis petitam adseverantes inpetrarunt ut hi, quos suspectati sunt, ilico rapti conpingerentur in vincula, organarius Sericus et Asbolius palaestrita et aruspex Campensis.');
+				section2 = accordion.addSection('section2', 'Montius nos tumore inusitato quodam et novo ut rebellis et maiestati recalcitrantes Augustae per haec quae strepit incusat iratus nimirum quod contumacem praefectum, quid rerum ordo postulat ignorare dissimulantem formidine tenus iusserim custodiri..Omitto iuris dictionem in libera civitate contra leges senatusque consulta; caedes relinquo; libidines praetereo, quarum acerbissimum extat indicium et ad insignem memoriam turpitudinis et paene ad iustum odium imperii nostri, quod constat nobilissimas virgines se in puteos abiecisse et morte voluntaria necessariam turpitudinem depulisse. Nec haec idcirco omitto, quod non gravissima sint, sed quia nunc sine teste dico.Principium autem unde latius se funditabat, emersit ex negotio tali. Chilo ex vicario et coniux eius Maxima nomine, questi apud Olybrium ea tempestate urbi praefectum, vitamque suam venenis petitam adseverantes inpetrarunt ut hi, quos suspectati sunt, ilico rapti conpingerentur in vincula, organarius Sericus et Asbolius palaestrita et aruspex Campensis.');
+				section3 = accordion.addSection('section3', 'Quid? qui se etiam nunc subsidiis patrimonii aut amicorum liberalitate sustentant, hos perire patiemur? An, si qui frui publico non potuit per hostem, hic tegitur ipsa lege censoria; quem is frui non sinit, qui est, etiamsi non appellatur, hostis, huic ferri auxilium non oportet? Retinete igitur in provincia diutius eum, qui de sociis cum hostibus, de civibus cum sociis faciat pactiones, qui hoc etiam se pluris esse quam collegam putet, quod ille vos tristia voltuque deceperit, ipse numquam se minus quam erat, nequam esse simularit. Piso autem alio quodam modo gloriatur se brevi tempore perfecisse, ne Gabinius unus omnium nequissimus existimaretur..Omitto iuris dictionem in libera civitate contra leges senatusque consulta; caedes relinquo; libidines praetereo, quarum acerbissimum extat indicium et ad insignem memoriam turpitudinis et paene ad iustum odium imperii nostri, quod constat nobilissimas virgines se in puteos abiecisse et morte voluntaria necessariam turpitudinem depulisse. Nec haec idcirco omitto, quod non gravissima sint, sed quia nunc sine teste dico.Principium autem unde latius se funditabat, emersit ex negotio tali. Chilo ex vicario et coniux eius Maxima nomine, questi apud Olybrium ea tempestate urbi praefectum, vitamque suam venenis petitam adseverantes inpetrarunt ut hi, quos suspectati sunt, ilico rapti conpingerentur in vincula, organarius Sericus et Asbolius palaestrita et aruspex Campensis.');
+				
+				$('output').appendChild(accordion.getDomNode());
+			}
+			
+			deleteSection = function()
+			{
+				accordion.deleteSection(section2);	
+			}					
+		</script>
+	</head>
+<body onload="init()">
+	<div class="w_box w_header w_bg_dark">
+		<span id="title">accordion</span>
+		<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+	</div>
+	
+	<div class="w_bloc">
+		click on the accordion section below to display the content.
+	</div>
+	
+	<div id="output" style="width: 95%; margin: auto">
+	</div>
+</body>
+</html>

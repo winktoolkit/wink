@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/progressbar.js"></script>
+		
+		<script>	
+			var progressBar1 = null;
+			var progressBar2 = null;
+			var progressBar3 = null;
+			var timer        = null;
+			var value        = 0;
+			var width        = 250
+			
+			init = function()
+			{			
+				var properties2 =
+				{
+					'height': 15,
+					'width' : width,
+					'borderColor': '#000',
+					'progressBarColor': 'transparent',
+					'progressBarImage':
+					{
+						'image': 'iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAIAAACgpqunAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAiRJREFUeNpckltT2lAQx5OTkzsJxFwcbpaKFu1l6PTV79WHvvaz9bXCtFocG6pAi0oUG9qBhFz6D5nC4Jk91z2/3bN7lv344T3DMP79xB2MsLANndluk6mPsblX0037iYqW6w1MTkH3Zz7u6dpTeM3v2g6RlC3YKZez2Sy+Y5jPX0+xhAdLTNc3vAAOXZgG6ZhFRtjw1HYcTNEy5BXt7o8/unL3K1ZR5Nc3iiJjtfY7F/14+qAdNCW1sIEtO4OTONY0vf22jeC9gG1YW89TdL7/y4PpF3iXXqKUIxyXwYZhYorjUFYy4PDn+LJ3xlR1TZXXsMYwJ+2jT93ebOpV6s9KRgmHHCdQSRJXF0RBjERROHz95nZyd+sHRlEXKcnhOEltQpCLbqe7d3AEWBBlnlICIBdZklRVa7aOkf/hLABDCF6XicBzisCfPN/B4WAwwAgSjbAs1BxLyGpLFaXwqt2Guj+6yXioV8JTTldV/ML4/Oxx+riMIhglaZokaQo1wyIMgiiqtTqcu340D6MEp/8b/LcqJtJ20fsWBvM4Tgg68DiOV2OS5VYptF4eY9EbTuIogulcMpWs5M69yf18sSDoQRDmEkVR7sTZLeeR/10E4RKWk1ygKtvW92vXPe/M/N8UHdnKU5//WRYqx1XrtfHw6sv1DZ4q8Jua0fk0T7tda9AHbyIrav7p6xYGYWnHRMHDCarN0LZqpqnT0x/js273nwADAG4u9cvtncYYAAAAAElFTkSuQmCC',
+						'type' : 'png'
+					}
+				}
+
+				var properties3 =
+				{
+					'height': 5,
+					'width' : width+50,
+					'borderColor': '#ff0000',
+					'progressBarColor': '#000'
+				}
+
+				progressBar1 = new wink.ui.xy.ProgressBar();
+				progressBar2 = new wink.ui.xy.ProgressBar(properties2);
+				progressBar3 = new wink.ui.xy.ProgressBar(properties3);
+				
+				$('output1').appendChild(progressBar1.getDomNode());
+				$('output2').appendChild(progressBar2.getDomNode());
+				$('output3').appendChild(progressBar3.getDomNode());
+
+				timer = wink.setInterval(window, 'animate', 800);
+			}
+
+			animate = function()
+			{
+				if ( value < 100 )
+				{
+					value += 10;
+					progressBar1.setValue(value);
+					progressBar2.setValue(value);
+					progressBar3.setValue(value);
+				} else
+				{
+					clearInterval(timer);
+				}
+			}
+								
+		</script>
+	</head>
+<body onload="init()">
+	<div class="w_box w_header w_bg_dark">
+		<span id="title">progress bar</span>
+		<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+	</div>
+	<div class="w_bloc">
+		<span>Default progress bar</span>
+		<div id="output1">
+		</div>
+		<br />
+		<span>Custom progress bar 1</span>
+		<div id="output2">
+		</div>
+		<br />
+		<span>Custom progress bar 2</span>
+		<div id="output3">
+		</div>
+	</div>
+</body>
+</html>

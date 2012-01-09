@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>Test wink.cache</title>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<script src="../js/wink.cache.js"></script>
+		<script src="../js/wink.cache.localStorage.js"></script>
+		<script src="../js/wink.cache.sqlDatabase.js"></script>
+		<script src="../js/wink.cache.indexedDatabase.js"></script>
+		
+		<script>
+			var resources =
+			[
+				{ url: '../../_amd/js/amd.js', type: 'js', group: 0 },
+				{ url: '../../_base/_base/js/base.js', type: 'js', group: 1 },
+				{ url: '../../_base/_dom/js/dom.js', type: 'js', group: 2 },
+				{ url: '../../_base/error/js/error.js', type: 'js', group: 2 },
+				{ url: '../../_base/topics/js/topics.js', type: 'js', group: 2 },
+				{ url: '../../_base/ua/js/ua.js', type: 'js', group: 2 },
+				{ url: '../../_base/_feat/js/feat.js', type: 'js', group: 1 },
+				{ url: '../../_base/_feat/js/feat_api.js', type: 'js', group: 2 },
+				{ url: '../../_base/_feat/js/feat_audio.js', type: 'js', group: 2 },
+				{ url: '../../_base/_feat/js/feat_css.js', type: 'js', group: 2 },
+				{ url: '../../_base/_feat/js/feat_dom.js', type: 'js', group: 2 },
+				{ url: '../../_base/_feat/js/feat_event.js', type: 'js', group: 2 },
+				{ url: '../../_base/_feat/js/feat_graphic.js', type: 'js', group: 2 },
+				{ url: '../../_base/_feat/js/feat_json.js', type: 'js', group: 2 },
+				{ url: '../../_base/_feat/js/feat_video.js', type: 'js', group: 2 },
+
+				{ url: '../../math/_basics/js/basics.js', type: 'js', group: 2 },
+				{ url: '../../math/_geometric/js/geometric.js', type: 'js', group: 3 },
+				{ url: '../../math/_matrix/js/matrix.js', type: 'js', group: 3 },
+
+				{ url: '../../ux/dnd/js/dnd.js', type: 'js', group: 2 },
+				{ url: '../../ux/event/js/event.js', type: 'js', group: 2 },
+				{ url: '../../ux/gesture/js/gesture.js', type: 'js', group: 2 },
+				{ url: '../../ux/gesturerecognizer/js/gesturerecognizer.js', type: 'js', group: 2 },
+				{ url: '../../ux/history/js/history.js', type: 'js', group: 2 },
+				{ url: '../../ux/inertia/js/inertia.js', type: 'js', group: 2 },
+				{ url: '../../ux/movementtracker/js/movementtracker.js', type: 'js', group: 2 },
+				{ url: '../../ux/search/js/search.js', type: 'js', group: 2 },
+				{ url: '../../ux/touch/js/touch.js', type: 'js', group: 3 },
+				{ url: '../../ux/window/js/window.js', type: 'js', group: 3 },
+				
+				{ url: '../../fx/_animation/js/animation.js', type: 'js', group: 2 },
+				{ url: '../../fx/_xy/js/2dfx.js', type: 'js', group: 2 },
+				{ url: '../../fx/_xyz/js/3dfx.js', type: 'js', group: 3 },
+
+				{ url: '../../net/cssloader/js/cssloader.js', type: 'js', group: 2 },
+				{ url: '../../net/imagesloader/js/imagesloader.js', type: 'js', group: 2 },
+				{ url: '../../net/jsloader/js/jsloader.js', type: 'js', group: 2 },
+				{ url: '../../net/smartloader/js/smartloader.js', type: 'js', group: 2 },
+				{ url: '../../net/tracking/js/tracking.js', type: 'js', group: 2 },
+				{ url: '../../net/tracking/js/ga.js', type: 'js', group: 3 },
+				{ url: '../../net/xhr/js/xhr.js', type: 'js', group: 2 },
+				
+				{ url: '../../ui/form/input/js/input.js', type: 'js', group: 3 },
+				{ url: '../../ui/layout/accordion/js/accordion.js', type: 'js', group: 3 },
+				{ url: '../../ui/layout/fixedlayout/js/fixedlayout.js', type: 'js', group: 3 },
+				{ url: '../../ui/layout/flippage/js/flippage.js', type: 'js', group: 3 },
+				{ url: '../../ui/layout/modalwindow/js/modalwindow.js', type: 'js', group: 3 },
+				{ url: '../../ui/layout/scroller/js/scroller.js', type: 'js', group: 3 },
+				{ url: '../../ui/layout/slidingpanels/js/slidingpanels.js', type: 'js', group: 3 },
+				{ url: '../../ui/layout/tabcontainer/js/tabcontainer.js', type: 'js', group: 3 },
+				{ url: '../../ui/layout/windows/js/windows.js', type: 'js', group: 3 },
+				
+				{ url: '../../ui/xy/carousel/js/carousel.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/colorpicker/js/colorpicker.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/cspinner/js/cspinner.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/datepicker/js/datepicker.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/layer/js/layer.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/menu/js/menu.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/newsticker/js/newsticker.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/popup/js/popup.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/progressbar/js/progressbar.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/slideshow/js/slideshow.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/spinner/js/spinner.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/togglebutton/js/togglebutton.js', type: 'js', group: 3 },
+				{ url: '../../ui/xy/trace/js/trace.js', type: 'js', group: 3 },
+				
+				{ url: '../../ui/xyz/coverflow/js/coverflow.js', type: 'js', group: 3 },
+				{ url: '../../ui/xyz/cube/js/cube.js', type: 'js', group: 3 },
+				{ url: '../../ui/xyz/flipdisc/js/flipdisc.js', type: 'js', group: 3 },
+				{ url: '../../ui/xyz/opener/js/opener.js', type: 'js', group: 3 },
+				{ url: '../../ui/xyz/tagcloud/js/tagcloud.js', type: 'js', group: 3 },
+				{ url: '../../ui/xyz/wall/js/wall.js', type: 'js', group: 3 },
+				
+				{ url: './resources/test2.js', type: 'js', expires: 60, group: 3 }, // Valid for 1 minute
+				{ url: './resources/test2.css', type: 'css', expires: 60, group: 3 } // Valid for 1 minute
+			];
+
+			var resourcesLoaded = function(result)
+			{
+				document.getElementById('result').innerHTML = getCacheInfos(result);
+			};
+
+			var getCacheInfos = function(r)
+			{
+				var infos = [];
+				infos.push('<b>Loading time: </b>' + r.loadTime + 'ms');
+				infos.push('<b>Use of local database: </b>' + r.useOfLocalDatabase);
+
+				var list = function(arr, name) {
+					var i, a = arr, l = a.length;
+					if (l == 0) {
+						infos.push('<b>' + name + ': </b>0');
+						return;
+					}
+					for (i = 0; i < l; i++) {
+						infos.push('<b>' + name + '[' + i + ']: </b>' + a[i]);
+					}
+				};
+				list(r.errors, "errors");
+				list(r.loadErrors, "load errors");
+				list(r.resourcesCleaned, "resources cleaned");
+				list(r.resourcesOldVersion, "resources old version");
+
+				return infos.join('<br/>');
+			};
+
+			var reset = function()
+			{
+				wink.cache.resetDatabase(function(result) {
+					var s = "<b>reset status: </b>";
+					if (result.errors.length == 0) {
+						s += "no errors";
+					} else {
+						var i, a = result.errors, l = a.length;
+						for (i = 0; i < l; i++) {
+							s += ('<br /><b>errors[' + i + ']: </b>' + a[i]);
+						}
+					}
+					document.getElementById('result').innerHTML = s;
+				});
+			};
+
+			(function() {
+				window.addEventListener('DOMContentLoaded', function() {
+					wink.load(resources, resourcesLoaded, {storage: 'indexedDatabase', synchronize: true});
+				}, false);
+			})();
+		</script>
+	</head>
+	<body>
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">easy caching</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../..?theme='+theme"/>
+		</div>
+	
+		<div style="width: 95%; margin: auto;">
+			<ul class="w_list w_border w_radius">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					easy caching
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="javascript:reset();">Reset database</a>
+				</li>
+			</ul>
+			<div class="w_box w_border w_radius" id="result">
+					
+			</div>
+		</div>
+	
+	</body>
+</html>

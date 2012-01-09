@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_tracking</title>
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<style type="text/css">
+			.parameter
+			{
+				float: right;
+				margin: 0 10px 0 0; 
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../net/tracking/js/tracking.js"></script>
+		<script type="text/javascript" src="../../../net/tracking/js/ga.js"></script>
+		
+		<script>	
+			var gaTracker;
+			var defaultTracker;
+			var tracking;
+
+			init = function()
+			{
+				wink.error.logLevel = 1;
+
+				gaTracker = new wink.net.tracking.GaTracker({ gaUrchinAccount : "UA-xxxxxxx-x" });
+				defaultTracker = new wink.net.tracking.DefaultTracker({ cbAfterSend : cbAfterSend });
+
+				tracking = new wink.net.Tracking({statTracker : defaultTracker, intervalFlush : 0 });
+			}
+
+			cbAfterSend = function(response)
+			{
+				var result = $("panelResultDefaultTracker").innerHTML;
+				result += response;
+				$("panelResultDefaultTracker").innerHTML = result;
+			}
+
+			flush = function()
+			{
+				$("panelResultDefaultTracker").innerHTML = "";
+				tracking.flush();
+				_appendPanelResult("> flushed");
+			}
+
+			push = function()
+			{
+				$("panelResultDefaultTracker").innerHTML = "";
+
+				var intervalFlush = $("configIntervalFlush").value;
+
+				tracking.push("/WINK/Test1");
+				tracking.push("/WINK/Test2");
+				tracking.push("/WINK/Test3");
+				tracking.push("/WINK/Test4");
+
+				_appendPanelResult("> 4 pushed");
+
+				if ( intervalFlush == 0 )
+				{
+					tracking.flush();
+					_appendPanelResult("> flushed");
+				} else
+				{
+					_appendPanelResult("> flush is delayed");
+				}
+			}
+
+			reset = function()
+			{
+				$("panelResult").innerHTML = "";
+				$("panelResultDefaultTracker").innerHTML = "";
+
+				tracking.reset();
+			}
+
+			setConfig = function()
+			{
+				$("panelResultDefaultTracker").innerHTML = "";
+
+				var intervalFlush = $("configIntervalFlush").value;
+				tracking.setIntervalFlush(intervalFlush);
+
+				var statTrackerName = $("configStatTracker").value;
+
+				switch ( statTrackerName )
+				{
+					case "Google Analytics":
+						statTracker = gaTracker;
+						break;
+
+					default:
+						statTracker = defaultTracker;
+						break;
+				}
+				tracking.setStatTracker(statTracker);
+
+				_appendPanelResult("> configuration set");
+			}
+
+			_appendPanelResult = function(msg)
+			{
+				var panelResult = $("panelResult").innerHTML;
+
+				if ( panelResult != "" )
+				{
+					panelResult += "<br>";
+				}
+
+				$("panelResult").innerHTML = panelResult + msg;
+			}
+		</script>
+	</head>
+
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span>tracking</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Tracking (configuration)
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<span id="label1">flush interval</span>
+					<div class="parameter">
+						<input class="w_input" id="configIntervalFlush" value="0">
+					</div>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<span id="label2">tracker</span>
+					<div class="parameter">
+						<select class="w_input" id="configStatTracker">
+							<option selected>WINK (default)</option>
+							<option>Google Analytics</option>
+						</select> 
+					</div>
+				</li>
+			</ul>
+		
+			<input type="button" class="w_button w_border w_radius w_bg_dark" value="set configuration" onclick="setConfig();" />
+			
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Tests
+				</li>
+			</ul>
+			
+			<input type="button" class="w_button w_border w_radius w_bg_light" value="push four statistic tracks" onclick="push();" />
+			<br />
+			<br />
+			<input type="button" class="w_button w_border w_radius w_bg_light" value="flush" onclick="flush();" />
+			<br />
+			<br />
+			<input type="button" class="w_button w_border w_radius w_bg_light" value="reset" onclick="reset();" />
+
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Result
+				</li>
+			</ul>
+
+			<p id="panelResult"></p>
+
+			<p id="panelResultDefaultTracker"></p>
+		</div>
+	</body>
+</html>

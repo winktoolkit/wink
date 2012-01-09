@@ -1,0 +1,249 @@
+Release 0.9 [08/06/2010]
+	- No changes
+	
+Release 1.0 [24/06/2010]
+	- removed method EventManager.register
+	- global renaming
+		- Accordion         --> wink.ui.layout.Accordion
+		- Ajax              --> wink.net.Xhr
+		- base              --> wink
+		- Carousel          --> wink.ui.xy.Carousel
+		- Colorpicker       --> wink.ui.xy.ColorPicker
+		- Coverflow         --> wink.ui.xyz.CoverFlow
+		- CssManager        --> wink.fx._xy
+		- CssManagerExtend  --> wink.fx._xyz
+		- Cube              --> wink.ui.xyz.Cube
+		- Databasemanager   --> wink.api.storage
+		- Datepicker        --> wink.ui.xy.DatePicker
+		- DndManager        --> wink.ux.dnd
+		- DndSource         --> wink.ux.dnd.source
+		- DndTarget         --> wink.ux.dnd.target
+		- ErrorManager      --> wink.error
+		- EventManager      --> wink.topics
+		- FlipDisc          --> wink.ui.xyz.FlipDisc
+		- Geolocator        --> wink.api.GeoLocation
+		- History           --> wink.ux.history
+		- InertiaManager    --> wink.ux.Inertia
+		- JSON              --> wink.json
+		- Layer             --> wink.ui.xy.layer
+		- JSLoader          --> wink.net.JsLoader
+		- CSSLoader         --> wink.net.CssLoader
+		- ImagesLoader      --> wink.net.ImagesLoader
+		- SmartLoader       --> wink.net.smaertloader
+		- MathManager       --> wink.math
+		- Menu              --> wink.ui.xy.Menu
+		- ModalWindow       --> wink.ui.layout.ModalWindow
+		- NewsTicker        --> wink.ui.xy.NewsTicker
+		- PlatformManager   --> wink.ua
+		- Popup             --> wink.ui.xy.Popup
+		- ProgressBar       --> wink.ui.xy.ProgressBar
+		- GestureRecognizer --> wink.ux.gesturerecognizer
+		- Scroller          --> wink.ui.layout.Scroller
+		- Search            --> wink.ux.search
+		- Slider            --> wink.ui.layout.SlidingPanels
+		- Spinner           --> wink.ui.xy.Spinner
+		- Switch            --> wink.ui.xy.Toggle
+		- TagCloud          --> wink.ui.xyz.TagCloud
+		- TouchManager      --> wink.ux.touch
+		- ManagedEvent      --> wink.ux.Event
+		- GestureManager    --> wink.ux.gesture
+		- MovementTracker   --> wink.ux.MovementTracker
+		- Wall              --> wink.ui.xyz.Wall
+		- Wheel             --> wink.ui.xy.Wheel
+		- WindowManager     --> wink.ux.Window
+	- creation of the wink namespace
+	- Added object wink.net.tracking
+	- Added method wink.call
+	- Added method wink.bind
+	- Added method wink.setInterval
+	- Added method wink.isCallback
+	- Added method wink.json.concat
+	- method isUndefined becomes wink.isUndefined
+	- method isset becomes wink.isset
+	- method isString becomes wink.isString
+	- method isInteger becomes wink.isInteger
+	- method isArray becomes wink.isArray
+	- method trim becomes wink.trim
+	- method getUId becomes wink.getUId
+	- method callMethodAfterDelay becomes wink.setTimeout
+	- method round becomes wink.math.round
+	- modified the modal window style
+	- wink.ux.Window was removed from the core
+	- wink.math (basics) was added to the core
+	- Added the support of the container width in the carousel
+	- Added the possibility to position the items to the center or to the left of the container in the carousel
+	- Added method updateCheckInterval in wink.ux.history
+	
+Release 1.0.1 [15/07/2010]
+	- Corrected bug on storage (Base64 object reference removed)
+	- Corrected bug in the "removeClass" method
+	- Deleted the TV coverflow test page
+	- Corrected bug on the sliding panels (duration property)
+	- Corrected bugs on the build file (generation of wink.min.js)
+	- improved the isCallback method
+	
+Release 1.1 [01/09/2010]
+	- Tested on iOS4
+	- The closure compiler replaces YUI compressor
+	- Added the headers parameter to the Xhr object
+	- Added the mm package and the audio player
+	- Added the 'cover' and 'reveal' options to the sliding panels
+	- Moved test images into the test folders
+	- Added the Tab container layout
+	- Added the Slideshow component
+	- Added methods isNull, isBoolean, isNumber 
+	- Added JSON extension (stringification)
+	- Corrected bug on the dispatch method of Event
+	- Changing the method wink.ux.touch.addListener(): arguments passed as an option object
+	- Corrected bug on wink.ux.touch.addListener and wink.ux.touch.removeListener which prevented the event listeners to be released properly.
+	- Added properties on the MovementTracker : prevent start, prevent move, tracking threshold
+	- Scroller upgraded, improved and optimized (methods setEdges, autoUpdateEdges, setViewportSize have been replaced ; the new features: scrollbar, stage callbacks, autorefresh, enable / disable, changeContext, destroy).
+	- Corrected bug on the pop method of History
+
+Release 1.1.1 [15/09/2010]
+	- Added wink.version
+	- Corrected bug on wink.call (method and callback arguments) and delete backwards compatibility on callback.ctx
+	- Improve the sendData method of the wink.net.Xhr object
+	- Improve the Window component : gather "resize" and "scroll" handlers
+	- Method wink.isset becomes wink.isSet (ensure backwards compatibility)
+	- Improve the scroller test with the carousel
+
+Release 1.1.2 [17/09/2010]
+	- corrected major bug on xhx
+	
+Release 1.2 [15/10/2010]
+	- Corrected bug on wink.ui.layout.TabContainer when the first tag was selected and removed
+	- Corrected bug on wink.ux.Dnd
+	- Improved the sliding panels behaviour on iOS 4
+	- Corrected bug on Scroller : prevent wrong state (animated) when incorrect datas are provided for the view
+	- Added the flippage component
+	- Added the opener component
+	- Added the animation component (fx extension)
+	- Harmonize gesture.listenTo() parameters with those of touch.addListener() (options)
+	- Improved the sliding panels. You can now go back using the 'slideTo' method
+	- Added D.O.H. and the first unit tests 
+	- Corrected bug on the isInteger method (error when the method was called with an undefined value). Now also returns false when passing a string
+	- Added the test_dnd_list example in wink.ux.dnd
+	- Added the easy caching component 
+	- Modified the wink object and properties declaration
+	- Improved the layer behaviour (the 'onclick' method of the layer is now initialized within the 'show' method)
+	- Corrected bug on 2dfx scale issue on IPad
+	- Corrected bug on absolute position (instead of relative) of click on TagCloud and Coverflow
+	- Corrected bug on wink.ui.xy.carousel. The items width and height was not set. The domNode's height didn't need to be set.
+	- Corrected bug on wink.ui.xy.newsticker. The "_properties" variable was not properly initialized
+	- Corrected bug on FlipDisc on iOS4 (latency). Add fx._animation dependency. Enhance "next" and "previous" animations. Adapt test for iPad.
+	- Added the video player component
+	- Modified the preview page. Removed non relevent items
+	- Improved the popup
+	- core weight reduction
+	
+Release 1.2.1 [15/11/2010]
+	- BlackBerry 6 compatibility
+	- Added the wink.ui.form package
+	- Added the input component
+	- Corrected bug on the easy caching (base64 encoded resources paths)
+	- Removed the wheel component
+	- Added styles for form elements in wink.ui.form
+	
+Release 1.2.2 [15/12/2010]
+	- Added wink.mixin / modifying components accordingly
+	- Added the onhashchange event support in wink.ux.history
+	- Adapted the wink.ui.form CSS to work on iOS3
+	- Added wink.connect and wink.disconnect
+	- Improved wink.json.parse
+	- Improved and corrected bug (for minified CSS url paths) on wink.cache
+	- Adapted 3dfx to work on iOS4.2.1
+	- Added the enterFullScreen functionality to the video player
+	- Corrected bug on the carousel's orientation change
+	
+Release 1.2.3 [14/01/2011]
+	- Bada 1.0 / Android 2.2 / Android 2.3 compatibility
+	- Added wink.fx.onTransitionEnd
+	- Modified wink.bind to support arguments
+	- Improved the slidingpanels
+	- Removed wink.isset (deprecated)
+	- Improved the accordion using CSS transforms
+
+Release 1.2.4 [18/01/2011]
+	- Corrected major bug on wink.ua (wrong detection for the webapp mode on iOS)
+	
+Release 1.3 [01/04/2011]
+	- Improved wink.ui.xy.Menu (removed timers)
+	- Improved wink.ui.xy.ToggleButton (removed timers)
+	- Added method Scroller.backToBounds
+	- Added the test_popup_add example in wink.ui.xy.popup
+	- global CSS renaming
+	- Added build system
+	- Added loaders
+	- Added feature detection : wink.has
+	- Modified wink.ux.Dnd (a drag zone can now be specified and Dnd is no longer a singleton)
+	- Added themes
+	- Corrected bug in wink.ux.history (wrong history index check)
+	- Added the windows layout
+	- Added wink.query
+	- Added wink.setLocale (multilingual management)
+	- Upgrade components popup, datepicker, audioplayer and videoplayer to multilingual management
+	- Added the fix layout component
+	
+Release 1.4 [03/10/2011]
+	- Integrating the latest google compiler version
+	- Modified wink.ux.window to make it a literal and integrate orientation change events
+	- Improved the tabcontainer for BB6
+	- Corrected bug on wink.ux.Menu (visibility)
+	- Modified wink.call to return the called function
+	- Integration of the AMD syntax
+	- Added wink.isFunction
+	- Corrected bug on wink.api.storage (do not treat function parameters)
+	- Improved wink.ux.Dnd to avoid multitouch conflicts
+	- Corrected bug on wink.ui.layout.Accordion (the sections width had to be set to 100%)
+	- Added method getSections on wink.ui.layout.Accordion
+	- Corrected bug on wink.ui.layout.SlidingPanels (removed the overflow-y on the panels)
+	- Added support for DOM events in wink.connect
+	- Added wink plugins system : wink.plugins
+	- Added the AsyncPanels plugin
+	- fixedlayout component: refactoring, patch and new parameters 
+	- Build system patch: encoding, amd/define syntax, validateProperties substitution, css url rewrite, delete logs
+	- Corrected bug on wink.ui.xyz.CoverFlow (takes into account transform position of nodes in click management)
+	- Added "position" property, getPosition and setPosition methods on wink.ui.xyz.CoverFlow
+	- Easy Caching patch: ensures the correct sequencing of operations, adds group and version management
+	- Added the SharingWheel plugin
+	- Corrected bug on wink.ui.layout.Scroller: duplicated scrollbars due to a missing canvas.clearRect call
+	- Corrected bug on wink.ui.layout.Scroller: bounce behavior enhanced when the scroll occurs outside of bounds
+	- wink.ui.layout.Scroller: added properties shiftOriginY, shiftLimitY and methods updateShiftBounds, getViewProperties needed for ScrollToRefresh and ScrollToLoad plugins
+	- Added wink.mm.MediaWheel
+	- Added the scrolltorefresh plugin
+	- Added the scrolltoload plugin
+	- Added the cspinner component
+	- Added the trace component
+	- Added the vertical option on wink.ui.xy.Carousel
+	- Added the w_no_wrap class for the lists items
+	- Apply a "translate" transform on the canvas tag on components that use it
+	- Added wink.plugins.completion
+	
+Release 1.4.1 [xx/xx/xxxx]
+	- Corrected bug on wink.ux.window (the orientation parameter was undefined when the "/window/events/orientationchange" was published)
+	- Corrected bug on feat_css : "css-position-fixed" detection for iOS
+	- Corrected bug on feat_css : prevent loop on "css-transform" detection
+	- Corrected bug on scroller : remove shiftSizeY local variable from global context
+	- Corrected bug on scroller : force focus on input and select elements (iOS 5 compatibility)
+	- Corrected bug on scroller : prevent click events on move when no the content size does not enable scroll
+	- Corrected bug on coverflow and flipdisc : depth issue on BB7 and Android OS3, preserve3d compatibility
+	- Improved wink.ui.xy.Carousel (dots img tag replaced by a div tag)
+	- Corrected bug on wall : remove the duplicate appendChild call which cancels listeners on pad nodes (iOS5)
+	- Corrected bug on tagcloud tests : replace window.alert which is cause of touch issue by wink popup
+	- Corrected bug on 2dfx : on Android OS 3, WebKitCSSMatrix instanciation fails with "none" value
+	- Corrected bug on videoplayer : on Android OS 3, the duration is available through "timeupdate" event
+	- Added Windows Phone 7.5 support
+	- Corrected bug on feat_css and sharingwheel : matrix stack is also inversed for android OS<3
+	- Corrected bug on accordion : the content node is above title node on z index (Android OS 3), translate transform on title node needed
+	- Corrected bug on windows : depth issue on Android OS3
+	- Corrected bug on togglebutton : listen to main dom node because of touch issue on Android OS3
+	- 2dfx: uses "scale3d" when it's supported
+	- Added the getPosition method and added the transform parameter to take the translations while calculating the position
+	- Corrected bug : removes references to progressbar.css that does not exists
+	- BlackBerry 7 compatibility
+	- Added the getPosition method and added the transform parameter to take the translations while calculating the position
+	- Corrected bug : removes references to progressbar.css that does not exists
+	- Android 3.0 and 3.1 compatibility
+	- New documentation (JSDoc)
+	- Added localStorage and indexedDatabse support for easy caching

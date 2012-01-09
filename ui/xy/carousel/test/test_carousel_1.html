@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/carousel.css" type="text/css">
+		
+		<style>
+			.thumbnail
+			{
+				width: 90px;
+				text-align: center;
+			}
+			
+			.text
+			{
+				font-size: 18px;
+				line-height: 65px;
+				height: 65px;
+				width: 120px;
+				text-align: center;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/carousel.js"></script>
+		
+		<script>	
+			var carousel1, carousel2, carousel3;
+
+			var properties1 = 
+			{
+				'itemsWidth': 280,
+				'itemsHeight': 136,
+				'autoAdjust': 1,
+				'autoAdjustDuration': 400,
+				'autoPlay': 1,
+				'autoPlayDuration': 4000,
+				'firstItemIndex': 2,
+				'items':
+				[
+				 {'type': 'string', 'content': '<img src="./img/carousel_image_01.png" />'},
+				 {'type': 'string', 'content': '<img src="./img/carousel_image_02.png" />'},
+				 {'type': 'string', 'content': '<img src="./img/carousel_image_03.png" />'},
+				 {'type': 'string', 'content': '<img src="./img/carousel_image_04.png" />'},
+				 {'type': 'string', 'content': '<img src="./img/carousel_image_05.png" />'},
+				 {'type': 'string', 'content': '<img src="./img/carousel_image_01.png" />'},
+				 {'type': 'string', 'content': '<img src="./img/carousel_image_02.png" />'},
+				 {'type': 'string', 'content': '<img src="./img/carousel_image_03.png" />'},
+				 {'type': 'string', 'content': '<img src="./img/carousel_image_04.png" />'},
+				 {'type': 'string', 'content': '<img src="./img/carousel_image_05.png" />'}
+				]
+			}
+
+
+			var properties2 = 
+			{
+				'itemsWidth': 90,
+				'itemsHeight': 65,
+				'displayDots': 1,
+				'autoAdjust': 1,
+				'firstItemIndex': 2,
+				'itemsAlign': 'left',
+				'items':
+				[
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_01.png" onclick="alert(\'click test\')" /></div>'},
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_02.png" onclick="alert(\'click test\')" /></div>'},
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_03.png" onclick="alert(\'click test\')" /></div>'},
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_04.png" onclick="alert(\'click test\')" /></div>'},
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_05.png" onclick="alert(\'click test\')" /></div>'},
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_06.png" onclick="alert(\'click test\')" /></div>'},
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_01.png" onclick="alert(\'click test\')" /></div>'},
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_02.png" onclick="alert(\'click test\')" /></div>'},
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_03.png" onclick="alert(\'click test\')" /></div>'},
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_04.png" onclick="alert(\'click test\')" /></div>'},
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_05.png" onclick="alert(\'click test\')" /></div>'},
+				 {'type': 'string', 'content': '<div class="thumbnail"><img src="./img/carousel_thumbnail_06.png" onclick="alert(\'click test\')" /></div>'}
+				]
+			}
+
+			var properties3 = 
+			{
+				'itemsWidth': 120,
+				'itemsHeight': 65,
+				'displayDots': 0,
+				'autoAdjust': 0,
+				'firstItemIndex': 4,
+				'items':
+				[
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#cccccc">test</div>'},
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#ff5500">test</div>'},
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#fd3252">test</div>'},
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#ba379f">test</div>'},
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#ad25ac">test</div>'},
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#9f3f6f">test</div>'},
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#3fcfcf">test</div>'},
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#87870f">test</div>'},
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#fd3252">test</div>'},
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#ff5500">test</div>'},
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#cccccc">test</div>'},
+				 {'type': 'string', 'content': '<div class="text" style="background-color:#3fcfcf">test</div>'}
+				]
+			}
+
+			init = function()
+			{
+				carousel1 = new wink.ui.xy.Carousel(properties1);
+				carousel2 = new wink.ui.xy.Carousel(properties2);
+				carousel3 = new wink.ui.xy.Carousel(properties3);
+
+				$('c1').appendChild(carousel1.getDomNode());
+				$('c2').appendChild(carousel2.getDomNode());
+				$('c3').appendChild(carousel3.getDomNode());
+
+				wink.subscribe('/carousel/events/switch', {method: 'moveCarousel3'});			
+			}
+
+			moveCarousel3 = function(params)
+			{
+				if ( params.carouselId == carousel2.uId )
+				{
+					switch(params.currentItemIndex)
+					{
+						case 0:
+							carousel3.goToItem(5);
+							break;
+						case 1:
+							carousel3.goToItem(10);
+							break;
+						case 2:
+							carousel3.goToItem(2);
+							break;
+						case 3:
+							carousel3.goToItem(0);
+							break;
+						case 4:
+							carousel3.goToItem(3);
+							break;
+						case 5:
+							carousel3.goToItem(6);
+							break;
+						case 6:
+							carousel3.goToItem(2);
+							break;
+						case 7:
+							carousel3.goToItem(4);
+							break;
+						case 8:
+							carousel3.goToItem(1);
+							break;
+						case 9:
+							carousel3.goToItem(7);
+							break;
+						case 10:
+							carousel3.goToItem(8);
+							break;
+						case 11:
+							carousel3.goToItem(3);
+							break;
+					}
+				}
+			}
+		</script>
+	</head>
+<body onload="init()">
+	<div class="w_box w_header w_bg_dark">
+		<span id="title">carousel</span>
+		<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+	</div>
+	
+	<div class="w_bloc">
+		Interractions: 
+		<ul>
+			<li>
+				moving the second carousel items will make the third carousel react
+			</li>
+			<li>
+				clicking on the second carousel items will trigger an alert
+			</li>
+		</ul>
+	</div>
+	
+	<div class="w_bloc">
+		options: autoAdjust, autoPlay (duration: 4000ms)
+	</div>
+	
+	<div id="c1">
+	</div>
+	
+	<br />
+	<br />
+	
+	<div class="w_bloc">
+		options: autoAdjust, itemsAlign (position: left)
+	</div>
+	
+	<div id="c2">
+	</div>
+	
+	<br />
+	<br />
+	
+	<div class="w_bloc">
+		options: no autoAdjust, no displayDots
+	</div>
+	
+	<div id="c3">
+	</div>
+</body>
+</html>

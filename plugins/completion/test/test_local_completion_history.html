@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    
+        <!-- THEME UTILITY -->
+        <link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+        <!-- END THEME UTILITY -->
+        
+        <link rel="stylesheet" href="../../../plugins/completion/css/completion.css" type="text/css">
+        
+        <!-- THEME UTILITY -->
+        <script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+        <!-- END THEME UTILITY -->
+        
+        <script type="text/javascript" src="../../../plugins/completion/test/resources/colors.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/test/resources/activities.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/test/resources/geometry.js"></script>
+        
+        <!-- CORE -->
+        <!-- Can be replaced by wink.min.js -->
+        <script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+        <script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+        <script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+        <script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+        <script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+        <script type="text/javascript" src="../../../_base/json/js/json.extended.js"></script>
+        <script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+        <script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+        <script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+        <script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+        <script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+        <script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+        <script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+        <script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+        <script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+        <script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+        <script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+        <script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+        <script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+        <!-- END CORE -->
+        
+        <script type="text/javascript" src="../../../ux/window/js/window.js"></script>
+        
+        <script type="text/javascript" src="../../../plugins/completion/js/component.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/tools.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/searchTools.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/manager/helper.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/manager/data/local.js"></script>        
+        <script type="text/javascript" src="../../../plugins/completion/js/manager/dom/simple.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/manager/event/simple.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/manager/history/simple.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/manager/history/handler/localstorage.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/module/data/default.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/module/dom/default.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/module/dom/label.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/module/event/default.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/module/event/label.js"></script>
+        
+        <script><!--
+        var activityCompleter;
+
+        wink.error.logLevel = 1;
+
+        init = function()
+        {
+            var activityProperties = 
+            {
+                "input": $('myInputActivity'),
+                "managers": {
+                
+                    "data": {
+                        "name": "LocalDataManager",
+                        "suggestions": activities,
+                        "minQueryLength": 1,
+                        "maxSearchedSuggestions": 5,
+                        "stripAccents": false,
+                        "callbacks": {
+                            "parseResponseData": { method: "addSuggestionLabel" },
+                            "parseFinalSuggestions": { method: "addCloseLabel" }
+                        },
+                        "modules": {
+                            "default": {
+                                "mapping": {
+                                    "value" : "value",
+                                    "type"  : "type",
+                                    "css"   : "css",
+                                    "action": "action",
+                                    "content" : "content"
+                                }
+                            }
+                        }
+                    },
+                    
+                    "dom": {
+                        "name": "SimpleDomManager",
+                        "borderSize": 1,
+                       	"modules": {
+                            "default": {
+                                "boldSuggestion": false
+                            }
+                        }
+                    },
+                    
+                    "event": {
+                        "name": "SimpleEventManager"
+                    },
+                    
+                    "history": {
+                        "name": "SimpleHistoryManager",
+                        "callbacks": {
+                            "parseHistoryData": { method: "addHistoryLabel" },
+                        },
+                        "handler": {
+                            "localStorage": { "storageName": "cmpl_history"}
+                        },
+                        "stripAccents": false
+                    }
+               }
+            };
+
+            activityCompleter = new wink.plugins.completion.Component(activityProperties);
+            activityCompleter.start();
+            
+
+            $('myInputActivity').form.onsubmit = function() {activityCompleter.saveSelectedSuggestionInHistory();};
+        };
+
+        /**
+         * Add a suggestion label if there are some suggestions
+         */
+        addSuggestionLabel = function(responseData)
+        {
+            if (responseData.length > 0)
+                responseData.unshift({ "value": "Suggests", "type": "label" });
+            
+            return responseData;
+        };
+
+        /**
+         * Add the history label if there are some history suggestion
+         */
+        addHistoryLabel = function(historyData)
+        {
+            if (historyData.length > 0)
+                historyData.unshift({ "value": 'History&nbsp;(<span onClick=\"activityCompleter.resetHistory();\";>clear</span>)', "type": "label" });
+
+            return historyData;
+        };
+
+        /**
+         * Add the close label if we have at least one suggestion
+         * including response and history response
+         */
+        addCloseLabel = function(suggestions)
+        {
+            if (suggestions.length > 0)
+                suggestions.push({ "value": "Close", "type": "label", "css": "leftClose", "action": { method: "closeActivityCompletion" } });            
+        };
+        
+        /**
+         * Close the completion manually
+         */
+        closeActivityCompletion = function()
+        {
+            activityCompleter.hideCompletion();
+        };
+        
+        saveHistory = function()
+        {
+        	console.log('save history');
+        };
+        
+        --></script>
+        
+        <style type="text/css">
+            
+            input[type="text"]  {
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+                width: 60%;  
+            }
+            
+            .color_text {   
+            }
+            
+            .color_box {
+                float: left;
+                width: 50px;
+                height: 10px;
+                margin: 5px;    
+            }
+            
+            .w_bloc {
+                margin-top: 20px;
+                height: 400px;
+            }
+            
+        </style>
+    </head>
+    
+    <body onload="init(); $('myInputActivity').focus();">
+        <div class="w_box w_header w_bg_dark">
+            <input type="button" class="w_button w_radius w_bg_light" id="back" value="back" style="visibility: visible; " onclick="document.location.href='index.html'" />
+            history
+        </div>
+        
+        <div class="w_bloc" style="text-align: center">
+            <form method="GET" action="">
+	            <div>Choose a job :</div>            
+	            <input id="myInputActivity" name="job" autocomplete="off" autocorrect="off" type="text" value="" style="height:36px;" class="w_input w_border w_radius"/>
+	            <input type="submit" class="w_button w_border w_radius w_bg_dark" value="ok" />
+            </form>
+        </div>
+    </body>
+</html>

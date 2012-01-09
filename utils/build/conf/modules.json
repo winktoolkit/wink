@@ -1,0 +1,559 @@
+{
+	"modules": [
+		// -------------- CORE
+		{
+		    "name": "core",
+		    "modules": [ 
+		        "amd",
+		        "kernel",
+		        "base",
+		        "dom",
+		        "error",
+		        "json",
+		        "topics",
+		        "ua",
+		        "feature",
+		        "2dfx",
+		        "math_basics",
+		        "event",
+		        "touch",
+		        "xhr",
+		        "layer"
+		    ]
+		},
+		{
+		    "name": "feature",
+		    "modules": [ 
+		        "feat",
+		        "featjson",
+		        "featcss",
+		        "featevent",
+		        "featdom"
+		    ]
+		},
+		{
+			"name": "amd",
+			"defaultImpl": "_amd/js/amd.js"
+		},
+		{
+			"name": "kernel",
+			"defaultImpl": "_base/_kernel/js/kernel.js"
+		},
+		{
+			"name": "base",
+			"defaultImpl": "_base/_base/js/base.js"
+			//,"subImpls": [
+			//	{
+			//		"target": "ie",
+			//	    "impl": "_base/_base/js/base_ie.js",
+			//		"excludeDefault": false
+			//	}
+			//]
+		},
+		{
+			"name": "dom",
+			"defaultImpl": "_base/_dom/js/dom.js"
+		},
+		{
+			"name": "error",
+			"defaultImpl": "_base/error/js/error.js"
+		},
+		{
+			"name": "json",
+			"defaultImpl": "_base/json/js/json.js"
+		},
+		{
+			"name": "topics",
+			"defaultImpl": "_base/topics/js/topics.js"
+		},
+		{
+			"name": "ua",
+			"defaultImpl": "_base/ua/js/ua.js"
+		},
+		{
+			"name": "feat",
+			"defaultImpl": "_base/_feat/js/feat.js"
+		},
+		{
+			"name": "featapi",
+			"defaultImpl": "_base/_feat/js/feat_api.js"
+		},
+		{
+			"name": "featjson",
+			"defaultImpl": "_base/_feat/js/feat_json.js"
+		},
+		{
+			"name": "featcss",
+			"defaultImpl": "_base/_feat/js/feat_css.js"
+		},
+		{
+			"name": "featevent",
+			"defaultImpl": "_base/_feat/js/feat_event.js"
+		},
+		{
+			"name": "featgraphic",
+			"defaultImpl": "_base/_feat/js/feat_graphic.js"
+		},
+		{
+			"name": "featdom",
+			"defaultImpl": "_base/_feat/js/feat_dom.js"
+		},
+		{
+			"name": "2dfx",
+			"defaultImpl": "fx/_xy/js/2dfx.js"
+		},
+		{
+			"name": "math_basics",
+			"defaultImpl": "math/_basics/js/basics.js"
+		},
+		{
+			"name": "event",
+			"defaultImpl": "ux/event/js/event.js"
+		},
+		{
+			"name": "touch",
+			"defaultImpl": "ux/touch/js/touch.js"
+		},
+		{
+			"name": "xhr",
+			"defaultImpl": "net/xhr/js/xhr.js"
+		},
+		{
+			"name": "layer",
+			"defaultImpl": "ui/xy/layer/js/layer.js"
+		},
+		
+		// -------------- JSON
+		{
+			"name": "jsonextended",
+			"defaultImpl": "_base/json/js/json.extended.js"
+		},
+		
+		// -------------- API
+		{
+			"name": "geolocation",
+			"defaultImpl": "api/geolocation/js/geolocation.js"
+		},
+		{
+			"name": "storage",
+			"defaultImpl": "api/storage/js/storage.js"
+		},
+		{
+			"name": "safaridb",
+			"defaultImpl": "api/storage/js/safaridb.js"
+		},
+		{
+			"name": "gearsdb",
+			"defaultImpl": "api/storage/js/gearsdb.js"
+		},
+		{
+			"name": "cache",
+			"defaultImpl": "_cache/js/wink.cache.js"
+		},
+		
+		// -------------- FX
+		{
+			"name": "3dfx",
+			"defaultImpl": "fx/_xyz/js/3dfx.js"
+		},
+		{
+			"name": "animation",
+			"defaultImpl": "fx/_animation/js/animation.js"
+		},
+		
+		// -------------- MATH
+		{
+			"name": "geometric",
+			"defaultImpl": "math/_geometric/js/geometric.js"
+		},
+		{
+			"name": "matrix",
+			"defaultImpl": "math/_matrix/js/matrix.js"
+		},
+		
+		// -------------- NET
+		{
+			"name": "cssloader",
+			"defaultImpl": "net/cssloader/js/cssloader.js"
+		},
+		{
+			"name": "imagesloader",
+			"defaultImpl": "net/imagesloader/js/imagesloader.js"
+		},
+		{
+			"name": "jsloader",
+			"defaultImpl": "net/jsloader/js/jsloader.js"
+		},
+		{
+			"name": "smartloader",
+			"defaultImpl": "net/smartloader/js/smartloader.js"
+		},
+		{
+			"name": "tracking",
+			"defaultImpl": "net/tracking/js/tracking.js"
+		},
+		
+		// -------------- MULTIMEDIA
+		{
+			"name": "audioplayer",
+			"defaultImpl": "mm/audioplayer/js/audioplayer.js",
+			"i18n": [
+				{ "en_EN": "mm/audioplayer/resources/en_EN/audioplayer.js" },
+				{ "fr_FR": "mm/audioplayer/resources/fr_FR/audioplayer.js" }
+			],
+			"css": [
+			    "mm/audioplayer/css/audioplayer.css"
+			]
+		},
+		{
+			"name": "videoplayer",
+			"defaultImpl": "mm/videoplayer/js/videoplayer.js",
+			"i18n": [
+				{ "en_EN": "mm/videoplayer/resources/en_EN/videoplayer.js" },
+				{ "fr_FR": "mm/videoplayer/resources/fr_FR/videoplayer.js" }
+			],
+			"css": [
+			    "mm/videoplayer/css/videoplayer.css"
+			]
+		},
+		{
+			"name": "mediawheel",
+			"defaultImpl": "mm/mediawheel/js/mediawheel.js",
+			"css": [
+			    "mm/mediawheel/css/mediawheel.css"
+			]
+		},
+		
+		// -------------- UX
+		{
+			"name": "history",
+			"defaultImpl": "ux/history/js/history.js"
+		},
+		{
+			"name": "dnd",
+			"defaultImpl": "ux/dnd/js/dnd.js"
+		},
+		{
+			"name": "gesture",
+			"defaultImpl": "ux/gesture/js/gesture.js"
+		},
+		{
+			"name": "gesturerecognizer",
+			"defaultImpl": "ux/gesturerecognizer/js/gesturerecognizer.js"
+		},
+		{
+			"name": "inertia",
+			"defaultImpl": "ux/inertia/js/inertia.js"
+		},
+		{
+			"name": "movementtracker",
+			"defaultImpl": "ux/movementtracker/js/movementtracker.js"
+		},
+		{
+			"name": "search",
+			"defaultImpl": "ux/search/js/search.js"
+		},
+		{
+			"name": "window",
+			"defaultImpl": "ux/window/js/window.js"
+		},
+		
+		// -------------- UI
+		{
+			"name": "accordion",
+			"defaultImpl": "ui/layout/accordion/js/accordion.js",
+			"css": [
+			    "ui/layout/accordion/css/accordion.css"
+			]
+		},
+		{
+			"name": "fixedlayout",
+			"defaultImpl": "ui/layout/fixedlayout/js/fixedlayout.js",
+			"css": [
+			    "ui/layout/fixedlayout/css/fixedlayout.css"
+			]
+		},
+		{
+			"name": "scroller",
+			"defaultImpl": "ui/layout/scroller/js/scroller.js"
+		},
+		{
+			"name": "slidingpanels",
+			"defaultImpl": "ui/layout/slidingpanels/js/slidingpanels.js",
+			"css": [
+			    "ui/layout/slidingpanels/css/slidingpanels.css"
+			]
+		},
+		{
+			"name": "tabcontainer",
+			"defaultImpl": "ui/layout/tabcontainer/js/tabcontainer.js",
+			"css": [
+			    "ui/layout/tabcontainer/css/tabcontainer.css"
+			]
+		},
+		{
+			"name": "modalwindow",
+			"defaultImpl": "ui/layout/modalwindow/js/modalwindow.js",
+			"css": [
+			    "ui/layout/modalwindow/css/modalwindow.css"
+			]
+		},
+		{
+			"name": "flippage",
+			"defaultImpl": "ui/layout/flippage/js/flippage.js",
+			"css": [
+			    "ui/layout/flippage/css/flippage.css"
+			]
+		},
+		{
+			"name": "windows",
+			"defaultImpl": "ui/layout/windows/js/windows.js",
+			"css": [
+			    "ui/layout/windows/css/windows.css"
+			]
+		},
+		
+		{
+			"name": "input",
+			"defaultImpl": "ui/form/input/js/input.js",
+			"css": [
+			    "ui/form/input/css/input.css"
+			]
+		},
+		{
+			"name": "carousel",
+			"defaultImpl": "ui/xy/carousel/js/carousel.js",
+			"css": [
+			    "ui/xy/carousel/css/carousel.css"
+			]
+		},
+		{
+			"name": "colorpicker",
+			"defaultImpl": "ui/xy/colorpicker/js/colorpicker.js",
+			"css": [
+			    "ui/xy/colorpicker/css/colorpicker.css"
+			]
+		},
+		{
+			"name": "datepicker",
+			"defaultImpl": "ui/xy/datepicker/js/datepicker.js",
+			"i18n": [
+				{ "en_EN": "ui/xy/datepicker/resources/en_EN/datepicker.js" },
+				{ "fr_FR": "ui/xy/datepicker/resources/fr_FR/datepicker.js" }
+			],
+			"css": [
+			    "ui/xy/datepicker/css/datepicker.css"
+			]
+		},
+		{
+			"name": "menu",
+			"defaultImpl": "ui/xy/menu/js/menu.js",
+			"css": [
+			    "ui/xy/menu/css/menu.css"
+			]
+		},
+		{
+			"name": "newsticker",
+			"defaultImpl": "ui/xy/newsticker/js/newsticker.js",
+			"css": [
+			    "ui/xy/newsticker/css/newsticker.css"
+			]
+		},
+		{
+			"name": "popup",
+			"defaultImpl": "ui/xy/popup/js/popup.js",
+			"i18n": [
+				{ "en_EN": "ui/xy/popup/resources/en_EN/popup.js" },
+				{ "fr_FR": "ui/xy/popup/resources/fr_FR/popup.js" }
+			],
+			"css": [
+			    "ui/xy/popup/css/popup.css"
+			]
+		},
+		{
+			"name": "progressbar",
+			"defaultImpl": "ui/xy/progressbar/js/progressbar.js"
+		},
+		{
+			"name": "slideshow",
+			"defaultImpl": "ui/xy/slideshow/js/slideshow.js",
+			"css": [
+			    "ui/xy/slideshow/css/slideshow.css"
+			]
+		},
+		{
+			"name": "spinner",
+			"defaultImpl": "ui/xy/spinner/js/spinner.js",
+			"css": [
+			    "ui/xy/spinner/css/spinner.css"
+			]
+		},
+		{
+			"name": "cspinner",
+			"defaultImpl": "ui/xy/cspinner/js/cspinner.js"
+		},
+		{
+			"name": "trace",
+			"defaultImpl": "ui/xy/trace/js/trace.js"
+		},
+		{
+			"name": "togglebutton",
+			"defaultImpl": "ui/xy/togglebutton/js/togglebutton.js",
+			"css": [
+			    "ui/xy/togglebutton/css/togglebutton.css"
+			]
+		},
+		{
+			"name": "wall",
+			"defaultImpl": "ui/xyz/wall/js/wall.js",
+			"css": [
+			    "ui/xyz/wall/css/wall.css"
+			]
+		},
+		{
+			"name": "coverflow",
+			"defaultImpl": "ui/xyz/coverflow/js/coverflow.js"
+		},
+		{
+			"name": "cube",
+			"defaultImpl": "ui/xyz/cube/js/cube.js"
+		},
+		{
+			"name": "flipdisc",
+			"defaultImpl": "ui/xyz/flipdisc/js/flipdisc.js"
+		},
+		{
+			"name": "opener",
+			"defaultImpl": "ui/xyz/opener/js/opener.js",
+			"css": [
+			    "ui/xyz/opener/css/opener.css"
+			]
+		},
+		{
+			"name": "tagcloud",
+			"defaultImpl": "ui/xyz/tagcloud/js/tagcloud.js"
+		},
+		
+		// -------------- PLUGINS
+		{
+			"name": "asyncpanels",
+			"defaultImpl": "plugins/asyncpanels/js/asyncpanels.js",
+			"css": [
+			    "plugins/asyncpanels/css/asyncpanels.css"
+			]
+		},
+		{
+			"name": "sharingwheel",
+			"defaultImpl": "plugins/sharingwheel/js/sharingwheel.js",
+			"css": [
+			    "plugins/sharingwheel/css/sharingwheel.css"
+			]
+		},
+		{
+			"name": "scrolltorefresh",
+			"defaultImpl": "plugins/scrolltorefresh/js/scrolltorefresh.js",
+			"css": [
+			    "plugins/scrolltorefresh/css/scrolltorefresh.css"
+			]
+		},
+		{
+			"name": "scrolltoload",
+			"defaultImpl": "plugins/scrolltoload/js/scrolltoload.js",
+			"css": [
+			    "plugins/scrolltoload/css/scrolltoload.css"
+			]
+		},
+		// -------------- Completion 
+        {
+            "name": "completion",
+            "modules": [ 
+                "completion_core"
+            ]
+        },
+        // --- Core
+        {
+            "name": "completion_core",
+            "modules": [ 
+                "completion_component",
+                "completion_tools",
+                "completion_manager_helper"
+            ]
+        },
+        {
+            "name": "completion_component",
+            "defaultImpl": "plugins/completion/js/component.js"
+        },
+        {
+            "name": "completion_tools",
+            "defaultImpl": "plugins/completion/js/tools.js"
+        },
+        {
+            "name": "completion_manager_helper",
+            "defaultImpl": "plugins/completion/js/manager/helper.js"
+        },
+        // --- Data handlers
+        {
+            "name": "completion_localdatamanager",
+            "defaultImpl": "plugins/completion/js/manager/data/local.js"
+        },
+        {
+            "name": "completion_remotedatamanager",
+            "defaultImpl": "plugins/completion/js/manager/data/remote.js"
+        },
+        {
+            "name": "completion_defaultdatamodule",
+            "defaultImpl": "plugins/completion/js/module/data/default.js"
+        },
+        {
+            "name": "completion_directlinkdatamodule",
+            "defaultImpl": "plugins/completion/js/module/data/directlink.js"
+        },
+        {
+            "name": "completion_labeldatamodule",
+            "defaultImpl": "plugins/completion/js/module/data/label.js"
+        },
+        // --- Dom handlers
+        {
+            "name": "completion_simpledommanager",
+            "defaultImpl": "plugins/completion/js/manager/dom/simple.js"
+        },
+        {
+            "name": "completion_defaultdommodule",
+            "defaultImpl": "plugins/completion/js/module/dom/default.js"
+        },
+        {
+            "name": "completion_directlinkdommodule",
+            "defaultImpl": "plugins/completion/js/module/dom/directlink.js"
+        },
+        {
+            "name": "completion_labeldommodule",
+            "defaultImpl": "plugins/completion/js/module/dom/label.js"
+        },
+        // --- Event handlers
+        {
+            "name": "completion_simpleeventmanager",
+            "defaultImpl": "plugins/completion/js/manager/event/simple.js"
+        },
+        {
+            "name": "completion_defaulteventmodule",
+            "defaultImpl": "plugins/completion/js/module/event/default.js"
+        },
+        {
+            "name": "completion_directlinkeventmodule",
+            "defaultImpl": "plugins/completion/js/module/event/directlink.js"
+        },
+        {
+            "name": "completion_labeleventmodule",
+            "defaultImpl": "plugins/completion/js/module/event/label.js"
+        },
+        // --- History handlers
+        {
+            "name": "completion_simplehistorymanager",
+            "defaultImpl": "plugins/completion/js/manager/history/simple.js"
+        },
+        {
+            "name": "completion_localstoragehandler",
+            "defaultImpl": "plugins/completion/js/manager/history/handler/localstorage.js"
+        }  
+	]
+}

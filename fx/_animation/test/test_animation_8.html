@@ -1,0 +1,271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_animation_starwink</title>
+
+		<style>
+			html, body {
+				background-color: #000;
+				
+				width: 100%;
+				height: 100%;
+			}
+			
+			.container 
+			{
+				width: 100%;
+				height: 100%;
+				background-color: transparent;
+				overflow: hidden;
+			}
+			
+			.page 
+			{
+				position: absolute;
+				background-color: transparent;
+				
+				color: #e1db77;
+				
+				text-shadow: 0.08em 0.08em 0.08em #fff;
+				margin-left: -25%;
+				margin-right: -25%;
+				width: auto;
+				display: none;
+			}
+			
+			.back 
+			{
+				position: absolute;
+				background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, rgba(0, 0, 0, 1.0)), color-stop(0.3, rgba(0, 0, 0, 0.4)), color-stop(1, rgba(255, 0, 0, 0.0)));
+				width: 100%;
+				height: 100%;
+			}
+			
+			.header 
+			{
+				text-align: center;
+				font-size: 4em;
+			}
+			
+			.main 
+			{
+				text-align: center;
+				padding: 5px;
+				margin: 2px;
+				font-size: 2em;
+			}
+			
+			@media screen and (min-device-width: 768px) 
+			{
+				.page 
+				{
+					width: 100%;
+					margin-left: 0%;
+					margin-right: 0%;
+				}
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../math/_matrix/js/matrix.js"></script>
+		<script type="text/javascript" src="../../../fx/_xyz/js/3dfx.js"></script>
+		<script type="text/javascript" src="../../../fx/_animation/js/animation.js"></script>
+
+		<script type="text/javascript">
+			var transformer = {
+				transform: function(params, transformations) {
+					var node = params.node;
+					
+					wink.fx.initComposedTransform(node);
+					for (var i = 0; i < transformations.length; i++) {
+						wink.fx.setTransformPart(node, (i + 1), transformations[i]);
+					}
+					wink.fx.applyComposedTransform(node);
+				}
+			};
+
+			var setFrontPosition = function(node) {
+				var trf = [
+				    { type: "rotate", x: 1, y: 0, z: 0, angle: angle },
+				    { type: "translate", x: pos1.x, y: pos1.y, z: pos1.z }
+				];
+				wink.fx.applyTransformTransition(node, "", "", "");
+				transformer.transform({ node: node }, trf);
+			};
+			var bringToBack = function(node, delay) {
+				var trf = [
+					{ type: "rotate", x: 1, y: 0, z: 0, angle: angle },
+					{ type: "translate", x: pos2.x, y: pos2.y, z: pos2.z }
+				];
+
+				var anim = new wink.fx.animation.Animation();
+				anim.addStep({
+					property: '-webkit-transform',
+					value: { context: transformer, method: 'transform', arguments: [ trf ] },
+					duration: delay,
+					delay: 0,
+					func: 'linear'
+				});
+
+				var trf2 = [
+					{ type: "rotate", x: 1, y: 0, z: 0, angle: angle - 35 },
+					{ type: "translate", x: pos3.x, y: pos3.y, z: pos3.z }
+				];
+				var anim2 = new wink.fx.animation.Animation();
+				anim2.addStep({
+					property: '-webkit-transform',
+					value: { context: transformer, method: 'transform', arguments: [ trf2 ] },
+					duration: duration,
+					delay: 0,
+					func: 'linear'
+				});
+
+				setFrontPosition(node);
+
+				var ctx = {
+					next: function(params, node) {
+						var next = getNext(node);
+						bringToBack(next, delayNext);
+						anim2.start(node);
+					}
+				};
+				anim.start(node, { onEnd: { context: ctx, method: 'next', arguments: [ node ] } });
+			};
+			var getNext = function(node) {
+				var index = 0;
+				for (var i = 0; i < nodeList.length; i++) {
+					if (node == nodeList[i]) {
+						index = (i + 1) % nodeList.length;
+						break;
+					}
+				}
+				return nodeList[index];
+			};
+
+			var nodeList, ipad, pos1, pos2, pos3, angle, duration, delayNext;
+			var init = function() {
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+
+				ipad = wink.ua.isIPad;
+				pos1 = ipad ? { x: 0, y: 1100, z: 700 } : { x: 0, y: 1100, z: 700 };
+				pos2 = ipad ? { x: 0, y: 1000, z: 400 } : { x: 0, y: 1000, z: 400 };
+				pos3 = ipad ? { x: 0, y: -5000, z: -3000 } : { x: 0, y: -5000, z: -3000 };
+				angle = ipad ? 45 : 50;
+				duration = ipad ? 120000 : 80000;
+				delayNext = ipad ? 5000 : 5000;
+
+				$('container').style["-webkit-perspective"] = 400;
+				$('container').style["-webkit-transform-style"] = 'preserve-3d';
+
+				nodeList = [ $('page1'), $('page2'), $('page3'), $('page4'), $('page5'), $('page6'), $('page7'), $('page8'), $('page9') ];
+
+				for (var i = 0; i < nodeList.length; i++) {
+					setFrontPosition(nodeList[i]);
+					nodeList[i].style.display = "block";
+				}
+				transformer.transform({ node: $('back') }, [ 
+					{ type: "translate", x: 0, y: 0, z: 200 },
+					{ type: "scale", x: 0.5, y: 0.5, z: 1 }
+				]);
+				bringToBack($('page1'), 0);
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">animations</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container" class="container">
+			<div id="back" class="back"></div>
+			<div id="page1" class="page">
+				<div id="header" class="header">WINK</div>
+				<br />
+				<div id="header" class="header">Chapter I</div>
+				<br />
+				<div id="main" class="main">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquet purus pulvinar turpis elementum posuere.
+				</div>
+				<br /><br /><br /><br /><br />
+			</div>
+			<div id="page2" class="page">
+				<div id="main" class="main">
+					Proin diam tortor, sollicitudin quis posuere dictum, viverra ut lectus. Quisque id nisi in enim condimentum consectetur a et ante. Fusce libero nulla, volutpat eu accumsan sed, condimentum lobortis leo. Proin in orci venenatis urna viverra fringilla. Integer bibendum, ligula eu laoreet tincidunt, augue enim lacinia neque.
+				</div>
+			</div>
+			<div id="page3" class="page">
+				<div id="main" class="main">
+					Donec vel venenatis nisi. In mollis justo auctor quam tempus vestibulum. Donec convallis elit eu ante eleifend ac pharetra libero lobortis. Aenean sed enim risus, ac bibendum est. Phasellus molestie felis nec nisl mollis imperdiet. Quisque vitae ipsum enim, vitae fringilla dui.
+				</div>
+			</div>
+			<div id="page4" class="page">
+				<div id="main" class="main">
+					Maecenas feugiat varius porttitor. Pellentesque scelerisque sodales sem, at cursus purus tristique sed. Donec malesuada tincidunt massa, in varius purus ultrices vel. Vestibulum quis dui justo. Nulla in arcu ipsum, eget feugiat velit. In hac habitasse platea dictumst. Etiam hendrerit turpis quis lacus lacinia scelerisque.
+				</div>
+			</div>
+			<div id="page5" class="page">
+				<div id="main" class="main">
+					Donec porta tortor in ipsum commodo porta interdum nulla accumsan. Nunc fermentum semper justo sit amet sodales. Praesent eu quam sit amet sem vulputate euismod in eu nisi. Nulla non lacus mauris. Duis libero quam, consequat eu euismod tristique, pellentesque non nibh.
+				</div>
+			</div>
+			<div id="page6" class="page">
+				<div id="main" class="main">
+					Vivamus libero purus, egestas tincidunt tincidunt eget, hendrerit sed arcu. Maecenas a urna enim, sed placerat sapien. Nunc dapibus, massa in interdum facilisis, orci massa hendrerit erat, eget sagittis libero libero id velit. Curabitur facilisis mauris mi, et dapibus dui.
+				</div>
+			</div>
+			<div id="page7" class="page">
+				<div id="main" class="main">
+					Cras ac ipsum eu justo vulputate consectetur. Curabitur quis mi lorem. Nunc tincidunt mauris et nisl varius sit amet molestie neque laoreet. Cras aliquet nunc nec diam gravida convallis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+				</div>
+			</div>
+			<div id="page8" class="page">
+				<div id="main" class="main">
+					Pellentesque hendrerit, dui ac blandit varius, augue velit imperdiet nisl, nec pellentesque elit lectus lobortis turpis. Curabitur nulla arcu, lobortis ut porta eu, ornare vel nulla. Maecenas ultricies congue nunc. Suspendisse potenti. Curabitur non est lectus, et fringilla quam. 
+				</div>
+			</div>
+			<div id="page9" class="page">
+				<div id="main" class="main">
+					Duis vulputate varius tincidunt. Mauris vel varius dui. Nam semper, magna eget mattis tincidunt, dui nibh eleifend nisi, sed malesuada nisl magna sed dui. Mauris sed ipsum urna, quis adipiscing ipsum. Nam eget euismod lectus. Quisque quis nisl sit amet lorem iaculis auctor. 
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_animation_door</title>
+
+		<style>
+			.container 
+			{
+				position: relative;
+				height: 300px;
+				width: 320px;
+				background-color: #ddd;
+				background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0, #000), color-stop(1, #385b43));
+				overflow: hidden;
+			}
+			
+			.door 
+			{
+				position: absolute;
+				height: 300px;
+				width: 160px;
+				top: 0;
+				z-index: 2;
+			}
+			
+			.door.left 
+			{
+				background-color: #afafaf;
+				background-image: -webkit-gradient(linear, 0 0, 100% 0, color-stop(0, #fff), color-stop(1, #afafaf));
+				left: 0;
+			}
+			.door.right {
+				background-color: #4f4f4f;
+				background-image: -webkit-gradient(linear, 0 0, 100% 0, color-stop(0, #4f4f4f), color-stop(1, #000));
+				left: 160px;
+			}
+			.door.left.active {
+				background-color: #81cd8a;
+				background-image: -webkit-gradient(linear, 0 0, 100% 0, color-stop(0, #fff), color-stop(1, #81cd8a));
+			}
+			.door.right.active {
+				background-color: #81cd8a;
+				background-image: -webkit-gradient(linear, 0 0, 100% 0, color-stop(0, #000), color-stop(1, #81cd8a));
+			}
+			
+			.lock {
+				position: absolute;
+				left: 60px;
+				top: 50px;
+				width: 200px;
+				height: 200px;
+				z-index: 4;
+			}
+			.lock .lock_image {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.door_key 
+			{
+				position: absolute;
+				width: 170px;
+				left: 75px;
+				top: 115px;
+				height: 80px;
+				z-index: 5;
+				display: none;
+				background-color: transparent;
+			}
+			
+			.door_digit_key 
+			{
+				position: absolute;
+				width: 85px;
+				height: 80px;
+				z-index: 3;
+				display: none;
+			}
+			
+			.door_digit_key.top 
+			{
+				background-color: #fff;
+				left: 75px;
+				top: 115px;
+				-webkit-transform-origin: 100% 50%;
+			}
+			
+			.door_digit_key.bottom 
+			{
+				background-color: #000;
+				left: 160px;
+				top: 115px;
+				-webkit-transform-origin: 0% 50%;
+			}
+			
+			.door_digit_key.top.active, .door_digit_key.bottom.active 
+			{
+				background-color: #81cd8a;
+			}
+			
+			.digit 
+			{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 120px;
+				height: 120px;
+				background-color: rgba(255,255,255,0.0);
+				z-index: 5;
+				display: none;
+			}
+			
+			.digit.red 
+			{
+				background: -webkit-gradient(radial,
+					50% 50%,40,
+					50% 50%,60,
+					from(rgba(255,0,0,0.8)),color-stop(80%, rgba(255,0,0,0.0)),to(rgba(0,0,0,0.0)));
+			}
+			
+			.digit.green 
+			{
+				background: -webkit-gradient(radial,
+					50% 50%,40,
+					50% 50%,60,
+					from(rgba(129,255,138,0.8)),color-stop(80%, rgba(129,255,138,0.0)),to(rgba(0,0,0,0.0)));
+			}
+			
+			.digit.active 
+			{
+				display: block;
+			}
+			
+			.text 
+			{
+				font-size: 4em;
+				color: #fff;
+				text-shadow: -0.04em -0.04em 0.04em #aaa; 
+				letter-spacing: 0.2em;
+				display: none;
+			}
+			
+			@media screen and (min-device-width: 768px) 
+			{
+				.container 
+				{
+					height: 720px;
+					width: 768px;
+					
+				}
+				
+				.door 
+				{
+					height: 720px;
+					width: 384px;
+				}
+				
+				.door.left 
+				{
+					left: 0;
+				}
+				
+				.door.right 
+				{
+					left: 384px;
+				}
+				
+				.lock 
+				{
+					left: 144px;
+					top: 120px;
+					width: 480px;
+					height: 480px;
+				}
+				
+				.door_key
+				{
+					width: 408px;
+					left: 180px;
+					top: 276px;
+					height: 192px;
+				}
+				
+				.door_digit_key 
+				{
+					width: 204px;
+					height: 192px;
+				}
+				
+				.door_digit_key.top 
+				{
+					left: 180px;
+					top: 276px;
+				}
+				
+				.door_digit_key.bottom 
+				{
+					left: 384px;
+					top: 276px;
+				}
+				
+				.digit 
+				{
+					top: 0px;
+					left: 0px;
+					width: 288px;
+					height: 288px;
+				}
+				
+				.text
+				{
+					font-size: 8em;
+					text-shadow: -0.04em -0.04em 0.04em #aaa; 
+					letter-spacing: 0.4em;
+				}
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+
+		<script type="text/javascript" src="../../../fx/_animation/js/animation.js"></script>
+		<script type="text/javascript" src="../../../ux/gesture/js/gesture.js"></script>
+
+		<script type="text/javascript">
+			var ColorAnimator = function(keyNode, color1, color2, color3, prop) {
+				this._keyNode = keyNode;
+				this._prop = prop ? prop : 'background-color';
+				this._colors = [ color1, color2, color3 ];
+				this._active = false;
+
+				/**
+				 *
+				 */
+				this.start= function() {
+					this._active = true;
+					this._step1();
+				};
+				/**
+				 *
+				 */
+				this.stop= function() {
+					this._active = false;
+				};
+				/**
+				 *
+				 */
+				this._step1= function() {
+					var onEnd = { context: this, method: '_step2' };
+					wink.fx.animate(this._keyNode, { property: this._prop, value: this._colors[0], duration: 1500 }, { onEnd: onEnd  });
+				};
+				/**
+				 *
+				 */
+				this._step2= function() {
+					var onEnd = { context: this, method: '_step3' };
+					wink.fx.animate(this._keyNode, { property: this._prop, value: this._colors[1], duration: 1500 }, { onEnd: onEnd  });
+				};
+				/**
+				 *
+				 */
+				this._step3= function() {
+					var onEnd = this._active ? { context: this, method: '_step1' } : null;
+					wink.fx.animate(this._keyNode, { property: this._prop, value: this._colors[2], duration: 1500 }, { onEnd: onEnd  });
+				}
+			};
+
+			var lockManager = {
+				key1Activated: false,
+				key2Activated: false,
+				unlocked: false,
+
+				/**
+				 *
+				 */
+				init: function() {
+					this.key1 = $('door_digit_key_1');
+					this.key2 = $('door_digit_key_2');
+					this.digit1 = $('digit1');
+					this.digit2 = $('digit2');
+					this.container = $('container');
+					this.doorLock = $('door_lock');
+					this.doorKey = $('door_key');
+					this.doorLeft = $('door_left');
+					this.doorRight = $('door_right');
+					this.yin = $('lock_image_yin');
+					this.yang = $('lock_image_yang');
+					this.text = $('text');
+					
+					this._listen();
+
+					this.colorAnimKey1 = new ColorAnimator(this.key1, '#81cd8a', '#11ac5e', '#ffffff');
+					this.colorAnimKey2 = new ColorAnimator(this.key2, '#81cd8a', '#11ac5e', '#000000');
+					this.colorAnimKey1.start();
+					this.colorAnimKey2.start();
+					
+					this.text.scale(0.01, 0.01);
+					this.doorLock.rotate(-90);
+
+					this.doorKey.style.display = 'block';
+					this.key1.style.display = 'block';
+					this.key2.style.display = 'block';
+					this.text.style.display = 'block';
+				},
+				/**
+				 *
+				 */
+				_listen: function() {
+					wink.ux.touch.addListener(this.container, "start", { context: this, method: "_handleStart" }, { preventDefault: true });
+					wink.ux.touch.addListener(this.container, "end", { context: this, method: "_handleEnd" });
+					this.container.listenToGesture("instant_rotation", { context: this, method: "_rotation" }, { preventDefault: true });
+				},
+				/**
+				 *
+				 */
+				_handleStart: function(uxEvent) {
+					var nbTouches = 0;
+					if (!wink.isSet(uxEvent.srcEvent.targetTouches)) {
+						return;
+					}
+					nbTouches = uxEvent.srcEvent.targetTouches.length;
+
+					var d1 = null, d2, d1Key1, d1Key2, d2Key1, d2Key2;
+					if (nbTouches > 0)
+					{
+						d1 = wink.ux.touch.getTouchProperties(uxEvent.srcEvent.targetTouches[0]);
+						d1Key1 = this._onKey(this.key1, d1.x, d1.y);
+						d1Key2 = this._onKey(this.key2, d1.x, d1.y);
+					}
+					if (nbTouches == 2)
+					{
+						d2 = wink.ux.touch.getTouchProperties(uxEvent.srcEvent.targetTouches[1]);
+						d2Key1 = this._onKey(this.key1, d2.x, d2.y);
+						d2Key2 = this._onKey(this.key2, d2.x, d2.y);
+					}
+
+					if (d1) {
+						wink.addClass(this.digit1, "active");
+						this.digit1.translate(d1.x - (this.digit1.offsetWidth / 2), d1.y - (this.digit1.offsetHeight / 2));
+						if (d1Key1 || d1Key2) {
+							this.key1Activated = true;
+							wink.removeClass(this.digit1, "red");
+							wink.addClass(this.digit1, "green");
+						} else {
+							this.key1Activated = false;
+							wink.removeClass(this.digit1, "green");
+							wink.addClass(this.digit1, "red");
+						}
+					} else {
+						wink.removeClass(this.digit1, "active");
+					}
+					if (d2) {
+						wink.addClass(this.digit2, "active");
+						this.digit2.translate(d2.x - (this.digit2.offsetWidth / 2), d2.y - (this.digit2.offsetHeight / 2));
+						if (d2Key1 || d2Key2) {
+							this.key2Activated = true;
+							wink.removeClass(this.digit2, "red");
+							wink.addClass(this.digit2, "green");
+						} else {
+							this.key2Activated = false;
+							wink.removeClass(this.digit2, "green");
+							wink.addClass(this.digit2, "red");
+						}
+					} else {
+						wink.removeClass(this.digit2, "active");
+					}
+				},
+				/**
+				 *
+				 */
+				_handleEnd: function(uxEvent) {
+					if (this.unlocked == false) {
+						this.key1Activated = false;
+						this.key2Activated = false;
+
+						var pwt = '-webkit-transform';
+						var getCb = function(x, y, angle) {
+							return { context: lockManager, method: '_transform', arguments: [ x, y, angle ] };
+						};
+						wink.fx.animate(this.doorLock, { property: pwt, value: getCb(0, 0, -90), duration: 200, delay: 0 });
+						wink.fx.animate(this.key1, { property: pwt, value: getCb(0, 0, 0.1), duration: 200, delay: 0 });
+						wink.fx.animate(this.key2, { property: pwt, value: getCb(0, 0, 0.1), duration: 200, delay: 0 });
+					}
+					wink.removeClass(this.digit1, "active");
+					wink.removeClass(this.digit2, "active");
+				},
+				/**
+				 *
+				 */
+				_rotation: function(gestureInfos) {
+					if (this.key1Activated && this.key2Activated) {
+						var d1 = gestureInfos.digit1, d2 = gestureInfos.digit2;
+						
+						wink.fx.applyTransformTransition(this.doorLock, '0ms', '0ms', 'default');
+						wink.fx.applyTransformTransition(this.key1, '0ms', '0ms', 'default');
+						wink.fx.applyTransformTransition(this.key2, '0ms', '0ms', 'default');
+						this.doorLock.rotate(-90 + gestureInfos.rotation);
+						this.key1.rotate(gestureInfos.rotation);
+						this.key2.rotate(gestureInfos.rotation);
+						
+						this.digit1.translate(d1.x - (this.digit1.offsetWidth / 2), d1.y - (this.digit1.offsetHeight / 2));
+						this.digit2.translate(d2.x - (this.digit2.offsetWidth / 2), d2.y - (this.digit2.offsetHeight / 2));
+
+						if (gestureInfos.rotation > 90) {
+							this._unlock();
+						}
+					}
+				},
+				/**
+				 *
+				 */
+				_unlock: function() {
+					this.unlocked = true;
+					this.doorLock.rotate(0);
+					
+					wink.ux.touch.removeListener(this.container, "start", { context: this, method: "_handleStart" });
+					wink.ux.touch.removeListener(this.container, "end", { context: this, method: "_handleEnd" });
+					this.container.unlistenToGesture("instant_rotation", { context: this, method: "_rotation" });
+
+					wink.removeClass(this.digit1, "active");
+					wink.removeClass(this.digit2, "active");
+					wink.addClass(this.doorLeft, 'active');
+					wink.addClass(this.doorRight, 'active')
+					
+					this.key1.style.display = 'none';
+					this.key2.style.display = 'none';
+					
+					var pwt = '-webkit-transform';
+					var getCb = function(x, y, angle, sx, sy) {
+						return { context: lockManager, method: '_transform', arguments: [ x, y, angle, sx, sy ] };
+					};
+
+					var middleX = wink.ua.isIPad ? 100 : 50;
+					var middleY = wink.ua.isIPad ? 160 : 80;
+					
+					wink.fx.animate(this.doorLeft, { property: pwt, value: getCb(-500, 0, 0), duration: 2000, delay: 1000 });
+					wink.fx.animate(this.doorRight, { property: pwt, value: getCb(500, 0, 0), duration: 2000, delay: 1000 });
+					wink.fx.animate(this.yin, { property: pwt, value: getCb(-540, 0, 0), duration: 2000, delay: 2000 });
+					wink.fx.animate(this.yang, { property: pwt, value: getCb(540, 0, 0), duration: 2000, delay: 2000 });
+					wink.fx.animate(this.text, { property: pwt, value: getCb(middleX, middleY, 0, 1, 1), duration: 800, delay: 2500 }, {
+						onEnd: { context: lockManager, method: '_animText' }
+					});
+				},
+				/**
+				 *
+				 */
+				_onKey: function(keyNode, x, y) {
+					var xmin = keyNode.getLeftPosition();
+					var ymin = keyNode.getTopPosition();
+					var xmax = xmin + keyNode.offsetWidth;
+					var ymax = ymin + keyNode.offsetHeight;
+					if (x >= xmin && x <= xmax && y >= ymin && y <= ymax) {
+						return true;
+					}
+					return false;
+				},
+				/**
+				 *
+				 */
+				_transform: function(params, x, y, angle, sx, sy) {
+					var n = params.node;
+					n.translate(x, y);
+					if (angle) {
+						n.rotate(angle);
+					}
+					if (sx && sy) {
+						n.scale(sx, sy);
+					}
+				},
+				/**
+				 *
+				 */
+				_animText: function() {
+					var animator = new ColorAnimator(this.text, '#ff5500', '#ffcc99', '#fff', 'color');
+					animator.start();
+				}
+			};
+
+			var init = function() {
+				window.scrollTo(0,0);
+				wink.error.logLevel = 1;
+				lockManager.init();
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">animations</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container" class="container">
+			<div id="door_left" class="door left"></div>
+			<div id="door_right" class="door right"></div>
+			<div id="door_lock" class="lock">
+				<img id="lock_image_yin" class="lock_image" src="./img/yin.png" />
+				<img id="lock_image_yang" class="lock_image" src="./img/yang.png" />
+			</div>
+			<div id="door_key" class="door_key"></div>
+			<div id="door_digit_key_1" class="door_digit_key top"></div>
+			<div id="door_digit_key_2" class="door_digit_key bottom"></div>
+			<div id="digit1" class="digit"></div>
+			<div id="digit2" class="digit"></div>
+			<div id="text" class="text">WINK</div>
+		</div>
+	</body>
+</html>

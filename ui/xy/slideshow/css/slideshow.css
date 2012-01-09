@@ -1,0 +1,23 @@
+.ss_container {
+	position: absolute;
+}
+
+.ss_container .ss_canvas {
+
+}
+
+.ss_container .ss_header {
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: rgba(255, 255, 255, 1.0);
+	font-size: 16px;
+	line-height: 26px;
+}
+
+.ss_container .ss_footer {
+	position: absolute;
+	background-color: rgba(255, 255, 255, 0.6);
+	color: rgba(0, 0, 0, 1.0);
+	font-size: 13px;
+	line-height: 26px;
+}

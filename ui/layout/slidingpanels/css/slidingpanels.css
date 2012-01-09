@@ -1,0 +1,13 @@
+.sl_container
+{
+	position: relative;
+	height: 100%;
+}
+
+.sl_page
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+}

@@ -1,0 +1,33 @@
+/*--------------------------------------------------------
+ * Copyright (c) 2011, The Dojo Foundation
+ * This software is distributed under the "Simplified BSD license",
+ * the text of which is available at http://www.winktoolkit.org/licence.txt
+ * or see the "license.txt" file for more details.
+ *--------------------------------------------------------*/
+ 
+/**
+ * This stylesheet is here for the preview purposes only
+ */
+ 
+@import url("../wink.css");
+
+/* default theme */
+@import url("../default/css/wink.default.css");
+@import url("../default/css/wink.default.icons.css");
+@import url("../default/css/wink.default.buttons.css");
+
+/* claro theme */
+@import url("../claro/css/wink.claro.css");
+@import url("../claro/css/wink.claro.icons.css");
+@import url("../claro/css/wink.claro.buttons.css");
+
+/* nihilo theme */
+@import url("../nihilo/css/wink.nihilo.css");
+@import url("../nihilo/css/wink.nihilo.icons.css");
+@import url("../nihilo/css/wink.nihilo.buttons.css");
+
+/* chocolate theme */
+@import url("../chocolate/css/wink.chocolate.css");
+@import url("../chocolate/css/wink.chocolate.icons.css");
+@import url("../chocolate/css/wink.chocolate.buttons.css");
+

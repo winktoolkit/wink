@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_gesture_box</title>
+
+		<style>
+			#container 
+			{
+				position: relative;
+				height: 100%;
+			}
+
+			#box {
+				position: absolute;
+				width: 80%;
+				height: 80%;
+				left: 10%;
+				top: 10%;
+				background-color: #333;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/gesture.js"></script>
+		
+		<script type="text/javascript">
+			var Box = function(node)
+			{
+				this.node = node;
+
+				this._scale = 1.0;
+				this._currentScale = 1.0;
+				this._rotation = 0;
+				this._currentRotation = 0;
+				this._x = 0;
+				this._y = 0;
+
+				this.node.listenToGesture("instant_scale", { context: this, method: "instantScale" }, { preventDefault: true });
+				this.node.listenToGesture("instant_rotation", { context: this, method: "instantRotation" }, { preventDefault: true });
+				this.node.listenToGesture("gesture_end", { context: this, method: "gestureEnd" }, { preventDefault: true });
+
+				this.instantScale = function(gestureInfos)
+				{
+					this.node.style.backgroundColor = "#ccc";
+					var nextScale = gestureInfos.scale * this._scale;
+					if (nextScale > 0.5 && nextScale < 1.1)
+					{
+						this._currentScale = nextScale;
+						this.node.scale(this._currentScale, this._currentScale);
+					}
+				};
+				this.instantRotation = function(gestureInfos)
+				{
+					this.node.style.backgroundColor = "#ccc";
+					this._currentRotation = (gestureInfos.rotation + this._rotation) % 360;
+					this.node.rotate(this._currentRotation);
+				};
+				this.gestureEnd = function(gestureInfos)
+				{
+					this._scale = this._currentScale;
+					this._rotation = this._currentRotation;
+					this.node.style.backgroundColor = "#333";
+				};
+			};
+
+			var init = function()
+			{
+				var box = new Box($("box"));
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">gestures</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			Try to use your fingers to rotate the cube and/or scale it.
+		</div>
+		
+		<div id="container">
+			<div id="box"></div>
+		</div>
+	</body>
+</html>

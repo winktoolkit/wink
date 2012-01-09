@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/input.css" type="text/css">
+
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/input.js"></script>
+		
+		<script>	
+			wink.error.logLevel = 1;
+
+			var input1, input2;
+			
+			var properties1 =
+			{
+				type: 'tel',
+				eraseButton: 1,
+				autoCorrect: 0,
+				autoCapitalize: 1,
+				placeholder: 'type a number',
+				width: 150
+			}
+			
+			var properties2 =
+			{
+				type: 'url',
+				eraseButton: 1,
+				autoCorrect: 0,
+				autoCapitalize: 0,
+				placeholder: 'type an url',
+				width: 150
+			}
+			
+			init = function()
+			{
+				input1 = new wink.ui.form.Input(properties1);
+				input2 = new wink.ui.form.Input(properties2);
+				
+				$('output1').appendChild(input1.getDomNode());
+				$('output2').appendChild(input2.getDomNode());
+			}			
+		</script>
+	</head>
+<body onload="init()">
+	<div class="w_box w_header w_bg_dark">
+		<span id="title">inputs</span>
+		<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+	</div>
+	
+	<div class="w_bloc">
+		<span>Default input</span>
+		<br />
+		<br />
+		<input type="text" placeholder="text" class="w_input w_border w_radius" />
+		<br />
+		<br />
+		<span>Custom input 1</span>
+		<br />
+		<br />
+		<input type="text" placeholder="text" class="w_input w_border w_radius w_bg_light" />
+		<br />
+		<br />
+		<span>Custom input 2</span>
+		<br />
+		<br />
+		<input type="text" placeholder="text" class="w_input w_border w_radius w_bg_dark" />
+		<br />
+		<br />
+		<span>Search input (tel)</span>
+		<br />
+		<br />
+		<div id="output1">
+		</div>
+		<br />
+		<br />
+		<span>Search input 2 (url)</span>
+		<br />
+		<br />
+		<div id="output2">
+		</div>
+		<br />
+		<br />
+		<span>Default select</span>
+		<br />
+		<br />
+		<select class="w_select">
+			<option selected>option 1</option>
+			<option>option 2</option>
+		</select>
+		<br />
+		<br />
+		<span>Custom select 1</span>
+		<br />
+		<br />
+		<select class="w_select w_bg_light">
+			<option selected>option 1</option>
+			<option>option 2</option>
+		</select> 
+		<br />
+		<br />
+		<span>Custom select 2</span>
+		<br />
+		<br />
+		<select class="w_select w_bg_dark">
+			<option selected>option 1</option>
+			<option>option 2</option>
+		</select> 
+		<br />
+		<br />
+		<span>Default text area</span>
+		<br />
+		<br />
+		<textarea rows="5" cols="20" class="w_textarea w_border w_radius"></textarea>
+		<br />
+		<br />
+		<span>Custom text area 1</span>
+		<br />
+		<br />
+		<textarea rows="5" cols="20" class="w_textarea w_border w_radius w_bg_light"></textarea>
+		<br />
+		<br />
+		<span>Custom text area 2</span>
+		<br />
+		<br />
+		<textarea rows="5" cols="20" class="w_textarea w_border w_radius w_bg_dark"></textarea>
+	</div>
+</body>
+</html>

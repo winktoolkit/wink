@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>test_trace</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../../../../ui/xy/trace/css/trace.css" type="text/css">
+		
+		<style>
+			#container {
+				
+			}
+			#container canvas {
+				border: 1px solid #666;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ui/xy/trace/js/trace.js"></script>
+		
+		<script>
+			var init = function()
+			{
+				var trace = new wink.ui.xy.Trace({
+					height: window.innerHeight - $('container').offsetTop - 2,
+					width: window.innerWidth - 2,
+					linewidth: 2
+					//,linestyle: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sJAQgOIkRxfooAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAACjUlEQVQ4y02US64dRRBET0RVXwsjYMCSvDUWx3KYYPxuV2YwyH6Sa9JqVeUvPqm///qWj49/MGLtF0kjTNFcv/5B7g/qfdNVVH/w9eufvH/8y+vr73QfvIzSvN9vvvzyG4ZCmI/3d+aEAApQB/sCQBbLF92HMA+81hMSbJF+40R0H6590SnkYG8kWN6EnpgOSPS5ua4X6WZ5PS2AvLA3O7kxi+6iT+HXRhLdonOgBdJ0qYVsOo26qIIEUgeAOjdOGjDpIEOd6RI10gYJYeRFEiJDGiFIEGJyCBCu80F3Ewp5AU0SIEiBnpEGhkUDVUVVHiwh3XQ3DVgSay+6DpLpngx7XRCwhhBSJIdrLexFTmEvqm70+YbgYVFIfsqFtS8SoJpw6Hpz+k33TddN8qbqO9Uf2AwUBBHcD+D2xmrW9YUkaJu2CCZd0AchLJEGr026sTzwBWxjISQN2GyE6YhEEI0en/r8NBpm4izA8AjM9qISlhbBIJMeFiXIM0FSkAZtbE9TgWBk83kcie1JRIxYo7sWQeiRhro+KaVzRhGfd9Y4x8JrLSI9VUK6SIeS0ClkESAaK47Aw0Kkm9B40k6HBGRPUM6DEWxD9k+67EJ7k9wsr8F4TMcANFPafpEqwNib7tB10z2+6jOjihfdN1U3HbP2fmBq7GvsOCyE+HpYfKrKTFNF0yh67GZoQEYSXusx3CjFfuGqYtnYpjJDgOiq2S5VdM4kfgpJIemBKC/Imf86+HOPpW8ssExSpMc1qNnbSC+6ZqFWHarfjyLq0eEwvemm6gYOdf4b3AiSsRbRi3awf9B9DzQJ6/pC13ncAkrTCU7GUmgNRsxmTiZpOM+3kMTyQ4aE12vkJoiNMP8DcfDRsE3tIPMAAAAASUVORK5CYII="
+				});
+				$('container').appendChild(trace.getDomNode());
+			};
+		</script>
+	</head>
+	
+	<body onload="init();setTimeout(scrollTo, 0, 0, 1);">
+		<div id="header" class="w_box w_header w_bg_dark">
+			<span id="title">trace</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container"></div>
+	</body>
+</html>

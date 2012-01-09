@@ -1,0 +1,54 @@
+/*--------------------------------------------------------
+ * Copyright (c) 2011, The Dojo Foundation
+ * This software is distributed under the "Simplified BSD license",
+ * the text of which is available at http://www.winktoolkit.org/licence.txt
+ * or see the "license.txt" file for more details.
+ *--------------------------------------------------------*/
+ 
+.chocolate .w_icon.w_button_play
+{
+	background-image: url(../img/buttons.png);
+	background-position: 0px 0px;
+}
+
+.chocolate .w_icon.w_button_pause
+{
+	background-image: url(../img/buttons.png);
+	background-position: -44px 0px;
+}
+
+.chocolate .w_icon.w_button_zoom
+{
+	background-image: url(../img/buttons.png);
+	background-position: -88px 0px;
+}
+
+.chocolate .w_icon.w_button_previous
+{
+	background-image: url(../img/buttons.png);
+	background-position: -132px 0px;
+}
+
+.chocolate .w_icon.w_button_next
+{
+	background-image: url(../img/buttons.png);
+	background-position: -176px 0px;
+}
+
+.chocolate .w_icon.w_button_handle
+{
+	background-image: url(../img/buttons.png);
+	background-position: -220px 0px;
+}
+
+.chocolate .w_icon.w_button_close
+{
+	background-image: url(../img/buttons.png);
+	background-position: -264px 0px;
+}
+
+.chocolate .w_icon.w_button_grab
+{
+	background-image: url(../img/buttons.png);
+	background-position: -308px 0px;
+}

@@ -1,0 +1,31 @@
+.mn_menu
+{
+	position: absolute;
+	
+	overflow: visible; 
+	
+	width: 278px;
+}
+
+.mn_menu_item
+{
+	float: left;
+	
+	padding-top: 20px;
+	
+	width: 91px;
+	height: 87px;
+	
+	text-align: center;
+}
+
+.mn_image 
+{
+	height: 50px;
+}
+
+.mn_title 
+{
+	height: 37px;
+	line-height: 37px;
+}

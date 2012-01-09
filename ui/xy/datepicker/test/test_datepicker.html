@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/datepicker.css" type="text/css">
+		
+		<style>
+			body 
+			{
+				min-height: 400px;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/datepicker.js"></script>
+		
+		<script type="text/javascript" src="../resources/fr_FR/datepicker.js"></script>
+		<script type="text/javascript" src="../resources/en_EN/datepicker.js"></script>
+		
+		<script>
+			var datepicker;  
+
+			init = function()
+			{
+				datepicker = new wink.ui.xy.DatePicker();
+				
+				wink.subscribe('/datepicker/events/pickdate', {method: 'fillInput1'});
+			}
+
+			function displayDatePicker()
+			{
+				datepicker.show();
+			}
+			
+			function fillInput1(parameters)
+			{
+				var d = parameters.date;
+
+				var day = (d.getDate().toString().length == 1)?('0' + d.getDate().toString()):d.getDate().toString();
+				var month = ((d.getMonth()+1).toString().length == 1)?('0' + (d.getMonth()+1).toString()):(d.getMonth()+1).toString();
+				var year = d.getFullYear();
+
+				$('date').innerHTML = 'The selected date is the ' + day + '/' + month + '/' + year;
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">date picker</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			<div id="description" style="width: 80%; margin: auto; border: 2px solid #000; padding: 10px;">
+				Select a date by clicking on the "select a date" button. 
+				<div id="date" style="text-align: center; margin: 10px 0; color: #f00">Yet no date has been selected</div>
+			</div>
+		</div>
+		
+		<div style="text-align: center;">
+			<input type='button' class="w_button w_radius w_bg_dark" value='select a date' onClick='displayDatePicker()'/>
+		</div>
+		
+
+	</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/slidingpanels.css" type="text/css">
+		
+		<style>
+			.page
+			{
+				margin: auto;
+				width: 98%;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/slidingpanels.js"></script>
+		
+		<script>	
+			var slidingPanels;
+
+			var properties = 
+			{
+				'duration': 500,
+				'pages': ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7', 'page8']
+			}
+			
+			init = function()
+			{
+				slidingPanels = new wink.ui.layout.SlidingPanels(properties);
+
+				wink.subscribe('/slidingpanels/events/slidestart', {method: 'changeTitle'});
+				//wink.subscribe('/slidingpanels/events/slideend', {method: 'changeTitle'});
+				
+				$('container').appendChild(slidingPanels.getDomNode());
+			}
+
+			slide = function(id)
+			{
+				slidingPanels.slideTo(id);
+			}	
+
+			slideBack = function()
+			{
+				slidingPanels.slideBack();
+			}	
+
+			changeTitle = function(params)
+			{
+				switch (params.id)
+				{
+					case 'page1':
+						$('back').style.visibility = 'hidden';
+						break;
+					default:
+						$('back').style.visibility = 'visible';
+				}
+				
+				$('title').innerHTML = 'Title: ' + params.id;
+			}	
+		</script>
+	</head>
+<body onload="init()">
+	<div class="w_box w_header w_bg_dark">
+		<input type="button" value="back" class="w_button w_radius w_bg_light" id="back" style="visibility: hidden" onclick="slideBack()"/>
+		<span id="title">Title: page1</span>
+		<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+	</div>
+	<div id="container" style="height:100%; overflow-y: hidden;">
+	</div>
+	<div class="w_box" id="page1">
+		<div class="page">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page2')">Go to next page</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page3')">Go to page 3</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="w_box" id="page2">
+		<div class="page">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page3')">Go to next page</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page4')">Go to page 4</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page1')">Go back to page 1</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="w_box" id="page3">
+		<div class="page">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page4')">Go to next page</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page8')">Go to page 8</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page1')">Go back to page 1</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="w_box" id="page4">
+		<div class="page">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page5')">Go to next page</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page1')">Go back to page 1</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="w_box" id="page5">
+		<div class="page">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page6')">Go to next page</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page1')">Go back to page 1</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="w_box" id="page6">
+		<div class="page">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page7')">Go to next page</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page1')">Go back to page 1</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="w_box" id="page7">
+		<div class="page">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page8')">Go to next page</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page1')">Go back to page 1</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="w_box" id="page8">
+		<div class="page">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="slide('page1')">Go back to page 1</a>
+					<span class="w_icon w_chevron"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

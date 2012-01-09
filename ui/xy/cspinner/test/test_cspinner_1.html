@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>test_cspinner</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<style>
+			.spinner_canvas {
+				margin-left: 10px;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/cspinner/js/cspinner.js"></script>
+		
+		<script>
+			var addSpinner = function(id, props)
+			{
+				var sp = new wink.ui.xy.CSpinner(props);
+				var node = sp.getDomNode();
+				$(id).appendChild(node);
+				sp.toggle();
+				wink.addClass(node, "spinner_canvas");
+				node.onclick = function() {
+					sp.toggle();
+				};
+				return sp;
+			};
+			
+			var init = function()
+			{
+				addSpinner('sp_block1', {
+					size: 50,
+					radius: 11,
+					thickness: 14,
+					count: 15,
+					space: 14,
+					fromcolor: '#ccc',
+					tocolor: '#000',
+					stopcolor: 0.4,
+					linecolor: 'transparent',
+					linewidth: 1,
+					refreshRate: 60
+				});
+
+				addSpinner('sp_block1', {
+					size: 24,
+					radius: 5,
+					thickness: 7,
+					count: 15,
+					space: 14,
+					fromcolor: '#ccc',
+					tocolor: '#000',
+					linewidth: 1,
+					refreshRate: 60
+				});
+
+				addSpinner('sp_block1', {
+					size: 50,
+					radius: 11,
+					thickness: 14,
+					count: 15,
+					space: 8,
+					fromcolor: '#ccc',
+					tocolor: '#000',
+					linewidth: 0
+				});
+
+				addSpinner('sp_block1', {
+					size: 50,
+					radius: 11,
+					thickness: 14,
+					count: 30,
+					space: 0,
+					fromcolor: '#eee',
+					tocolor: '#000',
+					stopcolor: 0.1,
+					linewidth: 0
+				});
+
+				addSpinner('sp_block1', {
+					size: 50,
+					radius: 10,
+					thickness: 3,
+					count: 30,
+					space: 0,
+					fromcolor: '#eee',
+					tocolor: '#000',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 20
+				});
+
+				addSpinner('sp_block1', {
+					size: 50,
+					radius: 2,
+					thickness: 23,
+					count: 10,
+					space: 20,
+					fromcolor: '#eee',
+					tocolor: '#00f',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 60
+				});
+
+				addSpinner('sp_block1', {
+					size: 50,
+					radius: 2,
+					thickness: 40,
+					count: 10,
+					space: 20,
+					fromcolor: '#eee',
+					tocolor: '#6df',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 60
+				});
+
+				addSpinner('sp_block1', {
+					size: 50,
+					radius: 2,
+					thickness: 10,
+					count: 12,
+					space: 20,
+					fromcolor: '#eee',
+					tocolor: '#f60',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 60
+				});
+
+				addSpinner('sp_block1', {
+					size: 50,
+					radius: 15,
+					thickness: 10,
+					count: 6,
+					space: 1,
+					fromcolor: '#eee',
+					tocolor: '#f00',
+					stopcolor: 0,
+					linewidth: 0,
+					refreshRate: 60
+				});
+
+				addSpinner('sp_block1', {
+					size: 50,
+					radius: 4,
+					thickness: 20,
+					count: 4,
+					space: 1,
+					fromcolor: '#eee',
+					tocolor: '#f00',
+					stopcolor: 0,
+					linewidth: 0,
+					refreshRate: 100
+				});
+
+				// --------------------------
+				addSpinner('sp_block2', {
+					size: 50,
+					radius: 11,
+					thickness: 14,
+					count: 15,
+					space: 14,
+					fromcolor: '#333',
+					tocolor: '#fff',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 30
+				});
+
+				addSpinner('sp_block2', {
+					size: 24,
+					radius: 5,
+					thickness: 7,
+					count: 15,
+					space: 14,
+					fromcolor: '#333',
+					tocolor: '#fff',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 30
+				});
+
+				addSpinner('sp_block2', {
+					size: 50,
+					radius: 11,
+					thickness: 14,
+					count: 15,
+					space: 14,
+					fromcolor: '#333',
+					tocolor: '#f60',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 30
+				});
+
+				addSpinner('sp_block2', {
+					size: 50,
+					radius: 10,
+					thickness: 10,
+					count: 10,
+					space: 5,
+					fromcolor: '#333',
+					tocolor: '#f60',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 60
+				});
+
+				addSpinner('sp_block2', {
+					size: 50,
+					radius: 10,
+					thickness: 10,
+					count: 10,
+					space: 5,
+					fromcolor: '#000',
+					tocolor: '#f60',
+					stopcolor: 0.6,
+					linewidth: 0,
+					refreshRate: 60
+				});
+
+				addSpinner('sp_block2', {
+					size: 50,
+					radius: 10,
+					thickness: 10,
+					count: 10,
+					space: 30,
+					fromcolor: '#ff0',
+					tocolor: '#f00',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 60
+				});
+
+				addSpinner('sp_block2', {
+					size: 50,
+					radius: 10,
+					thickness: 10,
+					count: 40,
+					space: 20,
+					fromcolor: '#000',
+					tocolor: '#f00',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 60
+				});
+
+				addSpinner('sp_block2', {
+					size: 50,
+					radius: 2,
+					thickness: 23,
+					count: 10,
+					space: 10,
+					fromcolor: '#222',
+					tocolor: '#00f',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 60
+				});
+
+				addSpinner('sp_block2', {
+					size: 50,
+					radius: 2,
+					thickness: 10,
+					count: 12,
+					space: 20,
+					fromcolor: '#222',
+					tocolor: '#f60',
+					stopcolor: 0.1,
+					linewidth: 0,
+					refreshRate: 60
+				});
+			};
+		</script>
+	</head>
+	
+	<body onload="init();setTimeout(scrollTo, 0, 0, 1);">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">spinner canvas</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div style="width: 95%; margin: auto">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Light: click to start / stop
+				</li>
+				<div id="sp_block1" class="w_bloc"></div>
+			</ul>
+			
+			<ul id="list1" class="w_list w_border w_radius w_bg_dark">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Dark: click to start / stop
+				</li>
+				<div id="sp_block2" class="w_bloc"></div>
+			</ul>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+{
+	"build": {
+		"jsFile": "wink-VERSION-PROFILE-TARGET.js",
+		"cssFile": "wink-VERSION-PROFILE-TARGET.css",
+		"version": "test",
+		"defaultLocaleList": [ "en_EN" ]
+	},
+	"profiles": [
+		{
+		    "name": "default",
+		    "modules": [ "module1", "module2", "my_special_module", "module4" ],
+		    "css": [ "global.css" ],
+		    "dependencies": [ "module2_external" ]
+		},
+		{
+		    "name": "light",
+		    "modules": [ "module1" ],
+		    "localeList": [ "fr_FR", "es_ES" ]
+		}
+	],
+	"features": [
+	    {
+	        "name": "touch",
+	        "value": true,
+	        "profiles": [
+	            "default"
+	        ],
+	        "targets": [
+	            "ie"
+	        ]
+	    },
+	    {
+	        "name": "gesture",
+	        "value": false,
+	        "profiles": [
+	            "default"
+	        ],
+	        "targets": [
+	            "default", "ie"
+	        ]
+	    }
+	],
+	"implementations": [
+		{
+			"module": "my_special_module",
+			"defaultImpl": "module3",
+			"subImpls": [
+				{
+					"target": "ie",
+					"impl": "module3"
+				},
+				{
+					"target": "android-1.5",
+					"impl": "module3_bis"
+				}
+			]
+		}
+	]
+}

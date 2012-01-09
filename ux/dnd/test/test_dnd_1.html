@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<style>
+			html, body
+			{
+				height: 360px;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/dnd.js"></script>
+		
+		<script>		
+			init = function()
+			{
+				var dnd = new wink.ux.Dnd();
+
+				// Define the d&d source and its methods
+				var source1 = new wink.ux.dnd.Source({'id': 'source1'});
+
+				source1.registerEvent('/dnd/events/dropIcon1', source1, 'drop1');
+				source1.registerEvent('/dnd/events/dropIcon2', source1, 'drop2');
+
+				source1.drop1 = function(params)
+				{
+					params.target.onSourceOut();
+
+					$(params.source.id).src = './img/test1.jpg';
+				}
+
+				source1.drop2 = function(params)
+				{
+					params.target.onSourceOut();
+
+					$(params.source.id).src = './img/test2.jpg';
+				}
+
+				source1.getAvatar = function()
+				{
+					var avatar = $(this.id).cloneNode(true);
+					
+					avatar.style.height = avatar.height * 3 + 'px';
+					avatar.style.width = avatar.width * 3 + 'px';
+					avatar.style.opacity = 0.5;
+
+					return avatar;
+				}
+
+				// Define the d&d targets and their methods
+				var target1 = new wink.ux.dnd.Target({'id': 'target1', 'event': '/dnd/events/dropIcon1'});
+				var target2 = new wink.ux.dnd.Target({'id': 'target2', 'event': '/dnd/events/dropIcon2'});
+
+				wink.ux.dnd.Target.prototype.over = wink.ux.dnd.Target.prototype.onSourceOver;
+				wink.ux.dnd.Target.prototype.out = wink.ux.dnd.Target.prototype.onSourceOut;
+
+				wink.ux.dnd.Target.prototype.onSourceOver = function()
+				{
+					if(!this._isOver)
+					{
+						this.over();
+						$(this.id).style.border = '1px dotted #000';
+					}
+				} 
+
+				wink.ux.dnd.Target.prototype.onSourceOut = function()
+				{
+					if(this._isOver)
+					{
+						this.out();
+						$(this.id).style.border = '1px solid #fff';
+					}
+				} 
+
+				// Add the source and targets to the d&d manager
+				dnd.addSource(source1);
+				dnd.addTarget(target1);
+				dnd.addTarget(target2);
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">drag &amp; drop</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			Drag the small orange square and drop it above the big squares.
+		</div>
+		<img id="source1" src="./img/test1.jpg" style="position: absolute; left: 10px; top: 110px;" width="40px" height="40px" />
+		
+		<div id="target1" style="position: absolute; left: 120px; top: 200px; padding: 5px; border: 1px solid #fff">
+			<img src="./img/test1.jpg"  width="70px" />
+		</div>
+		
+		<div id="target2" style="position: absolute; left: 220px; top: 200px; padding: 5px; border: 1px solid #fff">
+			<img src="./img/test2.jpg"  width="70px" />
+		</div>
+	</body>
+</html>

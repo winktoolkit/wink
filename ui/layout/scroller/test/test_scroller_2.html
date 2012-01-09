@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_scroller2</title>
+
+		<style>
+			body, html 
+			{
+				background-color: #190800;
+			}
+			
+			#wrapper 
+			{
+				position: relative;
+				z-index: 1;
+				width: 100%;
+				background-color: #190800;
+				overflow: hidden;
+			}
+			
+			#scrollContent 
+			{
+				position: relative;
+				height: 100%;
+			}
+			
+			.item 
+			{
+				float: left;
+				
+			}
+			
+			.item .image 
+			{
+				float: left;
+				
+				margin-right: 10px;
+				
+				width: 80px;
+				height: 60px;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ux/window/js/window.js"></script>
+		
+		<script type="text/javascript" src="../../../../ux/movementtracker/js/movementtracker.js"></script>
+		<script type="text/javascript" src="../../../../ux/inertia/js/inertia.js"></script>
+		<script type="text/javascript" src="../../../../ui/layout/scroller/js/scroller.js"></script>
+
+		<script type="text/javascript">
+			var headerHeight = 55;
+		
+			var scrollerHelper = {
+				nbItem: 20,
+				items: [],
+				limit: 0,
+				scroller: null,
+
+				getNearestItem: function() {
+					var spos = this.scroller.getPosition();
+					var d = Number.MAX_VALUE;
+					var nearest = 0;
+					for (var i = 0; i < this.items.length; i++) {
+						var a = Math.min(Math.max(this.items[i].position, this.limit), 0);
+						var b = spos.x;
+						var dist = Math.abs(a - b);
+						if (dist > d) {
+							break;
+						}
+						d = dist;
+						nearest = i;
+					}
+					return nearest;
+				},
+
+				goToItem: function(index, duration) {
+					var position = Math.min(Math.max(this.items[index].position, this.limit), 0);
+					this.scroller.scrollTo(position, null, duration);
+				},
+
+				onStopSliding: function() {
+					var n = this.getNearestItem();
+					var spos = this.scroller.getPosition();
+					
+					if (spos.x != this.items[n].position && n != 0 && n != this.items.length - 1) {
+						this.goToItem(n, 200);
+					}
+				},
+
+				buildContent: function(scrollContent) {
+					var mg = 10;
+					var pd = 10;
+					var w = wink.ux.window.width;
+					w = w - (w / 5);
+					var h = wink.ux.window.height - headerHeight - 50;
+				
+					var size = 0;
+					var windowHeight = window.innerHeight;
+					var sources = [ "s1", "s2", "s3", "s4", "s5", "s6" ];
+					
+					for (var i = 0; i < this.nbItem; i++) {
+						var div = document.createElement('div');
+
+						var s = sources[i % sources.length];
+						div.innerHTML = $(s).innerHTML;
+						
+						div.style["margin"] = mg + "px " + mg + "px " + mg + "px " + mg + "px";
+						div.style["padding"] = pd + "px " + pd + "px " + pd + "px " + pd + "px";
+						div.style["width"] = w + "px";
+						div.style["height"] = h + "px";
+						wink.addClass(div, 'w_bg_light w_bloc item');
+
+						var lg = (w + (mg * 2) + (pd * 2)) + 1;
+						var p = -(i * lg);
+						p = p + (wink.ux.window.width / 2) - (lg / 2);
+						p = wink.math.round(p, 0);
+						this.items.push({
+							node: div,
+							position: p
+						});
+
+						scrollContent.appendChild(div);
+						size += div.offsetWidth + (mg * 2);
+					}
+					scrollContent.style.width = size + "px";
+					this.limit = -(size - wink.ux.window.width);
+				}
+			};
+
+			var init = function() {
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+
+				scrollerHelper.buildContent($('scrollContent'));
+
+				var heightRemains = wink.ux.window.height - headerHeight;
+				$('wrapper').style.height = heightRemains + "px";
+				
+				var properties = {
+					target: "scrollContent",
+					direction: "x",
+					callbacks: {
+						stopSliding: { context: scrollerHelper, method: 'onStopSliding' }
+					},
+					scrollbars: {
+						backgroundColor: 'rgba(255, 255, 255, 0.8)',
+						borderColor: 'rgba(204, 174, 159, 0.8)'
+					}
+				};
+				scrollerHelper.scroller = new wink.ui.layout.Scroller(properties);
+			};
+		</script>
+	</head>
+	
+	<body onload="setTimeout(init, 1);">
+		<div id="header" class="w_box w_header w_bg_dark">
+			<span id="title">scroller</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div id="wrapper">
+			<div id="scrollContent"></div>
+		</div>
+		<div id="sources" style="display: none;">
+			<div id="s1">
+				<img class="image" src="img/img1.jpg" alt="image">
+				<span class="w_title">Donec diam lorem</span>
+				<p>Etiam dictum tincidunt consequat. Praesent semper interdum eros nec tempus. Phasellus lacinia dapibus fringilla. Vestibulum eu est et arcu faucibus euismod sed vitae lacus. Quisque sollicitudin sollicitudin lectus a suscipit.</p>
+			</div>
+			<div id="s2">
+				<img class="image" src="img/img2.jpg" alt="image">
+				<span class="w_title">Curabitur fermentum</span>
+				<p>eros ut imperdiet consectetur, nisi massa ornare libero, id vehicula justo nisl non sem. Nullam non ipsum orci. Ut luctus luctus volutpat. Vivamus tincidunt eros et felis elementum suscipit. Vivamus tincidunt vestibulum ligula sed dignissim.</p>
+			</div>
+			<div id="s3">
+				<img class="image" src="img/img3.jpg" alt="image">
+				<span class="w_title">Etiam at augue.</span>
+				<p>Vestibulum volutpat augue blandit elit vehicula at hendrerit sapien luctus. Integer porttitor sapien quam, tempor dignissim urna. Donec fermentum molestie orci, sed congue leo fermentum sollicitudin.</p>
+			</div>
+			<div id="s4">
+				<img class="image" src="img/img4.jpg" alt="image">
+				<span class="w_title">Aliquam lectus ipsum.</span>
+				<p>Aliquam erat volutpat. Nulla facilisi. In hac habitasse platea dictumst. Cras imperdiet mattis velit, a ornare nunc ultricies ac. Suspendisse at nisi eu tellus pretium convallis vel eu mauris.</p>
+			</div>
+			<div id="s5">
+				<img class="image" src="img/img5.jpg" alt="image">
+				<span class="w_title">Donec diam lorem.</span>
+				<p>Mauris nunc diam, hendrerit at bibendum in, sollicitudin sit amet tellus. Morbi felis tortor, fringilla sit amet congue ut, vehicula in elit. Nullam volutpat, lacus eu imperdiet tincidunt.</p>
+			</div>
+			<div id="s6">
+				<img class="image" src="img/img6.jpg" alt="image">
+				<span class="w_title">Pellentesque condimentum.</span>
+				<p>Cras a sem augue. Donec tristique massa et justo consequat vel malesuada ipsum pharetra. In sodales faucibus magna vel interdum. Duis eget sem accumsan purus dignissim luctus sed et tortor.</p>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_mouvementtracker</title>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../ux/movementtracker/js/movementtracker.js"></script>
+		
+		<script type="text/javascript">
+			var drawer = {};
+
+			var init = function()
+			{
+				wink.error.logLevel = 1;
+				
+				var object = $("canvas");
+				var movementTracker = new wink.ux.MovementTracker({ target: object });
+
+				drawer = {
+					_ctx: 				$('canvas').getContext('2d'),
+					_currentPoint: 		null,
+					_previousPoint: 	null,
+				
+					_handleMovementBegin: function(publishedInfos)
+					{
+						
+					},
+					_handleMovementChanged: function(publishedInfos)
+					{
+						var publisher = publishedInfos.publisher;
+						if (publisher.uId != movementTracker.uId) {
+							return;
+						}
+						var movement = publishedInfos.movement;
+
+						var firstPoint = movement.pointStatement[movement.pointStatement.length - 2];
+						var lastPoint = movement.pointStatement[movement.pointStatement.length - 1];
+
+						this._drawShape(firstPoint, lastPoint);
+					},
+					_handleMovementStored: function(publishedInfos)
+					{
+						$('text').innerHTML = "Movement point number: " + publishedInfos.movement.pointStatement.length;
+					},
+					_drawShape: function(p1, p2)
+					{
+						this._ctx.beginPath();
+						this._ctx.moveTo(p1.x, p1.y-45);
+						this._ctx.lineTo(p2.x, p2.y-45);
+						this._ctx.closePath();
+						this._ctx.stroke();
+					},
+					clearShape: function()
+					{
+						var lingrad = this._ctx.createLinearGradient(0, 0, 0, 600);
+		  				lingrad.addColorStop(0, '#385b43');
+						lingrad.addColorStop(1, '#000');
+						
+						this._ctx.fillStyle = lingrad;
+						this._ctx.fillRect(0, 0, 320, 300);
+						
+						this._ctx.strokeStyle = "#fff";
+						this._ctx.lineWidth = 1;
+					}
+				};	
+				drawer.clearShape();
+
+				wink.subscribe('/movementtracker/events/mvtbegin', { context: drawer, method: '_handleMovementBegin' });
+				wink.subscribe('/movementtracker/events/mvtchanged', { context: drawer, method: '_handleMovementChanged' });
+				wink.subscribe('/movementtracker/events/mvtstored', { context: drawer, method: '_handleMovementStored' });
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">movement</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container">
+			<canvas width="320" height="300" id="canvas"></canvas>
+		</div>
+		
+		<div class="w_bloc">
+			Move your finger in the green zone above to get info about the movement you draw.
+		</div>
+		
+		<div class="w_bloc">
+			<div id="text" style="width: 80%; margin: auto; border: 2px solid #000; padding: 10px;">
+				Result
+			</div>
+		</div>
+	</body>
+</html>

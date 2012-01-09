@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/wall.css" type="text/css">
+		
+		<style>
+			#container
+			{
+				position: relative;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../fx/_xyz/js/3dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_matrix/js/matrix.js"></script>
+		
+		<script type="text/javascript" src="../js/wall.js"></script>
+		
+		<script>	
+			var wall;
+			
+			var wallDatas = {
+				row1: [
+					{ img: "./img/1.gif" },
+					{ img: "./img/2.gif" },
+					{ img: "./img/3.gif" },
+					{ img: "./img/4.gif" },
+					{ img: "./img/5.gif" },
+					{ img: "./img/6.gif" },
+					{ img: "./img/7.gif" },
+					{ img: "./img/8.gif" },
+					{ img: "./img/9.gif" },
+					{ img: "./img/10.gif" },
+					{ img: "./img/11.gif" },
+					{ img: "./img/12.gif" },
+					{ img: "./img/13.gif" },
+					{ img: "./img/14.gif" },
+					{ img: "./img/15.gif" },
+					{ img: "./img/16.gif" },
+					{ img: "./img/17.gif" },
+					{ img: "./img/18.gif" },
+					{ img: "./img/19.gif" },
+					{ img: "./img/20.gif" },
+					{ img: "./img/21.gif" },
+					{ img: "./img/22.gif" },
+					{ img: "./img/23.gif" },
+					{ img: "./img/24.gif" },
+					{ img: "./img/25.gif" },
+					{ img: "./img/26.gif" },
+					{ img: "./img/27.gif" },
+					{ img: "./img/28.gif" },
+					{ img: "./img/29.gif" },
+					{ img: "./img/30.gif" },
+					{ img: "./img/31.gif" },
+					{ img: "./img/32.gif" },
+					{ img: "./img/33.gif" },
+					{ img: "./img/34.gif" },
+					{ img: "./img/35.gif" }
+				],
+				row2: [
+					{ img: "./img/1.gif" },
+					{ img: "./img/2.gif" },
+					{ img: "./img/3.gif" },
+					{ img: "./img/4.gif" },
+					{ img: "./img/5.gif" },
+					{ img: "./img/6.gif" },
+					{ img: "./img/7.gif" },
+					{ img: "./img/8.gif" },
+					{ img: "./img/9.gif" },
+					{ img: "./img/10.gif" },
+					{ img: "./img/11.gif" },
+					{ img: "./img/12.gif" },
+					{ img: "./img/13.gif" },
+					{ img: "./img/14.gif" },
+					{ img: "./img/15.gif" },
+					{ img: "./img/16.gif" },
+					{ img: "./img/17.gif" },
+					{ img: "./img/18.gif" },
+					{ img: "./img/19.gif" },
+					{ img: "./img/20.gif" },
+					{ img: "./img/21.gif" },
+					{ img: "./img/22.gif" },
+					{ img: "./img/23.gif" },
+					{ img: "./img/24.gif" },
+					{ img: "./img/25.gif" },
+					{ img: "./img/26.gif" },
+					{ img: "./img/27.gif" },
+					{ img: "./img/28.gif" },
+					{ img: "./img/29.gif" },
+					{ img: "./img/30.gif" },
+					{ img: "./img/31.gif" },
+					{ img: "./img/32.gif" },
+					{ img: "./img/33.gif" },
+					{ img: "./img/34.gif" },
+					{ img: "./img/35.gif" }
+				],
+				row3: [
+					{ img: "./img/1.gif" },
+					{ img: "./img/2.gif" },
+					{ img: "./img/3.gif" },
+					{ img: "./img/4.gif" },
+					{ img: "./img/5.gif" },
+					{ img: "./img/6.gif" },
+					{ img: "./img/7.gif" },
+					{ img: "./img/8.gif" },
+					{ img: "./img/9.gif" },
+					{ img: "./img/10.gif" },
+					{ img: "./img/11.gif" },
+					{ img: "./img/12.gif" },
+					{ img: "./img/13.gif" },
+					{ img: "./img/14.gif" },
+					{ img: "./img/15.gif" },
+					{ img: "./img/16.gif" },
+					{ img: "./img/17.gif" },
+					{ img: "./img/18.gif" },
+					{ img: "./img/19.gif" },
+					{ img: "./img/20.gif" },
+					{ img: "./img/21.gif" },
+					{ img: "./img/22.gif" },
+					{ img: "./img/23.gif" },
+					{ img: "./img/24.gif" },
+					{ img: "./img/25.gif" },
+					{ img: "./img/26.gif" },
+					{ img: "./img/27.gif" },
+					{ img: "./img/28.gif" },
+					{ img: "./img/29.gif" },
+					{ img: "./img/30.gif" },
+					{ img: "./img/31.gif" },
+					{ img: "./img/32.gif" },
+					{ img: "./img/33.gif" },
+					{ img: "./img/34.gif" },
+					{ img: "./img/35.gif" }
+				],
+				
+			};
+			
+			init = function()
+			{
+				 var wallProperties = {
+					thumbMargins: 20,
+					wallDatas: wallDatas, 	// wall datas
+				};
+				
+				wall = new wink.ui.xyz.Wall(wallProperties);
+
+				$('container').appendChild(wall.getDomNodes().wall);
+				$('container').appendChild(wall.getDomNodes().leftPad);
+				$('container').appendChild(wall.getDomNodes().rightPad);
+				
+				wink.subscribe('/wall/events/click', {method: 'onImageClick'});
+			}
+			
+			onImageClick = function(params)
+			{
+				alert('click on image: ' + params.item.src);
+			}
+		</script>
+	</head>
+<body onload="init(); setTimeout(scrollTo, 0, 0, 1)">
+	<div class="w_box w_header w_bg_dark">
+		<span id="title">wall</span>
+		<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+	</div>
+	
+	<div class="w_bloc">
+		Make the wall move by touching the left and right arrows. You can click on the wall items.
+	</div>
+	
+	<div id="container">
+	</div>
+</body>
+</html>

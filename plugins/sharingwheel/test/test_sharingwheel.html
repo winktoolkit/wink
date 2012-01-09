@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/sharingwheel.css" type="text/css">
+		
+		<style>
+			body
+			{
+				min-height: 416px;
+			}
+			
+			#container
+			{
+				width: 100px;
+				margin: 50px auto;
+				text-align: center;
+			}
+			
+			#wheel
+			{
+				visibility: hidden;
+				opacity: 0;
+				
+				position: absolute;
+				z-index: 999;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../fx/_xyz/js/3dfx.js"></script>
+		
+		<script type="text/javascript" src="../../../math/_matrix/js/matrix.js"></script>
+		<script type="text/javascript" src="../../../math/_geometric/js/geometric.js"></script>
+		
+		<script type="text/javascript" src="../../../fx/_animation/js/animation.js"></script>
+		
+		<script type="text/javascript" src="../../../plugins/sharingwheel/js/sharingwheel.js"></script>
+		
+		<script>
+			var share;
+			
+			var properties = 
+			{
+				'shareItems': 
+				[
+					{'title': 'do not <br />share'},
+				 	{'title': 'via <br />facebook', 'shareUrl' : 'http://facebook.com/share.php?u=http%3A%2F%2Fwww.winktoolkit.org&t=wink'},
+				 	{'title': 'via <br />twitter', 'shareUrl' : 'http://twitter.com/intent/tweet?text=' + encodeURIComponent('I love wink !!') + '&url=' + encodeURIComponent('http://www.winktoolkit.org')},
+				 	{'title': 'via <br />tumblr', 'shareUrl' : 'http://www.tumblr.com/share/link?url=' + encodeURIComponent('http://www.winktoolkit.org')},
+				 	{'title': 'by <br />e-mail', 'shareUrl' : 'mailto:?subject=' + encodeURIComponent('I love wink !!')}
+				],
+				'height': 200
+			};
+			
+			init = function()
+			{
+				share = new wink.plugins.SharingWheel(properties);
+				$('wheel').appendChild(share.getDomNode());
+				
+				wink.subscribe('/share/events/select', {method: 'hideShare'});	
+			}
+			
+			displayShare = function()
+			{
+				wink.layer.show();
+				
+				$('wheel').style.left = (window.innerWidth/2 - 100) + 'px';
+				$('wheel').style.top = (window.innerHeight/2 - 100) + 'px'
+				
+				$('wheel').style.visibility = 'visible';
+				
+				wink.fx.fadeIn($('wheel'), {duration: 500});
+			}
+			
+			hideShare = function()
+			{
+				wink.fx.fadeOut($('wheel'), {duration: 500, onEnd: {method: 'onHideEnd'}});
+				wink.layer.hide();
+			}
+				
+			onHideEnd = function()
+			{
+				$('wheel').style.visibility = 'hidden';
+			}
+			
+		</script>
+	</head>
+<body onload="init()">
+	<div class="w_box w_header w_bg_dark">
+		<span id="title">sharing</span>
+		<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+	</div>
+	
+	<div class="w_bloc">
+		Click on the button below to display the sharing wheel.
+	</div>
+	
+	<div id="container">
+		<input type="button" value="share" class="w_button w_border w_radius w_bg_light" onclick="displayShare()" />
+	</div>
+	
+	<div id="wheel">
+	</div>
+</body>
+</html>

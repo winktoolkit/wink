@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Wink Test Runner</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		
+		<link rel="apple-touch-icon" href="data:image/png;base64,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"/>
+		
+		<style type="text/css">
+			body,html
+			{
+				margin: 0;
+				padding: 0;
+				
+				-webkit-user-select: none;
+				-webkit-touch-callout: none;
+			}
+			
+			a
+			{
+				display: block;
+				color: #000000;
+			}
+			
+			#statusInfo
+			{
+				margin: 10px;
+			}
+			
+			#resultsNode
+			{
+				margin: 10px;
+			}
+			
+			#resultsNode h1 
+			{
+				font-size: 14px;
+				margin: 0;
+				padding: 0;
+			}
+			
+			#resultsNode h1 a 
+			{
+				padding: 5px 0px;
+				text-decoration: none;
+				background-color: #FF3F3F;
+			}
+			
+			#resultsNode h1 span 
+			{
+				font-weight: normal;
+				font-size: 12px;
+			}
+			
+			#resultsNode .groupResults
+			{
+				border: solid 1px #808080;
+				margin-bottom: 10px;
+				background: #80FF9F;
+			}
+			
+			#resultsNode .inner
+			{
+				padding: 5px 10px;
+			}
+			
+			#resultsNode .groupResults .passed
+			{
+				color: #077F00;
+			}
+			
+			#resultsNode .groupResults .failed a 
+			{
+				color: #FF3F3F;
+			}
+			
+			/* toggle details */
+			.inner
+			{
+				display: none;
+			}
+			.showDetails .inner,
+			.summary .inner 
+			{
+				display: block;
+			}
+			
+			.showDetails h1,
+			.summary h1 
+			{
+				border-bottom: solid 1px #808080;
+			}
+			
+			/* messages */
+			#resultsNode .messages 
+			{
+				margin: 5px 3px;
+				border-left: dotted 2px #808080;
+				padding-left: 10px;
+				font-size: 10px;
+				color: #404040;
+				display: none;
+			}
+			
+			#resultsNode .showMessages 
+			{
+				display: block;
+			}
+			
+			#testBoxContainer 
+			{
+				height: 0;
+				overflow: hidden;
+			}
+			
+			.sandbox
+			{
+				background: #ccc;
+				border: 1px solid #000;
+				
+				overflow: hidden;
+				
+				min-height: 150px;
+				
+				position: relative;
+				
+				margin: 10px;
+				padding: 10px;
+			}
+			
+			.test
+			{
+				background-color: yellow;
+				
+				height: 50px;
+				width: 50px;
+			}
+			
+			#explanations
+			{
+				background: #fff;
+				border: 1px solid #000;
+				
+				position: relative;
+				
+				margin: 10px;
+				padding: 10px;
+			}
+		</style>
+		
+		<script type="text/javascript" src="./doh/runner.js"></script>
+		<script type="text/javascript" src="./doh/modules.js"></script>
+		
+		<!-- WINK JS FILES -->		
+		
+		<!-- CACHE -->
+		<script type="text/javascript" src="../../_cache/js/wink.cache.js"></script>
+		<script type="text/javascript" src="../../_cache/js/wink.cache.sqlDatabase.js"></script>
+		<script type="text/javascript" src="../../_cache/js/wink.cache.localStorage.js"></script>
+		<script type="text/javascript" src="../../_cache/js/wink.cache.indexedDatabase.js"></script>
+		<!-- END CACHE -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../_amd/js/amd.js"></script>
+		
+		<script type="text/javascript" src="../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../_base/_feat/js/feat_dom.js"></script>
+		
+		<script type="text/javascript" src="../../fx/_xy/js/2dfx.js"></script>
+		
+		<script type="text/javascript" src="../../math/_basics/js/basics.js"></script>
+		
+		<script type="text/javascript" src="../../net/xhr/js/xhr.js"></script>
+		
+		<script type="text/javascript" src="../../ui/xy/layer/js/layer.js"></script>
+		
+		<script type="text/javascript" src="../../ux/touch/js/touch.js"></script>
+		<script type="text/javascript" src="../../ux/event/js/event.js"></script>
+		<!-- END CORE -->
+		
+		<!-- JSON -->
+		<script type="text/javascript" src="../../_base/json/js/json.extended.js"></script>
+		<!-- END JSON -->
+		
+		<!-- MATH -->
+		<script type="text/javascript" src="../../math/_geometric/js/geometric.js"></script>
+		<!-- END MATH -->
+		
+		<!-- NET -->
+		<script type="text/javascript" src="../../net/cssloader/js/cssloader.js"></script>
+		<script type="text/javascript" src="../../net/jsloader/js/jsloader.js"></script>
+		<script type="text/javascript" src="../../net/imagesloader/js/imagesloader.js"></script>
+		<!-- END NET -->
+		
+		<script type="text/javascript">
+			var nbScriptsToLoad = 0;
+			var nbScriptsLoaded = 0;
+
+			// Initialize the launcher
+			init = function()
+			{
+				// Parse URL
+				var qstr = window.location.search.substr(1);
+
+				if(qstr.length)
+				{
+					var qparts = qstr.split("&");
+					for(var x=0; x<qparts.length; x++)
+					{
+						var tp = qparts[x].split("=");
+
+						if (tp[0] == 'testModule')
+						{
+							var module = tests.modules[tp[1]];
+	
+							if ( module !== undefined )
+							{
+								nbScriptsToLoad++;
+								addScript(module);
+							} else
+							{
+								alert('module "' + tp[1] + '" cannot be found');
+							}
+						} else if ( tp[0] == 'testGroup' )
+						{
+							var group = tests.groups[tp[1]];
+
+							if ( group !== undefined )
+							{
+								for ( var i=0; i<group.length; i++ )
+								{
+									var module = group[i];
+									
+									if ( module !== undefined )
+									{
+										nbScriptsToLoad++;
+										addScript(module);
+									} else
+									{
+										alert('module "' + group[i] + '" cannot be found');
+									}
+								}
+							} else
+							{
+								alert('group "' + tp[1] + '" cannot be found');
+							}
+						}
+					}
+				} else
+				{
+					for ( p in tests.modules )
+					{
+						nbScriptsToLoad++;
+						addScript(tests.modules[p]);
+					}
+				}
+			};
+
+			// Run the tests
+			launch  = function()
+			{
+				scrollTo(0, 0);
+				
+				doh._docFragment = document.createDocumentFragment();
+
+				doh.resultsNode = document.createElement('pre');
+				doh.resultsNode.id = "resultsNode";
+
+				doh._docFragment.appendChild(doh.resultsNode);
+
+				doh.infoNode = document.getElementById("statusInfo");
+
+				doh.run();
+
+				document.title = "Running tests ...";
+				doh.infoNode && (doh.infoNode.innerHTML = document.title);
+			}
+
+			// Add scripts to the page
+		 	addScript = function(url)
+			{
+				var s = document.createElement('script');
+	
+				s.type = "text/javascript";
+				s.src = url;
+
+				s.onload = function()
+				{
+					nbScriptsLoaded++;
+					
+					if ( nbScriptsLoaded == nbScriptsToLoad )
+					{
+						$('launch').value = 'launch tests';
+						$('launch').disabled = false;
+					}
+				}
+
+				s.onerror = function()
+				{
+					alert('!!! Unable to load script ' + this.src + ' !!!');
+				}
+				
+				document.getElementsByTagName("head")[0].appendChild(s);
+			};
+
+			// Display more information
+		 	toggleClass = function(nodeId, classString)
+			{
+				var node = document.getElementById(nodeId);
+				var className = node.className;
+				var hasClass = (" " + className + " ").indexOf(" " + classString + " ") >= 0;
+
+				if(hasClass)
+				{
+					node.className = node.className.replace(classString, "");
+				}else
+				{
+					node.className += ( " " + classString );
+				}
+			};
+
+		 	toggleInner = function(group)
+			{
+				toggleClass(group, 'showDetails');
+			}
+
+		 	showMessages = function(id)
+			{
+				toggleClass(id, 'showMessages');
+			};
+		 </script>
+	</head>
+	<body onload="init()">
+	    
+	    <pre id="statusInfo"></pre>
+	    
+	    <div id="sandbox" class="sandbox">
+	    	<div id="test" class="test"></div>
+	    </div>
+	    
+	    <div id="explanations">
+	    	This is the WINK test runner based on D.O.H. (Dojo Objective Harness)
+	    	<br />
+	    	<br />
+	    	Depending on the test, you may be asked some questions. Use the "OK" button for "yes" and the "cancel" button for "no" 
+	    	<br />
+	    	<br />
+	    	You may also be asked to interract with the sandbox (the grey area with the yellow square above)
+	    	<br />
+	    	<br />
+	    	Three syntaxes are possible
+	    	<br />
+	    	You can test all the modules running the <b>runner.html</b> page
+	    	<br />
+	    	You can test an entire family using this syntax: <b>runner.html?testGroup=wink.math</b>
+	    	<br />
+	    	You can test on particular module using this syntax: <b>runner.html?testModule=wink.math._basics</b>
+	    	<div style="text-align: center">
+	    		<input type="button" id="launch" value="loading tests..." onclick="launch()" disabled />
+	    	</div>
+	    </div>
+	    
+	</body>
+</html>
+

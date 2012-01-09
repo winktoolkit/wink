@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Loader Test</title>
+		<script type="text/javascript" src="../loader.js"></script>
+	</head>
+	<body>
+		<div>
+			<span id="info">Loader process ...</span>
+		</div>
+		<script type="text/javascript">
+			winkloader.load({
+				buildPath: '../../build/wink/js/', // may be an URL
+				version: '1.4.0',
+				profile: 'all',
+				//target: 'default', // Optional, if not given, force the loader target detection
+				//ismin: false, // whether to get the minified script, true by default
+				callback: function() {
+					var buf = "";
+					buf += "winkloader Test OK <br/>";
+					buf += "load for target : " + winkloader.conf.target + "<br/>";
+					buf += "wink defined : " + (typeof wink != "undefined") + "<br/>";
+					document.getElementById("info").innerHTML = buf;
+				}
+			});
+		</script>
+	</body>
+</html>

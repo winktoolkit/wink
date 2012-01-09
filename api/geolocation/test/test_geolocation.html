@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_geolocation</title>
+
+		<style>
+			.right
+			{
+				float: right;
+				margin: 0 10px 0 0; 
+			}
+			
+			.title
+			{
+				font-weight: bold;
+				padding: 10px 0;
+			}
+			
+			#listener1, #listener2
+			{
+				text-align: center;
+				height: auto;
+			}
+			
+			#listener2
+			{
+				border-left: 1px solid #000;
+				width: 50%; 
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../api/geolocation/js/geolocation.js"></script>
+		
+		<script type="text/javascript">
+			var highAccuracy = false;
+			var positionChangedCount = 0;
+			var geoloc;
+			var locationListener;
+			var listener1;
+			var listener2;
+			var listener3;
+		
+			var LocationListener = function() 
+			{
+				this.positionChanged = function(geoLocationInfos, nodeId, color) 
+				{
+					var latitude = wink.math.round(geoLocationInfos.latitude, 10);
+					var longitude = wink.math.round(geoLocationInfos.longitude, 10);
+					var text1 = "lat=" + latitude + ", lng=" + longitude;
+					
+					var latitude = wink.math.round(geoLocationInfos.latitude, 6);
+					var longitude = wink.math.round(geoLocationInfos.longitude, 6);
+					var text2 = "lat=" + latitude + ", lng=" + longitude;
+					
+					if (nodeId == "positionChangeStatus")
+					{
+						positionChangedCount++;
+						$(nodeId).innerHTML = "Position has changed " + positionChangedCount + " times [" + text1 + "]";
+					} else 
+					{
+						$(nodeId).innerHTML = $(nodeId).innerHTML + text2 + "<br/>";
+					}
+					
+					this.highlight(nodeId);
+					wink.setTimeout(this, "turnOff", 500, nodeId, color);
+				};
+				
+				this.highlight = function(nodeId) 
+				{
+					$(nodeId).style.color = "#b51a1a";
+				};
+				
+				this.turnOff = function(nodeId, color) 
+				{
+					$(nodeId).style.color = '';
+				};
+			};
+
+			var accuracyChanged = function() 
+			{
+				removeListeners();
+				highAccuracy = ($("accuracy").checked === true);
+				addListeners();
+				
+				if ( $("accuracy").checked === true )
+				{
+					$("label1").innerHTML = "High accuracy activated";
+				} else
+				{
+					$("label1").innerHTML = "High accuracy deactivated";
+				}
+			};
+
+			var addListeners = function() 
+			{
+				geoloc.addListener(listener1, 5000, false, highAccuracy);
+				geoloc.addListener(listener2, 10000, false, highAccuracy);
+				geoloc.addListener(listener3, 1000, true, highAccuracy);
+			};
+
+			var removeListeners = function() 
+			{
+				geoloc.removeListener(listener1);
+				geoloc.removeListener(listener2);
+				geoloc.removeListener(listener3);
+			};
+		
+			var init = function() 
+			{
+				wink.error.logLevel = 1;
+				
+				locationListener = new LocationListener();
+				
+				listener1 = { context: locationListener, method: "positionChanged", arguments: [ "listener1", "#AAEEFF" ] };
+				listener2 = { context: locationListener, method: "positionChanged", arguments: [ "listener2", "#FFEEAA" ] };
+				listener3 = { context: locationListener, method: "positionChanged", arguments: [ "positionChangeStatus", "#FFFEFF" ] };
+				
+				geoloc = new wink.api.GeoLocation();
+				
+				addListeners();
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">geolocation</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div style="width: 95%; margin: auto;">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Accuracy
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<span id="label1">High accuracy deactivated</span>
+					<div class="right"><input id="accuracy" name="accuracy" type="checkbox" class="w_checkbox" onchange="accuracyChanged();" /></div>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="w_bloc" id="positionChangeStatus">
+			Position Changed ?
+		</div>
+		
+		<div class="w_layout_box" style="width: 95%; margin: auto;">
+			<div id="listener1" class="w_bg_light w_box w_expand">
+				<div class="title">Listener 5s</div>
+			</div>
+			<div id="listener2"  class="w_bg_dark">
+				<div class="title">Listener 10s</div>
+			</div>
+		</div>
+	</body>
+</html>

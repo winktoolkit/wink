@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<style>
+			html, body
+			{
+				margin: 0;
+				padding: 0	
+			}
+		</style>
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/gesturerecognizer.js"></script>
+		
+		<script>	
+			var _ctx;
+
+			var _currentPoint = null;
+			var _previousPoint = null;
+			
+			var templateString = '';
+			
+			init = function()
+			{
+
+				wink.ux.touch.addListener(document, "start", { context: window, method: "start", arguments: null }, { preventDefault: true });
+				wink.ux.touch.addListener(document, "move", { context: window, method: "move", arguments: null }, { preventDefault: true });
+				wink.ux.touch.addListener(document, "end", { context: window, method: "end", arguments: null }, { preventDefault: true });
+
+				_ctx = $('canvas').getContext('2d');
+
+				clearShape();
+			}
+
+			start = function(event)
+			{
+				var x = event.x;
+				var y = event.y;
+
+				templateString = 'new Array({x: ' + x + ', y: ' + y + '}, ';
+				
+				_currentPoint = {x: x, y: y};
+				
+				clearShape(); 
+			}
+			
+			move = function(event)
+			{
+				var x = event.x;
+				var y = event.y;
+
+				templateString += '{x: ' + x + ', y: ' + y + '}, ';
+				
+				_previousPoint = _currentPoint;
+				_currentPoint = {x: x, y: y};
+				
+				drawShape();
+			}
+
+			end = function(event)
+			{
+				var x = event.x;
+				var y = event.y;
+
+				templateString += '{x: ' + x + ', y: ' + y + '})';
+
+				if ( $('email').value != '' )
+				{
+					$('mailto').href = 'mailto:' + $('email').value + '?subject=' + encodeURIComponent('gesture recognition') + '&body=' + encodeURIComponent(templateString);
+					generateClick();
+				} else
+				{
+					alert('You must define an email address first !');
+				}
+			}
+
+			drawShape = function()
+			{
+				_ctx.beginPath();
+				_ctx.moveTo(_previousPoint.x, _previousPoint.y-40);
+				_ctx.lineTo(_currentPoint.x, _currentPoint.y-40);
+				_ctx.closePath();
+				_ctx.stroke();
+			}
+			
+			clearShape = function()
+			{
+				var lingrad = _ctx.createLinearGradient(0,0,0,600);
+  				lingrad.addColorStop(0, '#385b43');
+				lingrad.addColorStop(1, '#000');
+				
+				_ctx.fillStyle = lingrad;
+				_ctx.fillRect(0,0,320,420);
+				
+				_ctx.strokeStyle = "#fff";
+				_ctx.lineWidth = 2;
+			}
+
+			generateClick = function()
+			{
+				var event = document.createEvent('MouseEvents');
+				
+			    if (event && event.initMouseEvent && $('mailto').dispatchEvent )
+			    {
+			    	event.initMouseEvent( 'click', true, true, document.defaultView, 1, 0, 0, 0, 0, false, false, false, false, 0, null);   
+			    	$('mailto').dispatchEvent(event);
+			    }
+			
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<div style="height: 40px; line-height: 40px; text-align: center">
+			<input type="text" id="email" name="email" placeholder='email address'/>
+			<a id='mailto' href="mailto:" style="display:none">link</a>
+		</div>
+		<canvas  width="320" height="420" id="canvas">
+		
+		</canvas>
+	</body>
+</html>

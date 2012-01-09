@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_tagcloud_menu3d_image</title>
+
+		<style>
+			#container
+			{
+				position: relative;
+				
+				width: 320px;
+				height: 306px;
+				
+				margin: auto;
+			}
+			
+			.tags 
+			{
+				display: none;
+			}
+			
+			.tagImage 
+			{
+				width: 80px;
+				height: 80px;
+				
+				-webkit-box-reflect: below 3px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.1, transparent), to(white));
+			}
+			
+			.tagText 
+			{
+				font-size: 14px;
+				text-align: center;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+
+		<script type="text/javascript" src="../../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../../math/_matrix/js/matrix.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xyz/js/3dfx.js"></script>
+		<script type="text/javascript" src="../../../../ux/movementtracker/js/movementtracker.js"></script>
+
+		<script type="text/javascript" src="../../../../ui/xyz/tagcloud/js/tagcloud.js"></script>
+
+		<script type="text/javascript">
+			var init = function() {
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+
+				var tags = [
+					{ id: "tag0", 	rating: 50 },
+					{ id: "tag1", 	rating: 50 },
+					{ id: "tag2", 	rating: 50 },
+					{ id: "tag3", 	rating: 50 },
+					{ id: "tag4", 	rating: 50 },
+					//{ id: "tag5", 	rating: 50 },
+					//{ id: "tag6", 	rating: 50 },
+					//{ id: "tag7", 	rating: 50 },
+					//{ id: "tag8", 	rating: 50 },
+					{ id: "tag9", 	rating: 50 },
+					{ id: "tag10", 	rating: 50 }
+				];
+
+				var properties = {
+					tags: tags,
+					size: 130,
+					textColor: null,
+					selectedTextColor: null,
+					scaleFactors : {
+						ratioDepth: 0.8,
+						ratioRating: 0.2
+					},
+					canMove: true,
+					canSelect: false,
+					axis: "y",
+					shiftX: -10,
+					shiftY: -70,
+					asCircle: {
+						tilt: 0.2
+					}
+				};
+				var tagcloud = new wink.ui.xyz.TagCloud(properties);
+				$("container").appendChild(tagcloud.getDomNode());
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">3D menu</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container"></div>
+		<div id="tags" class="tags">
+			<div id="tag0" class="tag"><img src="./img/cover0.jpg" class="tagImage" /></div>
+			<div id="tag1" class="tag"><img src="./img/cover1.jpg" class="tagImage" /></div>
+			<div id="tag2" class="tag"><img src="./img/cover2.jpg" class="tagImage" /></div>
+			<div id="tag3" class="tag"><img src="./img/cover3.jpg" class="tagImage" /></div>
+			<div id="tag4" class="tag"><img src="./img/cover4.jpg" class="tagImage" /></div>
+			<div id="tag5" class="tag"><img src="./img/cover5.jpg" class="tagImage" /></div>
+			<div id="tag6" class="tag"><img src="./img/cover6.jpg" class="tagImage" /></div>
+			<div id="tag7" class="tag"><img src="./img/cover7.jpg" class="tagImage" /></div>
+			<div id="tag8" class="tag"><img src="./img/cover8.jpg" class="tagImage" /></div>
+			<div id="tag9" class="tag"><img src="./img/cover9.jpg" class="tagImage" /></div>
+			<div id="tag10" class="tag"><img src="./img/cover10.jpg" class="tagImage" /></div>
+		</div>
+	</body>
+</html>

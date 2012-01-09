@@ -1,0 +1,68 @@
+.vp_container
+{
+	padding: 10px;
+	-webkit-box-shadow: 5px 5px 5px #888;
+}
+
+.vp_video_container
+{
+	background-color: transparent;	
+
+	text-align: center;
+	
+    -webkit-transform-style: preserve-3d;
+    -webkit-perspective: 500;
+    
+    -webkit-transition-property: -webkit-transform;
+	-webkit-transform: translate3d(0, 0, 0.1)
+}
+
+.vp_video
+{
+	position: relative;
+	
+	-webkit-transition-property: -webkit-transform;
+    -webkit-transform: rotateY(0deg);
+}
+
+.vp_player
+{	
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transform: translate3d(0, 0, 0.2)
+}
+
+.vp_progress_container
+{
+	height: 44px;
+	margin: 0 10px;
+}
+
+.vp_progress
+{
+	top: 16px;
+}
+
+.w_bar .w_bar_progress.vp_buffering_bar
+{
+	background: rgba(255, 55, 0, 0.4);
+}
+
+.vp_cursor
+{
+	position: absolute;
+	
+	top: -14px;
+	left: -18px;
+}
+
+.vp_duration
+{
+	height: 44px;
+	line-height: 44px;
+	
+	min-width: 50px;
+	
+	margin: 0 10px;
+	
+	text-align: center;
+}

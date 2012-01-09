@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_touch</title>
+
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<style>
+			#container 
+			{
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+			
+			#text 
+			{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				background-color: #385b43;
+				color: #FFF;
+				width: 320px;
+				height: auto;
+			}
+			
+			canvas 
+			{
+				-webkit-user-select: none;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript">
+			var drawer = {};
+
+			var init = function()
+			{
+				var canvasOffset = $('container').offsetTop + $('canvas').offsetTop;
+				drawer = {
+					_startTime: 		null,
+					_ctx: 				$('canvas').getContext('2d'),
+					_currentPoint: 		null,
+					_previousPoint: 	null,
+				
+					_handleTouchStart: function(uxEvent)
+					{
+						this._currentPoint = { x: uxEvent.x, y: uxEvent.y };
+					},
+					_handleTouchStart2: function(uxEvent)
+					{
+						this._startTime = uxEvent.timestamp;
+					},
+					_handleTouchMove: function(uxEvent)
+					{
+						this._previousPoint = this._currentPoint;
+						this._currentPoint = { x: uxEvent.x, y: uxEvent.y };
+		
+						this._drawShape();
+					},
+					_handleTouchEnd: function(uxEvent)
+					{
+						$('text').innerHTML = "Movement duration = " + (new Date().getTime() - this._startTime) + " ms";
+					},
+					_drawShape: function()
+					{
+						this._ctx.beginPath();
+						this._ctx.moveTo(this._previousPoint.x, this._previousPoint.y - canvasOffset);
+						this._ctx.lineTo(this._currentPoint.x, this._currentPoint.y - canvasOffset);
+						this._ctx.closePath();
+						this._ctx.stroke();
+					},
+					clearShape: function()
+					{
+						var lingrad = this._ctx.createLinearGradient(0, 0, 0, 600);
+		  				lingrad.addColorStop(0, '#385b43');
+						lingrad.addColorStop(1, '#000');
+						
+						this._ctx.fillStyle = lingrad;
+						this._ctx.fillRect(0, 0, 320, 300);
+						
+						this._ctx.strokeStyle = "#fff";
+						this._ctx.lineWidth = 1;
+					}
+				};	
+				drawer.clearShape();
+				
+				var object = $("canvas");
+
+				wink.ux.touch.addListener(object, "start", { context: drawer, method: "_handleTouchStart", arguments: null }, { preventDefault: true });
+				wink.ux.touch.addListener(object, "start", { context: drawer, method: "_handleTouchStart2", arguments: null });
+				wink.ux.touch.addListener(object, "move", { context: drawer, method: "_handleTouchMove", arguments: null });
+				wink.ux.touch.addListener(object, "end", { context: drawer, method: "_handleTouchEnd", arguments: null });
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">touch</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container">
+			<canvas width="320" height="300" id="canvas"></canvas>
+			<div id="text">Draw Here</div>
+		</div>
+	</body>
+</html>

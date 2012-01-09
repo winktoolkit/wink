@@ -1,0 +1,23 @@
+.asp_loader
+{
+	position: absolute;
+	
+	top: 0;
+	left: 0;
+	
+	height: 75px; 
+	width: 100px; 
+	
+	padding-top: 10px;
+	
+	text-align: center;
+	
+	visibility: hidden;
+	
+	z-index: 999;
+}
+
+.asp_text
+{
+	padding: 10px;	
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_scrolltorefresh</title>
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../../../ui/xy/spinner/css/spinner.css" type="text/css">
+		
+		<link rel="stylesheet" href="../../../plugins/scrolltorefresh/css/scrolltorefresh.css" type="text/css">
+
+		<style>
+			body, html
+			{
+				min-height: 420px;
+			}
+			
+			#wrapper {
+				position: relative;
+				z-index: 1;
+				width: 100%;
+				overflow: hidden;
+			}
+			
+			#title {
+				margin-right: 20px;
+			}
+			
+			#scrollContent {
+				position: relative;
+				width: 100%;
+			}
+			
+			#scrollContent .w_list {
+				margin: 0;
+			}
+			
+			.w_list_item.preselected, .w_list_item.selected 
+			{
+				background: -webkit-gradient(linear, left top, left bottom, from(#2f2f2f), to(#000), color-stop(50%, #151515));
+				color: #dedede;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../ux/window/js/window.js"></script>
+		
+		<script type="text/javascript" src="../../../ux/movementtracker/js/movementtracker.js"></script>
+		<script type="text/javascript" src="../../../ux/inertia/js/inertia.js"></script>
+		<script type="text/javascript" src="../../../ui/layout/scroller/js/scroller.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/spinner/js/spinner.js"></script>
+		
+		<script type="text/javascript" src="../../../plugins/scrolltorefresh/js/scrolltorefresh.js"></script>
+		
+		<script type="text/javascript">
+			var init = function() 
+			{
+				window.scrollTo(0,0,0);
+
+				wink.error.logLevel = 1;
+
+				helper.addItems(20, true);
+
+				var headerHeight = 55;
+				var heightRemains = wink.ux.window.height - headerHeight;
+				
+				$('wrapper').style.height = heightRemains + "px";
+				
+				wink.ux.touch.addListener($('header'), "start", { context: helper, method: "onTouchHeader" });
+
+				var ctx = {};
+				var scrollToRefresh = new wink.plugins.ScrollToRefresh({
+					scroller: new wink.ui.layout.Scroller({
+						target: 'scrollContent',
+						direction: 'y',
+						callbacks: {
+							scrolling:		{ context: ctx, method: 'onScrolling' },
+							endScrolling:	{ context: ctx, method: 'onEndScrolling' }
+						}
+					}),
+					scrollerContent: $('scrollContent'),
+					topsection: {
+						waitText: 'Pull down to refresh...',
+						triggeredText: 'Release to refresh...',
+						releasedText: 'Loading...',
+						spinner: new wink.ui.xy.Spinner({ background: "light", size: 20 })
+					},
+					bottomsection: {
+						waitText: 'Pull up to load more...',
+						triggeredText: 'Release to refresh...',
+						releasedText: 'Loading...',
+						spinner: new wink.ui.xy.Spinner({ background: "light", size: 20 })
+					},
+					onTopReleased: function(callback) {
+						helper.simulateXhr(1, true, "New ", 1500, callback);
+					},
+					onBottomReleased: function(callback) {
+						helper.simulateXhr(1, false, "Archive ", 1500, callback);
+					}
+				});
+				
+				ctx.onScrolling = wink.bind(scrollToRefresh.onScrolling, scrollToRefresh);
+				ctx.onEndScrolling = wink.bind(scrollToRefresh.onEndScrolling, scrollToRefresh);
+				
+				window.addEventListener("scroll", function(e){helper.handleScrollEvent(e, scrollToRefresh);}, true);
+			};
+
+			var helper = 
+			{
+				index: 0,
+				touched: false,
+				addItems: function(n, atbegin, prefix)
+				{
+					for (var i = 0; i < n; i++) {
+						var li = document.createElement('li');
+						li.innerHTML = (prefix ? prefix : "") + "message " + this.index;
+						this.index++;
+						wink.addClass(li, "w_list_item w_border_bottom w_bg_light");
+						if (atbegin) {
+							$('content').insertBefore(li, $('content').childNodes[0]);
+						} else {
+							$('content').appendChild(li);
+						}
+					}
+				},
+				simulateXhr: function(n, atbegin, prefix, delay, callback)
+				{
+					var delayed = function() {
+						this.addItems(n, atbegin, prefix);
+						callback();
+					};
+					setTimeout(function () {
+						delayed.call(helper);
+					}, delay);
+				},
+				onTouchHeader: function(e)
+				{
+					if ( e.type == "start" )
+					{
+						this.offsetStart = window.pageYOffset;
+						this.touched = true;
+					}
+				},
+				handleScrollEvent: function(event, scrollToRefresh)
+				{
+					if (!this.touched && window.pageYOffset == 0)
+					{
+						scrollToRefresh.scroller.scrollTo(0, 0, 800);
+					}
+					
+					if ( this.touched )
+					{
+						this.touched = false;
+					}
+				}
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div id="header" class="w_box w_header w_bg_dark">
+			<span id="title">scroll to refresh</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="wrapper">
+			<div id="scrollContent">
+				<ul id="content" class="w_list w_border">
+				
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

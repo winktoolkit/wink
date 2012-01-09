@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_coverflow_2</title>
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+
+		<style>
+			html, body {
+				background-color: #333;
+			}
+
+			#container {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.backfaces {
+				display: none;
+			}
+			
+			.backface {
+				background-color: #eee;
+				font-size: 20px;
+				text-align: center;
+			}
+			
+			.titles {
+				display: none;
+			}
+			
+			.title {
+				color: #FFF;
+				background-color: transparent;
+				font-size: 40px;
+				text-align: center;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ux/window/js/window.js"></script>
+
+		<script type="text/javascript" src="../../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../../math/_matrix/js/matrix.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xyz/js/3dfx.js"></script>
+		<script type="text/javascript" src="../../../../ux/movementtracker/js/movementtracker.js"></script>
+		<script type="text/javascript" src="../../../../ux/gesture/js/gesture.js"></script>
+		
+		<script type="text/javascript" src="../../../../ui/xyz/coverflow/js/coverflow.js"></script>
+
+		<script type="text/javascript">
+			var defaultAction = function(cover, id) {
+				alert("Personal Management for cover " + id);
+			};
+		
+			var init = function() {
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+
+				var covers = [
+					{ image: "./img/0.gif", title: "title0", backFaceId: "backface1", action: { context: window, method: "defaultAction", arguments: [ "0" ] } },
+					{ image: "./img/1.gif", title: "title1", backFaceId: "backface1" },
+					{ image: "./img/2.gif", title: "title2", backFaceId: "backface1" },
+					{ image: "./img/3.gif", title: "title3", backFaceId: "backface1" },
+					{ image: "./img/4.gif", title: "title4", backFaceId: "backface1" },
+					{ image: "./img/5.gif", title: "title5", backFaceId: "backface1" },
+					{ image: "./img/6.gif", title: "title6", backFaceId: "backface1" },
+					{ image: "./img/7.gif", title: "title7", backFaceId: "backface1" },
+					{ image: "./img/8.gif", title: "title8", backFaceId: "backface1" },
+					{ image: "./img/9.gif", title: "title9", backFaceId: "backface1" },
+					{ image: "./img/10.gif", title: "title10", backFaceId: "backface1" },
+					{ image: "./img/11.gif", title: "title11", backFaceId: "backface1" },
+					{ image: "./img/12.gif", title: "title12", backFaceId: "backface1" },
+					{ image: "./img/13.gif", title: "title13", backFaceId: "backface1" },
+					{ image: "./img/14.gif", title: "title14", backFaceId: "backface1" },
+					{ image: "./img/15.gif", title: "title15", backFaceId: "backface1" },
+					{ image: "./img/16.gif", title: "title16", backFaceId: "backface1" },
+					{ image: "./img/17.gif", title: "title17", backFaceId: "backface1" },
+					{ image: "./img/18.gif", title: "title18", backFaceId: "backface1" },
+					{ image: "./img/19.gif", title: "title19", backFaceId: "backface1" },
+					{ image: "./img/20.gif", title: "title20", backFaceId: "backface1" },
+					{ image: "./img/21.gif", title: "title21", backFaceId: "backface1" },
+					{ image: "./img/22.gif", title: "title22", backFaceId: "backface1" },
+					{ image: "./img/23.gif", title: "title23", backFaceId: "backface1" },
+					{ image: "./img/24.gif", title: "title24", backFaceId: "backface1" },
+					{ image: "./img/25.gif", title: "title25", backFaceId: "backface1" },
+					{ image: "./img/26.gif", title: "title26", backFaceId: "backface1" },
+					{ image: "./img/27.gif", title: "title27", backFaceId: "backface1" },
+					{ image: "./img/28.gif", title: "title28", backFaceId: "backface1" },
+					{ image: "./img/29.gif", title: "title29", backFaceId: "backface1" },
+					{ image: "./img/30.gif", title: "title30", backFaceId: "backface1" },
+					{ image: "./img/31.gif", title: "title31", backFaceId: "backface1" },
+					{ image: "./img/32.gif", title: "title32", backFaceId: "backface1" },
+					{ image: "./img/33.gif", title: "title33", backFaceId: "backface1" },
+					{ image: "./img/34.gif", title: "title34", backFaceId: "backface1" },
+					{ image: "./img/35.gif", title: "title35", backFaceId: "backface1" },
+					{ image: "./img/36.gif", title: "title36", backFaceId: "backface1" },
+					{ image: "./img/37.gif", title: "title37", backFaceId: "backface1" },
+					{ image: "./img/38.gif", title: "title38", backFaceId: "backface1" },
+					{ image: "./img/39.gif", title: "title39", backFaceId: "backface1" },
+					{ image: "./img/40.gif", title: "title40", backFaceId: "backface1" },
+					{ image: "./img/41.gif", title: "title41", backFaceId: "backface1" },
+					{ image: "./img/42.gif", title: "title42", backFaceId: "backface1" },
+					{ image: "./img/43.gif", title: "title43", backFaceId: "backface1" },
+					{ image: "./img/44.gif", title: "title44", backFaceId: "backface1" },
+					{ image: "./img/45.gif", title: "title45", backFaceId: "backface1" },
+					{ image: "./img/46.gif", title: "title46", backFaceId: "backface1" },
+					{ image: "./img/47.gif", title: "title47", backFaceId: "backface1" },
+					{ image: "./img/48.gif", title: "title48", backFaceId: "backface1" },
+					{ image: "./img/49.gif", title: "title49", backFaceId: "backface1" },
+					{ image: "./img/50.gif", title: "title50", backFaceId: "backface1" }
+				];
+
+				var properties = {
+					covers: covers,
+					size: 300,
+					viewportWidth: document.documentElement.offsetWidth,
+					reflected: true,
+					displayTitle: true,
+					fadeEdges: true,
+					handleOrientationChange: true,
+					handleGesture: true,
+					backgroundColor: { r: 51, g: 51, b: 51 },
+					coverSpacing: 40, 			// [optional]
+					displayTitleDuration: 0,	// [optional]
+					borderSize: 5 				// [optional]
+				};
+				var coverflow = new wink.ui.xyz.CoverFlow(properties);
+				$("container").appendChild(coverflow.getDomNode());
+			};
+		</script>
+	</head>
+	
+	<body onload="setTimeout(init, 1);">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">coverflow</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container"></div>
+		<div id="coverBackFaces" class="backfaces">
+			<div id="backface1" class="backface">
+				No details
+			</div>
+		</div>
+		<div id="titles" class="titles">
+			<div id="title0" class="title">Cover Title</div>
+			<div id="title1" class="title">Cover Title</div>
+			<div id="title2" class="title">Cover Title</div>
+			<div id="title3" class="title">Cover Title</div>
+			<div id="title4" class="title">Cover Title</div>
+			<div id="title5" class="title">Cover Title</div>
+			<div id="title6" class="title">Cover Title</div>
+			<div id="title7" class="title">Cover Title</div>
+			<div id="title8" class="title">Cover Title</div>
+			<div id="title9" class="title">Cover Title</div>
+			<div id="title10" class="title">Cover Title</div>
+			<div id="title11" class="title">Cover Title</div>
+			<div id="title12" class="title">Cover Title</div>
+			<div id="title13" class="title">Cover Title</div>
+			<div id="title14" class="title">Cover Title</div>
+			<div id="title15" class="title">Cover Title</div>
+			<div id="title16" class="title">Cover Title</div>
+			<div id="title17" class="title">Cover Title</div>
+			<div id="title18" class="title">Cover Title</div>
+			<div id="title19" class="title">Cover Title</div>
+			<div id="title20" class="title">Cover Title</div>
+			<div id="title21" class="title">Cover Title</div>
+			<div id="title22" class="title">Cover Title</div>
+			<div id="title23" class="title">Cover Title</div>
+			<div id="title24" class="title">Cover Title</div>
+			<div id="title25" class="title">Cover Title</div>
+			<div id="title26" class="title">Cover Title</div>
+			<div id="title27" class="title">Cover Title</div>
+			<div id="title28" class="title">Cover Title</div>
+			<div id="title29" class="title">Cover Title</div>
+			<div id="title30" class="title">Cover Title</div>
+			<div id="title31" class="title">Cover Title</div>
+			<div id="title32" class="title">Cover Title</div>
+			<div id="title33" class="title">Cover Title</div>
+			<div id="title34" class="title">Cover Title</div>
+			<div id="title35" class="title">Cover Title</div>
+			<div id="title36" class="title">Cover Title</div>
+			<div id="title37" class="title">Cover Title</div>
+			<div id="title38" class="title">Cover Title</div>
+			<div id="title39" class="title">Cover Title</div>
+			<div id="title40" class="title">Cover Title</div>
+			<div id="title41" class="title">Cover Title</div>
+			<div id="title42" class="title">Cover Title</div>
+			<div id="title43" class="title">Cover Title</div>
+			<div id="title44" class="title">Cover Title</div>
+			<div id="title45" class="title">Cover Title</div>
+			<div id="title46" class="title">Cover Title</div>
+			<div id="title47" class="title">Cover Title</div>
+			<div id="title48" class="title">Cover Title</div>
+			<div id="title49" class="title">Cover Title</div>
+			<div id="title50" class="title">Cover Title</div>
+		</div>
+	</body>
+</html>

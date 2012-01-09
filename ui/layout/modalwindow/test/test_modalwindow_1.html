@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_modalwindow</title>
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+
+		<link rel="stylesheet" href="../css/modalwindow.css" type="text/css">
+		
+		<style>
+			#container {
+				min-height: 400px;
+			}
+			
+			#contents {
+				display: none;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ux/movementtracker/js/movementtracker.js"></script>
+		<script type="text/javascript" src="../../../../ui/layout/modalwindow/js/modalwindow.js"></script>
+
+		<script type="text/javascript">
+			var init = function()
+			{
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+
+				var pathImage = "./img/";
+				var icons = [
+					pathImage + "thumbnail1.png",
+					pathImage + "thumbnail2.png",
+					pathImage + "thumbnail3.png",
+					pathImage + "thumbnail4.png",
+					pathImage + "thumbnail5.png",
+					pathImage + "thumbnail6.png"
+				];
+
+				var mw1 = new wink.ui.layout.ModalWindow({
+					iconView:  { image: icons[0], 		x: document.documentElement.offsetWidth/2 - 108,   y: 10,  sizeX: 52, sizeY: 52 },
+					modalView: { content: "content1", 	x: document.documentElement.offsetWidth/2 - 100,   y: 25,	sizeX: 200, sizeY: 250 },
+					displayDuration: 800,
+					canDrag: true
+				});
+				$("container").appendChild(mw1.getDomNode());
+
+				var mw2 = new wink.ui.layout.ModalWindow({
+					iconView:  { image: icons[1], 		x: document.documentElement.offsetWidth/2 - 26, y: 10,  sizeX: 52, sizeY: 52 },
+					modalView: { content: "content2", 	x: document.documentElement.offsetWidth/2 - 100,   y: 25, sizeX: 200, sizeY: 250 },
+					displayDuration: 800,
+					canDrag: true
+				});
+				$("container").appendChild(mw2.getDomNode());
+
+				var mw3 = new wink.ui.layout.ModalWindow({
+					iconView:  { image: icons[2], 		x: document.documentElement.offsetWidth/2 + 56, y: 10,	sizeX: 52, sizeY: 52 },
+					modalView: { content: "content3", 	x: document.documentElement.offsetWidth/2 - 100,   y: 25,	sizeX: 200, sizeY: 250 },
+					displayDuration: 800,
+					canDrag: true
+				});
+				$("container").appendChild(mw3.getDomNode());
+
+				var mw4 = new wink.ui.layout.ModalWindow({
+					iconView:  { image: icons[3], 		x: document.documentElement.offsetWidth/2 - 108,   y: 100, sizeX: 52, sizeY: 52 },
+					modalView: { content: "content4", 	x: document.documentElement.offsetWidth/2 - 100,   y: 25, sizeX: 200, sizeY: 250 },
+					displayDuration: 500,
+					canDrag: true
+				});
+				$("container").appendChild(mw4.getDomNode());
+
+				var mw5 = new wink.ui.layout.ModalWindow({
+					iconView:  { image: icons[4], 		x: document.documentElement.offsetWidth/2 - 26, y: 100,	sizeX: 52,  sizeY: 52 },
+					modalView: { content: "content5", 	x: document.documentElement.offsetWidth/2 - 100,  y: 25,  sizeX: 200, sizeY: 250 },
+					displayDuration: 500,
+					canDrag: true
+				});
+				$("container").appendChild(mw5.getDomNode());
+				
+				var mw6 = new wink.ui.layout.ModalWindow({
+					iconView:  { image: icons[5], 		x: document.documentElement.offsetWidth/2 + 56, y: 100,	sizeX: 52,  sizeY: 52 },
+					modalView: { content: "content6", 	x: document.documentElement.offsetWidth/2 - 100,  y: 25,  sizeX: 200, sizeY: 250 },
+					displayDuration: 500,
+					canDrag: true
+				});
+				$("container").appendChild(mw6.getDomNode());
+			};
+		</script>
+	</head>
+	
+	<body onload="setTimeout(init, 1);">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">modal window</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		<div id="container">
+			<div class="w_bloc">
+				In this test page, you can drag the modal windows in the page
+			</div>
+		</div>
+		<div id="contents">
+			<div id="content1" class="content">
+				<div class="header">My RSS feed</div>
+				<br />
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+				Ut sed odio at ipsum lobortis aliquet. Morbi id lectus non erat fermentum adipiscing. 
+				Etiam sit amet luctus augue.
+			</div>
+			<div id="content2" class="content">
+				<div class="header">My juridic info</div>
+				<br />
+				Nullam at lacus tortor, quis imperdiet mi. 
+				Integer mattis mollis nulla eget dignissim. Fusce mi tellus, mollis eget cursus ut, 
+				euismod id tellus.
+			</div>
+			<div id="content3" class="content">
+				<div class="header">My safe</div>
+				<br />
+				In accumsan, est id aliquet tristique, arcu augue malesuada nibh, 
+				eleifend scelerisque felis augue ac lectus. Phasellus imperdiet, elit ac facilisis ultrices, 
+				massa erat consectetur ligula, aliquet imperdiet ante neque eget sapien. Donec lacus magna, 
+				commodo sed vestibulum et, ultrices et orci.
+			</div>
+			<div id="content4" class="content">
+				<div class="header">My cart</div>
+				<br />
+				In accumsan, est id aliquet tristique, arcu augue malesuada nibh, 
+				eleifend scelerisque felis augue ac lectus. Phasellus imperdiet, elit ac facilisis ultrices, 
+				massa erat consectetur ligula, aliquet imperdiet ante neque eget sapien. Donec lacus magna, 
+				commodo sed vestibulum et, ultrices et orci.
+			</div>
+			<div id="content5" class="content">
+				<div class="header">My wallet</div>
+				<br />
+				In accumsan, est id aliquet tristique, arcu augue malesuada nibh, 
+				eleifend scelerisque felis augue ac lectus. Phasellus imperdiet, elit ac facilisis ultrices, 
+				massa erat consectetur ligula, aliquet imperdiet ante neque eget sapien. Donec lacus magna, 
+				commodo sed vestibulum et, ultrices et orci.
+			</div>
+			<div id="content6" class="content">
+				<div class="header">My travel</div>
+				<br />
+				In accumsan, est id aliquet tristique, arcu augue malesuada nibh, 
+				eleifend scelerisque felis augue ac lectus. Phasellus imperdiet, elit ac facilisis ultrices, 
+				massa erat consectetur ligula, aliquet imperdiet ante neque eget sapien. Donec lacus magna, 
+				commodo sed vestibulum et, ultrices et orci.
+			</div>
+		</div>
+	</body>
+</html>

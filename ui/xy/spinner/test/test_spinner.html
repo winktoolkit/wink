@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>test_spinner</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/spinner.css" media="screen"/>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" language="javascript" src="../js/spinner.js"></script>
+		
+		<script>
+			init = function()
+			{
+				var spinner1 = new wink.ui.xy.Spinner({background: "light"}).getDomNode();
+				var spinner2 = new wink.ui.xy.Spinner({background: "dark"}).getDomNode();
+				var spinner3 = new wink.ui.xy.Spinner({background: "personal", backgroundImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAdCAYAAABWk2cPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAqBJREFUeNq0l09sTVEQxt+956V/BE1VVYioRki1C8QKCzYSiY0FDRULtScW3TSR2thaNK3YSFhJV1pJY2HDhoQFkpJKLERKaGhoFY37jm9kRsb03Of23naSX+/tfe+e78ycMzPnudLibAWoAA8Og1bQBCIwk3WQKMN3doEj4ABoBN/Aa3BPjRHxZOizJ+BtXtENYAB0qoH19/vVGLHhKxhL8z5OEezhlzqqTMozIQcoIl0cpQVWDjzrA908iE+Jxif1PDL34kgN2AtWgQfVPD0DTvB9xXhE/ALXwSHjaWSI1ZW83ZO2prSGI6BeTUh7MAFOpaxTHTgKVpu1FeEE3OC1/keUBLeYcEkkjoHxDDu9GRwHTr0v4tMcpb+D7uec8yq0nq87MgqSTYFBFnFGlPK5TYueCwiWeNZ57JZZW5nAQS26UYkJk+BFTtEPYI7FnBJeI6L7QK0Kp3CyVMxuBooG6Wwtcy55lR6Sn58Lis4pL/Wm/SPaZnIuNpWmiLlAeraUVecomaKw1KJi9SQ6y0LRMojGgXo9H3ObspuosoSeOpOzU/TnoSkGsr6NBQVXBsoh8UpEvxtvqVZeKyh6QXnoVA2ekJi/M17S/VqwLafgJi4ENrTTeqGvBkJM16Gcor0mtBLeMS36CLwxorKT71JCZxTbzA44s5aOm8FL29rWc+upMTU44etHcB58CYhRH70IGtSkEzXGT3BZqpw9itC55qzpNklgk8kpQv7XzxOVcvLObXV6XFAxxvlMs914G+qzPqVmR+oZ2X1w539l6jGHo50/9ykTqCZINs+nkdHFnHtbwCXutTq83oSzYtaP7t+DK3xqzHXCp5PcabCON5kVF35w8x4Gz4v+rNC2G+zk5K/jnxH0E+IZeJp1kN8CDAB9ltpq+w/AhQAAAABJRU5ErkJggg=="}).getDomNode();
+				
+				spinner1.style.height = "20px";
+				
+				$('white').appendChild(spinner1);
+				$('black').appendChild(spinner2);
+				$('personal').appendChild(spinner3);
+			};
+			
+		</script>
+	</head>
+	
+	<body onload="init();setTimeout(scrollTo, 0, 0, 1);">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">spinner</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div style="width: 95%; margin: auto">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Spinner option 1 (light background)
+				</li>
+				<div id="white" class="w_bloc" style="float: right"></div>
+			</ul>
+			
+			<ul id="list1" class="w_list w_border w_radius w_bg_dark">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Spinner option 2 (dark background)
+				</li>
+				<div id="black" class="w_bloc" style="float: right"></div>
+			</ul>
+			
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Spinner option 3 (custom)
+				</li>
+				<div id="personal" class="w_bloc" style="float: right"></div>
+			</ul>
+		</div>
+	</body>
+</html>
+		

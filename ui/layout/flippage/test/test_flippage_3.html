@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/flippage.css" type="text/css">
+		
+		<style>
+			#wrapper
+			{
+				position: relative;
+				z-index: 1;
+				width: 100%;
+				background-color: #fff;
+				overflow: hidden;
+			}
+			
+			.content
+			{
+				background-color: #fff;
+				height: 900px;
+			}
+			
+			p
+			{
+				margin: 0;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ux/window/js/window.js"></script>
+		<script type="text/javascript" src="../../../../ux/movementtracker/js/movementtracker.js"></script>
+		<script type="text/javascript" src="../../../../ux/inertia/js/inertia.js"></script>
+		<script type="text/javascript" src="../../../../ui/layout/scroller/js/scroller.js"></script>
+		
+		<script type="text/javascript" src="../../../../fx/_xyz/js/3dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../../math/_matrix/js/matrix.js"></script>
+		
+		<script type="text/javascript" src="../js/flippage.js"></script>
+		
+		<script>	
+			var flipPage, scroller;
+
+			var startX, startY, endX, endY;
+			var startTime, endTime;
+
+			var flipPageProperties = 
+			{
+				'duration': 1400,
+				'pages': ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7', 'page8']
+			}
+
+			var scrollerProperties = 
+			{
+				target: "view",
+				direction: "y",
+				scrollbars: 
+				{
+					backgroundColor: 'rgba(0, 0, 0, 0.5)',
+					borderColor: 'rgba(255, 255, 255, 0.7)'
+				}
+			};
+			
+			init = function()
+			{
+				flipPage = new wink.ui.layout.FlipPage(flipPageProperties);
+				$('view').appendChild(flipPage.getDomNode());
+
+				var headerHeight = 55;
+				var footerHeight = 45;
+				
+				var heightRemains = wink.ux.window.height - headerHeight - footerHeight;
+
+				$('wrapper').style.height = heightRemains + "px";
+
+				scroller = new wink.ui.layout.Scroller(scrollerProperties);
+
+				// Reconnect the touch events with the flippage
+				wink.ux.touch.addListener($('view'), "start", { context: flipPage, method: "_touchStart", arguments: null }, { preventDefault: false });
+				wink.ux.touch.addListener($('view'), "end", { context: flipPage, method: "_touchEnd", arguments: null }, { preventDefault: false });
+			}
+
+			previous = function()
+			{
+				flipPage.flipBack();
+			}
+
+			next = function()
+			{
+				flipPage.flipForward();
+			}
+
+			first = function()
+			{
+				flipPage.flipTo("page1");
+			}
+
+			last = function()
+			{
+				flipPage.flipTo("page8");
+			}
+		</script>
+	</head>
+<body onload="init()">
+	<div class="w_box w_header w_bg_dark">
+		<span id="title">flippage</span>
+		<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+	</div>
+	<div id="wrapper">
+		<div id="view">
+			<div id="page1">
+				<div class="content">
+					<div class="w_bloc">
+						<div class="w_title">
+							New York city
+						</div>
+						<img src="./img/ny.jpg" width="150px" style="margin-right: 10px; float: left" />
+						<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu arcu eget sem sagittis molestie. Vestibulum sem quam, vulputate vitae interdum vulputate, euismod nec eros. Pellentesque pellentesque odio sit amet nibh faucibus sed porttitor ante interdum. Curabitur dui tortor, pellentesque vel blandit vel, euismod vel nunc. Aenean mattis rhoncus est, a vulputate tellus sagittis sed. Aliquam semper arcu vel nunc placerat et feugiat metus volutpat. Duis ac mi eget sem mollis aliquet id id sapien. Etiam massa tortor, accumsan non volutpat sed, luctus in velit. Fusce ultricies, augue facilisis tempor aliquam, lacus diam posuere ipsum, at varius lorem arcu semper lectus. Curabitur ac felis et nisi vehicula euismod. Vestibulum vulputate sapien id risus tristique vitae pulvinar ante cursus. Nunc laoreet nisl a sapien aliquet feugiat non et tortor. Mauris ipsum metus, volutpat ut accumsan ac, aliquet luctus elit. Vivamus et blandit orci. Nunc scelerisque, nulla ut posuere placerat, nunc odio lacinia ante, ut ornare purus velit quis ligula. Duis auctor egestas diam ut hendrerit. Duis ante quam, pretium at tempor ut, feugiat eget tellus.
+						<br />
+						Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque dignissim tellus sed nulla consectetur luctus. Nulla non sem neque. Duis porta ultricies sem. Proin eleifend venenatis magna, non suscipit metus sodales id. Phasellus risus sem, porttitor eu lacinia eu, pharetra sit amet risus. Proin imperdiet, dolor eu fermentum scelerisque, nisl est placerat massa, eleifend varius erat sem id purus. Etiam nec nunc sem. In pellentesque ornare rutrum. Nulla volutpat, diam vitae varius fermentum, risus massa vehicula sapien, ac euismod nunc sapien ac risus. Nunc at libero nibh. Aliquam condimentum commodo felis, accumsan ornare neque vulputate ut. Aliquam mi enim, rutrum eget tincidunt et, pretium vel felis. Curabitur lacus ipsum, congue eu consequat quis, elementum quis augue. Fusce pulvinar dictum porttitor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+						<br />
+						Morbi velit magna, commodo vel elementum non, ultrices ac nisl. Maecenas sodales consectetur nulla, et varius elit consequat eu. Maecenas vestibulum neque quis leo interdum malesuada. Curabitur nunc orci, bibendum sit amet accumsan et, egestas quis nisi. Etiam adipiscing lorem a est vulputate eu pharetra quam mollis. Duis nec tortor diam. Nulla ac ligula enim. In hac habitasse platea dictumst. Mauris fringilla nisi id eros malesuada iaculis. Nullam convallis pulvinar ornare. Maecenas convallis diam non orci lacinia aliquet. Morbi sodales, lorem viverra pellentesque fermentum, eros urna dignissim sem, nec posuere velit nisi ut ipsum. Aenean iaculis accumsan lectus, at placerat odio gravida id. Duis commodo, diam eu hendrerit varius, nisl mi mollis lorem, rhoncus consectetur erat dui ut risus. Maecenas id nulla hendrerit tellus tincidunt pulvinar. Nulla id ante metus, ac aliquet erat.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div id="page2">
+				<div class="content">
+					<div class="w_bloc">
+						<div class="w_title">
+							Los Angeles
+						</div>
+						<img src="./img/la.jpg" width="150px" style="margin-left: 10px; float: right" />
+						<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu arcu eget sem sagittis molestie. Vestibulum sem quam, vulputate vitae interdum vulputate, euismod nec eros. Pellentesque pellentesque odio sit amet nibh faucibus sed porttitor ante interdum. Curabitur dui tortor, pellentesque vel blandit vel, euismod vel nunc. Aenean mattis rhoncus est, a vulputate tellus sagittis sed. Aliquam semper arcu vel nunc placerat et feugiat metus volutpat. Duis ac mi eget sem mollis aliquet id id sapien. Etiam massa tortor, accumsan non volutpat sed, luctus in velit. Fusce ultricies, augue facilisis tempor aliquam, lacus diam posuere ipsum, at varius lorem arcu semper lectus. Curabitur ac felis et nisi vehicula euismod. Vestibulum vulputate sapien id risus tristique vitae pulvinar ante cursus. Nunc laoreet nisl a sapien aliquet feugiat non et tortor. Mauris ipsum metus, volutpat ut accumsan ac, aliquet luctus elit. Vivamus et blandit orci. Nunc scelerisque, nulla ut posuere placerat, nunc odio lacinia ante, ut ornare purus velit quis ligula. Duis auctor egestas diam ut hendrerit. Duis ante quam, pretium at tempor ut, feugiat eget tellus.
+						<br />
+						Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque dignissim tellus sed nulla consectetur luctus. Nulla non sem neque. Duis porta ultricies sem. Proin eleifend venenatis magna, non suscipit metus sodales id. Phasellus risus sem, porttitor eu lacinia eu, pharetra sit amet risus. Proin imperdiet, dolor eu fermentum scelerisque, nisl est placerat massa, eleifend varius erat sem id purus. Etiam nec nunc sem. In pellentesque ornare rutrum. Nulla volutpat, diam vitae varius fermentum, risus massa vehicula sapien, ac euismod nunc sapien ac risus. Nunc at libero nibh. Aliquam condimentum commodo felis, accumsan ornare neque vulputate ut. Aliquam mi enim, rutrum eget tincidunt et, pretium vel felis. Curabitur lacus ipsum, congue eu consequat quis, elementum quis augue. Fusce pulvinar dictum porttitor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+						<br />
+						Morbi velit magna, commodo vel elementum non, ultrices ac nisl. Maecenas sodales consectetur nulla, et varius elit consequat eu. Maecenas vestibulum neque quis leo interdum malesuada. Curabitur nunc orci, bibendum sit amet accumsan et, egestas quis nisi. Etiam adipiscing lorem a est vulputate eu pharetra quam mollis. Duis nec tortor diam. Nulla ac ligula enim. In hac habitasse platea dictumst. Mauris fringilla nisi id eros malesuada iaculis. Nullam convallis pulvinar ornare. Maecenas convallis diam non orci lacinia aliquet. Morbi sodales, lorem viverra pellentesque fermentum, eros urna dignissim sem, nec posuere velit nisi ut ipsum. Aenean iaculis accumsan lectus, at placerat odio gravida id. Duis commodo, diam eu hendrerit varius, nisl mi mollis lorem, rhoncus consectetur erat dui ut risus. Maecenas id nulla hendrerit tellus tincidunt pulvinar. Nulla id ante metus, ac aliquet erat.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div id="page3">
+				<div class="content">
+					<div class="w_bloc">
+						<div class="w_title">
+							San francisco
+						</div>
+						<div style="text-align: center;">
+							<img src="./img/sf.jpg" width="150px" />
+						</div>
+						<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu arcu eget sem sagittis molestie. Vestibulum sem quam, vulputate vitae interdum vulputate, euismod nec eros. Pellentesque pellentesque odio sit amet nibh faucibus sed porttitor ante interdum. Curabitur dui tortor, pellentesque vel blandit vel, euismod vel nunc. Aenean mattis rhoncus est, a vulputate tellus sagittis sed. Aliquam semper arcu vel nunc placerat et feugiat metus volutpat. Duis ac mi eget sem mollis aliquet id id sapien. Etiam massa tortor, accumsan non volutpat sed, luctus in velit. Fusce ultricies, augue facilisis tempor aliquam, lacus diam posuere ipsum, at varius lorem arcu semper lectus. Curabitur ac felis et nisi vehicula euismod. Vestibulum vulputate sapien id risus tristique vitae pulvinar ante cursus. Nunc laoreet nisl a sapien aliquet feugiat non et tortor. Mauris ipsum metus, volutpat ut accumsan ac, aliquet luctus elit. Vivamus et blandit orci. Nunc scelerisque, nulla ut posuere placerat, nunc odio lacinia ante, ut ornare purus velit quis ligula. Duis auctor egestas diam ut hendrerit. Duis ante quam, pretium at tempor ut, feugiat eget tellus.
+						<br />
+						Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque dignissim tellus sed nulla consectetur luctus. Nulla non sem neque. Duis porta ultricies sem. Proin eleifend venenatis magna, non suscipit metus sodales id. Phasellus risus sem, porttitor eu lacinia eu, pharetra sit amet risus. Proin imperdiet, dolor eu fermentum scelerisque, nisl est placerat massa, eleifend varius erat sem id purus. Etiam nec nunc sem. In pellentesque ornare rutrum. Nulla volutpat, diam vitae varius fermentum, risus massa vehicula sapien, ac euismod nunc sapien ac risus. Nunc at libero nibh. Aliquam condimentum commodo felis, accumsan ornare neque vulputate ut. Aliquam mi enim, rutrum eget tincidunt et, pretium vel felis. Curabitur lacus ipsum, congue eu consequat quis, elementum quis augue. Fusce pulvinar dictum porttitor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+						<br />
+						Morbi velit magna, commodo vel elementum non, ultrices ac nisl. Maecenas sodales consectetur nulla, et varius elit consequat eu. Maecenas vestibulum neque quis leo interdum malesuada. Curabitur nunc orci, bibendum sit amet accumsan et, egestas quis nisi. Etiam adipiscing lorem a est vulputate eu pharetra quam mollis. Duis nec tortor diam. Nulla ac ligula enim. In hac habitasse platea dictumst. Mauris fringilla nisi id eros malesuada iaculis. Nullam convallis pulvinar ornare. Maecenas convallis diam non orci lacinia aliquet. Morbi sodales, lorem viverra pellentesque fermentum, eros urna dignissim sem, nec posuere velit nisi ut ipsum. Aenean iaculis accumsan lectus, at placerat odio gravida id. Duis commodo, diam eu hendrerit varius, nisl mi mollis lorem, rhoncus consectetur erat dui ut risus. Maecenas id nulla hendrerit tellus tincidunt pulvinar. Nulla id ante metus, ac aliquet erat.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div id="page4">
+				<div class="content">
+					<div class="w_bloc">
+						<div class="w_title">
+							Chicago
+						</div>
+						<div style="text-align: center;">
+							<img src="./img/ch.jpg" width="150px" />
+						</div>
+						<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu arcu eget sem sagittis molestie. Vestibulum sem quam, vulputate vitae interdum vulputate, euismod nec eros. Pellentesque pellentesque odio sit amet nibh faucibus sed porttitor ante interdum. Curabitur dui tortor, pellentesque vel blandit vel, euismod vel nunc. Aenean mattis rhoncus est, a vulputate tellus sagittis sed. Aliquam semper arcu vel nunc placerat et feugiat metus volutpat. Duis ac mi eget sem mollis aliquet id id sapien. Etiam massa tortor, accumsan non volutpat sed, luctus in velit. Fusce ultricies, augue facilisis tempor aliquam, lacus diam posuere ipsum, at varius lorem arcu semper lectus. Curabitur ac felis et nisi vehicula euismod. Vestibulum vulputate sapien id risus tristique vitae pulvinar ante cursus. Nunc laoreet nisl a sapien aliquet feugiat non et tortor. Mauris ipsum metus, volutpat ut accumsan ac, aliquet luctus elit. Vivamus et blandit orci. Nunc scelerisque, nulla ut posuere placerat, nunc odio lacinia ante, ut ornare purus velit quis ligula. Duis auctor egestas diam ut hendrerit. Duis ante quam, pretium at tempor ut, feugiat eget tellus.
+						<br />
+						Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque dignissim tellus sed nulla consectetur luctus. Nulla non sem neque. Duis porta ultricies sem. Proin eleifend venenatis magna, non suscipit metus sodales id. Phasellus risus sem, porttitor eu lacinia eu, pharetra sit amet risus. Proin imperdiet, dolor eu fermentum scelerisque, nisl est placerat massa, eleifend varius erat sem id purus. Etiam nec nunc sem. In pellentesque ornare rutrum. Nulla volutpat, diam vitae varius fermentum, risus massa vehicula sapien, ac euismod nunc sapien ac risus. Nunc at libero nibh. Aliquam condimentum commodo felis, accumsan ornare neque vulputate ut. Aliquam mi enim, rutrum eget tincidunt et, pretium vel felis. Curabitur lacus ipsum, congue eu consequat quis, elementum quis augue. Fusce pulvinar dictum porttitor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+						<br />
+						Morbi velit magna, commodo vel elementum non, ultrices ac nisl. Maecenas sodales consectetur nulla, et varius elit consequat eu. Maecenas vestibulum neque quis leo interdum malesuada. Curabitur nunc orci, bibendum sit amet accumsan et, egestas quis nisi. Etiam adipiscing lorem a est vulputate eu pharetra quam mollis. Duis nec tortor diam. Nulla ac ligula enim. In hac habitasse platea dictumst. Mauris fringilla nisi id eros malesuada iaculis. Nullam convallis pulvinar ornare. Maecenas convallis diam non orci lacinia aliquet. Morbi sodales, lorem viverra pellentesque fermentum, eros urna dignissim sem, nec posuere velit nisi ut ipsum. Aenean iaculis accumsan lectus, at placerat odio gravida id. Duis commodo, diam eu hendrerit varius, nisl mi mollis lorem, rhoncus consectetur erat dui ut risus. Maecenas id nulla hendrerit tellus tincidunt pulvinar. Nulla id ante metus, ac aliquet erat.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div id="page5">
+				<div class="content">
+					
+				</div>
+			</div>
+			<div id="page6">
+				<div class="content">
+					
+				</div>
+			</div>
+			<div id="page7">
+				<div class="content">
+					
+				</div>
+			</div>
+			<div id="page8">
+				<div class="content">
+					<div class="w_bloc">
+						<div class="w_title">
+							Washington
+						</div>
+						<img src="./img/wa.jpg" width="150px" style="margin-right: 10px; float: left" />
+						<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu arcu eget sem sagittis molestie. Vestibulum sem quam, vulputate vitae interdum vulputate, euismod nec eros. Pellentesque pellentesque odio sit amet nibh faucibus sed porttitor ante interdum. Curabitur dui tortor, pellentesque vel blandit vel, euismod vel nunc. Aenean mattis rhoncus est, a vulputate tellus sagittis sed. Aliquam semper arcu vel nunc placerat et feugiat metus volutpat. Duis ac mi eget sem mollis aliquet id id sapien. Etiam massa tortor, accumsan non volutpat sed, luctus in velit. Fusce ultricies, augue facilisis tempor aliquam, lacus diam posuere ipsum, at varius lorem arcu semper lectus. Curabitur ac felis et nisi vehicula euismod. Vestibulum vulputate sapien id risus tristique vitae pulvinar ante cursus. Nunc laoreet nisl a sapien aliquet feugiat non et tortor. Mauris ipsum metus, volutpat ut accumsan ac, aliquet luctus elit. Vivamus et blandit orci. Nunc scelerisque, nulla ut posuere placerat, nunc odio lacinia ante, ut ornare purus velit quis ligula. Duis auctor egestas diam ut hendrerit. Duis ante quam, pretium at tempor ut, feugiat eget tellus.
+						<br />
+						Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque dignissim tellus sed nulla consectetur luctus. Nulla non sem neque. Duis porta ultricies sem. Proin eleifend venenatis magna, non suscipit metus sodales id. Phasellus risus sem, porttitor eu lacinia eu, pharetra sit amet risus. Proin imperdiet, dolor eu fermentum scelerisque, nisl est placerat massa, eleifend varius erat sem id purus. Etiam nec nunc sem. In pellentesque ornare rutrum. Nulla volutpat, diam vitae varius fermentum, risus massa vehicula sapien, ac euismod nunc sapien ac risus. Nunc at libero nibh. Aliquam condimentum commodo felis, accumsan ornare neque vulputate ut. Aliquam mi enim, rutrum eget tincidunt et, pretium vel felis. Curabitur lacus ipsum, congue eu consequat quis, elementum quis augue. Fusce pulvinar dictum porttitor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+						<br />
+						Morbi velit magna, commodo vel elementum non, ultrices ac nisl. Maecenas sodales consectetur nulla, et varius elit consequat eu. Maecenas vestibulum neque quis leo interdum malesuada. Curabitur nunc orci, bibendum sit amet accumsan et, egestas quis nisi. Etiam adipiscing lorem a est vulputate eu pharetra quam mollis. Duis nec tortor diam. Nulla ac ligula enim. In hac habitasse platea dictumst. Mauris fringilla nisi id eros malesuada iaculis. Nullam convallis pulvinar ornare. Maecenas convallis diam non orci lacinia aliquet. Morbi sodales, lorem viverra pellentesque fermentum, eros urna dignissim sem, nec posuere velit nisi ut ipsum. Aenean iaculis accumsan lectus, at placerat odio gravida id. Duis commodo, diam eu hendrerit varius, nisl mi mollis lorem, rhoncus consectetur erat dui ut risus. Maecenas id nulla hendrerit tellus tincidunt pulvinar. Nulla id ante metus, ac aliquet erat.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="w_box w_footer w_bg_dark">
+		footer
+	</div>
+</body>
+</html>

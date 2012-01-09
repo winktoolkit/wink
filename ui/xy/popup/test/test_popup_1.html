@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_popup</title>
+
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/popup.css" type="text/css">
+		
+		<style>
+			body
+			{
+				min-height: 1500px;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ui/xy/popup/js/popup.js"></script>
+		
+		<script type="text/javascript" src="../../../../ui/xy/popup/resources/en_EN/popup.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/popup/resources/fr_FR/popup.js"></script>
+
+		<script type="text/javascript">
+			var popup;
+		
+			var showAlert = function() {
+				popup.alert({
+					msg: "this is an alert",
+					callback: { context: window, method:'alertOk1' }
+				});
+			};
+			
+			var showAlertTest = function() {
+				popup.alert({
+					msg: "this is an info without border radius",
+					btn: "test",
+					callback: { context: window, method:'alertOk2' },
+					borderRadius: false
+				});
+			};
+			
+			var showConfirm = function() {
+				popup.confirm({
+					msg: "Will you confirm ?",
+					callbackOk: { context: window, method: 'confirmOk' },
+					callbackCancel: { context: window, method: 'confirmCancel' },
+					followScrollY: true
+				});
+			};
+			
+			var showPopup = function(position, targetNode, arrowPos) {
+				popup.popup({
+					content: "<div class='w_bloc'>This is a fully customizable popup</div>",
+					arrow: position,
+					arrowLeftPos: arrowPos,
+					targetNode: targetNode,
+					layerCallback: { context: window, method: 'closePopup' }
+				});
+			};
+			
+			var alertOk1 = function() {
+				$('result').innerHTML = "you just closed the first alert";
+			};
+			
+			var alertOk2 = function() {
+				$('result').innerHTML = "you just closed the second alert";
+			};
+			
+			var confirmOk = function() {
+				$('result').innerHTML = "you just confirmed";
+			};
+			
+			var confirmCancel = function() {
+				$('result').innerHTML = "you just canceled";
+			};
+
+			var closePopup = function() {
+				$('result').innerHTML = "popup closed by layer handler";
+				popup.hide();
+			};
+			
+			var init = function() {
+				window.scrollTo(0,0);
+				wink.error.logLevel = 1;
+				popup = new wink.ui.xy.Popup();
+				document.body.appendChild(popup.getDomNode());
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">popup</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			Click on the links below to display the different popups. Your actions will be registered in the second frame
+		</div>
+		
+		<div style="width: 95%; margin: auto">
+			<ul class="w_list w_border w_radius">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Popup options
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="showAlert();">show an alert</a>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="showAlertTest();">show info without border radius</a>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="showConfirm();">show confirm that follows the scroll</a>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="showPopup('bottom', this);">show a popup with a bottom arrow</a>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="showPopup('top', this, '10em');">show a popup with a top arrow (custom left)</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div style="width: 95%; margin: auto">
+			<ul class="w_list w_border w_radius">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Your action feedback
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light" id="result">
+					No action yet
+				</li>
+			</ul>
+		</div>
+		
+	</body>
+</html>

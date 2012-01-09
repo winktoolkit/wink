@@ -1,0 +1,91 @@
+/*--------------------------------------------------------
+ * Copyright (c) 2011, The Dojo Foundation
+ * This software is distributed under the "Simplified BSD license",
+ * the text of which is available at http://www.winktoolkit.org/licence.txt
+ * or see the "license.txt" file for more details.
+ *--------------------------------------------------------*/
+ 
+body
+{
+	background-color: #eee;
+	color: #2f2f2f;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+.w_border, .w_border_top, .w_border_bottom, .w_border_left, .w_border_right, .w_button
+{
+	border-color: #8a8a8a;
+}
+
+.w_bg_dark
+{
+	background-color: #000;
+	
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#4d525a), to(#17191f), color-stop(50%, #151515));
+	background-image: -moz-linear-gradient(top, #4d525a, #17191f, #151515 50%);
+	
+	color: #dedede;
+}
+
+.w_bg_light
+{
+	background-color: #f8f8f8;
+	
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#a1a1a1));
+	background-image: -moz-linear-gradient(top, #f8f8f8, #a1a1a1);
+	
+	color: #2f2f2f;
+}
+
+/* layouts */
+.w_header
+{
+	-webkit-box-shadow: -5px 3px 5px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow: -5px 3px 5px rgba(0, 0, 0, 0.7);
+}
+
+.w_window
+{
+	-webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* lists */
+.w_list_item.w_bg_light
+{	
+	background-color: #fdfdfd;
+	
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fdfdfd), to(#eee));
+	background-image: -moz-linear-gradient(top, #fdfdfd, #eee);
+}
+
+.w_list_item.w_bg_dark
+{
+	background-color: #000;
+	
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#2f2f2f), to(#000), color-stop(50%, #151515));
+	background-image: -moz-linear-gradient(top, #2f2f2f, #000, #151515 50%);
+}
+
+/* icons */
+.w_icon.w_chevron
+{
+	background-image: url(../img/chevron.png);
+}
+
+/* bars */
+.w_bar
+{
+	background-color: #909090;
+	
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#909090), to(#dedede));
+	background-image: -moz-linear-gradient(top, #909090, #dedede);
+}
+
+.w_bar .w_bar_progress
+{
+	background-color: #a80d0d;
+	
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#a80d0d), to(#f67777));
+	background-image: -moz-linear-gradient(top, #a80d0d, #f67777);
+}

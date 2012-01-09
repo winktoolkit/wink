@@ -1,0 +1,65 @@
+.wa_container
+{
+	position: relative;
+	
+	margin-top: 10px;
+	
+	height: 280px;
+	width: 100%;
+	
+	overflow: hidden;
+	
+	-webkit-perspective: 500;
+	-webkit-transform-style: preserve-3d;
+	
+	z-index: 994
+}
+
+.wa_padLeft
+{
+	position: absolute;
+	
+	top: 0;
+	left: 0;
+	
+	background: url(../img/left.png) no-repeat;
+	
+	width: 44px;
+	height: 280px;
+	
+	z-index: 995
+}
+
+.wa_padRight
+{
+	position: absolute;
+	
+	top: 0;
+	right: 0;
+	
+	background: url(../img/right.png) no-repeat;
+	
+	width: 44px;
+	height: 280px;
+	
+	z-index: 995
+}
+
+.wa_roller
+{
+	position: absolute;
+	height: 100%
+}
+
+.wa_row
+{
+	position: relative;
+}
+
+.wa_row img
+{
+	position: absolute;
+	left: 0;
+	top: 2px;
+	width: 100%;
+}

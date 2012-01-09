@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_menu</title>
+
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/menu.css" type="text/css">
+		
+		<style>
+			body {
+				min-height: 400px;
+			}
+			.mn_menu .mn_menu_item.item1 .mn_image {
+				background: url(./img/item1.png) no-repeat center 0px;
+			}
+			.mn_menu .mn_menu_item.item2 .mn_image {
+				background: url(./img/item2.png) no-repeat center 0px;
+			}
+			.mn_menu .mn_menu_item.item3 .mn_image {
+				background: url(./img/item3.png) no-repeat center 0px;
+			}
+			.mn_menu .mn_menu_item.item4 .mn_image {
+				background: url(./img/item4_inactive.png) no-repeat center 0px;
+				height: 40px;
+			}
+			.mn_menu .mn_menu_item.item4 .mn_title {
+				height: 47px;
+				line-height: 18px;
+			}
+			.mn_menu .mn_menu_item.item4 .mn_title .mn_title_text {
+				color: #7b7b7b;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ui/xy/menu/js/menu.js"></script>
+
+		<script type="text/javascript">
+			var menu;
+			var menuHelper;
+			
+			var init = function()
+			{
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+
+				var menuProperties = {
+					x: document.documentElement.offsetWidth/2 - 136,
+					y: 0
+				};
+				menu = new wink.ui.xy.Menu(menuProperties);
+				wink.layer.zIndex = 50;
+				menu.getDomNode().style.zIndex = 51;
+				document.body.appendChild(menu.getDomNode());
+
+				menuHelper = {
+					showMenu: function() {
+						menu.toggle();
+					},
+					selectItem1: function() {
+						menu.toggle();
+						//window.location = 'test_menu.html';
+					},
+					selectItem2: function() {
+						menu.toggle();
+						window.location = 'test_menu_2.html';
+					},
+					selectItem3: function() {
+						menu.toggle();
+						window.open('http://www.google.fr');
+					},
+					selectItem4: function() {
+						
+					}
+				};
+				
+				menu.addItem({
+					itemClass: 'item1',
+					title: 'page1',
+					callback: { context: menuHelper, method: 'selectItem1' }
+				});
+				
+				menu.addItem({
+					itemClass: 'item2',
+					title: 'page2',
+					callback: { context: menuHelper, method: 'selectItem2' }
+				});
+				
+				menu.addItem({
+					itemClass: 'item3',
+					title: 'google.fr',
+					callback: { context: menuHelper, method: 'selectItem3' }
+				});
+				
+				menu.addItem({
+					
+				});
+				
+				menu.addItem({
+					
+				});
+				
+				menu.addItem({
+					itemClass: 'item4',
+					title: 'Vancouver 2010'
+				});
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<input type="button" value="menu" class="w_button w_radius w_bg_dark" onclick="menuHelper.showMenu();">
+			<span id="title">menu</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			Click on the "menu" button in the header to display the menu.
+		</div>
+	</body>
+</html>

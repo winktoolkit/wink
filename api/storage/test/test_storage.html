@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/storage.js"></script>
+		<script type="text/javascript" src="../js/safaridb.js"></script>
+		<script type="text/javascript" src="../js/gearsdb.js"></script>
+		
+		<script>	
+			var storage;
+
+			// Database descriptor
+			descriptor =
+			{
+				name : 'dummy_db',
+				tables :
+				{
+					contacts :
+					{
+						lastname : wink.api.storage.fieldtypes.TEXT,
+						firstname : wink.api.storage.fieldtypes.TEXT,
+						age : wink.api.storage.fieldtypes.INTEGER, 
+						phone : wink.api.storage.fieldtypes.TEXT,
+						email : wink.api.storage.fieldtypes.TEXT,
+					},
+					quotes :
+					{
+						author : wink.api.storage.fieldtypes.TEXT,
+						quote : wink.api.storage.fieldtypes.BLOB,
+						quote_b64 : wink.api.storage.fieldtypes.BLOB_B64
+					}
+				}
+			}
+			
+			init = function()
+			{
+				wink.error.logLevel = 1;
+				
+				storage = new wink.api.Storage();	
+				storage.connect(descriptor);
+				
+				$('dbname').innerHTML += descriptor.name;	
+			}
+			
+			// Callbacks without context
+			
+			// Retrieve contacts
+			getContactsList = function()
+			{
+				storage.getList('contacts', {context: null, method: 'onContactsList'});
+			}
+			
+			onContactsList = function(list)
+			{
+				var result = '';
+				
+				if (list.length > 0) 
+				{
+					for(var i=0; i<list.length; i++)
+					{
+						result += list[i].id + ' - ' + list[i].lastname + ' - ' + list[i].firstname + ' - ' + list[i].age + ' - ' + list[i].phone + ' - ' + list[i].email + '\r\n';
+					}
+				} else 
+				{
+					result += 'empty list';
+				}
+				
+				alert(result);
+			}
+
+			// Add contacts
+			addNewContact = function()
+			{
+				storage.insert('contacts', {lastname:'Doe', firstname:'John', age:30, phone:'0607889900', email:'jdoe@wink.com'}, {context: null,method: 'onContactAdded'});
+			}
+			
+			onContactAdded = function(contact)
+			{
+				var result = '';
+				
+				if (contact != null) 
+				{
+					result = 'A new contact has been added, with id ' + contact.id;
+					result += ' : ' + contact.lastname + ' - ' + contact.firstname + ' - ' + contact.age + ' - ' + contact.phone + ' - ' + contact.email;
+				} else 
+				{
+					result = 'No contact was added';
+				}
+				
+				alert(result);
+			}
+
+			// Modify contacts
+			var nbModifs = 0;
+			
+			modifyContact = function()
+			{
+				nbModifs++;
+				if(nbModifs%2 == 0)
+				{
+					storage.update('contacts', {id:3, lastname:'Martin', firstname:'Bob', age:32, phone:'0611223344', email:'bmartin@wink.fr'}, {context: null,method: 'onContactModified'});
+				} else
+				{
+					storage.update('contacts', {id:3, lastname:'Williams', firstname:'Roger', age:50, phone:'0699887766', email:'rwilliams@wink.com'}, {context: null,method: 'onContactModified'});
+				}
+			}
+			
+			onContactModified = function(contact)
+			{
+				var result = '';
+				
+				if (contact != null) 
+				{
+					result = 'The contact whose id is 3 has been modified';
+					result += ' : ' + contact.lastname + ' - ' + contact.firstname + ' - ' + contact.age + ' - ' + contact.phone + ' - ' + contact.email;
+				} else 
+				{
+					result = 'No contact was modified';
+				}
+				
+				alert(result);
+			}
+
+			// Remove contacts
+			removeContact = function()
+			{
+				storage.remove('contacts', 4, {context: null,method: 'onContactRemoved'});
+			}
+			
+			onContactRemoved = function(contactId)
+			{
+				var result = '';
+				
+				if (contactId != null)
+				{
+					result = 'The contact whose id is 4 has been removed';
+				} else 
+				{
+					result = 'No contact was removed';
+				}
+				
+				alert(result);
+			}
+
+			// Get contects whose age is 30
+			getContactsListByField = function()
+			{
+				storage.getListByField('contacts', 'age', 30, {context: test,method: 'onListByField'});
+			}
+
+			// Get contact with id 3
+			getContactById = function()
+			{
+				storage.getById('contacts', 3, {context: test,method: 'onContactById'});
+			}
+
+			// Empty database
+			empty = function()
+			{
+				storage.emptyDatabase();
+			}
+
+			// Create tables
+			tables = function()
+			{
+				storage.createTables();
+			}
+			
+			// Callbacks with context
+			Test = function()
+			{
+				this.onListByField = function(list)
+				{
+					var result = '';
+					
+					if (list.length > 0) 
+					{
+						for (var i = 0; i < list.length; i++) 
+						{
+							result += list[i].id + ' - ' + list[i].lastname + ' - ' + list[i].firstname + ' - ' + list[i].age + ' - ' + list[i].phone + ' - ' + list[i].email + '\r\n';
+						}
+					} else 
+					{
+						result += 'empty list';
+					}
+					
+					alert(result);
+				}
+				
+				this.onContactById = function(contact)
+				{
+					var result = '';
+					
+					if (contact != null) 
+					{
+						
+						result += contact.id + ' - ' + contact.lastname + ' - ' + contact.firstname + ' - ' + contact.age + ' - ' + contact.phone + ' - ' + contact.email + '\r\n';
+					} else 
+					{
+						result += 'no contact with id 3';
+					}
+					
+					alert(result);
+				}
+			}
+			
+			var test = new Test();
+		</script>
+	</head>
+	<body onload='init()'>
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">storage</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			Click on the links below to perform actions on the storage component.
+		</div>
+		
+		<div style="width: 95%; margin: auto;">
+			<ul id="list1" class="w_list w_border w_radius">
+				<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+					Database name: <span id="dbname"></span>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="getContactsList()">get contacts list</a>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="addNewContact()">add a new contact</a>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="modifyContact()">modify contact whose id is 3</a>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="removeContact()">remove contact whose id is 4</a>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="getContactsListByField()">get contacts who are 30 years old</a>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="getContactById()">get contact whose id is 3</a>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="empty()">delete the database</a>
+				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="tables()">re-create the tables</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

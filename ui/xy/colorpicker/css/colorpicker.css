@@ -1,0 +1,23 @@
+.cp_colorpicker
+{
+	opacity: 1;
+	position: absolute;
+	z-index: 999;
+	
+	overflow: visible;				
+}
+
+.cp_separator
+{
+	clear: both;
+	margin: auto;
+	width: 220px
+}
+	
+.cp_color
+{
+	float: left;
+	height: 40px;
+	width: 40px;
+	margin: 2px; 
+}

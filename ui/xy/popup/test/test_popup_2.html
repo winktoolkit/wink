@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_popup_add</title>
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/popup.css" type="text/css">
+		<style>
+			.pp_popup {
+				width: 250px;
+				left: 37px;
+			}
+			
+			.pp_popup_ipad {
+				left: 37px;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ui/xy/popup/js/popup.js"></script>
+
+		<script type="text/javascript">
+			var popup;
+			
+			var i18n =
+			{
+				title: "Add to Home Screen",	
+				contentIPhone:	"To add this webapp to your homescreen, click on the icon below",
+				contentIPad: "To add this webapp to your homescreen, click on the icon above",
+				tip: "don't show anymore"
+			}	
+			
+			if ( !wink.ua.isIPad )
+			{
+				wink.ui.xy.Popup.prototype._updatePosition = function()
+				{
+					var y = 0;
+					
+					if ( this.addToHomepage == true )
+					{
+						var y = (window.pageYOffset + window.innerHeight) - popup.initialHeight;
+					} else
+					{
+						if (this._absolutePos == false) 
+						{
+							y += ((window.innerHeight - this._domNode.offsetHeight) / 2) + window.pageYOffset;
+						} else if (this._followScrollY) {
+							y += window.pageYOffset;
+						}
+					}
+					
+					this._domNode.translate(0, y);
+				};
+			}
+			
+			var showPopup = function() 
+			{
+				popup.initialHeight = window.innerHeight;
+				
+				var popupProperties = 
+				{	
+					content: "<div class='w_icon w_button_close w_float' onclick='popup.hide()'></div><div style='margin: 1em;'><center><span style='color:#fff;font-weight:bold;'>" + _("title") + "</span></center></div><div style='margin: 1em;'><center><span>" + (wink.ua.isIPad?_("contentIPad"):_("contentIPhone")) + "</span></center></div><div style='margin: 1em;'><input type='checkbox' id='dontshow' onchange='savePopupState()' /><label for='dontshow'>&nbsp;&nbsp;&nbsp;" + _("tip") + "</label></div>",
+					arrow: wink.ua.isIPad ? "top" : "bottom",
+					arrowLeftPos: wink.ua.isIPad ? "157px": "45%",
+					top: wink.ua.isIPad ? 20 : window.pageYOffset + popup.initialHeight - 205,
+					followScrollY: true
+				};
+				
+				popup.popup(popupProperties);
+				
+				if ( wink.ua.isIPad ) wink.addClass(popup.getDomNode(), "pp_popup_ipad");
+				
+				wink.layer.hide();
+			};
+			
+			var savePopupState = function()
+			{
+				localStorage.setItem("popupToHide", $('dontshow').checked ? 1:0 );
+			};
+			
+			var init = function()
+			{
+				var toHide = localStorage.getItem("popupToHide");
+
+				if ( ( !wink.isSet(toHide) || toHide == 0 ) && !window.navigator.standalone )
+				{
+					popup = new wink.ui.xy.Popup();
+					popup.addToHomepage = true;
+					
+					document.body.appendChild(popup.getDomNode());
+
+					wink.setTimeout(window, 'showPopup', 500);
+					wink.setTimeout(popup, 'hide', 7500);
+				}
+				
+			};
+			
+			var clearStorage = function()
+			{
+				localStorage.removeItem("popupToHide");
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">popup</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			This page shows you how to use the popup component to build a "had to homescreen" popup.
+			<br />
+			<br />
+			The popup will automatically disapear after 7.5s.
+			<br />
+			<br />
+			If you check "don't show anymore" the popup won't appear the next time you'll load the page. You can make it appear again by clicking on the "clear local storage" button below.
+			<br />
+			<br />
+			
+			<input type="button" class="w_button w_radius w_bg_dark" value="clear local storage" onclick="clearStorage()" />
+			
+			<br />
+			<br />
+			
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae enim non sapien rutrum posuere. Phasellus vitae hendrerit ipsum. Proin ullamcorper diam eu elit pellentesque ut pulvinar enim fringilla. Duis ut tellus libero. Curabitur molestie varius orci, in convallis ipsum sodales sed. Fusce ipsum nisl, ornare ut aliquet et, consequat sit amet metus. Aliquam feugiat tristique magna, id egestas felis laoreet quis. Aliquam erat volutpat. Donec rhoncus vehicula vehicula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque dictum convallis lorem at scelerisque. Phasellus vulputate elementum elit, nec pellentesque lacus pharetra sed. Donec ultrices risus eget diam pretium eu tincidunt est iaculis. Curabitur pharetra gravida ultrices.
+	
+			Fusce pretium imperdiet lorem non tincidunt. Fusce suscipit sapien id nisi mattis vitae blandit orci fermentum. Suspendisse dignissim pretium dui vel mollis. Morbi elit nisi, sollicitudin nec adipiscing sit amet, dapibus vitae enim. Donec mollis massa sed nisi malesuada nec interdum justo condimentum. Suspendisse potenti. Vestibulum ut orci enim. Maecenas vel porta sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis velit nisl, tincidunt sed egestas ac, faucibus vel magna. Aenean tempus elit ac nulla tempus tristique.
+	
+			In vitae iaculis nunc. Phasellus nunc ipsum, eleifend non semper a, rhoncus id enim. Duis ultrices tellus vel tortor eleifend at eleifend augue tincidunt. Aenean urna felis, hendrerit non rutrum eu, tincidunt eget dolor. Aenean pellentesque felis eget purus pellentesque et congue velit auctor. Nullam imperdiet facilisis nisl eget semper. In hac habitasse platea dictumst. Maecenas tristique dictum placerat. In hac habitasse platea dictumst. Integer dolor quam, adipiscing hendrerit volutpat ac, iaculis ac arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque dolor lorem, aliquam tincidunt blandit vitae, ullamcorper quis augue. Sed arcu nunc, euismod id malesuada non, feugiat in augue. Sed posuere fringilla sem.
+	
+			In quam erat, iaculis quis malesuada ut, euismod quis est. Quisque id pulvinar massa. Maecenas sed sapien vel massa tincidunt laoreet. Nulla purus ligula, consequat nec condimentum id, bibendum eu dui. Quisque hendrerit vulputate dolor a ullamcorper. Donec scelerisque est sed est posuere facilisis. Suspendisse potenti. Pellentesque consequat rhoncus ultricies. Fusce dapibus vestibulum enim non hendrerit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis dui nisi, malesuada nec porta a, ullamcorper ac ligula. Nam semper posuere bibendum.
+	
+			Nullam sed lorem nec nisl iaculis euismod. Donec at nulla turpis, at dictum augue. Ut sit amet orci nec erat volutpat pellentesque cursus id eros. Maecenas ligula lorem, tincidunt a facilisis et, lobortis placerat magna. Integer massa massa, consectetur ac placerat laoreet, semper non diam. Integer libero nunc, imperdiet eget posuere quis, aliquam non dolor. Sed condimentum scelerisque augue, quis sodales ipsum egestas et. In tincidunt dui quis ligula ullamcorper ultricies lobortis lectus euismod. Integer fringilla hendrerit odio quis faucibus. Ut vitae nisl id massa pretium tempor. Fusce sit amet posuere quam. Sed a rutrum nisl. Aliquam placerat, nunc quis consequat ornare, purus lorem adipiscing nunc, eu ornare tortor sem ut enim. Sed tincidunt adipiscing nulla, in porttitor ipsum gravida sit amet. Praesent quis imperdiet massa. Nam sed quam eu ligula ullamcorper varius ac nec quam. Phasellus tristique, enim vel eleifend iaculis, purus nisl sagittis lacus, ut aliquet odio neque vitae arcu. Fusce aliquam hendrerit gravida. Maecenas aliquam ante in leo accumsan suscipit.
+			
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae enim non sapien rutrum posuere. Phasellus vitae hendrerit ipsum. Proin ullamcorper diam eu elit pellentesque ut pulvinar enim fringilla. Duis ut tellus libero. Curabitur molestie varius orci, in convallis ipsum sodales sed. Fusce ipsum nisl, ornare ut aliquet et, consequat sit amet metus. Aliquam feugiat tristique magna, id egestas felis laoreet quis. Aliquam erat volutpat. Donec rhoncus vehicula vehicula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque dictum convallis lorem at scelerisque. Phasellus vulputate elementum elit, nec pellentesque lacus pharetra sed. Donec ultrices risus eget diam pretium eu tincidunt est iaculis. Curabitur pharetra gravida ultrices.
+	
+			Fusce pretium imperdiet lorem non tincidunt. Fusce suscipit sapien id nisi mattis vitae blandit orci fermentum. Suspendisse dignissim pretium dui vel mollis. Morbi elit nisi, sollicitudin nec adipiscing sit amet, dapibus vitae enim. Donec mollis massa sed nisi malesuada nec interdum justo condimentum. Suspendisse potenti. Vestibulum ut orci enim. Maecenas vel porta sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis velit nisl, tincidunt sed egestas ac, faucibus vel magna. Aenean tempus elit ac nulla tempus tristique.
+	
+			In vitae iaculis nunc. Phasellus nunc ipsum, eleifend non semper a, rhoncus id enim. Duis ultrices tellus vel tortor eleifend at eleifend augue tincidunt. Aenean urna felis, hendrerit non rutrum eu, tincidunt eget dolor. Aenean pellentesque felis eget purus pellentesque et congue velit auctor. Nullam imperdiet facilisis nisl eget semper. In hac habitasse platea dictumst. Maecenas tristique dictum placerat. In hac habitasse platea dictumst. Integer dolor quam, adipiscing hendrerit volutpat ac, iaculis ac arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque dolor lorem, aliquam tincidunt blandit vitae, ullamcorper quis augue. Sed arcu nunc, euismod id malesuada non, feugiat in augue. Sed posuere fringilla sem.
+	
+			In quam erat, iaculis quis malesuada ut, euismod quis est. Quisque id pulvinar massa. Maecenas sed sapien vel massa tincidunt laoreet. Nulla purus ligula, consequat nec condimentum id, bibendum eu dui. Quisque hendrerit vulputate dolor a ullamcorper. Donec scelerisque est sed est posuere facilisis. Suspendisse potenti. Pellentesque consequat rhoncus ultricies. Fusce dapibus vestibulum enim non hendrerit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis dui nisi, malesuada nec porta a, ullamcorper ac ligula. Nam semper posuere bibendum.
+	
+			Nullam sed lorem nec nisl iaculis euismod. Donec at nulla turpis, at dictum augue. Ut sit amet orci nec erat volutpat pellentesque cursus id eros. Maecenas ligula lorem, tincidunt a facilisis et, lobortis placerat magna. Integer massa massa, consectetur ac placerat laoreet, semper non diam. Integer libero nunc, imperdiet eget posuere quis, aliquam non dolor. Sed condimentum scelerisque augue, quis sodales ipsum egestas et. In tincidunt dui quis ligula ullamcorper ultricies lobortis lectus euismod. Integer fringilla hendrerit odio quis faucibus. Ut vitae nisl id massa pretium tempor. Fusce sit amet posuere quam. Sed a rutrum nisl. Aliquam placerat, nunc quis consequat ornare, purus lorem adipiscing nunc, eu ornare tortor sem ut enim. Sed tincidunt adipiscing nulla, in porttitor ipsum gravida sit amet. Praesent quis imperdiet massa. Nam sed quam eu ligula ullamcorper varius ac nec quam. Phasellus tristique, enim vel eleifend iaculis, purus nisl sagittis lacus, ut aliquet odio neque vitae arcu. Fusce aliquam hendrerit gravida. Maecenas aliquam ante in leo accumsan suscipit.
+		</div>
+	</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<style>
+			.reorder_item 
+			{
+				width:100%;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/dnd.js"></script>
+		
+		<script>		
+			var dnd;
+			
+			init = function()
+			{
+				dnd = new wink.ux.Dnd({zone: $('list')});
+
+				// Define the d&d source and its methods
+				
+				// Source 1
+				var source1 = new wink.ux.dnd.Source({'id': 'reorder_grab_1'});
+				source1.registerEvent('/dnd/events/dropItem', null, 'moveItem');
+
+				// Source 2
+				var source2 = new wink.ux.dnd.Source({'id': 'reorder_grab_2'});
+				source2.registerEvent('/dnd/events/dropItem', null, 'moveItem');
+
+				// Source 3
+				var source3 = new wink.ux.dnd.Source({'id': 'reorder_grab_3'});
+				source3.registerEvent('/dnd/events/dropItem', null, 'moveItem');
+
+				// Source 4
+				var source4 = new wink.ux.dnd.Source({'id': 'reorder_grab_4'});
+				source4.registerEvent('/dnd/events/dropItem', null, 'moveItem');
+
+				// Source 5
+				var source5 = new wink.ux.dnd.Source({'id': 'reorder_grab_5'});
+				source5.registerEvent('/dnd/events/dropItem', null, 'moveItem');
+
+				// Source 6
+				var source6 = new wink.ux.dnd.Source({'id': 'reorder_grab_6'});
+				source6.registerEvent('/dnd/events/dropItem', null, 'moveItem');
+
+				wink.ux.dnd.Source.prototype.getAvatar = function()
+				{
+					var avatar = $(this.id).parentNode.cloneNode(true);
+
+					avatar.style.position = 'absolute';
+					avatar.style.opacity = '0.5';
+
+					avatar.style.top = $(this.id).winkGetTopPosition() + 'px';
+					avatar.style.left = '0px';
+					
+					
+					return avatar;
+				}
+
+				// Define the d&d targets and their methods
+				var target1 = new wink.ux.dnd.Target({'id': 'reorder_position_1', 'event': '/dnd/events/dropItem'});
+				var target2 = new wink.ux.dnd.Target({'id': 'reorder_position_2', 'event': '/dnd/events/dropItem'});
+				var target3 = new wink.ux.dnd.Target({'id': 'reorder_position_3', 'event': '/dnd/events/dropItem'});
+				var target4 = new wink.ux.dnd.Target({'id': 'reorder_position_4', 'event': '/dnd/events/dropItem'});
+				var target5 = new wink.ux.dnd.Target({'id': 'reorder_position_5', 'event': '/dnd/events/dropItem'});
+				var target6 = new wink.ux.dnd.Target({'id': 'reorder_position_6', 'event': '/dnd/events/dropItem'});
+
+				wink.ux.dnd.Target.prototype.over = wink.ux.dnd.Target.prototype.onSourceOver;
+				wink.ux.dnd.Target.prototype.out = wink.ux.dnd.Target.prototype.onSourceOut;
+
+				wink.ux.dnd.Target.prototype.onSourceOver = function()
+				{
+					if(!this._isOver)
+					{
+						this.over();
+						$(this.id).style.color = '#ff0000';
+					}
+				} 
+
+				wink.ux.dnd.Target.prototype.onSourceOut = function()
+				{
+					if(this._isOver)
+					{
+						this.out();
+						$(this.id).style.color = 'inherit';
+					}
+				} 
+
+				// Add the source and targets to the d&d manager
+				dnd.addSource(source1);
+				dnd.addSource(source2);
+				dnd.addSource(source3);
+				dnd.addSource(source4);
+				dnd.addSource(source5);
+				dnd.addSource(source6);
+
+				dnd.addTarget(target1);
+				dnd.addTarget(target2);
+				dnd.addTarget(target3);
+				dnd.addTarget(target4);
+				dnd.addTarget(target5);
+				dnd.addTarget(target6);
+
+				
+				// Override the default behaviour and insert the avatar in the list
+				wink.ux.Dnd.prototype._startDrag = function(event)
+				{		
+					if ( event.multitouch )
+					{
+						this._multitouch++;
+						return;
+					}
+					
+					this._startEvent = event;
+					
+					if (event.target.className && event.target.className.search(/dnd_movable/i) > -1)
+					{
+						// See if the element being dragged is a registered source
+						this._currentSource = this._getSource(event.target.id);
+				        
+						if (this._currentSource !== null)
+						{
+							this._currentSource.activate();
+				
+							this._currentAvatar = 
+							{
+				                target: this._currentSource.getAvatar(),
+								beginX: event.x,
+				                beginY: event.y,
+				                pozX: event.target.pozXinit,
+				                pozY: event.target.pozYinit
+				            };
+							
+							$('list').appendChild(this._currentAvatar.target);
+						}
+						
+				    }
+				}
+				
+				wink.ux.Dnd.prototype._endDrag = function(event)
+				{	
+					if ( this._multitouch > 0 )
+					{
+						this._multitouch--;
+						return;
+					}
+					
+					this._endEvent = event;
+					
+					// Check if a click event must be generated
+					if ( ((this._endEvent.timestamp-this._startEvent.timestamp) < 250) && (Math.abs(this._endEvent.x-this._startEvent.x) < 20))
+					{
+						this._endEvent.dispatch(this._endEvent.target, 'click');
+					}
+					
+					if (this._currentAvatar !== null)
+					{
+						
+						// check if we are over a drop target
+						this._currentTarget = this._getTarget(this.lastX, this.lastY);
+						
+						if ( this._currentTarget !== null )
+						{
+							// make the drop target react
+							this._currentTarget._onDrop(this._currentSource);
+						}
+						
+						// remove the avatar
+						$('list').removeChild(this._currentAvatar.target);
+						
+						// reset the drag and drop
+						this._currentSource.deactivate();
+						
+						this._currentSource = null;
+						this._currentTarget = null;
+						this._currentAvatar = null;
+						
+						this.lastX = 0;
+						this.lastY = 0;
+				
+						this.updateTargets();
+				    }
+				},
+				
+				// Override the default behaviour and force the vertical drag
+				wink.ux.Dnd.prototype._drag = function(event)
+				{
+					if ( this._multitouch > 0 )
+					{
+						return;
+					}
+					
+					if (this._currentAvatar !== null)
+					{
+						this._currentAvatar.target.pozXinit = this._currentAvatar.pozX + event.x - this._currentAvatar.beginX;	
+						this._currentAvatar.target.pozYinit = this._currentAvatar.pozY + event.y - this._currentAvatar.beginY;	
+						
+						this._currentAvatar.target.translate(0, this._currentAvatar.target.pozYinit);
+						
+						// check if we are over a drop target
+						this._currentTarget = this._getTarget(event.x, event.y);
+						
+						if ( this._currentTarget !== null )
+						{
+							for ( var i=0; i<this._currentSource._events.length; i++)
+							{
+								if ( this._currentSource._events[i].event == this._currentTarget._event )
+								{
+									// make the drop target react
+									this._currentTarget.onSourceOver(this._currentSource);
+								}
+							}
+						} 
+						
+						// Save the current position
+						this.lastX = event.x;
+						this.lastY = event.y;
+				
+						// Vertical scroll
+						if ( event.y >= ( (window.innerHeight + window.scrollY)-60 ) )
+						{
+							scrollTo(window.scrollX, window.scrollY + 5);
+						} else if ( (event.y <= (window.scrollY + 60)) && window.scrollY > 0 )
+						{
+							scrollTo(window.scrollX, window.scrollY - 5);
+						}
+						
+						// Horizontal scroll
+						if ( event.x >= ( (window.innerWidth + window.scrollX)-40 ) )
+						{
+							scrollTo(window.scrollX + 5, window.scrollY);
+						} else if ( (event.x <= (window.scrollX + 40)) && window.scrollX > 0 )
+						{
+							scrollTo(window.scrollX - 5, window.scrollY);
+						}
+				    }
+				}
+			}
+
+			// Switch the items in the list
+			moveItem = function(params)
+			{
+				params.target.onSourceOut();
+
+				var sourceId = $(params.source.id).parentNode.id;
+				var targetId = params.target.id;
+
+				if ( sourceId != targetId )
+				{
+					var sourceTop = $(sourceId).winkGetTopPosition();
+					var targetTop = $(targetId).winkGetTopPosition();
+
+					if( targetTop < sourceTop)
+					{
+						$(targetId).parentNode.insertBefore($(sourceId), $(targetId));
+					} else 
+					{
+						if( $(targetId) == $(targetId).parentNode.lastChild)
+						{
+							$(targetId).parentNode.appendChild($(sourceId));
+						} else 
+						{
+							$(targetId).parentNode.insertBefore($(sourceId), $(targetId).nextSibling);
+						}
+					}
+				} else
+				{
+					// Do nothing
+				}
+
+				wink.setTimeout(window, 'updateTargets', 200);
+			}
+
+			// Update the items positions
+			updateTargets = function()
+			{
+				dnd.updateTargets();
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">drag &amp; drop</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div style="width: 95%; margin: auto;">
+			<ul class="w_list w_border w_radius" id="list">
+				<li id="reorder_position_1" class="w_list_item w_border_bottom w_bg_light reorder_item">
+					item 1
+					<span class="w_icon w_button_grab" id="reorder_grab_1"></span>
+				</li>
+				<li id="reorder_position_2" class="w_list_item w_border_bottom w_bg_light reorder_item">
+					item 2
+					<span class="w_icon w_button_grab" id="reorder_grab_2"></span>
+				</li>
+				<li id="reorder_position_3" class="w_list_item w_border_bottom w_bg_light reorder_item">
+					item 3
+					<span class="w_icon w_button_grab" id="reorder_grab_3"></span>
+				</li>
+				<li id="reorder_position_4" class="w_list_item w_border_bottom w_bg_light reorder_item">
+					item 4
+					<span class="w_icon w_button_grab" id="reorder_grab_4"></span>
+				</li>
+				<li id="reorder_position_5" class="w_list_item w_border_bottom w_bg_light reorder_item">
+					item 5
+					<span class="w_icon w_button_grab" id="reorder_grab_5"></span>
+				</li>
+				<li id="reorder_position_6" class="w_list_item w_border_bottom w_bg_light reorder_item">
+					item 6
+					<span class="w_icon w_button_grab" id="reorder_grab_6"></span>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

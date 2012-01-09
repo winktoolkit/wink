@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_slideshow</title>
+
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../../../../ui/xy/slideshow/css/slideshow.css" type="text/css">
+		
+		<style>
+			#container {
+				position: relative;
+				
+				width: 300px;
+				height: 250px;
+				
+				margin: 30px auto;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+
+		<script type="text/javascript" src="../../../../ux/movementtracker/js/movementtracker.js"></script>
+		
+		<script type="text/javascript" src="../../../../ui/xy/slideshow/js/slideshow.js"></script>
+		
+		<script type="text/javascript">
+			var itemNumber = 200;
+			var imgIndex = 0;
+			var pathImage = './img/image';
+			
+			var getNextImage = function() {
+				var nextImage = pathImage;
+				nextImage += imgIndex;
+				nextImage += '.jpg';
+				imgIndex = (imgIndex + 1) % 20;
+				return nextImage;
+			};
+
+			var buildItems = function() {
+				var items = [];
+				for (var i = 0; i < itemNumber; i++) {
+					items.push({ image: getNextImage(), title: '&nbsp;Image ' + (i + 1), info: '&nbsp;Details of Image ' + (i + 1) });
+				}
+				return items;
+			};
+
+			var init = function() {
+				window.scrollTo(0,0);
+				wink.error.logLevel = 1;
+
+				var items = buildItems();
+				var properties = {
+					height: 250,
+					width: 300,
+					items: items,
+					position: 0,
+					
+					displayHeader: true,
+					displayFooter: true,
+					listeningTouch: true,
+					touchTranslation: false,
+					withSliding: false,
+					withAnim: true,
+					autoplay: true,
+					anims: [ 
+						"nSquare", "horizontalOut", "horizontalIn",
+						"circleOut", "circleIn",
+						"rowDown", "rowUp", "colLeft", "colRight",
+						"spin", "spinQuarter", "light",
+						"wrap", "scaleIn", "scaleOut"
+					],
+					animRandom: true,
+					autoplayDuration: 5000,
+					slideDuration: 200,
+					animDuration: 800
+				};
+
+				var ss = new wink.ui.xy.Slideshow(properties);
+				$('container').appendChild(ss.getDomNode());
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">slideshow</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			You can choose between 20 different animations for the slideshow. 
+			<br />
+			In the example below, transitions are automatically triggered every 5 seconds.
+			<br />
+			You can also go from one image to the other by swiping your finger over the slideshow.
+		</div>
+		
+		<div id="container">
+		</div>
+	</body>
+</html>

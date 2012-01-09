@@ -1,0 +1,61 @@
+.w_completion_box {
+    border-color: #000;
+    border-style: solid;
+    border-width: 1px;
+    -webkit-border-radius: .8em;
+    -moz-border-radius: .8em;
+    background-color: #fff;
+    overflow: hidden;
+    text-align: left;
+    z-index: 900;
+    webkit-
+}
+
+.w_completion_suggestion,
+.w_completion_suggestion.highlighted {
+    border-top: 1px solid #ccc;
+    overflow: hidden;
+    background-color: transparent;
+    cursor: pointer;
+    color: #000;
+    font-size: 13px;
+    padding: 5px 5px;
+    z-index: 40;
+    white-space: nowrap;
+}
+
+.w_completion_suggestion.highlighted {
+    background-color: #F60 !important;
+    color: white !important;
+}
+
+.w_completion_suggestion.label {
+    text-align: right;
+    padding-right: 5px;
+    cursor: none;           
+}
+
+.w_completion_suggestion.label.leftClose {
+    cursor: pointer;    
+    text-align: left;
+}
+
+.w_completion_suggestion:first-child {
+    border-top: none !important;
+}
+
+.w_completion_reference {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	width: 0;
+	height: 0;
+}
+
+.w_completion_container {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	z-index: 50;
+}

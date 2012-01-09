@@ -1,0 +1,18 @@
+.in_erase
+{	
+	display: none;
+	
+	position: absolute;
+	
+	background: url("../img/erase.png") center center no-repeat;
+	
+	height: 20px;
+	width: 20px;
+	
+	right: 2px;
+	top: 0px;
+	
+	-moz-background-size: 16px;  
+  	-webkit-background-size: 16px;  
+  	-o-background-size: 16px; 
+}

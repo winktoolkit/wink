@@ -1,0 +1,42 @@
+.tc_tabs_items 
+{
+	position: absolute;
+	
+	width: 100%;
+	height: 40px;
+	left: 44px;
+	right: 44px;
+	
+	overflow: hidden;
+}
+
+.tc_tabs_moveable 
+{
+	position: absolute;
+}
+
+.tc_arrow
+{
+	position: absolute;
+}
+
+.tc_arrow.tc_right
+{
+	right: 0;
+}
+
+.tc_bloc 
+{
+	display: none;
+}
+
+.tc_tabs_items .tc_on
+{
+	border: none;
+	-webkit-box-shadow: -6px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.tc_bloc.tc_on
+{
+	display: block;
+}

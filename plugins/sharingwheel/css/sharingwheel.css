@@ -1,0 +1,36 @@
+.sh_wheel
+{
+	position: relative;
+	z-index: 999;
+}
+
+.sh_petals
+{
+	position: relative;
+	
+	height: 100%;
+	width: 100%;
+}
+
+.sh_petals .selected
+{
+	color: #ff5500;	
+}
+
+.sh_petal
+{
+	position: absolute;
+	
+	top: 0;
+	left: 0;
+	
+	border-right: 2px solid #ccc;
+}
+
+.sh_content
+{
+	padding-top: 5px;
+	
+	float: right;
+	text-align: center;
+}

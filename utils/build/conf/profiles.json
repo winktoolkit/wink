@@ -1,0 +1,63 @@
+{
+	"build": {
+		"jsFile": "wink-VERSION-PROFILE-TARGET.js",
+		"cssFile": "wink-VERSION-PROFILE-TARGET.css",
+		"version": "1.4.0",
+		"defaultLocaleList": [ "en_EN" ]
+	},
+	"profiles": [
+		{
+			"name": "all",
+			"modules": [
+				// CORE
+				"core",
+				// FEATURE EXTENDED
+				"featapi", "featgraphic",
+				// JSON
+				"jsonextended",
+				// API
+				"geolocation", "storage", "safaridb", "gearsdb",
+				// FX
+				"3dfx", "animation",
+				// MATH
+				"geometric", "matrix",
+				// NET
+				"cssloader", "imagesloader", "jsloader", "smartloader", "tracking",
+				// MULTIMEDIA
+				"audioplayer", "videoplayer", "mediawheel",
+				// UX
+				"history", "dnd", "gesture", "gesturerecognizer", "inertia", "movementtracker", "search", "window",
+				// UI
+				"accordion", "fixedlayout", "scroller", "slidingpanels", "tabcontainer", "modalwindow", "flippage", "windows", "input", "carousel",
+				"colorpicker", "datepicker", "menu", "newsticker", "popup", "progressbar", "slideshow", "spinner", "cspinner", "trace",
+				"togglebutton", "wall", "coverflow", "cube", "flipdisc", "opener", "tagcloud",
+				// PLUGINS
+				"asyncpanels", "sharingwheel", "scrolltorefresh", "scrolltoload"
+			],
+			"css": [
+				"_themes/wink.css",
+				"_themes/default/css/wink.default.css",
+				"_themes/default/css/wink.default.buttons.css",
+				"_themes/default/css/wink.default.icons.css"
+			]
+		},
+		{
+			"name": "core",
+			"modules": [
+				"core"
+			],
+			"css": [
+				"_themes/wink.css",
+				"_themes/default/css/wink.default.css",
+				"_themes/default/css/wink.default.buttons.css",
+				"_themes/default/css/wink.default.icons.css"
+			]
+		},
+		{
+			"name": "easycaching",
+			"modules": [
+				"cache"
+			]
+		}
+	]
+}

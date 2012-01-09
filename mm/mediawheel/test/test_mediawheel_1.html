@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../../../mm/mediawheel/css/mediawheel.css" type="text/css">
+		
+		<title>test_mediawheel</title>
+
+		<style>
+			#content {
+				margin: auto;
+				height: 95%;
+				width: 95%;
+			}
+			#space {
+				height: 5%;
+			}
+			#player {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				z-index: 1;
+			}
+			#time_container {
+				position: absolute;
+				top: 35%;
+				left: 50%;
+				z-index: 1;
+				color: #fff;
+				
+				background-color: rgba(100, 100, 100, 0.3);
+				background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(100, 100, 100, 0.3)), to(rgba(10, 10, 10, 0.3)), color-stop(.4, rgba(46, 46, 46, 0.3)));
+				background-image: -moz-linear-gradient(0% 100% 90deg, rgba(10, 10, 10, 0.3), rgba(46, 46, 46, 0.3), rgba(100, 100, 100, 0.3) 100%);
+				
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				
+				border: 1px solid #555;
+				padding: 0px 10px;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../ux/movementtracker/js/movementtracker.js"></script>
+		<script type="text/javascript" src="../../../mm/mediawheel/js/mediawheel.js"></script>
+
+		<script type="text/javascript">
+			/**
+			 * 
+			 */
+			var init = function() 
+			{
+				wink.error.logLevel = 1;
+				
+				window.scrollTo(0,0);
+
+				var _w = $('content').offsetWidth,
+					_h = $('content').offsetHeight;
+
+				$('content').style.width = _w + "px";
+				$('content').style.height = _h + "px";
+				
+				var mediaWheel = new wink.mm.MediaWheel({
+					width: _w,
+					height: _h
+				});
+
+				$('content').appendChild(mediaWheel.getDomNode());
+
+				var ready = false;
+				$('time_container').innerHTML = _formatTime(0);
+
+				$('player').style.left = $('player').offsetLeft - ($('player').offsetWidth / 2) + "px";
+				$('time_container').style.left = $('time_container').offsetLeft - ($('time_container').offsetWidth / 2) + "px";
+
+				wink.subscribe('/mediawheel/events/timeupdate', { context: {
+					ontimeupdate: function(params) {
+						if (params.publisher.uId != mediaWheel.uId) {
+							return;
+						}
+						if (!ready) {
+							return;
+						}
+						audioplayer.setTime(params.time);
+						audioplayer.play();
+					}
+				}, method: 'ontimeupdate' });
+				
+				audioplayer.init({
+					url: "../../audioplayer/test/files/track.mp3",
+					parent: "player",
+					playBtn: "player_btn",
+					onready: function() {
+						ready = true;
+						mediaWheel.setDuration(audioplayer.getDuration());
+						mediaWheel.setBufferedTime(audioplayer.getBufferedDuration());
+					},
+					onprogress: function() {
+						if (!ready) {
+							return;
+						}
+						mediaWheel.setBufferedTime(audioplayer.getBufferedDuration());
+					},
+					ontimeupdate: function() {
+						if (!ready) {
+							return;
+						}
+						mediaWheel.setTime(audioplayer.getCurrentTime());
+						$('time_container').innerHTML = _formatTime(audioplayer.getCurrentTime());
+					}
+				});
+			};
+
+			/**
+			 * Audio Player
+			 */
+			var audioplayer = (function() {
+				var _audioNode,
+					_playing = false,
+					_url,
+					_parent,
+					_playBtn,
+					_onready,
+					_onprogress,
+					_ontimeupdate;
+				
+				var ap = {};
+
+				ap.init = function(props) {
+					_url = props.url;
+					_parent = $(props.parent);
+					_playBtn = $(props.playBtn);
+					_onready = props.onready;
+					_onprogress = props.onprogress;
+					_ontimeupdate = props.ontimeupdate;
+					_initAudioNode();
+					_toggleButtonState();
+				};
+				
+				ap.play = function() {
+					if (_playing) {
+						return;
+					}
+					_playing = true;
+					_audioNode.play();
+					_toggleButtonState();
+				};
+				
+				ap.pause = function() {
+					if (!_playing) {
+						return;
+					}
+					_playing = false;
+					_audioNode.pause();
+					_toggleButtonState();
+				};
+				
+				ap.getCurrentTime = function() {
+					return _audioNode.currentTime;
+				};
+				
+				ap.getDuration = function() {
+					return _audioNode.duration;
+				};
+				
+				ap.getBufferedDuration = function() {
+					return _audioNode.buffered.end((_audioNode.buffered.length - 1));
+				};
+				ap.setTime = function(seconds) {
+					try { 
+						_audioNode.currentTime = seconds;
+					} catch(e) {}
+				};
+
+				var _initAudioNode = function() {
+					_audioNode = document.createElement('audio');
+					_audioNode.style.height = '0';
+					_audioNode.style.width = '0';
+					_audioNode.src = _url;
+					_parent.appendChild(_audioNode);
+					_audioNode.addEventListener('canplay', _onready, false);
+					_audioNode.addEventListener('progress', _onprogress, false);
+					_audioNode.addEventListener('timeupdate', _ontimeupdate, false);
+					_playBtn.addEventListener('click', _togglePlayButton, false);
+				};
+				var _togglePlayButton = function() {
+					if (_playing) {
+						ap.pause();
+					} else {
+						ap.play();
+					}
+				};
+				var _toggleButtonState = function() {
+					if (_playing) {
+						wink.removeClass(_playBtn, 'w_button_play');
+						wink.addClass(_playBtn, 'w_button_pause');
+					} else {
+						wink.removeClass(_playBtn, 'w_button_pause');
+						wink.addClass(_playBtn, 'w_button_play');
+					}
+				};
+				return ap;
+			})();
+
+			/**
+			 * 
+			 */
+			var _formatTime = function(d) {
+				var dm = Math.floor(d / 60);
+				var ds = Math.floor(d % 60);
+				if (dm < 10) {
+					dm = "0" + dm;
+				}
+				if (ds < 10) {
+					ds = "0" + ds;
+				}
+				return (dm + "'" + ds + "''");
+			};
+		</script>
+	</head>
+	
+	<body onload="setTimeout(init, 1);">
+		<div id="header" class="w_box w_header w_bg_dark">
+			<span id="title">mediawheel</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="content">
+			<div id="time_container"></div>
+			<div id="player">
+				<input id="player_btn" type="button" class="w_icon w_button_play" />
+			</div>
+		</div>
+		<div id="space"></div>
+	</body>
+</html>

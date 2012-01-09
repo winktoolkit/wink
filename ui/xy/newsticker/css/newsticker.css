@@ -1,0 +1,38 @@
+.nt_container
+{
+	overflow: hidden;
+	
+	position: relative;	
+	width: 100%;
+	
+	height: 20px;
+	line-height: 20px;
+}
+
+.nt_title
+{	
+	position: absolute;
+	left: 0;
+	top: 0;
+	
+	width: 70px;
+	height: 20px;
+	
+	z-index: 100;
+}
+
+.nt_news
+{	
+	position: absolute;
+	left: 0;
+	top: 0;
+	
+	font-size: 12px;
+	
+	height: 20px;
+	
+	display: block;
+	white-space: nowrap;
+	
+	z-index: 99;
+}

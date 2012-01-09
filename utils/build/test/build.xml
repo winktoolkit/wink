@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="wink_build_tests" default="wink_tests" basedir=".">
+	<description>WINK BUILD TESTS</description>
+	
+	<!--================================
+			LOADING PROPERTIES
+		================================-->
+	<available file="./build.properties" property="property.file.found" />
+	<fail unless="property.file.found" message="No build.properties file found. Build aborted." />
+
+	<property file="./build.properties" />
+	
+	<!--================================
+			WINK BUILD TESTS
+		================================-->
+	<target name="wink_tests" description="wink tests">
+		<antcall target="compile" />
+		<antcall target="js_build_test" />
+		<antcall target="css_build_test" />
+		<antcall target="clean_classes" />
+		<delete dir="${wink.build.test.outputdir}" />
+		<delete dir="${wink.build.test.tmpdir}" />
+	</target>
+	
+	<!--================================
+			JS BUILD TEST
+		================================-->
+	<target name="js_build_test" description="JS Build test">
+		<echo message="JS build test" level="info" />
+		
+		<java fork="true" classname="${java.test.js.mainclass}" dir="${project.path}">
+			<classpath>
+				<pathelement path="${java.classes.dir}"/>
+				<pathelement path="${jar.rhino}"/>
+				<pathelement path="${jar.winkbuilder}"/>
+			</classpath>
+		</java>
+	</target>
+	
+	<!--================================
+			CSS BUILD TEST
+		================================-->
+	<target name="css_build_test" description="CSS Build test">
+		<echo message="CSS build test" level="info" />
+		
+		<java fork="true" classname="${java.test.css.mainclass}" dir="${project.path}">
+			<classpath>
+				<pathelement path="${java.classes.dir}"/>
+				<pathelement path="${jar.rhino}"/>
+				<pathelement path="${jar.winkbuilder}"/>
+			</classpath>
+		</java>
+	</target>
+	
+	<!--================================
+			COMPILE
+		================================-->
+	<target name="compile" description="Compile Test resources" depends="clean_classes">
+		<echo message="compile test resources" level="info" />
+
+		<mkdir dir="${java.classes.dir}" />
+		<javac
+			srcdir="${java.test.dir}"
+			destdir="${java.classes.dir}"
+			debug="on">
+			<classpath>
+				<pathelement path="${jar.rhino}"/>
+				<pathelement path="${jar.winkbuilder}"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<!--================================
+			CLEAN CLASSES
+		================================-->
+	<target name="clean_classes" description="Clean Java classes">
+		<echo message="cleaning java classes" level="info" />
+		<delete dir="${java.classes.dir}" />
+	</target>
+</project>

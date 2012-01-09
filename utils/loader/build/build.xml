@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="wink_loader_build" default="build_wink_loader" basedir=".">
+	<description>WINK LOADER BUILD</description>
+	
+	<!--================================
+			LOADING PROPERTIES
+		================================-->
+	<available file="./build.properties" property="property.file.found" />
+	<fail unless="property.file.found" message="No build.properties file found. Build aborted." />
+
+	<property file="./build.properties" />
+	
+	<!--================================
+			CLEAN
+		================================-->
+	<target name="clean" description="clean temporary files">
+		<delete file="${tmp.js.loader}"></delete>
+		<delete file="${tmp.js.loader_dev}"></delete>
+	</target>
+	
+	<!--================================
+			BUILD JS LOADER DEV
+		================================-->
+	<target name="build_js_loader_dev" description="build js loader dev">
+		<echo message="create ${tmp.js.loader_dev}" level="info" />
+		
+		<concat destfile="${tmp.js.loader_dev}">
+			<fileset file="${src.js.loader_dev}"></fileset>
+			<fileset file="${src.js.loader_helper}"></fileset>
+		</concat>
+	</target>
+		
+	<!--================================
+			BUILD JS LOADER
+		================================-->
+	<target name="build_js_loader" description="build js loader">
+		<echo message="create ${tmp.js.loader}" level="info" />
+		
+		<concat destfile="${tmp.js.loader}">
+			<fileset file="${src.js.loader}"></fileset>
+			<fileset file="${src.js.loader_helper}"></fileset>
+		</concat>
+	</target>
+	
+	<!--================================
+			MINIMIZE LOADER
+		================================-->
+	<target name="minimize_loader" description="minimize js loaders">
+		<echo message="create ${dest.js.loader} and ${dest.js.loader_dev}" level="info" />
+		
+		<java dir="." fork="true" jar="${jar.compiler.google}">
+			<arg line="--js" />
+			<arg line="${tmp.js.loader}" />
+			<arg line="--js_output_file" />
+			<arg line="${dest.js.loader}" />
+		</java>
+		
+		<java dir="." fork="true" jar="${jar.compiler.google}">
+			<arg line="--js" />
+			<arg line="${tmp.js.loader_dev}" />
+			<arg line="--js_output_file" />
+			<arg line="${dest.js.loader_dev}" />
+		</java>
+	</target>
+	
+	<!--================================
+			BUILD WINK LOADER
+		================================-->
+	<target name="build_wink_loader" description="build js loaders and minimize">
+		<antcall target="clean" />
+		<antcall target="build_js_loader_dev" />
+		<antcall target="build_js_loader" />
+		<antcall target="minimize_loader"/>
+		<antcall target="clean" />
+	</target>
+</project>

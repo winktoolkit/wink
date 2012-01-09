@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>test_trace</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../../../../ui/xy/trace/css/trace.css" type="text/css">
+		
+		<style>
+			html, body
+			{
+				background: #fff;
+				width: 100%;
+			}
+			
+			#container
+			{
+				background: url(./img/advice.png) no-repeat bottom center;
+
+				position: relative;
+				
+				height: 80%;
+				width: 100%;
+			}
+			
+			.tr_container 
+			{
+				position: absolute;
+				
+				top: 0;
+				left: 0;
+			}
+			
+			.question
+			{
+				padding-top: 30px;
+				text-align: center;
+			}
+			
+			.question span
+			{
+				font-size: 90px
+			}
+			
+			#result
+			{
+				text-align: center;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ux/gesturerecognizer/js/gesturerecognizer.js"></script>
+		
+		<script type="text/javascript" src="../../../../ui/xy/trace/js/trace.js"></script>
+		
+		<script>
+			var gesturerecognizer;
+			
+			var currentQuestion = 1;
+			var answers = [];
+			
+			var init = function()
+			{
+				var t0 = {'name': 'yes', 'points': new Array({x: 73, y: 190}, {x: 80, y: 197}, {x: 83, y: 211}, {x: 91, y: 245}, {x: 97, y: 261}, {x: 101, y: 273}, {x: 106, y: 282}, {x: 110, y: 289}, {x: 115, y: 295}, {x: 116, y: 295}, {x: 119, y: 295}, {x: 120, y: 290}, {x: 122, y: 283}, {x: 128, y: 258}, {x: 134, y: 240}, {x: 142, y: 222}, {x: 152, y: 200}, {x: 179, y: 148}, {x: 195, y: 116}, {x: 215, y: 84}, {x: 246, y: 38}, {x: 256, y: 24}, {x: 263, y: 13}, {x: 263, y: 13})};
+				var t1 = {'name': 'yes', 'points': new Array({x: 102, y: 158}, {x: 114, y: 176}, {x: 124, y: 203}, {x: 131, y: 224}, {x: 137, y: 237}, {x: 140, y: 244}, {x: 143, y: 245}, {x: 144, y: 238}, {x: 148, y: 212}, {x: 156, y: 168}, {x: 159, y: 159}, {x: 163, y: 147}, {x: 165, y: 145}, {x: 165, y: 142}, {x: 165, y: 142})};
+				var t2 = {'name': 'no', 'points': new Array({x: 245, y: 114}, {x: 233, y: 137}, {x: 217, y: 165}, {x: 196, y: 192}, {x: 173, y: 216}, {x: 164, y: 226}, {x: 154, y: 234}, {x: 145, y: 240}, {x: 129, y: 248}, {x: 123, y: 251}, {x: 114, y: 255}, {x: 100, y: 258}, {x: 95, y: 258}, {x: 84, y: 256}, {x: 69, y: 233}, {x: 55, y: 200}, {x: 49, y: 183}, {x: 42, y: 166}, {x: 38, y: 154}, {x: 35, y: 137}, {x: 35, y: 127}, {x: 38, y: 123}, {x: 63, y: 121}, {x: 78, y: 121}, {x: 92, y: 124}, {x: 128, y: 138}, {x: 147, y: 148}, {x: 165, y: 162}, {x: 184, y: 178}, {x: 198, y: 194}, {x: 226, y: 228}, {x: 240, y: 245}, {x: 265, y: 278}, {x: 273, y: 287}, {x: 279, y: 293}, {x: 279, y: 293})};
+				
+				
+				var trace = new wink.ui.xy.Trace(
+				{
+					height: $('container').offsetHeight,
+					width: $('container').offsetWidth,
+					duration: 300,
+					linewidth: 7,
+					linestyle: '#ff5500',
+					fadeonend: true
+				});
+				
+				$('container').appendChild(trace.getDomNode());
+				
+				gesturerecognizer = new wink.ux.GestureRecognizer(
+				{
+					'node': trace.getDomNode(),
+					'templates': [t0, t1, t2]
+				});
+						
+				
+				wink.subscribe('/gesturerecognizer/events/result', {method: 'handleResult'});
+			};
+			
+			handleResult = function(params)
+			{
+				if (params.score < 0.7 )
+				{
+					return;	
+				}
+				
+				answers.push(params.result);
+				
+				if ( currentQuestion == 2 )
+				{
+					$('result').innerHTML = "Question 1: " + answers[0] + "<br />" + "Question 2: " + answers[1];
+				}
+				
+				if ( currentQuestion == 3 )
+				{
+					return;
+				}
+				
+				$('question_' + currentQuestion).style.display = 'none';
+				currentQuestion++;
+				$('question_' + currentQuestion).style.display = 'block';
+			}
+		</script>
+	</head>
+	
+	<body onload="init();setTimeout(scrollTo, 0, 0, 1);">
+		<div id="header" class="w_box w_header w_bg_dark">
+			<span id="title">trace</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container">
+			<div id="question_1" class="question">
+				<span>1</span>
+				<br />
+				Do you like Wink ?
+			</div>
+			<div id="question_2" class="question" style="display: none">
+				<span>2</span>
+				<br />
+				Would you recommend wink ?
+			</div>
+			<div id="question_3" class="question" style="display: none">
+				<span style="font-size: 50px">Results</span>
+				<br />
+				<div id="result"></div>
+			</div>
+		</div>
+	</body>
+</html>

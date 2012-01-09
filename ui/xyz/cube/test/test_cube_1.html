@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_cube_simple</title>
+
+		<style>
+			#container {
+				position: relative;
+				
+				width: 320px;
+				height: 306px;
+				
+				margin: auto;
+			}
+			
+			.faces 
+			{
+				display: none;
+			}
+			
+			.face 
+			{
+				background-color: rgba(255, 255, 255, 1.0);
+				text-align: center;
+				border: 1px solid rgba(0, 0, 0, 0.95);
+				width: 299px;
+				height: 299px;
+			}
+			
+			#face1  {
+				background-color: rgba(200, 50, 50, 0.7);
+			}
+		
+			#face2 {
+				background-color: rgba(47, 200, 183, 0.7);
+			}
+		
+			#face3 {
+				background-color: rgba(50, 50, 250, 0.7);
+			}
+		
+			#face4 {
+				background-color: rgba(100, 100, 100, 0.7);
+			}
+		
+			#face5 {
+				background-color: rgba(66, 123, 90, 0.7);
+			}
+		
+			#face6 {
+				background-color: rgba(0, 90, 20, 0.7);
+			}
+			
+			#face7 {
+				background-color: rgba(210, 90, 20, 0.7);
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../../math/_matrix/js/matrix.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xyz/js/3dfx.js"></script>
+		<script type="text/javascript" src="../../../../ux/movementtracker/js/movementtracker.js"></script>
+		
+		<script type="text/javascript" src="../../../../ui/xyz/cube/js/cube.js"></script>
+
+		<script type="text/javascript">
+			var cube;
+
+			var handleRotation = function(rotation) {
+				//console.log("Rotation: " + rotation.x + ", " + rotation.y);
+			};
+			var handleRotationEnd = function(rotation) {
+				//console.log("RotationEnd: " + rotation.x + ", " + rotation.y);
+			};
+		
+			var init = function() {
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+				
+				var properties = {
+					faces: [
+						{ id: 1, faceId: "face1" },
+						{ id: 2, faceId: "face2" },
+						{ id: 3, faceId: "face3" },
+						{ id: 4, faceId: "face4" },
+						{ id: 5, faceId: "face5" },
+						{ id: 6, faceId: "face7" }
+					],
+					size: 300,
+					shiftX: 0,
+					shiftY: 0,
+					shiftZ: -500,
+					observerX: 150,
+					observerY: 150,
+					axis: "xy",
+					focus: true,
+					focusDuration: 200,
+					dispatch: true,
+					rotationCallback: { context: window, method: 'handleRotation' },
+					rotationEndCallback: { context: window, method: 'handleRotationEnd' }
+				};
+				cube = new wink.ui.xyz.Cube(properties);
+				$("container").appendChild(cube.getDomNode());
+				cube.setFace({ id: 6, faceId: "face6" });
+
+				setTimeout(function() {
+					cube.rotate(10, 10, 100);
+				}, 100);
+			};
+		</script>
+	</head>
+	
+	<body onload="setTimeout(init, 1);">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">cube</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container"></div>
+		<div id="faces" class="faces">
+			<div id="face1" class="face">My Face 1</div>
+			<div id="face2" class="face">My Face 2</div>
+			<div id="face3" class="face">My Face 3</div>
+			<div id="face4" class="face">My Face 4</div>
+			<div id="face5" class="face">My Face 5</div>
+			<div id="face6" class="face">My Face 6</div>
+			<div id="face7" class="face">My Face 7</div>
+		</div>
+	</body>
+</html>

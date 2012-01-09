@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="wink_build_system" default="build_wink" basedir=".">
+	<description>WINK BUILD SYSTEM</description>
+	
+	<!--================================
+			LOADING PROPERTIES
+		================================-->
+	<available file="./build.properties" property="property.file.found" />
+	<fail unless="property.file.found" message="No build.properties file found. Build aborted." />
+
+	<property file="./build.properties" />
+	
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="${jar.antcontrib}" />
+		</classpath>
+	</taskdef>
+	
+	<!--================================
+			BUILD WINK
+		================================-->
+	<target name="build_wink" description="build wink js and css">
+		<antcall target="build_wink_js" />
+		<antcall target="build_wink_css" />
+	</target>
+	
+	<!--================================
+			BUILD WINK WITH JAR
+		================================-->
+	<target name="build_wink_with_jar" description="build wink js and css, and JAR">
+		<antcall target="build_jar" />
+		<antcall target="build_wink" />
+	</target>
+	
+	<!--================================
+			BUILD WINK CORE
+		================================-->
+	<target name="build_wink_core" description="build wink.min js and css files">
+		<var name="build.targets" unset="true" />
+		<var name="build.profiles" unset="true" />
+		<var name="build.conf.profiles" unset="true" />
+		<property name="build.targets" value="default" />
+		<property name="build.profiles" value="default" />
+		<property name="build.conf.profiles" value="profile.core.json" />
+		
+		<antcall target="build_wink_js" />
+		<antcall target="build_wink_css" />
+	</target>
+	
+	<!--================================
+			BUILD WINK JS
+		================================-->
+	<target name="build_wink_js" description="build js and minimize">
+		<delete dir="${build.js.destdir}" />
+		<antcall target="build_js" />
+		<antcall target="minimize_js_all"/>
+	</target>
+	
+	<!--================================
+			BUILD WINK CSS
+		================================-->
+	<target name="build_wink_css" description="build css and minimize">
+		<delete dir="${build.css.destdir}" />
+		<antcall target="build_css" />
+		<antcall target="minimize_css_all"/>
+	</target>
+	
+	<!--================================
+			JS BUILD
+		================================-->
+	<target name="build_js" description="Build JS Files">
+		<echo message="BUILD ${project.name} in ${build.js.destdir}" level="info" />
+		
+		<mkdir dir="${build.js.destdir}" />
+		
+		<java fork="true" classname="${java.src.mainclass}">
+			<classpath>
+				<pathelement path="${jar.rhino}"/>
+				<pathelement path="${jar.winkbuilder}"/>
+			</classpath>
+			<arg line="-JS_PATH=${build.scripts.dir}" />
+			<arg line="-JS_MAIN_FILE=${build.js.main}" />
+			<arg line="-CONF_PATH=${build.conf.dir}" />
+			<arg line="-MODULE_CONF_FILE=${build.conf.modules}" />
+			<arg line="-PROFILES_CONF_FILE=${build.conf.profiles}" />
+			<arg line="-WINK_PATH=${wink.dir}" />
+			<arg line="-TEMPORARY_PATH=${build.js.tmpdir}" />
+			<arg line="-BUILD_DEST_PATH=${build.js.destdir}" />
+			<arg line="-TARGETS=${build.targets}" />
+			<arg line="-PROFILES=${build.profiles}" />
+			<arg line="-OPTION_CLEAN_TEMPORARY=${build.js.options.cleantmpdir}" />
+			<arg line="-OPTION_DELETE_DUPLICATES=${build.js.options.deleteduplicates}" />
+			<arg line="-OPTION_FILTER_FEATURE=${build.js.options.filterfeature}" />
+			<arg line="-OPTION_PRINT_EXTENSIONS=${build.js.options.printextension}" />
+			<arg line="-OPTION_PRINT_MODEL=${build.js.options.printmodel}" />
+			<arg line="-OPTION_FAIL_ON_UNMANAGED_SYNTAX=${build.js.options.failOnUnmanagedSyntax}" />
+			<arg line="-OPTION_WARN_ON_UNMANAGED_SYNTAX=${build.js.options.warnOnUnmanagedSyntax}" />
+			<arg line="-OPTION_FAIL_ON_UNRESOLVED_NAMESPACE=${build.js.options.failOnUnresolvedNamespace}" />
+			<arg line="-OPTION_DELETE_VALIDATE_PROPERTIES=${build.js.options.deleteValidateProperties}" />
+			<arg line="-OPTION_DELETE_LOGS=${build.js.options.deleteLogs}" />
+		</java>
+	</target>
+	
+	<!--================================
+			CSS BUILD
+		================================-->
+	<target name="build_css" description="Build CSS Files">
+		<echo message="BUILD ${project.name} in ${build.css.destdir}" level="info" />
+		
+		<mkdir dir="${build.css.destdir}" />
+		
+		<java fork="true" classname="${java.src.mainclass}">
+			<classpath>
+				<pathelement path="${jar.rhino}"/>
+				<pathelement path="${jar.winkbuilder}"/>
+			</classpath>
+			<arg line="-JS_PATH=${build.scripts.dir}" />
+			<arg line="-JS_MAIN_FILE=${build.css.main}" />
+			<arg line="-CONF_PATH=${build.conf.dir}" />
+			<arg line="-MODULE_CONF_FILE=${build.conf.modules}" />
+			<arg line="-PROFILES_CONF_FILE=${build.conf.profiles}" />
+			<arg line="-WINK_PATH=${wink.dir}" />
+			<arg line="-TEMPORARY_PATH=${build.css.tmpdir}" />
+			<arg line="-BUILD_DEST_PATH=${build.css.destdir}" />
+			<arg line="-TARGETS=${build.targets}" />
+			<arg line="-PROFILES=${build.profiles}" />
+			<arg line="-OPTION_CLEAN_TEMPORARY=${build.css.options.cleantmpdir}" />
+			<arg line="-OPTION_REWRITE_IMAGE_URL=${build.css.options.rewriteImageUrl}" />
+			<arg line="-OPTION_FROM_WINK_PATH=${build.css.options.fromWinkPath}" />
+			<arg line="-OPTION_RELATIVE_PATH=${build.css.options.relativePath}" />
+		</java>
+	</target>
+	
+	<!--================================
+			MINIMIZE JS ALL
+		================================-->
+	<target name="minimize_js_all" description="minimize all JS Files">
+		<foreach param="file" target="minimize_js" inheritall="true">
+			<path>
+				<fileset dir="${build.js.destdir}">
+					<include name="**/*.js"/>
+					<exclude name="**/*.${build.js.minify.suffix}"/>
+				</fileset>
+			</path>
+		</foreach>
+	</target>
+	
+	<!--================================
+			MINIMIZE JS
+		================================-->
+	<target name="minimize_js" description="minimize JS Files">
+		<basename file="${file}" property="name" suffix=".js" />
+		<var name="name.min" value="${name}.${build.js.minify.suffix}" />
+		
+		<echo message="Create minimized JS File ${name.min}" level="info" />
+		
+		<java dir="." fork="true" jar="${jar.compiler.google}">
+			<arg line="--js" />
+			<arg line="${file}" />
+			<arg line="--js_output_file" />
+			<arg line="${build.js.destdir}/${name.min}" />
+			<arg line="--warning_level=DEFAULT" />
+		</java>
+		
+		<if><not><equals arg1="${build.js.keep.nomin}" arg2="true" /></not>
+		<then>
+			<delete file="${file}" />
+		</then>
+		</if>
+	</target>
+	
+	<!--================================
+			MINIMIZE CSS ALL
+		================================-->
+	<target name="minimize_css_all" description="minimize all CSS Files">
+		<foreach param="file" target="minimize_css" inheritall="true">
+			<path>
+				<fileset dir="${build.css.destdir}">
+					<include name="**/*.css"/>
+					<exclude name="**/*.${build.css.minify.suffix}"/>
+				</fileset>
+			</path>
+		</foreach>
+	</target>
+	
+	<!--================================
+			MINIMIZE CSS
+		================================-->
+	<target name="minimize_css" description="minimize CSS Files">
+		<basename file="${file}" property="name" suffix=".css" />
+		<var name="name.min" value="${name}.${build.css.minify.suffix}" />
+		
+		<echo message="Create minimized CSS File ${name.min}" level="info" />
+		
+		<java dir="." fork="true" jar="${jar.yui.compressor}" output="${build.css.destdir}/${name.min}">
+			<arg line="${file}" />
+		</java>
+		
+		<if><not><equals arg1="${build.css.keep.nomin}" arg2="true" /></not>
+		<then>
+			<delete file="${file}" />
+		</then>
+		</if>
+	</target>
+	
+	<!--================================
+			JAR
+		================================-->
+	<target name="build_jar" description="Build Wink Builder JAR">
+		<echo message="BUILD ${project.name} JAR : ${jar.winkbuilder}" level="info" />
+
+		<delete dir="${java.classes.dir}" />
+		<mkdir dir="${java.classes.dir}" />
+		<javac
+			srcdir="${java.src.dir}"
+			destdir="${java.classes.dir}"
+			debug="on">
+			<classpath>
+				<pathelement path="${jar.rhino}"/>
+			</classpath>
+		</javac>
+		
+		<jar destfile="${jar.winkbuilder}">
+			<fileset dir="${java.classes.dir}" />
+		</jar>
+		
+		<delete dir="${java.classes.dir}" />
+	</target>
+</project>

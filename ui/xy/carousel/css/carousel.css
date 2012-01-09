@@ -1,0 +1,87 @@
+.ca_container
+{
+	background: #909193;
+	position: relative;
+	overflow: hidden
+}
+
+.ca_header
+{
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#747678), to(#909193));
+	background-image: -moz-linear-gradient(top, #747678, #909193);
+	
+	height: 7px;	
+}
+
+.ca_dots
+{
+	background: #909193;
+	height: 14px;
+	padding-top: 5px;
+	text-align: center;
+	width:100%;	
+}
+
+.ca_vertical .ca_dots
+{
+	display: -webkit-box;
+	display: -moz-box;
+	
+	background: transparent;
+	
+	position: absolute;
+	
+	top: 0;
+	right: 10px;
+	
+	width: 10px;
+	height: 100%;
+	
+	-webkit-box-align: center;
+	-moz-box-align: center;
+	
+	-moz-box-pack: center;
+}
+
+.ca_dot
+{
+	display: inline-block;
+	
+	background: #ccc;
+	border: 0;
+	
+	height: 6px;
+	width: 6px;
+	
+	margin: 5px;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+.ca_dot.ca_selected
+{
+	background: #fff;
+}
+
+.ca_footer
+{
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#909193), to(#747678));
+	background-image: -moz-linear-gradient(top, #909193, #747678);
+	
+	height: 7px;	
+}
+
+.ca_items
+{
+	position: relative;
+	width: 100%;
+}
+
+.ca_item
+{	
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+}

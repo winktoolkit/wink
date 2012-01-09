@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="./files/wikipedia.css" type="text/css">
+		
+		<title>test_scroller_tablet</title>
+
+		<style>
+			#wrapper13, #wrapper23
+			{
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.w_list_item.preselected, .w_list_item.selected 
+			{
+				background: -webkit-gradient(linear, left top, left bottom, from(#2f2f2f), to(#000), color-stop(50%, #151515));
+				color: #dedede;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ux/window/js/window.js"></script>
+		
+		<script type="text/javascript" src="../../../../ux/movementtracker/js/movementtracker.js"></script>
+		<script type="text/javascript" src="../../../../ux/inertia/js/inertia.js"></script>
+		<script type="text/javascript" src="../../../../ui/layout/scroller/js/scroller.js"></script>
+
+		<script type="text/javascript">
+			var scrollerHelper = 
+			{
+				nbItem: 30,
+				items: [],
+				scrolling: false,
+				sliding: false,
+				currentStage: null,
+				selectTimer: null,
+				nodePreselected: null,
+				nodeSelected: null,
+					
+				preselect: function(node) 
+				{
+					clearTimeout(this.selectTimer);
+					this.selectTimer = null;
+					
+					if (this.scrolling == false && this.sliding == false) 
+					{
+						var cn = node.className;
+						if (cn.indexOf('selected') == -1) 
+						{
+							this.resetItemStatus();
+							wink.addClass(node, "preselected");
+							this.nodePreselected = node;
+						}
+					}
+				},
+
+				select: function(node) 
+				{
+					this.resetItemStatus();
+					wink.addClass(node, "selected");
+					this.nodeSelected = node;
+				},
+
+				resetItemStatus: function() 
+				{
+					if (this.nodePreselected != null)
+					{
+						wink.removeClass(this.nodePreselected, "preselected");
+						this.nodePreselected = null;
+					}
+					
+					if (this.nodeSelected != null)
+					{
+						wink.removeClass(this.nodeSelected, "selected");
+						this.nodeSelected = null;
+					}
+				},
+
+				stageChanged: function(params, stage) 
+				{
+					this.currentStage = stage;
+
+					if (wink.isSet(params.uxEvent)) 
+					{
+						var target = params.uxEvent.target;
+						var target = (target.nodeType == 3 ? target.parentNode : target);
+					}
+					
+					if (stage == 'scrollerTouched') 
+					{
+						if (this.sliding == false) 
+						{
+							this.selectTimer = wink.setTimeout(this, 'preselect', 200, target);
+						}
+					} else if (stage == 'startScrolling') 
+					{
+						this.resetItemStatus();
+						this.scrolling = true;
+					} else if (stage == 'endScrolling') 
+					{
+						if (this.selectTimer != null) 
+						{
+							clearTimeout(this.selectTimer);
+							this.selectTimer = null;
+						}
+						this.scrolling = false;
+					} else if (stage == 'startSliding')
+					{
+						this.sliding = true;
+					} else if (stage == 'stopSliding') 
+					{
+						this.sliding = false;
+					} else if (stage == 'scrollerClicked') 
+					{
+						this.select(target);
+					}
+				},
+
+				buildListContent: function(scrollContent) 
+				{
+					var texts = 
+					[ 
+						"Wink", "Webapp", "Innovative", "Kit", "web", 
+						"IPhone", "Android", "IPad",
+						"Orange", "Labs", "Javascript", "HTML", "Css", "Mobile",
+						"Core", "ui", "ux", "mm", "net", "api", "fx", "math",
+						"Webkit", "Dojo", "Foundation", "Scroller", "Animations"
+					];
+					
+					for (var i = 0; i < this.nbItem; i++) 
+					{
+						var li = document.createElement('div');
+						var t = i % texts.length;
+						li.innerHTML = texts[t];
+						this.items.push(li);
+						$('list').appendChild(li);
+						
+						if ( i == this.nbItem -1)
+						{
+							wink.addClass(li, "w_list_item w_bg_light");
+						} else
+						{
+							wink.addClass(li, "w_list_item w_border_bottom w_bg_light");
+						}
+					}
+				},
+				
+				buildWikipediaContent: function(result)
+				{
+					$('scrollContent23').innerHTML = result.xhrObject.responseText;
+
+					resizer.refresh();
+					
+					scroller1 = new wink.ui.layout.Scroller({
+						target: "scrollContent13",
+						direction: "y",
+						callbacks: {
+							scrollerTouched:	{ context: scrollerHelper, method: 'stageChanged', arguments: 'scrollerTouched' },
+							scrollerClicked:	{ context: scrollerHelper, method: 'stageChanged', arguments: 'scrollerClicked' },
+							startScrolling:		{ context: scrollerHelper, method: 'stageChanged', arguments: 'startScrolling' },
+							scrolling:			{ context: scrollerHelper, method: 'stageChanged', arguments: 'scrolling' },
+							endScrolling:		{ context: scrollerHelper, method: 'stageChanged', arguments: 'endScrolling' },
+							startSliding:		{ context: scrollerHelper, method: 'stageChanged', arguments: 'startSliding' },
+							stopSliding:		{ context: scrollerHelper, method: 'stageChanged', arguments: 'stopSliding' }
+						}
+					});
+					
+					scroller2 = new wink.ui.layout.Scroller({
+						target: "scrollContent23",
+						direction: "y"
+					});
+
+					wink.subscribe('/window/events/orientationchange', { context: resizer, method: 'handleOrientationChange'} );
+				}
+			};
+
+			var resizer = 
+			{
+				refresh: function() 
+				{
+					var headerHeight = 55;
+					var heightRemains = wink.ux.window.height - headerHeight;
+					
+					$('wrapper13').style.height = heightRemains + "px";
+					$('wrapper23').style.height = heightRemains + "px";
+				},
+				
+				handleOrientationChange: function() 
+				{
+					this.refresh();
+					scroller1.updateViewportSize();
+					scroller2.updateViewportSize();
+					scroller1.updateTargetSize();
+					scroller2.updateTargetSize();
+				}
+			};
+
+			var scroller1, scroller2;
+			
+			var init = function() 
+			{
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+
+				scrollerHelper.buildListContent($('scrollContent13'));
+				
+				xhr = new wink.Xhr();
+				xhr.sendData('./files/wikipedia.html', null, 'GET', {method: 'buildWikipediaContent', context: scrollerHelper}, null, null);
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div id="header" class="w_box w_header w_bg_dark">
+			<span id="title">tablet layout</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_layout_box">
+			<div id="wrapper13" class="w_box w_tablet_left w_border_right">
+				<div id="scrollContent13">
+					<ul id="list" class="w_list">
+						<!-- content built at startupt -->
+					</ul>
+				</div>
+			</div>
+			<div id="wrapper23" class="w_box w_tablet_right">
+				<div id="scrollContent23">
+					<!-- content retrieved by a XHR request -->
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

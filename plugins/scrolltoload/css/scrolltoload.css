@@ -1,0 +1,30 @@
+.stl_section {
+	height: 40px;
+	line-height: 40px;
+	padding: 5px 10px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #888;
+}
+
+.stl_section .stl_text {
+	width: auto;
+}
+
+.stl_section .stl_label {
+	display: none;
+}
+
+.stl_section.wait .stl_label.wait,
+.stl_section.loading .stl_label.loading {
+	display: -webkit-box;
+	display: -moz-box;
+}
+
+.stl_section.wait .stl_sp_box {
+	display: none;
+}
+
+.stl_section .stl_sp_box {
+	margin: 5px 5px 0px 0px;
+}

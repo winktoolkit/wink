@@ -1,0 +1,283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../../../mm/mediawheel/css/mediawheel.css" type="text/css">
+		
+		<title>test_mediawheel</title>
+
+		<style>
+			#content {
+				margin: auto;
+				height: 95%;
+				width: 95%;
+			}
+			#space {
+				height: 5%;
+			}
+			#player {
+				position: absolute;
+				top: 55px;
+				left: 50%;
+				z-index: 1;
+			}
+			#time_container {
+				position: absolute;
+				top: 100px;
+				left: 50%;
+				z-index: 1;
+				color: #fff;
+				
+				background-color: rgba(100, 100, 100, 0.3);
+				background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(100, 100, 100, 0.3)), to(rgba(10, 10, 10, 0.3)), color-stop(.4, rgba(46, 46, 46, 0.3)));
+				background-image: -moz-linear-gradient(0% 100% 90deg, rgba(10, 10, 10, 0.3), rgba(46, 46, 46, 0.3), rgba(100, 100, 100, 0.3) 100%);
+				
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				
+				border: 1px solid #555;
+				padding: 0px 10px;
+			}
+			
+			#content video {
+				position: absolute;
+				top: 55%;
+				left: 50%;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../ux/movementtracker/js/movementtracker.js"></script>
+		<script type="text/javascript" src="../../../mm/mediawheel/js/mediawheel.js"></script>
+
+		<script type="text/javascript">
+			/**
+			 * 
+			 */
+			var init = function() 
+			{
+				wink.error.logLevel = 1;
+				
+				window.scrollTo(0,0);
+
+				var _w = $('content').offsetWidth,
+					_h = $('content').offsetHeight;
+
+				$('content').style.width = _w + "px";
+				$('content').style.height = _h + "px";
+				
+				var mediaWheel = new wink.mm.MediaWheel({
+					width: _w,
+					height: _h
+				});
+
+				$('content').appendChild(mediaWheel.getDomNode());
+
+				var ready = false;
+				$('time_container').innerHTML = _formatTime(0);
+
+				$('player').style.left = $('player').offsetLeft - ($('player').offsetWidth / 2) + "px";
+				$('time_container').style.left = $('time_container').offsetLeft - ($('time_container').offsetWidth / 2) + "px";
+
+				wink.subscribe('/mediawheel/events/timeupdate', { context: {
+					ontimeupdate: function(params) {
+						if (params.publisher.uId != mediaWheel.uId) {
+							return;
+						}
+						if (!ready) {
+							return;
+						}
+						videoplayer.setTime(params.time);
+						videoplayer.play();
+					}
+				}, method: 'ontimeupdate' });
+				
+				videoplayer.init({
+					url: "../../videoplayer/test/files/sintel.mp4",
+					parent: "content",
+					height: mediaWheel.height / 3,
+					width: mediaWheel.width / 3,
+					poster: '../../videoplayer/test/img/poster1.jpg',
+					playBtn: "player_btn",
+					onready: function() {
+						ready = true;
+						mediaWheel.setDuration(videoplayer.getDuration());
+						mediaWheel.setBufferedTime(videoplayer.getBufferedDuration());
+					},
+					onprogress: function() {
+						if (!ready) {
+							return;
+						}
+						mediaWheel.setBufferedTime(videoplayer.getBufferedDuration());
+					},
+					ontimeupdate: function() {
+						if (!ready) {
+							return;
+						}
+						mediaWheel.setTime(videoplayer.getCurrentTime());
+						$('time_container').innerHTML = _formatTime(videoplayer.getCurrentTime());
+					}
+				});
+				var vpNode = videoplayer.getDomNode();
+				vpNode.style.top = vpNode.offsetTop - (vpNode.offsetHeight / 2) + "px";
+				vpNode.style.left = vpNode.offsetLeft - (vpNode.offsetWidth / 2) + "px";
+			};
+
+			/**
+			 * Video Player
+			 */
+			var videoplayer = (function() {
+				var _videoNode,
+					_playing = false,
+					_url,
+					_parent,
+					_playBtn,
+					_props;
+				
+				var vp = {};
+
+				vp.init = function(props) {
+					_url = props.url;
+					_parent = $(props.parent);
+					_playBtn = $(props.playBtn);
+					_props = props;
+					_initAudioNode();
+					_toggleButtonState();
+				};
+				
+				vp.getDomNode = function() {
+					return _videoNode;
+				};
+				
+				vp.play = function() {
+					if (_playing) {
+						return;
+					}
+					_playing = true;
+					_videoNode.play();
+					_toggleButtonState();
+				};
+				
+				vp.pause = function() {
+					if (!_playing) {
+						return;
+					}
+					_playing = false;
+					_videoNode.pause();
+					_toggleButtonState();
+				};
+				
+				vp.getCurrentTime = function() {
+					return _videoNode.currentTime;
+				};
+				
+				vp.getDuration = function() {
+					return _videoNode.duration;
+				};
+				
+				vp.getBufferedDuration = function() {
+					return _videoNode.buffered.end((_videoNode.buffered.length - 1));
+				};
+				vp.setTime = function(seconds) {
+					try { 
+						_videoNode.currentTime = seconds;
+					} catch(e) {}
+				};
+
+				var _initAudioNode = function() {
+					_videoNode = document.createElement('video');
+					_videoNode.className = 'vp_video';
+					_videoNode.style.height = _props.height + "px";
+					_videoNode.style.width = _props.width + "px";
+					_videoNode.src = _url;
+					_videoNode.poster = _props.poster;
+					_parent.appendChild(_videoNode);
+					_videoNode.addEventListener('canplay', _props.onready, false);
+					_videoNode.addEventListener('durationchange', _props.onprogress, false);
+					_videoNode.addEventListener('timeupdate', _props.ontimeupdate, false);
+					_playBtn.addEventListener('click', _togglePlayButton, false);
+				};
+				var _togglePlayButton = function() {
+					if (_playing) {
+						vp.pause();
+					} else {
+						vp.play();
+					}
+				};
+				var _toggleButtonState = function() {
+					if (_playing) {
+						wink.removeClass(_playBtn, 'w_button_play');
+						wink.addClass(_playBtn, 'w_button_pause');
+					} else {
+						wink.removeClass(_playBtn, 'w_button_pause');
+						wink.addClass(_playBtn, 'w_button_play');
+					}
+				};
+				return vp;
+			})();
+
+			/**
+			 * 
+			 */
+			var _formatTime = function(d) {
+				var dm = Math.floor(d / 60);
+				var ds = Math.floor(d % 60);
+				if (dm < 10) {
+					dm = "0" + dm;
+				}
+				if (ds < 10) {
+					ds = "0" + ds;
+				}
+				return (dm + "'" + ds + "''");
+			};
+		</script>
+	</head>
+	
+	<body onload="setTimeout(init, 1);">
+		<div id="header" class="w_box w_header w_bg_dark">
+			<span id="title">mediawheel</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="content">
+			<div id="time_container"></div>
+			<div id="player">
+				<input id="player_btn" type="button" class="w_icon w_button_play" />
+			</div>
+		</div>
+		<div id="space"></div>
+	</body>
+</html>

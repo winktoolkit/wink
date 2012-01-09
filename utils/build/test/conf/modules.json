@@ -1,0 +1,69 @@
+{
+	"modules": [
+		{
+			"name": "module1",
+			"defaultImpl": "module1.js",
+			"i18n": [
+				{ "en_EN": "module1_i18n_en.js" },
+				{ "fr_FR": "module1_i18n_fr.js" }
+			],
+			"subImpls": [
+				{
+					"target": "ie",
+				    "impl": "module1_ie.js",
+				    "i18n": [
+						{ "es_ES": "module1_i18n_es.js" }
+					]
+				}
+			],
+			"css": [
+			    "module1.css"
+			]
+		},
+		{
+			"name": "module2",
+			"defaultImpl": "module2.js",
+			"subImpls": [
+				{
+					"target": "ie",
+				    "impl": "module2_ie.js"
+				}
+			]
+		},
+		{
+			"name": "module2_external",
+			"defaultImpl": "module2_external.js"
+		},
+		{
+			"name": "module3",
+			"defaultImpl": "module3.js",
+			"subImpls": [
+				{
+					"target": "ie",
+				    "impl": "module3_ie.js"
+				}
+			]
+		},
+		{
+			"name": "module3_bis",
+			"defaultImpl": "module3_bis.js",
+		},
+		{
+			"name": "module4",
+			"defaultImpl": "module4.js",
+			"subImpls": [
+				{
+					"target": "ie",
+				    "impl": "module4_ie.js",
+				    "excludeDefault": true,
+				    "css": [
+					    "module4_ie.css"
+					]
+				}
+			],
+			"css": [
+			    "module4.css"
+			]
+		}
+	]
+}

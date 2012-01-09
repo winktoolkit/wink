@@ -1,0 +1,20 @@
+#container 
+{
+	position: relative;
+	
+	width: 320px;
+	height: 306px;
+	
+	margin: auto;
+	
+}
+
+.tags
+{
+	display: none;
+}
+
+.tag 
+{
+	font-size: 18px;
+}

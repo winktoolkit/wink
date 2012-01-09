@@ -1,0 +1,590 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<title>test_scroller_4</title>
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../../../../ui/xy/carousel/css/carousel.css" type="text/css">
+		<link rel="stylesheet" href="../../../../ui/layout/slidingpanels/css/slidingpanels.css" type="text/css">
+
+		<style>			
+			#wrapper 
+			{
+				position: relative;
+				z-index: 1;
+				width: 100%;
+				overflow: hidden;
+			}
+
+			#scrollContent 
+			{
+				position: relative;
+				width: 100%;
+			}
+			
+			#scrollContent .w_list {
+				margin: 0;
+			}
+			
+			.w_list_item.preselected, .w_list_item.selected 
+			{
+				background: -webkit-gradient(linear, left top, left bottom, from(#2f2f2f), to(#000), color-stop(50%, #151515));
+				color: #dedede;
+			}
+			
+			/** Carousel **/
+			.carousel 
+			{
+				height: 140px;
+				width: auto;
+			}
+			
+			.carousel .carousel_item 
+			{
+				margin-top: 5px;
+				margin-bottom: 5px;
+			}
+			
+			.icon 
+			{
+				margin-left: 15px;
+				
+				width: 250px;
+				height: 120px;
+
+				-webkit-box-shadow: 0.2em 0.2em 0.2em rgba(30, 30, 30, 1.0);
+			}
+			
+			.icon.color1 { background-color: #559fa6; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#559fa6), to(#335f63)); }
+			.icon.color2 { background-color: #a74414; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FF5500), to(#a74414)); }
+			.icon.color3 { background-color: #500274; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9300d7), to(#500274)); }
+			.icon.color4 { background-color: #050064; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0900c4), to(#050064)); }
+			.icon.color5 { background-color: #1c5731; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2b9b52), to(#1c5731)); }
+			.icon.color6 { background-color: #58610a; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b3c800), to(#58610a)); }
+			.icon.color7 { background-color: #706717; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d4be00), to(#706717)); }
+			.icon.color8 { background-color: #5e1506; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c82100), to(#5e1506)); }
+			.icon.color9 { background-color: #700d42; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c3006a), to(#700d42)); }
+			.icon.color10 { background-color: #315845; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#6fc19a), to(#315845)); }
+			.icon.color11 { background-color: #8e5700; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ff9c00), to(#8e5700)); }
+			.icon.color12 { background-color: #630707; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dc0000), to(#630707)); }
+			
+			
+			/** Panel **/
+			.view2Actions 
+			{
+				margin-top: 1em;
+				text-align: center;
+			}
+			
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ux/window/js/window.js"></script>
+		
+		<script type="text/javascript" src="../../../../ux/movementtracker/js/movementtracker.js"></script>
+		<script type="text/javascript" src="../../../../ux/inertia/js/inertia.js"></script>
+		<script type="text/javascript" src="../../../../ui/layout/scroller/js/scroller.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/carousel/js/carousel.js"></script>
+		<script type="text/javascript" src="../../../../ui/layout/slidingpanels/js/slidingpanels.js"></script>
+
+		<script type="text/javascript">
+			var scrollerHelper = 
+			{
+				scrolling: false,
+				sliding: false,
+				currentStage: null,
+				selectTimer: null,
+				nodePreselected: null,
+				nodeSelected: null,
+				scroller: null,
+				carousel: null,
+				slidingPanels: null,
+				scrollEnabled: true,
+				startPoint: { x: 0, y: 0 },
+				_startEvent: null,
+				_endEvent: null,
+
+				init: function()
+				{
+					wink.ux.touch.addListener($('header'), "start", { context: this, method: "onTouchHeaderFooter" });
+					wink.ux.touch.addListener($('header'), "end", { context: this, method: "onTouchHeaderFooter" });
+					
+					wink.ux.touch.addListener($('footer'), "start", { context: this, method: "onTouchHeaderFooter" });
+					wink.ux.touch.addListener($('footer'), "end", { context: this, method: "onTouchHeaderFooter" });
+				},
+
+				onTouchHeaderFooter: function(uxEvent) 
+				{
+					if ( uxEvent.type == "start")
+					{
+						this._startEvent = uxEvent;
+						uxEvent.preventDefault();
+					} else
+					{
+						this._endEvent = uxEvent;
+						
+						if ( ((this._endEvent.timestamp-this._startEvent.timestamp) < 250) && (Math.abs(this._endEvent.x-this._startEvent.x) < 20))
+						{
+							this._endEvent.dispatch(this._endEvent.target, 'click');
+						}
+					}
+					
+				},
+					
+				preselect: function(node)
+				{
+					clearTimeout(this.selectTimer);
+					this.selectTimer = null;
+					if (this.scrolling == false && this.sliding == false) 
+					{
+						var cn = node.className;
+						if (cn.indexOf('selected') == -1) 
+						{
+							this.resetItemStatus();
+							wink.addClass(node.parentNode, "preselected");
+							this.nodePreselected = node;
+						}
+					}
+				},
+
+				select: function(node) 
+				{
+					this.resetItemStatus();
+					wink.addClass(node.parentNode, "selected");
+					this.nodeSelected = node;
+				},
+
+				resetItemStatus: function() 
+				{
+					if (this.nodePreselected != null) 
+					{
+						wink.removeClass(this.nodePreselected.parentNode, "preselected");
+						this.nodePreselected = null;
+					}
+					
+					if (this.nodeSelected != null)
+					{
+						wink.removeClass(this.nodeSelected.parentNode, "selected");
+						this.nodeSelected = null;
+					}
+				},
+
+				stageChanged: function(params, stage) 
+				{
+					this.currentStage = stage;
+
+					var target;
+					if (wink.isSet(params.uxEvent)) 
+					{
+						target = params.uxEvent.target;
+						target = (target.nodeType == 3 ? target.parentNode : target);
+					}
+					
+					var onCarousel = this.onCarousel(target);
+					var isCarouselItem = this.onCarouselItem(target);
+					
+					if (stage == 'scrollerTouched') 
+					{
+						if (isCarouselItem) 
+						{
+							this.scrollEnabled = false;
+							this.scroller.disable();
+							return;
+						} else 
+						{
+							this.scrollEnabled = true;
+							this.scroller.enable();
+						}
+						
+						if (this.sliding == false) 
+						{
+							this.selectTimer = wink.setTimeout(this, 'preselect', 200, target);
+						}
+					} else if (stage == 'startScrolling') 
+					{
+						this.resetItemStatus();
+						this.scrolling = true;
+					} else if (stage == 'endScrolling') 
+					{
+						if (this.selectTimer != null) 
+						{
+							clearTimeout(this.selectTimer);
+							this.selectTimer = null;
+						}
+						this.scrolling = false;
+					} else if (stage == 'startSliding') 
+					{
+						this.sliding = true;
+					} else if (stage == 'stopSliding') 
+					{
+						this.sliding = false;
+					} else if (stage == 'scrollerClicked') 
+					{
+						if (!onCarousel) 
+						{
+							this.select(target);
+							this.slidingPanels.slideTo('view2');
+						}
+					}
+				},
+
+				notifyVerticalMouvement: function() 
+				{
+					if (this.scrollEnabled == false) 
+					{
+						this.scrollEnabled = true;
+						this.scroller.enable();
+					}
+				},
+
+				buildCarousel: function() 
+				{
+					var nodes = [
+						'<div class="carousel_item"><div class="icon color1"></div></div>',
+						'<div class="carousel_item"><div class="icon color2"></div></div>',
+						'<div class="carousel_item"><div class="icon color3"></div></div>',
+						'<div class="carousel_item"><div class="icon color4"></div></div>',
+						'<div class="carousel_item"><div class="icon color5"></div></div>',
+						'<div class="carousel_item"><div class="icon color6"></div></div>',
+						'<div class="carousel_item"><div class="icon color7"></div></div>',
+						'<div class="carousel_item"><div class="icon color8"></div></div>',
+						'<div class="carousel_item"><div class="icon color9"></div></div>',
+						'<div class="carousel_item"><div class="icon color10"></div></div>',
+						'<div class="carousel_item"><div class="icon color11"></div></div>',
+						'<div class="carousel_item"><div class="icon color12"></div></div>'
+					];
+					
+					var items = [];
+					
+					for (var i = 0; i < nodes.length; i++) 
+					{
+						items.push({ 'type': 'string', 'content': nodes[i] });
+					}
+
+					var propertiesSlideshow = 
+					{
+						itemsWidth: 280,
+						itemsHeight: 140,
+						displayDots: 0,
+						autoAdjust: 1,
+						autoAdjustDuration: 200,
+						autoPlay: 0,
+						firstItemIndex: 5,
+						items: items
+					};
+					
+					this.carousel = new wink.ui.xy.Carousel(propertiesSlideshow);
+					
+					$('carousel').appendChild(this.carousel.getDomNode());
+				},
+
+				buildSlidingPanels: function() 
+				{
+					var properties = 
+					{
+						'duration': 500,
+						'pages': [ 'view1', 'view2' ]
+					};
+					
+					this.slidingPanels = new wink.ui.layout.SlidingPanels(properties);
+					
+					$('wrapper').appendChild(this.slidingPanels.getDomNode());
+				},
+
+				slideBack: function() 
+				{
+					this.slidingPanels.slideBack();
+				},
+
+				onCarouselItem: function(node) 
+				{
+					var p = node;
+					while (p && p != document.body) 
+					{
+						var cn = p.className;
+						if (cn && cn != '' && cn.indexOf('carousel_item') != -1) 
+						{
+							return true;
+						}
+						p = p.parentNode;
+					}
+					return false;
+				},
+
+				onCarousel: function(node) 
+				{
+					var p = node;
+					var crs = $('carousel');
+					while (p && p != document.body) 
+					{
+						if (p == crs) 
+						{
+							return true;
+						}
+						p = p.parentNode;
+					}
+					return false;
+				}
+			};
+
+			var mvtHandler = 
+			{
+				node: null,
+				_notify: false,
+				
+				init: function()
+				{
+					this.node = $('wrapper');
+					
+					wink.ux.touch.addListener(this.node, "start", { context: this, method: "_start" }, { captureFlow: true });
+					wink.ux.touch.addListener(this.node, "move", { context: this, method: "_move" }, { captureFlow: true });
+					wink.ux.touch.addListener(this.node, "end", { context: this, method: "_end" }, { captureFlow: true });
+				},
+				
+				_start: function(uxEvent) 
+				{
+					this._se = uxEvent;
+					this._notify = false;
+				},
+				
+				_move: function(uxEvent) 
+				{
+					if (this._notify == true) 
+					{
+						return;
+					}
+					var dx = Math.abs(this._se.x - uxEvent.x);
+					var dy = Math.abs(this._se.y - uxEvent.y);
+
+					if (dy > 5) {
+						if (dy > dx) {
+							this._notify = true;
+							scrollerHelper.notifyVerticalMouvement();
+						}
+					}
+				},
+				
+				_end: function() 
+				{
+					this._notify = true;
+				}
+			};
+			
+			var init = function() 
+			{
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+
+				scrollerHelper.init();
+				scrollerHelper.buildCarousel();
+				scrollerHelper.buildSlidingPanels();
+
+				var headerHeight = 55;
+				var footerHeight = 45;
+				
+				var heightRemains = wink.ux.window.height - headerHeight - footerHeight;
+				
+				$('wrapper').style.height = heightRemains + "px";
+				$('view1').style.height = heightRemains + "px";
+				$('view2').style.height = heightRemains + "px";
+
+				var properties = 
+				{
+					target: "scrollContent",
+					direction: "y",
+					callbacks: 
+					{
+						scrollerTouched:	{ context: scrollerHelper, method: 'stageChanged', arguments: 'scrollerTouched' },
+						scrollerClicked:	{ context: scrollerHelper, method: 'stageChanged', arguments: 'scrollerClicked' },
+						startScrolling:		{ context: scrollerHelper, method: 'stageChanged', arguments: 'startScrolling' },
+						scrolling:			{ context: scrollerHelper, method: 'stageChanged', arguments: 'scrolling' },
+						endScrolling:		{ context: scrollerHelper, method: 'stageChanged', arguments: 'endScrolling' },
+						startSliding:		{ context: scrollerHelper, method: 'stageChanged', arguments: 'startSliding' },
+						stopSliding:		{ context: scrollerHelper, method: 'stageChanged', arguments: 'stopSliding' }
+					},
+					scrollbars: 
+					{
+						backgroundColor: 'rgba(15, 15, 15, 0.5)',
+						borderColor: 'rgba(255, 255, 255, 0.7)'
+					}
+				};
+				
+				scrollerHelper.scroller = new wink.ui.layout.Scroller(properties);
+
+				mvtHandler.init();
+			};
+		</script>
+	</head>
+	
+	<body onload="setTimeout(init, 1);">
+		<div id="header" class="w_box w_header w_bg_dark">
+			<span id="title">scroller</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		<div id="wrapper">
+			<div id="view1">
+				<div id="scrollContent">
+					<ul class="w_list  w_border">
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 1</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 2</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 3</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 4</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 5</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 6</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+					</ul>
+					<div id="carousel" class="carousel">
+					</div>
+					<ul class="w_list  w_border">
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 7</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 8</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 9</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 10</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 11</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 12</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 13</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 14</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 15</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 16</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 17</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 18</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 19</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 20</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 21</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 22</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+						<li class="w_list_item w_border_bottom w_bg_light">
+							<a href="#">Item 23</a>
+							<span class="w_icon w_chevron"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="view2">
+				<div class="w_bloc">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque lobortis cursus sollicitudin. 
+					Sed in turpis non dolor tincidunt tristique ac vel tellus. Integer dictum posuere dui eu varius. 
+					Cras et odio vitae dolor posuere pretium. Phasellus a eros mi, quis pellentesque risus. 
+					Quisque dui arcu, imperdiet iaculis lobortis id, tempus id risus. Sed enim tortor, suscipit et rhoncus quis, 
+					facilisis vel augue.
+				</div>
+				<div class="view2Actions">
+					<input type="button" class="w_button w_radius w_bg_dark" onclick="scrollerHelper.slideBack();" value="back" />
+				</div>
+			</div>
+		</div>
+		<div id="footer" class="w_box w_footer w_bg_dark">
+			<div class="w_layout_box">
+				<div class="w_menu_item">
+					<input type="button" value="item" class="w_button w_border w_bg_dark" onclick="alert('you clicked on item 1')" />
+				</div>
+				<div class="w_menu_item">
+					<input type="button" value="item" class="w_button w_border w_bg_dark" onclick="alert('you clicked on item 2')" />
+				</div>
+				<div class="w_menu_item">
+					<input type="button" value="item" class="w_button w_border w_bg_dark" onclick="alert('you clicked on item 3')" />
+				</div>
+				<div class="w_menu_item">
+					<input type="button" value="item" class="w_button w_border w_bg_dark" onclick="alert('you clicked on item 4')" />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

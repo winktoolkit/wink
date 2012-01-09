@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_animation_page_tip</title>
+
+		<style>
+			.container 
+			{
+				width: 320px;
+				height: 300px;
+			}
+			
+			.page 
+			{
+				position: absolute;
+				width: 280px;
+				height: 300px;
+				left: 20px;
+			}
+			
+			.page .image 
+			{
+				width: 100%;
+				height: 100%;
+			}
+			
+			.page1
+			{
+				text-shadow: 0.04em 0.04em 0.04em #000;
+				z-index: 2;
+			}
+			
+			.page2
+			{
+				text-shadow: -0.04em -0.04em 0.04em #fff; 
+				z-index: 1;
+			}
+			
+			.header
+			{
+				height: 40px;
+				line-height: 40px;
+				
+				text-align: center;
+			}
+			
+			.innerCard 
+			{
+				width: 48%;
+				height: 48%;
+				overflow: hidden;
+				margin: 5px;
+				padding: 0.2em;
+			}
+			
+			.page1 .innerCard 
+			{
+				float: right;
+			}
+			
+			.page2 .innerCard 
+			{
+				float: left;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../math/_matrix/js/matrix.js"></script>
+		<script type="text/javascript" src="../../../fx/_xyz/js/3dfx.js"></script>
+		<script type="text/javascript" src="../../../fx/_animation/js/animation.js"></script>
+
+		<script type="text/javascript">
+			var transformer = {
+				transform: function(params, transformations) {
+					var node = params.node;
+					
+					wink.fx.initComposedTransform(node);
+					for (var i = 0; i < transformations.length; i++) {
+						wink.fx.setTransformPart(node, (i + 1), transformations[i]);
+					}
+					wink.fx.applyComposedTransform(node);
+				}
+			};
+		
+			var anim = function(node, rows, cols, delay) {
+				var clone = wink.fx.split(node, rows, cols);
+				node.parentNode.appendChild(clone.copy.container.node);
+				node.style.opacity = 0;
+
+				clone.copy.container.node.style["-webkit-perspective"] = 300;
+				clone.copy.container.node.style["-webkit-transform-style"] = 'preserve-3d';
+
+				var animGroup = new wink.fx.animation.AnimationGroup();
+				for (var i = 0; i < rows; i++) {
+					for (var j = 0; j < cols; j++) {
+						var sp = clone.copy.subparts[i][j];
+						var anim = new wink.fx.animation.Animation();
+
+						var angle = 90;
+						if (j >= (cols / 2)) {
+							angle = -90;
+						}
+						
+						var transformations1 = [
+							{ type: "rotate", x: 0, y: 1, z: 0, angle: angle },
+							{ type: "translate", x: 0, y: 0, z: 0 }
+						];
+
+						var transformations2 = [
+							{ type: "rotate", x: 0, y: 1, z: 0, angle: angle },
+							{ type: "translate", x: 0, y: 0, z: 500 }
+						];
+						
+						anim.addStep({
+							property: '-webkit-transform',
+							value: { context: transformer, method: 'transform', arguments: [ transformations1 ] },
+							duration: 1000,
+							delay: delay,
+							func: 'default'
+						});
+						anim.addStep({
+							property: '-webkit-transform',
+							value: { context: transformer, method: 'transform', arguments: [ transformations2 ] },
+							duration: 1000,
+							delay: 0,
+							func: 'default'
+						});
+						animGroup.addAnimation(sp.node, anim);
+					}
+				}
+				var ctx = {
+					reloadAnim: function(params, node, clone, rows, cols, delay) {
+						node.parentNode.removeChild(clone.copy.container.node);
+						
+						switchNode(node);
+						node.style.opacity = 1;
+						window.anim((node == $('page1')) ? $('page2') : $('page1'), rows, cols, delay);
+					}
+				};
+				animGroup.start({ onEnd: { context: ctx, method: 'reloadAnim', arguments: [ node, clone, rows, cols, delay ] } });
+			};
+
+			var switchNode = function(node) {
+				var oneToTwo = (node == $('page1'));
+				$('page1').style.zIndex = oneToTwo ? 1 : 2;
+				$('page2').style.zIndex = oneToTwo ? 2 : 1;
+			};
+		
+			var init = function() {
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+
+				switchNode($('page2'));
+				anim($('page1'), 1, 2, 2000);
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">animations</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container" class="container">
+			<div id="page1" class="w_bg_dark page page1">
+				<div id="header" class="header">Lorem ipsum dolor sit amet</div>
+				<div id="main" class="w_bloc">
+					<div class="innerCard"><img class="image" src="img/img1.jpg" /></div>
+					<p>Proin ligula leo, dictum vitae vestibulum eu, ornare quis velit. Proin diam tortor, sollicitudin quis posuere dictum, viverra ut lectus. Quisque id nisi in enim condimentum consectetur a et ante. Fusce libero nulla, volutpat eu accumsan sed, condimentum lobortis leo. Proin in orci venenatis urna viverra fringilla. Integer bibendum, ligula eu laoreet tincidunt, augue enim lacinia neque, vel porttitor nunc augue laoreet enim. Aenean tempus leo lorem.</p>
+				</div>
+			</div>
+			<div id="page2" class="w_bg_light page page2">
+				<div id="header" class="header">Proin nec tellus tellus.</div>
+				<div id="main" class="w_bloc">
+					<div class="innerCard"><img class="image" src="img/img2.jpg" /></div>
+					<p>Maecenas feugiat varius porttitor. Pellentesque scelerisque sodales sem, at cursus purus tristique sed. Donec malesuada tincidunt massa, in varius purus ultrices vel. Vestibulum quis dui justo. Nulla in arcu ipsum, eget feugiat velit. In hac habitasse platea dictumst. Etiam hendrerit turpis quis lacus lacinia scelerisque. Donec porta tortor in ipsum commodo porta interdum nulla accumsan. Nunc fermentum semper justo sit amet sodales.</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,70 @@
+.fb_container
+{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	
+	min-height: 900px;
+	
+	-webkit-perspective: 1000;
+}
+
+.fb_page
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	
+	width: 50%;
+	height: 100%;
+}
+
+.fb_content_front
+{
+	position: absolute;
+	
+	height: 100%;
+	width: 100%;
+	
+	top: 0;
+	right: 0;
+	
+	overflow: hidden;
+
+	-webkit-transform: rotateY(360deg);
+	-webkit-backface-visibility: hidden;
+}
+
+.fb_content_back
+{
+	position: absolute;
+
+	height: 100%;
+	width: 100%;
+	
+	top: 0;
+	right: 0;
+	
+	overflow: hidden;
+
+	-webkit-transform: rotateY(180deg);
+	-webkit-backface-visibility: hidden;
+}
+
+.fb_content_right
+{
+	position: absolute;
+				
+	width: 200%;
+	height: 100%;
+	
+	right: 0;
+}
+
+.fb_content_left
+{
+	position: relative;
+	
+	width: 200%;
+	height: 100%;
+}

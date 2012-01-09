@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/togglebutton.css" type="text/css">
+		
+		<style type="text/css">
+			.toggle
+			{
+				float: right;
+				margin: 10px 10px 0 0; 
+			}
+			
+			.to_toggle.onoff1
+			{
+				background:transparent url(../img/onoff.png) no-repeat center;
+			}
+			
+			.to_toggle.onoff2
+			{
+				background:transparent url(../img/onoff2.png) no-repeat center;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/togglebutton.js"></script>
+		
+		<script>
+			var toggle1, toggle2;
+			
+			init = function()
+			{
+				wink.error.logLevel = 1;
+				
+				toggle1 = new wink.ui.xy.ToggleButton({cssClass:"onoff1", position: 'left'});
+				toggle2 = new wink.ui.xy.ToggleButton({cssClass:"onoff2", position: 'right'});
+
+				$('toggle1').appendChild(toggle1.getDomNode());
+				$('toggle2').appendChild(toggle2.getDomNode());
+				
+				wink.subscribe('/togglebutton/events/switch', {method: "onswitch"});
+			};					
+			
+			onswitch = function(params)
+			{
+				var id = '';
+				var value = '';
+				
+				if (params.uId == toggle1.uId)
+				{
+					id = 'label1';	
+					
+					if ( params.position == 'right' )
+					{
+						value = 'feature activated';
+					} else
+					{
+						value = 'feature deactivated';
+					}
+				} else
+				{
+					id = 'label2';
+					
+					if ( params.position == 'right' )
+					{
+						value = 'feature activated';
+					} else
+					{
+						value = 'feature deactivated';
+					}
+				}
+				
+				$(id).innerHTML = value;
+			};
+		</script>
+	</head>
+<body onload="init()">
+	<div class="w_box w_header w_bg_dark">
+		<span id="title">toggle button</span>
+		<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+	</div>
+	
+	<div class="w_bloc">
+		Switch the toggle buttons to activate/deactivate the options.
+	</div>
+	
+	<div style="width: 95%; margin: auto">
+		<ul id="list1" class="w_list w_border w_radius">
+			<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+				Toggle buttons
+			</li>
+			<li class="w_list_item w_border_bottom w_bg_light">
+				<span id="label1">feature deactivated</span>
+				<div class="toggle" id="toggle1"></div>
+			</li>
+			<li class="w_list_item w_border_bottom w_bg_light">
+				<span id="label2">feature activated</span>
+				<div class="toggle" id="toggle2"></div>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

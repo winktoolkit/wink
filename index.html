@@ -1,0 +1,857 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>WINK</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="./_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="apple-touch-icon" href="data:image/png;base64,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"/>
+		
+		<style>
+			.brand_logo 
+			{
+				position: absolute;
+				top: 5px;
+				left: 2px;
+			}
+			
+			.brand_logo_img 
+			{
+				background: url(data:image/png;base64,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) no-repeat;
+				display: inline;
+				height: 32px;
+				width: 67px
+			}
+			
+			.w_list_item .unavailable
+			{
+				color: #a1a1a1;
+			}
+			
+			.subtitle
+			{
+				text-align: center;
+			}
+			
+			.new
+			{
+				position: absolute;
+				
+				top: 0;
+				left: 0;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="./_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="./_amd/js/amd.js"></script>
+		<script type="text/javascript" src="./_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="./_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="./_base/error/js/error.js"></script>
+		<script type="text/javascript" src="./_base/json/js/json.js"></script>
+		<script type="text/javascript" src="./_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="./_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="./_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="./_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="./_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="./_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="./_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="./fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="./math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="./net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="./ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="./ux/event/js/event.js"></script>
+		<script type="text/javascript" src="./ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="./_base/_feat/js/feat_api.js"></script>
+		<script type="text/javascript" src="./_base/_feat/js/feat_graphic.js"></script>
+		
+		<script>
+			var tests = {
+				'User Interface':
+				[
+					{
+						type: 'subsection',
+						label: '** Layouts **'
+					},
+					{
+						name: 'accordion',
+						label: 'Accordion',
+						page: './ui/layout/accordion/test/test_accordion_1.html'
+					},
+					{
+						name: 'fixedlayout',
+						label: 'Fixed layout',
+						page: './ui/layout/fixedlayout/test/test_fixedlayout_1.html',
+						page_ie: './ui/layout/fixedlayout/test/test_fixedlayout_1_ie.html'
+					},
+					{
+						name: 'flippage',
+						label: 'Flippage',
+						page: './ui/layout/flippage/test/test_flippage_1.html'
+					},
+					{
+						name: 'flippage',
+						label: 'Flippage + History',
+						page: './ui/layout/flippage/test/test_flippage_2.html'
+					},
+					{
+						name: 'flippage',
+						label: 'Flippage + Scroller',
+						page: './ui/layout/flippage/test/test_flippage_3.html'
+					},
+					{
+						name: 'windows',
+						label: 'Floating Windows',
+						page: './ui/layout/windows/test/test_windows.html'
+					},
+					{
+						name: 'modalwindow',
+						label: 'Modal Window',
+						page: './ui/layout/modalwindow/test/test_modalwindow_1.html'
+					},
+					{
+						name: 'modalwindow',
+						label: 'Modal Window with scroll',
+						page: './ui/layout/modalwindow/test/test_modalwindow_2.html'
+					},
+					{
+						name: 'scroller',
+						label: 'Scroller (classic layout)',
+						page: './ui/layout/scroller/test/test_scroller_4.html'
+					},
+					{
+						name: 'scroller',
+						label: 'Scroller (tablet layout)',
+						page: './ui/layout/scroller/test/test_scroller_6.html'
+					},
+					{
+						name: 'scroller',
+						label: 'Scroller (nested)',
+						page: './ui/layout/scroller/test/test_scroller_5.html'
+					},
+					{
+						name: 'scroller',
+						label: 'Scroller (vertical)',
+						page: './ui/layout/scroller/test/test_scroller_1.html'
+					},
+					{
+						name: 'scroller',
+						label: 'Scroller (horizontal)',
+						page: './ui/layout/scroller/test/test_scroller_2.html'
+					},
+					{
+						name: 'scroller',
+						label: 'Scroller (both directions)',
+						page: './ui/layout/scroller/test/test_scroller_3.html'
+					},
+					{
+						name: 'slidingpanels',
+						label: 'Sliding panels',
+						page: './ui/layout/slidingpanels/test/test_slidingpanels_1.html'
+					},
+					{
+						name: 'slidingpanels',
+						label: 'Sliding panels (cover)',
+						page: './ui/layout/slidingpanels/test/test_slidingpanels_2.html'
+					},
+					{
+						name: 'slidingpanels',
+						label: 'Sliding panels (reveal)',
+						page: './ui/layout/slidingpanels/test/test_slidingpanels_3.html'
+					},
+					{
+						name: 'slidingpanels',
+						label: 'Sliding panels + History',
+						page: './ui/layout/slidingpanels/test/test_slidingpanels_4.html'
+					},
+					{
+						name: 'tabcontainer',
+						label: 'Tabs',
+						page: './ui/layout/tabcontainer/test/test_tabcontainer_1.html',
+						page_ie: './ui/layout/tabcontainer/test/test_tabcontainer_1_ie.html'
+					},
+					{
+						name: 'tabcontainer',
+						label: 'Tabs (no arrows)',
+						page: './ui/layout/tabcontainer/test/test_tabcontainer_2.html',
+						page_ie: './ui/layout/tabcontainer/test/test_tabcontainer_2_ie.html'
+					},
+					{
+						name: 'tabcontainer',
+						label: 'Tabs + History',
+						page: './ui/layout/tabcontainer/test/test_tabcontainer_3.html'
+					},
+					{
+						type: 'subsection',
+						label: '** Forms **'
+					},
+					{
+						name: 'input',
+						label: 'Inputs',
+						page: './ui/form/input/test/test_input.html'
+					},
+					{
+						name: 'forms',
+						label: 'Buttons',
+						page: './ui/form/styles/test/test_button.html'
+					},
+					{
+						name: 'forms',
+						label: 'Radio',
+						page: './ui/form/styles/test/test_radio.html'
+					},
+					{
+						name: 'forms',
+						label: 'Checkbox',
+						page: './ui/form/styles/test/test_checkbox.html'
+					},
+					{
+						name: 'forms',
+						label: 'Lists',
+						page: './ui/form/styles/test/test_list.html'
+					},
+					{
+						name: 'forms',
+						label: 'Icons',
+						page: './ui/form/styles/test/test_icons.html'
+					},
+					{
+						type: 'subsection',
+						label: '** Xy **'
+					},
+					{
+						name: 'carousel',
+						label: 'Carousel',
+						page: './ui/xy/carousel/test/test_carousel_1.html',
+						page_ie: './ui/xy/carousel/test/test_carousel_1_ie.html'
+					},
+					{
+						name: 'carousel',
+						label: 'Vertical carousel',
+						page: './ui/xy/carousel/test/test_carousel_2.html',
+						page_ie: './ui/xy/carousel/test/test_carousel_2_ie.html',
+						isNew: true
+					},
+					{
+						name: 'colorpicker',
+						label: 'Color picker',
+						page: './ui/xy/colorpicker/test/test_colorpicker.html'
+					},
+					{
+						name: 'datepicker',
+						label: 'Date picker',
+						page: './ui/xy/datepicker/test/test_datepicker.html'
+					},
+					{
+						name: 'menu',
+						label: 'Menu',
+						page: './ui/xy/menu/test/test_menu.html'
+					},
+					{
+						name: 'newsticker',
+						label: 'News ticker',
+						page: './ui/xy/newsticker/test/test_newsticker.html'
+					},
+					{
+						name: 'popup',
+						label: 'Popup',
+						page: './ui/xy/popup/test/test_popup_1.html'
+					},
+					{
+						name: 'popup_add',
+						label: 'Popup (Add to Home screen)',
+						page: './ui/xy/popup/test/test_popup_2.html'
+					},
+					{
+						name: 'progressbar',
+						label: 'Progress bar',
+						page: './ui/xy/progressbar/test/test_progressbar.html'
+					},
+					{
+						name: 'slideshow',
+						label: 'Slideshow',
+						page: './ui/xy/slideshow/test/test_slideshow.html'
+					},
+					{
+						name: 'spinner',
+						label: 'Spinner',
+						page: './ui/xy/spinner/test/test_spinner.html'
+					},
+					{
+						name: 'cspinner',
+						label: 'CSpinner',
+						page: './ui/xy/cspinner/test/test_cspinner_1.html',
+						isNew: true
+					},
+					{
+						name: 'cspinner',
+						label: 'CSpinner Custom',
+						page: './ui/xy/cspinner/test/test_cspinner_2.html',
+						isNew: true
+					},
+					{
+						name: 'toggle',
+						label: 'Toggle button',
+						page: './ui/xy/togglebutton/test/test_togglebutton.html'
+					},
+					{
+						name: 'trace',
+						label: 'Trace',
+						page: './ui/xy/trace/test/test_trace_1.html',
+						isNew: true
+					},
+					{
+						name: 'trace',
+						label: 'Trace drawing (for tablets)',
+						page: './ui/xy/trace/test/test_trace_2.html',
+						isNew: true
+					},
+					{
+						name: 'trace',
+						label: 'Trace + Recognition',
+						page: './ui/xy/trace/test/test_trace_3.html',
+						isNew: true
+					},
+					{
+						type: 'subsection',
+						label: '** Xyz **'
+					},
+					{
+						name: 'coverflow',
+						label: 'Coverflow',
+						page: './ui/xyz/coverflow/test/test_coverflow_1.html'
+					},
+					{
+						name: 'cube',
+						label: '3D Cube',
+						page: './ui/xyz/cube/test/test_cube_simple.html'
+					},
+					{
+						name: 'cube',
+						label: '3D Cube (option 2)',
+						page: './ui/xyz/cube/test/test_cube_actu.html'
+					},
+					{
+						name: 'cube',
+						label: '3D Cube (option 3)',
+						page: './ui/xyz/cube/test/test_cube_nav.html'
+					},
+					{
+						name: 'flipdisc',
+						label: 'Flip-disc display',
+						page: './ui/xyz/flipdisc/test/test_flipdisc.html'
+					},
+					{
+						name: 'opener',
+						label: 'Opener',
+						page: './ui/xyz/opener/test/test_opener.html'
+					},
+					{
+						name: 'opener',
+						label: 'Opener (option 2)',
+						page: './ui/xyz/opener/test/test_opener_2.html'
+					},
+					{
+						name: 'tagcloud',
+						label: 'Tag Cloud',
+						page: './ui/xyz/tagcloud/test/test_tagcloud.html'
+					},
+					{
+						name: 'tagcloud',
+						label: 'Tag Cloud (images)',
+						page: './ui/xyz/tagcloud/test/test_tagcloud_image.html'
+					},
+					{
+						name: 'wall',
+						label: '3D Wall',
+						page: './ui/xyz/wall/test/test_wall.html'
+					},
+					{
+						name: 'tagcloud',
+						label: '3D menu',
+						page: './ui/xyz/tagcloud/test/test_tagcloud_menu3d.html'
+					},
+					{
+						name: 'tagcloud',
+						label: '3D menu (Vertical)',
+						page: './ui/xyz/tagcloud/test/test_tagcloud_menu3dv.html'
+					},
+					{
+						name: 'tagcloud',
+						label: '3D menu (Image)',
+						page: './ui/xyz/tagcloud/test/test_tagcloud_menu3d_image.html'
+					}
+				],
+				'Animations':
+				[
+					{
+						name: 'animation',
+						label: 'Animation (simple)',
+						page: './fx/_animation/test/test_animation_1.html'
+					},
+					{
+						name: 'animation',
+						label: 'Animation (advanced)',
+						page: './fx/_animation/test/test_animation_2.html'
+					},
+					{
+						name: 'animationGesture',
+						label: 'Animation (yin-yang)',
+						page: './fx/_animation/test/test_animation_3.html'
+					},
+					{
+						name: 'animation3d',
+						label: 'Animated Pages (flip)',
+						page: './fx/_animation/test/test_animation_4.html'
+					},
+					{
+						name: 'animation3d',
+						label: 'Animated Pages (fly)',
+						page: './fx/_animation/test/test_animation_5.html'
+					},
+					{
+						name: 'animation3d',
+						label: 'Animated Pages (tip)',
+						page: './fx/_animation/test/test_animation_6.html'
+					},
+					{
+						name: 'animation3d',
+						label: 'Animated Pages (wave)',
+						page: './fx/_animation/test/test_animation_7.html'
+					},
+					{
+						name: 'animation3d',
+						label: 'Animation (StarWink)',
+						page: './fx/_animation/test/test_animation_8.html'
+					}
+				],
+				'Interactions':
+				[
+					{
+						name: 'dnd',
+						label: 'D&amp;D',
+						page: './ux/dnd/test/test_dnd_1.html'
+					},
+					{
+						name: 'dnd',
+						label: 'D&amp;D (puzzle)',
+						page: './ux/dnd/test/test_dnd_2.html'
+					},
+					{
+						name: 'dnd',
+						label: 'D&amp;D (reordering list)',
+						page: './ux/dnd/test/test_dnd_4.html'
+					},
+					{
+						name: 'history',
+						label: 'History',
+						page: './ux/history/test/test_history.html'
+					},
+					{
+						name: 'inertia',
+						label: 'Inertia',
+						page: './ux/inertia/test/test_inertia.html'
+					},
+					{
+						name: 'gesturerecognizer',
+						label: '2D gesture recognizer',
+						page: './ux/gesturerecognizer/test/test_gesturerecognizer.html'
+					},
+					{
+						name: 'search',
+						label: 'Search',
+						page: './ux/search/test/test_search.html',
+						page_ie: './ux/search/test/test_search_ie.html',
+					},
+					{
+						name: 'gesture',
+						label: 'Gestures handling',
+						page: './ux/gesture/test/test_gesture_2.html'
+					},
+					{
+						name: 'movementtracker',
+						label: 'Movement Tracker',
+						page: './ux/movementtracker/test/test_movementtracker.html'
+					},
+					{
+						name: 'window',
+						label: 'Window',
+						page: './ux/window/test/test_window.html'
+					}
+				],
+				'Multimedia':
+				[
+					{
+						name: 'audioplayer',
+						label: 'Audio player',
+						page: './mm/audioplayer/test/test_audioplayer.html'
+					},
+					{
+						name: 'videoplayer',
+						label: 'Video player',
+						page: './mm/videoplayer/test/test_videoplayer.html'
+					},
+					{
+						name: 'mediawheel_audio',
+						label: 'Media Wheel (audio)',
+						page: './mm/mediawheel/test/test_mediawheel_1.html',
+						page_ie: './mm/mediawheel/test/test_mediawheel_1_ie.html',
+						isNew: true
+					},
+					{
+						name: 'mediawheel_video',
+						label: 'Media Wheel (video)',
+						page: './mm/mediawheel/test/test_mediawheel_2.html',
+						isNew: true
+					}
+				],
+				'HTML5':
+				[
+					{
+						name: 'geolocation',
+						label: 'Geo Location',
+						page: './api/geolocation/test/test_geolocation.html'
+					},
+					{
+						name: 'storage',
+						label: 'Database Storage',
+						page: './api/storage/test/test_storage.html'
+					},
+					{
+						name: 'accelerometer',
+						label: 'Device orientation',
+						page: './api/accelerometer/test/test_orientation.html'
+					},
+					{
+						name: 'accelerometer',
+						label: 'Device orientation (room)',
+						page: './api/accelerometer/test/test_orientation_room.html'
+					},
+					{
+						name: 'accelerometer',
+						label: 'Device motion',
+						page: './api/accelerometer/test/test_motion.html'
+					}
+				],
+				'Plugins':
+				[
+					{
+						name: 'asyncpanels',
+						label: 'Async Panels',
+						page: './plugins/asyncpanels/test/test_asyncpanels.html',
+						isNew: true
+					},
+					{
+						name: 'sharingwheel',
+						label: 'Sharing Wheel',
+						page: './plugins/sharingwheel/test/test_sharingwheel.html',
+						isNew: true
+					},
+					{
+						name: 'scrolltorefresh',
+						label: 'Scroll To Refresh',
+						page: './plugins/scrolltorefresh/test/test_scrolltorefresh.html',
+						isNew: true
+					},
+					{
+						name: 'scrolltoload',
+						label: 'Scroll To Load',
+						page: './plugins/scrolltoload/test/test_scrolltoload_1.html',
+						isNew: true
+					},
+					{
+						name: 'scrolltoload_s',
+						label: 'Scroll To Load (with Scroller)',
+						page: './plugins/scrolltoload/test/test_scrolltoload_2.html',
+						isNew: true
+					},
+					{
+						name: 'completion',
+						label: 'Autocomplete',
+						page: './plugins/completion/test/index.html',
+						isNew: true
+					}
+				],
+				'Performances':
+				[
+					{
+						name: 'cache',
+						label: 'Easy caching',
+						page: './_cache/test/test_cache_2.html'
+					}
+				]
+			};
+		
+			var init = function()
+			{
+				$(theme + '_theme').checked = true;
+				
+				var pageId = wink.ua.isIE ? 'page_ie' : null;
+				for(sectionLabel in tests)
+				{
+					var section = tests[sectionLabel];
+
+					var sectionNode = document.createElement('div');
+					wink.addClass(sectionNode, 'w_list w_border w_radius');
+					
+					var title = document.createElement('li');
+					wink.addClass(title, 'w_list_item w_list_header w_border_bottom w_bg_dark');
+					title.innerHTML = sectionLabel;
+
+					$('tests').appendChild(sectionNode);
+					sectionNode.appendChild(title);
+					
+					for(i in section)
+					{
+						var test = section[i];
+						if(wink.isSet(test.type) && (test.type == 'subsection'))
+						{
+							var subsectionNode = document.createElement('li');
+							wink.addClass(subsectionNode, 'subtitle w_list_item w_border_bottom w_bg_light');
+							subsectionNode.innerHTML = test.label;
+							
+							sectionNode.appendChild(subsectionNode);
+						}
+						else
+						{
+							var testNode = document.createElement('li');
+							wink.addClass(testNode, 'w_list_item w_border_bottom w_bg_light');
+							sectionNode.appendChild(testNode);
+							
+							var link = document.createElement('a');
+							link.name = test.name;
+							link.href = 'javascript: goToPage(\'' + ((!wink.isNull(pageId) && wink.isSet(test[pageId])) ? test[pageId] : test.page) + '\')';
+							link.innerHTML = test.label;
+							testNode.appendChild(link);
+							
+							var chevron =  document.createElement('span');
+							wink.addClass(chevron, 'w_icon w_chevron');
+							testNode.appendChild(chevron);
+							
+							if(wink.isSet(test.isNew && test.isNew))
+							{
+								var newImage = document.createElement('img');
+								newImage.src = 'data:image/png;base64,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'
+								wink.addClass(newImage, 'new');
+								testNode.appendChild(newImage);
+							}
+						}
+					}
+				}
+				
+				var os = wink.ua.osVersion;
+				var osm = wink.ua.osMinorVersion;
+				
+				if (wink.ua.isMobile && !wink.has('touch'))
+				{
+					disableTestPage('carousel');
+					disableTestPage('coverflow');
+					disableTestPage('cube');
+					disableTestPage('dnd');
+					disableTestPage('gesturerecognizer');
+					disableTestPage('inertia');
+					disableTestPage('movementtracker');
+					disableTestPage('scroller');
+					disableTestPage('scrolltorefresh');
+					disableTestPage('scrolltoload_s');
+					disableTestPage('sharingwheel');
+					disableTestPage('tabcontainer');
+					disableTestPage('tagcloud');
+					disableTestPage('toggle');
+					disableTestPage('trace');
+					disableTestPage('wall');
+				}
+				
+				if ( !wink.has('transitionend'))
+				{
+					disableTestPage('animation');
+					disableTestPage('newsticker');
+					disableTestPage('scroller');
+					disableTestPage('scrolltorefresh');
+					disableTestPage('scrolltoload_s');
+					disableTestPage('slidingpanels');
+				}
+				
+				if ( !wink.has('css-perspective'))
+				{
+					disableTestPage('animation3d');
+					disableTestPage('coverflow');
+					disableTestPage('cube');
+					disableTestPage('flippage');
+					disableTestPage('flipdisc');
+					disableTestPage('opener');
+					disableTestPage('wall');
+					disableTestPage('windows');
+				}
+				
+				if ( !wink.has('gesture'))
+				{
+					disableTestPage('animationGesture');
+					disableTestPage('gesture');
+				}
+				
+				if ( !wink.has('canvas') )
+				{
+					disableTestPage('slideshow');
+					disableTestPage('cspinner');
+					disableTestPage('trace');
+				}
+				
+				if ( !wink.has('native-geolocation'))
+				{
+					disableTestPage('geolocation');
+				}
+				
+				if ( !wink.has('native-device-motion'))
+				{
+					disableTestPage('accelerometer');
+				}
+
+				// iOS
+				if (wink.ua.isIOS || (wink.ua.isBlackBerry && wink.ua.browserVersion >= 7 ) || (wink.ua.isAndroid && wink.ua.osVersion >= 3 ))
+				{
+					var ipod_or_iphone = (wink.ua.isIPhone || wink.ua.isIPod);
+					var ipad = wink.ua.isIPad;
+					
+					// Iphone 4.0
+					if ( (ipod_or_iphone && os < 4) && !ipad )
+					{
+						disableTestPage('audioplayer');
+						disableTestPage('mediawheel_audio');
+					}
+					
+					// Not IPad nor bb7
+					if ( !ipad && !(wink.ua.isBlackBerry && wink.ua.browserVersion >= 7 ))
+					{
+						disableTestPage('videoplayer');
+						disableTestPage('mediawheel_video');
+					}
+				}
+				else
+				{
+					disableTestPage('audioplayer');
+					disableTestPage('videoplayer');
+					disableTestPage('mediawheel_audio');
+					disableTestPage('mediawheel_video');
+					disableTestPage('popup_add');
+				}
+
+				// Android
+				if ( wink.ua.isAndroid )
+				{
+					// Android 1
+					if (os < 2)
+					{
+						disableTestPage('sharingwheel');
+						disableTestPage('tagcloud');
+						disableTestPage('cache');
+
+						// Android 1.1
+						if (osm < 5)
+						{
+							disableTestPage('modalwindow');
+							disableTestPage('spinner');
+						}
+					}
+					// Android 2
+					if (os == 2)
+					{
+						// Android 2.1
+						if (osm == 1)
+						{
+							disableTestPage('slideshow');
+						}
+						if (osm == 2 || osm == 3)
+						{
+							disableTestPage('modalwindow');
+						}
+					}
+				}
+
+				// BlackBerry 6+
+				if ( wink.ua.isBlackBerry )
+				{
+					disableTestPage('geolocation');
+				}
+			}
+			
+			var switchTheme = function(e)
+			{
+				window.location = window.location.pathname + "?theme=" + e.target.value;
+			}
+			
+			var disableTestPage = function(name)
+			{
+				var nodeList = document.getElementsByName(name);
+				
+				for ( var i=0; i < nodeList.length; i++)
+				{
+					nodeList[i].className = 'unavailable';
+				}
+			}
+			
+			var goToPage = function(address)
+			{
+				window.location = address + '?theme=' + theme;
+			}
+		</script>
+	</head>
+
+	<body onload="init();setTimeout(scrollTo, 0, 0, 1);">
+		<div style="padding-bottom: 20px">
+			
+			<!--  HEADER -->
+			<div class="w_box w_header w_bg_dark">
+				<div class="brand_logo">
+					<a href="http://www.winktoolkit.org" title="wink homepage">
+						<img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" class="brand_logo_img"/>
+					</a>
+				</div>
+				<span id="title">wink toolkit</span>
+			</div>
+			
+			<div class="w_bloc" >
+				Just click on the links below to access to the wink demos pages.
+			</div>
+			
+			<div id="tests" style="width: 95%; margin: auto">
+				<ul class="w_list w_border w_radius">
+					<li class="w_list_item w_list_header w_border_bottom w_bg_dark">
+						Themes
+					</li>
+					
+					<li class="w_list_item w_border_bottom w_bg_light">
+						<label for="default_theme">Default theme</label>
+						<input id="default_theme" name="theme" value="default" type="radio" class="w_radio w_radius w_bg_dark" style="position: absolute; top: 8px; right: 10px" onchange="switchTheme(event);" checked/>
+					</li>
+					
+					<li class="w_list_item w_border_bottom w_bg_light">
+						<label for="claro_theme">Claro theme</label>
+						<input id="claro_theme" name="theme" value="claro" type="radio" class="w_radio w_radius w_bg_dark" style="position: absolute; top: 8px; right: 10px" onchange="switchTheme(event);" />
+					</li>
+					
+					<li class="w_list_item w_border_bottom w_bg_light">
+						<label for="nihilo_theme">Nihilo theme</label>
+						<input id="nihilo_theme" name="theme" value="nihilo" type="radio" class="w_radio w_radius w_bg_dark" style="position: absolute; top: 8px; right: 10px" onchange="switchTheme(event);" />
+					</li>
+					
+					<li class="w_list_item w_border_bottom w_bg_light">
+						<label for="chocolate_theme">Chocolate theme</label>
+						<input id="chocolate_theme" name="theme" value="chocolate" type="radio" class="w_radio w_radius w_bg_dark" style="position: absolute; top: 8px; right: 10px" onchange="switchTheme(event);" />
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

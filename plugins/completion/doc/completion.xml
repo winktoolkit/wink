@@ -1,0 +1,1357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "../../../utils/doc/wink_doc.dtd" >
+<?xml-stylesheet type="text/xsl" href="../../../utils/doc/wink_doc.xsl"?>
+<module>
+  <title>Completion</title>
+  <name>wink.plugins.completion.Component</name>
+  <is_graphical>1</is_graphical>
+  <description>Create a completion box linked to an input</description>
+  <test_pages>
+    <page>
+      <description>A set of completion examples with local and remote data</description>
+      <url>test_completion.html</url>
+    </page>
+  </test_pages>
+  <compatibility>Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Windows Phone 7.5</compatibility>
+  <instanciation>
+    <description>To instantiate a completion, you must give a property array to the Component and call the start method. Each completion box have a unique identifier.</description>
+    <properties>
+      <property>
+        <name>input</name>
+        <description>The completion input</description>
+        <type>InputHTMLElement</type>
+        <is_optional>0</is_optional>
+      </property>
+      <property>
+        <name>uId</name>
+        <description>The unique identifier of the completion.</description>
+        <type>string</type>
+        <is_optional>1</is_optional>
+      </property>
+      <property>
+        <name>managers</name>
+        <description>
+        An array containing manager's configurations.
+        
+        ================ MAIN ================
+        
+        {
+	        "data":
+	        {
+	            [DATA MANAGER CONFIGURATION]
+	        },
+	        "dom":
+	        {
+	            [DOM MANAGER CONFIGURATION]
+	        },
+	        "event":
+	        {
+	            [EVENT MANAGER CONFIGURATION]
+	        },
+	        [Optional] "history":
+	        {
+	            [HISTORY MANAGER CONFIGURATION]
+	        }
+        }
+        
+        ================ MANAGERS ================
+        
+        [DATA MANAGER CONFIGURATION]
+        
+            RemoteDataManager
+            {
+                name:                       "RemoteDataManager"
+                url:                        The Remote server URL to call
+                queryParamName:             The query parameter name to use in the URL
+                sendMethod:                 [Optional] The send method to use (GET or POST) Default is GET
+                minQueryLength:             [Optional] The minimum query length
+                callbacks:                  [Optional] The array containing all processable callbacks
+                                            Available callbacks are :
+                                                - "getDataContent" : The remote server can encapsulate the response content in high-level array (for example, to get the request status). Return value must be the data content or null in order to hide the completion
+                                                - "parseResponseData" : Function to call after retrieve the response from local data source. Return value must be the updated data (with a first specific separated label, for example) or null in order to hide the completion
+                                                - "parseFinalSuggestions" : Function to call after processing all suggestions. Allow to update the internal suggestions list (for example to add a close label suggestion). Return value can be null in order to hide the completion
+                removeDuplicateSuggestions: [Optional] The boolean that indicate if we have to remove duplicate suggestions
+                modules:
+                {
+                    moduleType:             [Optional] [DATA MODULES CONFIGURATION]
+                }
+            }
+            
+            LocalDataManager
+            {
+                name:                       "LocalDataManager"
+                suggestions:                The local data suggestion to search on
+                minQueryLength:             [Optional] The minimum required query length
+                maxSearchedSuggestions:     [Optional] The maximum suggestions number to return in a request
+                callbacks:                  [Optional] The array containing all processable callbacks
+                                            Available callbacks are :
+                                                - "parseResponseData" : Function to call after retrieve the response from local data source. Return value must be the updated data (with a first specific separated label, for example) or null in order to hide the completion
+                                                - "parseFinalSuggestions" : Function to call after processing all suggestions. Allow to update the internal suggestions list (for example to add a close label suggestion). Return value can be null in order to hide the completion
+                                                - "compareData" : Comparison function between the query and the suggestion value. Return value must be an ordering number to sort the final suggestions list
+                removeDuplicateSuggestions: [Optional] Indicate if we have to remove duplicate suggestions
+                modules:
+                {
+                    moduleType:             [Optional] [DATA MODULES CONFIGURATION]
+                }
+            }
+            
+        [DOM MANAGER CONFIGURATION]
+        
+	        SimpleDomManager
+	        {
+                name:                   "SimpleDomManager"
+	            domNode:                [Optional] The DOM node HTMLElement
+                callbacks:              [Optional] The array containing all processable callbacks
+                                        Available callbacks are :
+                                            - "show" : Function to call before showing the completion box
+                                            - "hide" : Function to call before hiding the completion box
+                cssPrefix:              [Optional] The CSS prefix used for all HTMLElement
+                borderSize:             [Optional] The CSS border size value
+                modules:
+                {
+                    moduleType:             [Optional] [DOM MODULES CONFIGURATION]
+                }
+	        }
+	        
+        [EVENT MANAGER CONFIGURATION]
+        
+            SimpleEventManager
+            {
+                name:                   "SimpleEventManager"
+                closeOnBlur:            [Optional] Boolean that indicate if we have to close the completion on blur event
+                callbacks:              [Optional] The array containing all processable callbacks
+                                        Available callbacks are :
+                                            - "selection" : Function to call after selecting a suggestion
+            }
+        
+        [HISTORY MANAGER CONFIGURATION]
+        
+            SimplehistoryManager
+            {
+                name:                   "SimpleHistoryManager"
+                minQueryLength:         [Optional] The minimum query length
+                maxHistory:             [Optional] The maximum history size
+                callbacks:              [Optional] The array containing all processable callbacks
+                                        Available callbacks are :
+                                            - "parseHistoryData" : Function to call after retrieve the history data. 
+                                            Return value must be the updated data (with a first specific separated label, 
+                                            for example) or null in order to hide the completion
+                handler:
+                {
+                    handlerType:        [HISTORY HANDLER CONFIGURATION]
+                }
+            }
+        
+        ================ MODULES ================
+        
+        [DATA MODULES CONFIGURATION]
+        
+            DefaultDataModule
+            {
+                mapping:                [Optional] The mapping array between data key name and internal suggestion key name.
+                                        Default mapping is : 
+										{
+										    "value": "value"
+										    "type" : "type"
+										    "css"  : "css"
+										}
+            }
+            
+            DirectLinkDataModule
+            {
+                mapping:                [Optional] The mapping array between data key name and internal suggestion key name.
+                                        Default mapping is : 
+										{
+										    "clickUrl": "clickUrl"
+										}
+            }
+            
+            LabelDataModule
+            {
+                mapping:                [Optional] The mapping array between data key name and internal suggestion key name.
+                                        Default mapping is : 
+										{
+                                            "content": "content"
+                                            "action": "action"
+										}
+            }
+            
+        [DOM MODULES CONFIGURATION]
+            
+            DefaultDomModule
+            {
+				boldSuggestion:         [Optional] Indicate if we have to bold the suggestion value. Default is true
+				clearAccents:           [Optional] Indicate if we have to remove accents before comparison. Default is false
+				clearSeparatorChars:    [Optional] Indicate if we have to remove special chars before comparison. Default is false
+				callbacks:              [Optional] The array containing all processable callbacks
+				                        Available callbacks are :
+				                        - "customDisplay" : Create a custom suggestion DOM node content
+            }
+            
+            DirectLinkDomModule
+            {
+                directLinkRightCssClassname:    [Optional] Specify the name of right content css style
+            }
+        
+        ================ HISTORY HANDLERS ================
+        
+        [HISTORY HANDLER CONFIGURATION]
+        
+            LocalStorageHistoryHandler
+            {
+                storageName:            [Optional] Key name of the history local storage entry
+                callbacks:              [Optional] The array containing all processable callbacks
+                                        Available callbacks are :
+                                        - "compareData" : Comparison function between the query and the suggestion value. 
+                                        Return value must be an ordering number to sort the final suggestions list
+            }
+        
+        </description>
+        <type>object</type>
+        <is_optional>0</is_optional>
+      </property>
+    </properties>
+    <code_sample>
+var cityProperties = 
+{
+    "input": $('myInputCity'),
+    "managers": {                
+        "data": {
+            "name": "LocalDataManager",
+            "suggestions": cities,
+            "maxSearchedSuggestions": 4
+        },
+        "dom": {
+            "name": "SimpleDomManager"
+        },
+        "event": {
+            "name": "SimpleEventManager",
+            "closeOnBlur": true
+        }
+   }
+};
+
+cityCompleter = new wink.plugins.completion.Component(cityProperties);
+cityCompleter.start();
+    </code_sample>
+  </instanciation>
+  <components>
+    <component>
+      <name>wink.plugins.completion.Component</name>
+      <description>manage all completion process</description>
+      <public_methods>
+        <method>
+          <name>start</name>
+          <description>start the completion</description>
+        </method>
+        <method>
+          <name>stop</name>
+          <description>stop the completion</description>
+        </method>
+        <method>
+          <name>restart</name>
+          <description>restart the completion with given new properties</description>
+          <parameters>
+            <parameter>
+              <name>properties</name>
+              <description>The new global properties array</description>
+              <type>object</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>isStarted</name>
+          <description>check if the completion is correctly started</description>
+        </method>
+        <method>
+          <name>showCompletion</name>
+          <description>force showing the current completion box</description>
+        </method>
+        <method>
+          <name>hideCompletion</name>
+          <description>force hiding the current completion box</description>
+        </method>
+        <method>
+          <name>addSuggestion</name>
+          <description>add a new item in suggestions list</description>
+          <parameters>
+            <parameter>
+              <name>suggestion</name>
+              <description>The valid new suggestion object</description>
+              <type>object</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>index</name>
+              <description>The index of the added suggestion. Default index is last index</description>
+              <type>integer</type>
+              <is_optional>1</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>getSuggestion</name>
+          <description>get the suggestion item at specified index</description>
+        </method>
+        <method>
+          <name>getSuggestions</name>
+          <description>get all the suggestions list</description>
+        </method>
+        <method>
+          <name>resetSuggestions</name>
+          <description>reset the suggestions list</description>
+        </method>
+        <method>
+          <name>getHighlightedSuggestion</name>
+          <description>get the current preselected suggestion item</description>
+        </method>
+        <method>
+          <name>getSelectedSuggestion</name>
+          <description>get the current selected suggestion item</description>
+        </method>
+        <method>
+          <name>calculateShiftHighlightedIndex</name>
+          <description>calculate index increased by shift value</description>
+          <parameters>
+            <parameter>
+              <name>shiftValue</name>
+              <description>the value to add (positive or negative)</description>
+              <type>integer</type>
+              <is_optional>1</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>highlight</name>
+          <description>highlight the suggestion specified by given index</description>
+          <parameters>
+            <parameter>
+              <name>index</name>
+              <description>The suggestion index to highlight</description>
+              <type>integer</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>unhighlight</name>
+          <description>unhighlight all suggestions</description>
+        </method>
+        <method>
+          <name>saveSelectedSuggestionInHistory</name>
+          <description>save the current selected suggestion in history</description>
+        </method>
+        <method>
+          <name>resetHistory</name>
+          <description>reset all history suggestions</description>
+        </method>
+      </public_methods>
+      <public_properties>
+        <property>
+          <name>input</name>
+          <description>the input HTMLElement</description>
+          <type>InputHTMLElement</type>
+        </property>
+        <property>
+          <name>uId</name>
+          <description>the unique completion identifier</description>
+          <type>integer</type>
+        </property>
+        <property>
+          <name>managers</name>
+          <description>the manager's configurations array</description>
+          <type>object</type>
+        </property>
+      </public_properties>
+    </component>
+    <component>
+      <name>wink.plugins.completion.manager.data.LocalDataManager</name>
+      <description>define the completion local data manager with default values</description>
+      <public_methods>
+        <method>
+          <name>start</name>
+          <description>start the data manager</description>
+        </method>
+        <method>
+          <name>stop</name>
+          <description>stop the data manager</description>
+        </method>
+        <method>
+          <name>searchData</name>
+          <description>run the local search process using the specified query string</description>
+          <parameters>
+            <parameter>
+              <name>query</name>
+              <description>The searched query</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+      <public_properties>
+        <property>
+          <name>suggestions</name>
+          <description>the suggestions data array</description>
+          <type>array</type>
+        </property>
+        <property>
+          <name>minQueryLength</name>
+          <description>the minimum query length</description>
+          <type>integer</type>
+        </property>
+        <property>
+          <name>maxSearchedSuggestions</name>
+          <description>the maximum searched suggestions count</description>
+          <type>integer</type>
+        </property>
+        <property>
+          <name>callbacks</name>
+          <description>the array containing all processable callbacks</description>
+          <type>object</type>
+        </property>
+        <property>
+          <name>removeDuplicateSuggestions</name>
+          <description>the boolean value that indicate if we have to remove duplicate suggestions</description>
+          <type>boolean</type>
+        </property>
+		<property>
+          <name>stripAccents</name>
+          <description>Indicate if we use strip accents for the suggestions search</description>
+          <type>boolean</type>
+        </property>
+      </public_properties>
+    </component>
+    <component>
+      <name>wink.plugins.completion.manager.data.RemoteDataManager</name>
+      <description>define the completion remote data manager with default values</description>
+      <public_methods>
+        <method>
+          <name>start</name>
+          <description>start the data manager</description>
+        </method>
+        <method>
+          <name>stop</name>
+          <description>stop the data manager</description>
+        </method>
+        <method>
+          <name>searchData</name>
+          <description>run the remote search process using the specified query string</description>
+          <parameters>
+            <parameter>
+              <name>query</name>
+              <description>The searched query</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+      <public_properties>
+        <property>
+          <name>url</name>
+          <description>the Remote server URL to call</description>
+          <type>string</type>
+        </property>
+        <property>
+          <name>queryParamName</name>
+          <description>the query parameter name to use in the URL</description>
+          <type>string</type>
+        </property>
+        <property>
+          <name>sendMethod</name>
+          <description>the send method to use (GET or POST)</description>
+          <type>string</type>
+        </property>
+        <property>
+          <name>minQueryLength</name>
+          <description>the minimum query length</description>
+          <type>array</type>
+        </property>
+        <property>
+          <name>callbacks</name>
+          <description>the array containing all processable callbacks</description>
+          <type>object</type>
+        </property>
+        <property>
+          <name>removeDuplicateSuggestions</name>
+          <description>the boolean that indicate if we have to remove duplicate suggestions</description>
+          <type>boolean</type>
+        </property>
+      </public_properties>
+    </component>
+    <component>
+      <name>wink.plugins.completion.manager.dom.SimpleDomManager</name>
+      <description>define the completion dom manager with default values</description>
+      <public_methods>
+        <method>
+          <name>start</name>
+          <description>start the DOM manager</description>
+        </method>
+        <method>
+          <name>stop</name>
+          <description>stop the DOM manager</description>
+        </method>
+        <method>
+          <name>buildDomNode</name>
+          <description>build the DOM node using the internal suggestion of the Component</description>
+        </method>
+        <method>
+          <name>showDomNode</name>
+          <description>show the DOM node</description>
+        </method>
+        <method>
+          <name>hideDomNode</name>
+          <description>hide the DOM node</description>
+        </method>
+        <method>
+          <name>highlight</name>
+          <description>highlight a specific DOM suggestion</description>
+          <parameters>
+            <parameter>
+              <name>index</name>
+              <description>index of the suggestion to highlight</description>
+              <type>integer</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>unhighlight</name>
+          <description>unhighlight all DOM suggestions</description>
+        </method>
+        <method>
+          <name>updatePositions</name>
+          <description>update the size and the position of the DOM node</description>
+        </method>
+        <method>
+          <name>getDomNode</name>
+          <description>return the DOM node</description>
+        </method>
+        <method>
+          <name>getSuggestionDomNode</name>
+          <description>return the suggestion DOM node specified by the index</description>
+          <parameters>
+            <parameter>
+              <name>index</name>
+              <description>the suggestion DOM node index</description>
+              <type>integer</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+      <public_properties>
+        <property>
+          <name>domNode</name>
+          <description>the DOM node HTMLElement</description>
+          <type>HTMLElement</type>
+        </property>
+        <property>
+          <name>callbacks</name>
+          <description>the array containing all processable callbacks</description>
+          <type>object</type>
+        </property>
+        <property>
+          <name>cssPrefix</name>
+          <description>the CSS prefix used for all HTMLElement</description>
+          <type>string</type>
+        </property>
+        <property>
+          <name>borderSize</name>
+          <description>the CSS border size value</description>
+          <type>integer</type>
+        </property>
+      </public_properties>
+    </component>
+    <component>
+      <name>wink.plugins.completion.manager.event.SimpleEventManager</name>
+      <description>define the completion event manager with default values</description>
+      <public_methods>
+        <method>
+          <name>start</name>
+          <description>start the event manager</description>
+        </method>
+        <method>
+          <name>stop</name>
+          <description>stop the event manager</description>
+        </method>
+        <method>
+          <name>addMouseEventListenersOnNewSuggestion</name>
+          <description>append mouse listener to the DOM suggestion</description>
+          <parameters>
+            <parameter>
+              <name>index</name>
+              <description>the index of the current suggestion</description>
+              <type>integer</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>domNode</name>
+              <description>the domNode suggestion</description>
+              <type>HTMLElement</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>onInputBlur</name>
+          <description>manage the onBlur event of the Component's input</description>
+          <parameters>
+            <parameter>
+              <name>event</name>
+              <description>the onBlur event</description>
+              <type>Event</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>onInputKeyUp</name>
+          <description>manage the onKeyUp event of the Component's input</description>
+          <parameters>
+            <parameter>
+              <name>event</name>
+              <description>the onKeyUp event</description>
+              <type>Event</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>onInputKeyDown</name>
+          <description>manage the onKeyDown event of the Component's input</description>
+          <parameters>
+            <parameter>
+              <name>event</name>
+              <description>the onKeyDown event</description>
+              <type>Event</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+		<method>
+          <name>getSelectionCallback</name>
+          <description>return the selection callback if defined</description>
+        </method>
+      </public_methods>
+      <public_properties>
+        <property>
+          <name>closeOnBlur</name>
+          <description>indicate if we have to close the completion on blur event</description>
+          <type>boolean</type>
+        </property>
+        <property>
+          <name>callbacks</name>
+          <description>the array containing all processable callbacks</description>
+          <type>object</type>
+        </property>
+      </public_properties>
+    </component>
+    <component>
+      <name>wink.plugins.completion.manager.history.SimpleHistoryManager</name>
+      <description>define the completion history manager with default values</description>
+      <public_methods>
+        <method>
+          <name>start</name>
+          <description>start the history manager</description>
+        </method>
+        <method>
+          <name>stop</name>
+          <description>stop the history manager</description>
+        </method>
+        <method>
+          <name>searchHistoryData</name>
+          <description>search and append the history data in the Component suggestion list</description>
+          <parameters>
+            <parameter>
+              <name>query</name>
+              <description>the searched query</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>saveHistoryData</name>
+          <description>save the suggestion in history</description>
+          <parameters>
+            <parameter>
+              <name>suggestion</name>
+              <description>the suggestion to save</description>
+              <type>object</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>resetHistory</name>
+          <description>reset the history data</description>
+        </method>
+      </public_methods>
+      <public_properties>
+        <property>
+          <name>enable</name>
+          <description>the state of the history storage</description>
+          <type>boolean</type>
+        </property>
+        <property>
+          <name>minQueryLength</name>
+          <description>the minimum query length</description>
+          <type>integer</type>
+        </property>
+        <property>
+          <name>maxHistory</name>
+          <description>the maximum history size</description>
+          <type>integer</type>
+        </property>
+		<property>
+          <name>stripAccents</name>
+          <description>Indicate if we use strip accents for the suggestions search in history</description>
+          <type>boolean</type>
+        </property>
+        <property>
+          <name>callbacks</name>
+          <description>the array containing all processable callbacks</description>
+          <type>object</type>
+        </property>
+      </public_properties>
+    </component>
+    <component>
+      <name>wink.plugins.completion.manager.history.handler.LocalStorageHistoryHandler</name>
+      <description>define the local storage history handler</description>
+      <public_methods>
+        <method>
+          <name>getHistoryData</name>
+          <description>return the history data for specified query</description>
+          <parameters>
+            <parameter>
+              <name>query</name>
+              <description>the searched query</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>saveHistoryData</name>
+          <description>save the suggestion data in history</description>
+          <parameters>
+            <parameter>
+              <name>suggestion</name>
+              <description>the suggestion to save</description>
+              <type>object</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>resetHistoryData</name>
+          <description>reset the history data</description>
+        </method>
+      </public_methods>
+      <public_properties>
+        <property>
+          <name>storageName</name>
+          <description>the history storage name</description>
+          <type>string</type>
+        </property>
+        <property>
+          <name>callbacks</name>
+          <description>the array containing all processable callbacks</description>
+          <type>object</type>
+        </property>
+      </public_properties>
+    </component>
+    <component>
+      <name>wink.plugins.completion.manager.ManagerHelper</name>
+      <description>handle all specific manager's common process</description>
+      <public_methods>
+        <method>
+          <name>createModules</name>
+          <description>create default and additional modules for the manager</description>
+          <parameters>
+            <parameter>
+              <name>manager</name>
+              <description>the manager object</description>
+              <type>Manager</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>managerType</name>
+              <description>the type of manager : dom, data or event</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>startModules</name>
+          <description>start each module of the manager</description>
+          <parameters>
+            <parameter>
+              <name>managerModules</name>
+              <description>the list of module to start</description>
+              <type>array</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>addModule</name>
+          <description>append a module in the manager's module array</description>
+          <parameters>
+            <parameter>
+              <name>manager</name>
+              <description>the manager object</description>
+              <type>Manager</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>moduleInstance</name>
+              <description>the instance of module</description>
+              <type>Module</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>type</name>
+              <description>the module type</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>getDefaultModule</name>
+          <description>return the default module of the specified manager</description>
+          <parameters>
+            <parameter>
+              <name>manager</name>
+              <description>the manager object</description>
+              <type>Manager</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>getModuleType</name>
+          <description>return the module type of the module instance</description>
+          <parameters>
+            <parameter>
+              <name>moduleInstance</name>
+              <description>the instance of module</description>
+              <type>Module</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>isModuleType</name>
+          <description>check if the suggestion is with the type of the module</description>
+          <parameters>
+            <parameter>
+              <name>moduleInstance</name>
+              <description>the instance of module</description>
+              <type>Module</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>suggestion</name>
+              <description>a completion suggestion</description>
+              <type>object</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+    </component>
+    <component>
+      <name>wink.plugins.completion.module.data.DefaultDataModule</name>
+      <description>define the default completion data module</description>
+      <public_methods>
+        <method>
+          <name>start</name>
+          <description>start the module</description>
+        </method>
+        <method>
+          <name>processSuggestion</name>
+          <description>process the current suggestion using data</description>
+          <parameters>
+            <parameter>
+              <name>suggestion</name>
+              <description>the current suggestion</description>
+              <type>object</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>data</name>
+              <description>the parsed data</description>
+              <type>array</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+      <public_properties>
+        <property>
+          <name>mapping</name>
+          <description>the mapping array between data key name and internal suggestion key name</description>
+          <type>object</type>
+        </property>
+      </public_properties>
+    </component>
+    <component>
+      <name>wink.plugins.completion.module.data.DirectLinkDataModule</name>
+      <description>define the direct link completion data module</description>
+      <public_methods>
+        <method>
+          <name>start</name>
+          <description>start the module</description>
+        </method>
+        <method>
+          <name>processSuggestion</name>
+          <description>process the current suggestion using data</description>
+          <parameters>
+            <parameter>
+              <name>suggestion</name>
+              <description>the current suggestion</description>
+              <type>object</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>data</name>
+              <description>the parsed data</description>
+              <type>array</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+      <public_properties>
+        <property>
+          <name>mapping</name>
+          <description>the mapping array between data key name and internal suggestion key name</description>
+          <type>object</type>
+        </property>
+      </public_properties>
+    </component>
+    <component>
+      <name>wink.plugins.completion.module.data.LabelDataModule</name>
+      <description>define the label completion data module</description>
+      <public_methods>
+        <method>
+          <name>start</name>
+          <description>start the module</description>
+        </method>
+        <method>
+          <name>processSuggestion</name>
+          <description>process the current suggestion using data</description>
+          <parameters>
+            <parameter>
+              <name>suggestion</name>
+              <description>the current suggestion</description>
+              <type>object</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>data</name>
+              <description>the parsed data</description>
+              <type>array</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+      <public_properties>
+        <property>
+          <name>mapping</name>
+          <description>the mapping array between data key name and internal suggestion key name</description>
+          <type>object</type>
+        </property>
+      </public_properties>
+    </component>
+    <component>
+      <name>wink.plugins.completion.module.dom.DefaultDomModule</name>
+      <description>define the default completion DOM module</description>
+      <public_methods>
+        <method>
+          <name>start</name>
+          <description>start the module</description>
+        </method>
+        <method>
+          <name>processSuggestion</name>
+          <description>display the current suggestion DOM node</description>
+          <parameters>
+            <parameter>
+              <name>suggestion</name>
+              <description>the current suggestion</description>
+              <type>object</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>domNode</name>
+              <description>the current DOM node suggestion</description>
+              <type>HTMLElement</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+      <public_properties>
+        <property>
+          <name>boldSuggestion</name>
+          <description>indicate if we have to bold the suggestion value</description>
+          <type>boolean</type>
+        </property>
+        <property>
+          <name>clearAccents</name>
+          <description>indicate if we have to remove accents before comparison</description>
+          <type>boolean</type>
+        </property>
+        <property>
+          <name>clearSeparatorChars</name>
+          <description>indicate if we have to remove special chars before comparison</description>
+          <type>boolean</type>
+        </property>
+        <property>
+          <name>callbacks</name>
+          <description>the array containing all processable callbacks</description>
+          <type>object</type>
+        </property>
+      </public_properties>
+    </component>
+    <component>
+      <name>wink.plugins.completion.module.dom.LabelDomModule</name>
+      <description>define the label completion DOM module</description>
+      <public_methods>
+        <method>
+          <name>processSuggestion</name>
+          <description>display the current suggestion DOM node</description>
+          <parameters>
+            <parameter>
+              <name>suggestion</name>
+              <description>the current suggestion</description>
+              <type>object</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>domNode</name>
+              <description>the current DOM node suggestion</description>
+              <type>HTMLElement</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+    </component>
+    <component>
+      <name>wink.plugins.completion.module.event.DefaultEventModule</name>
+      <description>define the default completion Event module</description>
+      <public_methods>
+        <method>
+          <name>onMouseDown</name>
+          <description>manage the onMouseDown event on a suggestion</description>
+          <parameters>
+            <parameter>
+              <name>event</name>
+              <description>the mouse event</description>
+              <type>Event</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>index</name>
+              <description>the suggestion index</description>
+              <type>integer</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>onClick</name>
+          <description>manage the onClick event on a suggestion</description>
+          <parameters>
+            <parameter>
+              <name>event</name>
+              <description>the mouse event</description>
+              <type>Event</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>index</name>
+              <description>the suggestion index</description>
+              <type>integer</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>onKeyDown</name>
+          <description>manage the onKeyDown event on a suggestion</description>
+          <parameters>
+            <parameter>
+              <name>event</name>
+              <description>the event</description>
+              <type>Event</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>onKeyUp</name>
+          <description>manage the onKeyUp event on a suggestion</description>
+          <parameters>
+            <parameter>
+              <name>event</name>
+              <description>the event</description>
+              <type>Event</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+    </component>
+    <component>
+      <name>wink.plugins.completion.module.event.DirectLinkEventModule</name>
+      <description>define the Direct Link completion Event module</description>
+      <public_methods>
+		<method>
+          <name>onClick</name>
+          <description>manage the onClick event on a suggestion</description>
+          <parameters>
+            <parameter>
+              <name>event</name>
+              <description>the mouse event</description>
+              <type>Event</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>index</name>
+              <description>the suggestion index</description>
+              <type>integer</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+    </component>
+    <component>
+      <name>wink.plugins.completion.module.event.LabelEventModule</name>
+      <description>define the Label completion Event module</description>
+      <public_methods>
+        <method>
+          <name>onMouseDown</name>
+          <description>manage the onMouseDown event on a suggestion</description>
+          <parameters>
+            <parameter>
+              <name>event</name>
+              <description>the mouse event</description>
+              <type>Event</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>index</name>
+              <description>the suggestion index</description>
+              <type>integer</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>onClick</name>
+          <description>manage the onClick event on a suggestion</description>
+          <parameters>
+            <parameter>
+              <name>event</name>
+              <description>the mouse event</description>
+              <type>Event</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>index</name>
+              <description>the suggestion index</description>
+              <type>integer</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+    </component>
+    <component>
+      <name>wink.plugins.completion.tools</name>
+      <description>set of general function that is used by the completion</description>
+      <public_methods>
+        <method>
+          <name>clone</name>
+          <description>clone a simple object</description>
+          <parameters>
+            <parameter>
+              <name>obj</name>
+              <description>the simple object to clone</description>
+              <type>object</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>ucFirst</name>
+          <description>capitalize the first letter of the string</description>
+          <parameters>
+            <parameter>
+              <name>str</name>
+              <description>the string to capitalize</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>lcFirst</name>
+          <description>minimize the first letter of the string</description>
+          <parameters>
+            <parameter>
+              <name>str</name>
+              <description>the string to minimize</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>cleanQuery</name>
+          <description>clean a query string by removing left spaces and replacing multiple space</description>
+          <parameters>
+            <parameter>
+              <name>query</name>
+              <description>the query to clean</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>removeDuplicate</name>
+          <description>manage the onKeyDown event on a suggestion</description>
+          <parameters>
+            <parameter>
+              <name>sourceArray</name>
+              <description>the array to clean</description>
+              <type>array</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>sourceKey</name>
+              <description>the comparison source key</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>excludeArray</name>
+              <description>the array to compare</description>
+              <type>array</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>excludeKey</name>
+              <description>the comparison exclude key</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+    </component>
+    <component>
+      <name>wink.plugins.completion.searchTools</name>
+      <description>set of general function that is used by the completion</description>
+      <public_methods>
+        <method>
+          <name>stripAccents</name>
+          <description>remove all accent and replace them by normal letter</description>
+          <parameters>
+            <parameter>
+              <name>str</name>
+              <description>the string to strip accent</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>stripSeparatorChars</name>
+          <description>manage the onClick event on a suggestion</description>
+          <parameters>
+            <parameter>
+              <name>str</name>
+              <description>the string to strip separator char</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>clearSpace</name>
+          <description>trim left and right and remove multiple space on the string</description>
+          <parameters>
+            <parameter>
+              <name>str</name>
+              <description>the string to clear</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+        <method>
+          <name>getBoldInv</name>
+          <description>manage the onKeyDown event on a suggestion</description>
+          <parameters>
+            <parameter>
+              <name>str</name>
+              <description>the string</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>pattern</name>
+              <description>the pattern</description>
+              <type>string</type>
+              <is_optional>0</is_optional>
+            </parameter>
+            <parameter>
+              <name>clearAccents</name>
+              <description>if we have to clear accent</description>
+              <type>boolean</type>
+              <is_optional>1</is_optional>
+            </parameter>
+            <parameter>
+              <name>clearSeparatorChars</name>
+              <description>if we have to clear separator chars</description>
+              <type>boolean</type>
+              <is_optional>1</is_optional>
+            </parameter>
+          </parameters>
+        </method>
+      </public_methods>
+    </component>
+  </components>
+  <styles>
+    <classes>
+      <class>
+        <name>w_completion_box</name>
+        <description>the main completion box</description>
+      </class>
+      <class>
+        <name>w_completion_suggestion</name>
+        <description>the completion suggestion</description>
+      </class>
+      <class>
+        <name>highlighted</name>
+        <description>Associated to w_completion_suggestion class, the highlighted completion suggestion</description>
+      </class>
+      <class>
+        <name>label</name>
+        <description>Associated to w_completion_suggestion class, the label completion suggestion</description>
+      </class>
+    </classes>
+  </styles>
+</module>

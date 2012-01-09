@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<style>
+			html, body
+			{
+				min-height: 460px;
+				
+				-webkit-perspective: 320;
+				-webkit-transform-style: preserve-3d;
+			}
+			
+			#container
+			{
+				position: relative;
+				width: 100%;
+				-webkit-transform-style: preserve-3d;
+			}
+			
+			#plan1
+			{
+				background-color: rgba(255, 0, 0, 0.5);
+			}
+			
+			#plan2
+			{
+				background-color: rgba(0, 255, 0, 0.5);
+			}
+			
+			#plan3
+			{
+				background-color: rgba(0, 0, 255, 0.5);
+			}
+			
+			#plan4
+			{
+				background-color: rgba(0, 255, 255, 0.5);
+			}
+			
+			#plan5
+			{
+				background-color: rgba(255, 255, 255, 0);
+			}
+			
+			#plan6
+			{
+				background-color: rgba(255, 255, 255, 0.5);
+				
+				color: #ccc;
+				
+				font-size: 20px;
+			}
+			
+			.plan
+			{
+				position: absolute;
+				
+				color: #fff;
+				
+				font-size: 25px;
+				font-weight: bold;
+				
+				top: 0;
+				left: 0;
+				
+				text-align: center;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../math/_matrix/js/matrix.js"></script>
+		<script type="text/javascript" src="../../../fx/_xyz/js/3dfx.js"></script>
+		
+		<script type="text/javascript">
+			var transform = function(node, transformations) {
+				wink.fx.initComposedTransform(node);
+				for (var i = 0; i < transformations.length; i++) {
+					wink.fx.setTransformPart(node, (i + 1), transformations[i]);
+				}
+				wink.fx.applyComposedTransform(node);
+			};
+			
+			var init = function()
+			{
+				var container = $('container'),
+					plan1 = $('plan1'),
+					plan2 = $('plan2'),
+					plan3 = $('plan3'),
+					plan4 = $('plan4'),
+					plan5 = $('plan5'),
+					plan6 = $('plan6');
+
+				
+				var w = container.offsetWidth;
+				container.style['height'] = (w / 1.2) + "px";
+				var	h = container.offsetHeight;
+				
+				wink.fx.apply(container, {'transform-origin': '50% 50% ' + w / 2 + 'px'});
+
+				var dims = {
+					width: w + 'px',
+					height: h + 'px',
+					"line-height": h + 'px'
+				};
+				
+				wink.fx.apply(plan1, dims);
+				wink.fx.apply(plan2, dims);
+				wink.fx.apply(plan3, dims);
+				wink.fx.apply(plan4, dims);
+
+				dims = {
+					width: w + 'px',
+					height: w + 'px'
+				};
+				wink.fx.apply(plan5, dims);
+
+				dims["top"] = (h-w) + 'px';
+				wink.fx.apply(plan6, dims);
+
+				transform(plan1, [
+					{ type: "translate", x: 0, y: 0, z: 0}
+				]);
+				transform(plan2, [
+					{ type: "rotate", x: 0, y: 1, z: 0, angle: -90},
+					{ type: "translate", x: w / 2, y: 0, z: w / 2}
+				]);
+				transform(plan3, [
+					{ type: "rotate", x: 0, y: 1, z: 0, angle: 180},
+					{ type: "translate", x: 0, y: 0, z: w}
+				]);
+				transform(plan4, [
+					{ type: "rotate", x: 0, y: 1, z: 0, angle: 90},
+					{ type: "translate", x: -w / 2, y: 0, z: w / 2}
+				]);
+				transform(plan5, [
+					{ type: "rotate", x: 1, y: 0, z: 0, angle: 90},
+					{ type: "translate", x: 0, y: 0, z: 0}
+				]);
+				transform(plan6, [
+					{ type: "rotate", x: 1, y: 0, z: 0, angle: 90},
+					{ type: "translate", x: 0, y: w / 2, z: w / 2}
+				]);
+			};
+			
+			window.addEventListener("deviceorientation", function(e) 
+			{
+				var alpha = e.alpha;
+				var beta = e.beta;
+				var gamma = e.gamma;
+				transform(container, [ { type: "rotate", x: 0, y: 1, z: 0, angle: -alpha } ]);
+			}, false);
+			
+		</script>
+	</head>
+	<body onload="init();setTimeout(scrollTo, 0, 0, 1);">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">orientation</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container">
+			<div id="plan1" class="plan">
+				Front
+			</div>
+			<div id="plan2" class="plan">
+				Right
+			</div>
+			<div id="plan3" class="plan">
+				Back
+			</div>
+			<div id="plan4" class="plan">
+				Left
+			</div>
+			<div id="plan5" class="plan">
+				
+			</div>
+			<div id="plan6" class="plan">
+				<br />
+				<br />
+				Move your device to move in the room
+				<br />
+				<br />
+				Your device must be equipped of a gyroscope.
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_animation_simple</title>
+
+		<style>
+			.text 
+			{
+				font-size: 3.5em;
+				width: 3.5em;
+				color: #000;
+				text-shadow: -0.04em -0.04em 0.04em #aaa; 
+				letter-spacing: 0.2em;
+			}
+			
+			.text2 
+			{
+				font-size: 1.5em;
+				width: 10em;
+				color: #000;
+				text-shadow: -0.04em -0.04em 0.04em #aaa;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+
+		<script type="text/javascript" src="../../../fx/_animation/js/animation.js"></script>
+
+		<script type="text/javascript">
+			var animator = {
+				/**
+				 *
+				 */
+				startAnim: function(nextStep)
+				{
+					wink.fx.fadeOut($('text2'), {
+						duration: 1000,
+						delay: 500,
+						onEnd: { context: animator, method: '_step2' }
+					});
+				},
+				/**
+				 *
+				 */
+				_step2: function()
+				{
+					wink.fx.animate($('text'), [
+						{ property: 'background-color', value: 'rgba(0, 0, 0, 0.8)', duration: 1500 },
+						{ property: 'color', value: 'rgba(255, 255, 255, 1.0)', duration: 1000, delay: 50, func: 'ease-in' }
+					], { onEnd: { context: animator, method: '_step3' } });
+				},
+				/**
+				 *
+				 */
+				_step3: function()
+				{
+					var anim = wink.fx.animate(null, { 
+							property: '-webkit-transform', 
+							value: { context: this, method: '_translateRotate', arguments: [ 100, 100, 180 ] }, 
+							duration: 500, 
+							delay: 0 
+					}, { start: false })
+					.chain(wink.fx.animate(null, { 
+						property: '-webkit-transform', 
+						value: { context: this, method: '_translateRotate', arguments: [ 100, 100, 360 ] }, 
+						duration: 500, 
+						delay: 0 
+					}, { start: false }));
+					anim.start($('text'), { onEnd: { context: animator, method: '_step4' } });
+				},
+				/**
+				 *
+				 */
+				_step4: function()
+				{
+					var anim = wink.fx.fadeIn($('text2'), { start: false });
+					anim.chain(wink.fx.animate(null, { 
+						property: '-webkit-transform', 
+						value: { context: this, method: '_translateRotate', arguments: [ 20, 0, 0 ] }, 
+						duration: 500
+					}, { start: false }));
+					anim.start($('text2'));
+				},
+				/**
+				 *
+				 */
+				_translateRotate: function(params, x, y, angle) {
+					var n = params.node;
+					n.translate(x, y);
+					n.rotate(angle);
+				}
+			};
+
+			var init = function() {
+				window.scrollTo(0,0);
+
+				wink.error.logLevel = 1;
+
+				animator.startAnim();
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+	
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">animations</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div id="container" class="container">
+			<div id="text" class="text">WINK</div>
+			<div id="text2" class="text2">Webapp INnovation Kit</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,90 @@
+.dp_datepicker
+{
+	position: absolute;	
+	
+	font-size: 17px;
+	font-weight: bold;
+	
+	padding: 0;
+	
+	opacity: 1;
+	overflow: visible;
+	
+	z-index: 999;
+}
+
+.dp_navigation
+{
+	clear: both;
+	height: 40px;
+	text-align:center;
+	
+	-webkit-tap-highlight-color: rgba(0,0,0,0)
+}
+
+.dp_previous
+{
+	float: left;
+	margin-left: 25px;
+	height: 100%;
+	width: 40px
+}
+
+.dp_datepicker .dp_navigation .dp_month
+{
+	float: left;
+	font-weight: bold;
+	line-height: 40px;
+	height: 100%;
+	width: 150px
+}
+
+.dp_datepicker .dp_navigation .dp_next
+{
+	float: left;
+	height: 100%;
+	width: 40px
+}
+
+.dp_days_container
+{
+	clear: both;
+	text-align:center;
+	width: 100%
+}
+
+.dp_days
+{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	width: 40px
+}
+
+.dp_dates_container
+{
+	clear: both;
+	width: 100%
+}
+
+.dp_date
+{
+	color: inherit;
+	
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	text-decoration: none;
+	width: 39px
+}
+
+.dp_today
+{
+	color: #FF5500
+}
+
+.dp_finished
+{
+	color: #888
+}

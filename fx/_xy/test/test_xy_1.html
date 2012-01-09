@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<title>test_xy_dom</title>
+
+		<style>
+			#container 
+			{
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.box 
+			{
+				position: absolute;
+				top: 20%;
+				left: 20%;
+				width: 30%;
+				height: 30%;
+				background-color: #6584F3;
+				-webkit-user-select: none;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript">
+			var BoxMover = function(box)
+			{
+				this.x = 0;
+				this.y = 0;
+				this.box = box;
+				
+				this.handleBoxStart = function(uxEvent)
+				{
+					uxEvent.preventDefault();
+					this.startX = uxEvent.x - this.x;
+					this.startY = uxEvent.y - this.y;
+					this.box.scale(1.2, 1.2);
+				};
+				this.handleBoxMove = function(uxEvent)
+				{
+					this.x = uxEvent.x - this.startX;
+					this.y = uxEvent.y - this.startY;
+					this.box.translate(this.x, this.y);
+				};
+				this.handleBoxEnd = function(uxEvent)
+				{
+					this.box.scale(1, 1);
+				};
+			};
+
+			var init = function() {
+				wink.error.logLevel = 1;
+				
+				var box = $("box");
+
+				wink.addClass(box, 'box');
+				
+				var boxMover = new BoxMover(box);
+				
+				wink.ux.touch.addListener(box, "start", { context: boxMover, method: "handleBoxStart" });
+				wink.ux.touch.addListener(box, "move", { context: boxMover, method: "handleBoxMove" });
+				wink.ux.touch.addListener(box, "end", { context: boxMover, method: "handleBoxEnd" });
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">2d fx</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			Move the blue square.
+		</div>
+		
+		<div id="container">
+			<div id="box"></div>
+		</div>
+	</body>
+</html>

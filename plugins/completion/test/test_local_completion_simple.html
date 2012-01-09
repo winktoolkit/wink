@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    
+        <!-- THEME UTILITY -->
+        <link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+        <!-- END THEME UTILITY -->
+        
+        <link rel="stylesheet" href="../../../plugins/completion/css/completion.css" type="text/css">
+        
+        <!-- THEME UTILITY -->
+        <script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+        <!-- END THEME UTILITY -->
+        
+        <script type="text/javascript" src="../../../plugins/completion/test/resources/cities.js"></script>
+         
+        <!-- CORE -->
+        <!-- Can be replaced by wink.min.js -->
+        <script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+        <script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+        <script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+        <script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+        <script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+        <script type="text/javascript" src="../../../_base/json/js/json.extended.js"></script>
+        <script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+        <script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+        <script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+        <script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+        <script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+        <script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+        <script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+        <script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+        <script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+        <script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+        <script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+        <script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+        <script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+        <!-- END CORE -->
+        
+        <script type="text/javascript" src="../../../ux/window/js/window.js"></script>
+        
+        <script type="text/javascript" src="../../../plugins/completion/js/component.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/tools.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/searchTools.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/manager/helper.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/manager/data/local.js"></script>        
+        <script type="text/javascript" src="../../../plugins/completion/js/manager/dom/simple.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/manager/event/simple.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/module/data/default.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/module/dom/default.js"></script>
+        <script type="text/javascript" src="../../../plugins/completion/js/module/event/default.js"></script>
+        
+        <script><!--
+        wink.error.logLevel = 1;
+
+        var cityCompleter;
+
+        init = function()
+        {
+            var cityProperties = 
+            {
+                "input": $('myInputCity'),
+                "managers": {                
+                    "data": {
+                        "name": "LocalDataManager",
+                        "suggestions": cities,
+                        "maxSearchedSuggestions": 4,
+                        "stripAccents": false
+                    },
+                    "dom": {
+                        "name": "SimpleDomManager",
+                       	"modules": {
+                               "default": {
+                                   "boldSuggestion": true
+                               }
+                           }
+                    },
+                    "event": {
+                        "name": "SimpleEventManager",
+                        "closeOnBlur": true
+                    }
+               }
+            };
+
+            cityCompleter = new wink.plugins.completion.Component(cityProperties);
+            cityCompleter.start();
+
+        };
+
+        --></script>
+        
+        <style type="text/css">
+            
+        input[type="text"]  {
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            width: 80%;  
+        }
+        
+        .w_bloc {
+            margin-top: 20px;
+            height: 400px;
+        }
+                 
+        </style>
+    </head>
+    
+    <body onload="init(); $('myInputCity').focus();">
+        <div class="w_box w_header w_bg_dark">
+            <input type="button" class="w_button w_radius w_bg_light" id="back" value="back" style="visibility: visible; " onclick="document.location.href='index.html'" />
+            simple
+        </div>
+        
+        <div class="w_bloc" style="text-align: center">
+			<div>Choose your city :</div>
+			<input id="myInputCity" autocomplete="off" autocorrect="off" name="city" autocorrect="off" type="text" style="height:36px;" class="w_input w_border w_radius"/>
+        </div>
+    </body>
+</html>

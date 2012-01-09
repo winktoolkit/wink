@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<style>
+			html, body
+			{
+				min-height: 460px;
+			}
+			
+			#container
+			{
+				position: relative;
+				
+				margin: auto;
+				
+				-webkit-transform-style: preserve-3d;
+				-webkit-transform-origin: 50% 0;
+			}
+			
+			#plan
+			{
+				position: relative;
+				-webkit-transform-style: preserve-3d;
+			}
+			
+			.axis
+			{
+				position: absolute;
+				
+				top: 0;
+				left: 0;
+				
+				padding: 10px;
+				
+				font-size: 20px;
+				
+				-webkit-transform-origin: 0 0;
+			}
+			
+			#x
+			{
+				background-color: rgba(255, 0, 0, 0.4);
+			}
+			
+			#y
+			{
+				background-color: rgba(0, 0, 255, 0.2);
+			}
+			
+			#z
+			{
+				background-color: rgba(0, 255, 0, 0.2);
+			}
+			
+			#device, #backface
+			{
+				background-color: #000;
+				background-image: url(./img/tel.png);
+				
+				position: absolute;
+				
+				-webkit-border-radius: 10px;
+				-webkit-transform-origin: 50% 50%;
+				
+				-webkit-backface-visibility: hidden;
+			}
+			
+			#backface
+			{
+				background-image: none;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../math/_geometric/js/geometric.js"></script>
+		<script type="text/javascript" src="../../../math/_matrix/js/matrix.js"></script>
+		<script type="text/javascript" src="../../../fx/_xyz/js/3dfx.js"></script>
+		
+		<script type="text/javascript">
+			var rotation = 0;
+			
+			var height = 200;
+			var width = 200;
+			
+			var iconHeight = 64;
+			var iconWidth = 125;
+			
+			window.addEventListener("deviceorientation", function(e) 
+			{
+				var alpha = e.alpha;
+				var beta = e.beta;
+				var gamma = e.gamma;
+				
+				wink.fx.initComposedTransform($('device'));
+				wink.fx.setTransformPart($('device'), 1, { type: "translate", x: 0, y: 0, z: 0.1 });
+				wink.fx.setTransformPart($('device'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 90 + gamma });
+				wink.fx.setTransformPart($('device'), 3, { type: "rotate", x: 0, y: 1, z: 0, angle: alpha });
+				wink.fx.setTransformPart($('device'), 4, { type: "rotate", x: 0, y: 0, z: 1, angle: beta });
+				wink.fx.applyComposedTransform($('device'));
+				
+				wink.fx.initComposedTransform($('backface'));
+				wink.fx.setTransformPart($('backface'), 1, { type: "translate", x: 0, y: 0, z: -0.1 });
+				wink.fx.setTransformPart($('backface'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 270 + gamma });
+				wink.fx.setTransformPart($('backface'), 3, { type: "rotate", x: 0, y: 1, z: 0, angle: alpha });
+				wink.fx.setTransformPart($('backface'), 4, { type: "rotate", x: 0, y: 0, z: 1, angle: beta });
+				wink.fx.applyComposedTransform($('backface'));
+				
+			}, false);
+			
+			init = function()
+			{
+				$('container').style.height = height + 'px';
+				$('container').style.width = width + 'px';
+				
+				$('x').style.height = height + 'px';
+				$('x').style.width = width + 'px';
+				
+				$('y').style.height = height + 'px';
+				$('y').style.width = width + 'px';
+				
+				$('z').style.height = height + 'px';
+				$('z').style.width = width + 'px';
+				
+				$('device').style.height = iconHeight + 'px';
+				$('device').style.width = iconWidth + 'px';
+				
+				$('backface').style.height = iconHeight + 'px';
+				$('backface').style.width = iconWidth + 'px';
+				
+				$('container').style.top = '50px';
+				
+				$('device').style.top = (height - iconHeight)/2 + 'px';
+				$('device').style.left = (width - iconWidth)/2 + 'px';
+				
+				$('backface').style.top = (height - iconHeight)/2 + 'px';
+				$('backface').style.left = (width - iconWidth)/2 + 'px';
+				
+				wink.fx.initComposedTransform($('plan'));
+				wink.fx.setTransformPart($('plan'), 1, { type: "rotate", x: 0, y: 1, z: 0, angle: 20 });
+				wink.fx.setTransformPart($('plan'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: -20 });
+				wink.fx.applyComposedTransform($('plan'));
+				
+				wink.fx.initComposedTransform($('x'));
+				wink.fx.setTransformPart($('x'), 1, { type: "rotate", x: 1, y: 0, z: 0, angle: 90 });
+				wink.fx.setTransformPart($('x'), 2, { type: "translate", x: 0, y: width/2, z: -height/2 });
+				wink.fx.applyComposedTransform($('x'));
+				
+				wink.fx.initComposedTransform($('z'));
+				wink.fx.setTransformPart($('z'), 1, { type: "rotate", x: 0, y: 1, z: 0, angle: 90 });
+				wink.fx.setTransformPart($('z'), 2, { type: "translate", x: width/2, y: 0, z: 120 });
+				wink.fx.applyComposedTransform($('z'));
+				
+				wink.fx.initComposedTransform($('device'));
+				wink.fx.setTransformPart($('device'), 1, { type: "translate", x: 0, y: 0, z: 0.1 });
+				wink.fx.setTransformPart($('device'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 90 });
+				wink.fx.applyComposedTransform($('device'));
+				
+				wink.fx.initComposedTransform($('backface'));
+				wink.fx.setTransformPart($('backface'), 1, { type: "translate", x: 0, y: 0, z: -0.1 });
+				wink.fx.setTransformPart($('backface'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 270 });
+				wink.fx.applyComposedTransform($('backface'));
+			}
+			
+			rotateContainer = function()
+			{
+				rotation += 181;
+				
+				wink.fx.applyTransformTransition($('container'), "4s", "0ms", "linear");
+				
+				wink.fx.initComposedTransform($('container'));
+				wink.fx.setTransformPart($('container'), 1, { type: "rotate", x: 0, y: 1, z: 0, angle: rotation});
+				wink.fx.applyComposedTransform($('container'));
+				
+				wink.fx.onTransitionEnd($('container'), rotateContainer);
+			}
+		</script>
+	</head>
+	<body onload="init();setTimeout(scrollTo, 0, 0, 1);">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">orientation</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		<div class="w_bloc">
+			This page only works in browsers that supports the deviceOrientation event specification and have a gyroscope.
+		</div>
+		<div style="text-align: center;">
+			<input type="button" value="rotate the plan" onclick="rotateContainer()" class="w_button w_border w_radius w_bg_dark" />
+		</div>
+		<div id="container">
+			<div id="plan">
+				<div id="x" class="axis">x</div>
+				<div id="y" class="axis">y</div>
+				<div id="z" class="axis">z</div>
+				
+				<div id="device"></div>
+				<div id="backface"></div>
+			</div>
+		</div>
+	</body>
+</html>

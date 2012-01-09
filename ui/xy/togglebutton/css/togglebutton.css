@@ -1,0 +1,15 @@
+.to_toggle {
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	height:27px;
+	width:94px;
+	position:relative;
+}
+
+.to_toggle .to_toggle_btn {
+	background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAbCAQAAACUlRTEAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAAAEgAAABIAEbJaz4AAAAJdnBBZwAAADIAAAAbAPVW0DUAAACvSURBVEjH7daxTgJREIXh7ywbDbUNlFqayPvQ8HDb8DyGhBITGzvbjQa5FPsEFLOFYeYB/nvmn9xMYGjKahfC0F6tPRQAfn052iVD23gyuhRAOkvf3nWsjZoUdDNaoY8FUuZkIXpSiJie3xNdPaRyWFPNkyTlTjKbk7v4G5KkHDKn+P/yrcwivnqF7+Jvh5xLk/yhj08vJbcKdE6Tjn178+yxAPHjw8E2gX3hBbkNV28dHWxIVUtsAAAAJXRFWHRjcmVhdGUtZGF0ZQAyMDEwLTAxLTIxVDE1OjI2OjUxKzAxOjAwN408UgAAACV0RVh0bW9kaWZ5LWRhdGUAMjAxMC0wMS0yMVQxNToyNjo1MSswMTowMGg8SmYAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAAElFTkSuQmCC) center;
+	width:50px;
+	height:27px;
+	position:absolute;
+	left:44px;
+	top:0px;
+}

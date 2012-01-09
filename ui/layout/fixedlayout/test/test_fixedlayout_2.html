@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+
+		<title>test_fixedlayout2</title>
+		
+		<style>
+			.w_header, .w_footer {
+				width: 100%;
+				
+				background-color: rgba(0, 0, 0, 0.5);
+				background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(77, 82, 90, 0.7)), to(rgba(23, 25, 31, 0.1)), color-stop(50%, rgba(21, 21, 21, 0.5)));
+			}
+		
+			.wrapper {
+				z-index: 1;
+				width: 100%;
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			}
+			
+			.w_list_item.w_bg_light {	
+				background-color: #fdfdfd;
+				
+				background-image: none;
+				background-image: none;
+			}
+			
+			#content {
+				margin: 0px;
+			}
+		</style>
+		
+		<link rel="stylesheet" href="../css/fixedlayout.css" type="text/css">
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/window/js/window.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../../../../ui/layout/fixedlayout/js/fixedlayout.js"></script>
+
+		<script type="text/javascript">
+			var flHelper = {
+				nbItem: 100,
+				items: [],
+				
+				buildContent: function(scrollContent) 
+				{
+					var texts = 
+					[ 
+						"Lorem ipsum", "dolor sit amet", "consectetur adipiscing", "Ut sed odio", "at ipsum lobortis",
+						"aliquet", "Morbi id", "lectus non erat", "fermentum adipiscing", "Etiam sit", "amet luctus",
+						"Nullam at lacus", "tortor, quis", "imperdiet mi", "Integer mattis", "mollis nulla",
+						"eget dignissim", "Fusce mi tellus", "mollis eget", "cursus ut", "euismod id tellus",
+						"In accumsan", "est id aliquet", "tristique, arcu", "augue malesuada nibh", "eleifend scelerisque",
+						"felis augue", "Phasellus imperdiet"
+					];
+					
+					for (var i = 0; i < this.nbItem; i++)
+					{
+						var li = document.createElement('li');
+						var t = i % texts.length;
+						li.innerHTML = texts[t];
+						this.items.push(li);
+						scrollContent.appendChild(li);
+						wink.addClass(li, "w_list_item w_border_bottom w_bg_light");
+					}
+				}
+			};
+			
+			var init = function() {
+				//window.scrollTo(0,0);
+	
+				wink.error.logLevel = 1;
+	
+				flHelper.buildContent($('content'));
+
+				var _shorcutHeight = 0;
+				if (wink.ua.isBlackBerry && wink.ua.osVersion == 9800) {
+					_shorcutHeight = 20;
+				};
+				
+				setTimeout(function()
+				{
+					var fl = new wink.ui.layout.FixedLayout({
+						target: 'wrapper',
+						header: 'header',
+						footer: 'footer',
+						moveDuration: 0,
+						displayDuration: 0,
+						showHideOnClick: true,
+						paddingTop: 0,
+						paddingBottom: 0,
+						urlBarShorcutHeight: _shorcutHeight,
+						scrollAtStart: wink.ua.isAndroid
+					});
+				}, 100);
+			};
+		</script>
+	</head>
+	
+	<body onload="init();">
+		<div id="header" class="w_box w_header w_bg_dark">
+			<span id="title">fixed layout</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+		</div>
+		<div id="wrapper" class="wrapper">
+			<ul id="content" class="w_list  w_border">
+				
+			</ul>
+		</div>
+		<div id="footer" class="w_box w_footer w_bg_dark">
+			<div class="w_layout_box">
+				<div class="w_menu_item">
+					<input type="button" value="item" class="w_button w_border w_bg_dark" onclick="alert('you clicked on item 1')" />
+				</div>
+				<div class="w_menu_item">
+					<input type="button" value="item" class="w_button w_border w_bg_dark" onclick="alert('you clicked on item 2')" />
+				</div>
+				<div class="w_menu_item">
+					<input type="button" value="item" class="w_button w_border w_bg_dark" onclick="alert('you clicked on item 3')" />
+				</div>
+				<div class="w_menu_item">
+					<input type="button" value="item" class="w_button w_border w_bg_dark" onclick="alert('you clicked on item 4')" />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
