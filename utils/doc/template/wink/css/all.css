@@ -311,6 +311,24 @@ span.break {
 }
 /* End general styles */
 
+/* Syntax highlighter */
+div.syntaxhighlighter {
+	border: 1px dashed #cdcdcd;
+	padding: 5px;
+	width: 95% !important;
+}
+
+div.syntaxhighlighter table caption {
+	background-color: #f3f8ff !important;
+	border-left: 1px solid #006ca2 !important;
+	color: #006ca2 !important;
+	margin-bottom: 10px !important;
+}
+
+div.syntaxhighlighter div.toolbar {
+	visibility: hidden !important;
+}
+
 /*
  * END JSDOC
  */
