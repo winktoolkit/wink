@@ -102,14 +102,14 @@ define(['../../../_amd/core'], function(wink)
 		
 		this._isDown               = false;
 		
-		this.numTemplates          = 8,
+		this.numTemplates          = 0,
 		this.numPoint              = 64,
 		this.squareSize            = 250.0,
 		this.origin                = {x: 0, y: 0},
 		this.diagonal              = Math.sqrt(this.squareSize * this.squareSize + this.squareSize * this.squareSize),
 		this.halfDiagonal          = 0.5 * this.diagonal,
-		this.angleRange            = wink.ux.GestureRecognizer.prototype.utils.deg2Rad(45.0),
-		this.anglePrecision        = wink.ux.GestureRecognizer.prototype.utils.deg2Rad(2.0),
+		this.angleRange            = this.utils.deg2Rad(45.0),
+		this.anglePrecision        = this.utils.deg2Rad(2.0),
 		this.phi                   = 0.5 * (-1.0 + Math.sqrt(5.0));	
 	
 		this._domNode              = null;
@@ -132,12 +132,12 @@ define(['../../../_amd/core'], function(wink)
 		{
 			resample: function(points, n)
 			{
-				var I = wink.ux.GestureRecognizer.prototype.utils.pathLength(points) / (n - 1);
+				var I = this.pathLength(points) / (n - 1);
 				var D = 0.0;
 				var newpoints = new Array(points[0]);
 				for (var i = 1; i < points.length; i++)
 				{
-					var d = wink.ux.GestureRecognizer.prototype.utils.distance(points[i - 1], points[i]);
+					var d = this.distance(points[i - 1], points[i]);
 					if ((D + d) >= I)
 					{
 						var qx = points[i - 1].x + ((I - D) / d) * (points[i].x - points[i - 1].x);
@@ -160,13 +160,13 @@ define(['../../../_amd/core'], function(wink)
 			
 			indicativeAngle: function(points)
 			{
-				var c = wink.ux.GestureRecognizer.prototype.utils.centroid(points);
+				var c = this.centroid(points);
 				return Math.atan2(c.y - points[0].y, c.x - points[0].x);
 			},
 			
 			rotateBy: function(points, radians)
 			{
-				var c = wink.ux.GestureRecognizer.prototype.utils.centroid(points);
+				var c = this.centroid(points);
 				var cos = Math.cos(radians);
 				var sin = Math.sin(radians);
 				
@@ -182,7 +182,7 @@ define(['../../../_amd/core'], function(wink)
 			
 			scaleTo: function(points, size)
 			{
-				var B = wink.ux.GestureRecognizer.prototype.utils.boundingBox(points);
+				var B = this.boundingBox(points);
 				var newpoints = new Array();
 				for (var i = 0; i < points.length; i++)
 				{
@@ -195,7 +195,7 @@ define(['../../../_amd/core'], function(wink)
 			
 			translateTo: function(points, pt)
 			{
-				var c = wink.ux.GestureRecognizer.prototype.utils.centroid(points);
+				var c = this.centroid(points);
 				var newpoints = new Array();
 				for (var i = 0; i < points.length; i++)
 				{
@@ -209,9 +209,9 @@ define(['../../../_amd/core'], function(wink)
 			distanceAtBestAngle: function(points, T, a, b, threshold, phi)
 			{
 				var x1 = phi * a + (1.0 - phi) * b;
-				var f1 = wink.ux.GestureRecognizer.prototype.utils.distanceAtAngle(points, T, x1);
+				var f1 = this.distanceAtAngle(points, T, x1);
 				var x2 = (1.0 - phi) * a + phi * b;
-				var f2 = wink.ux.GestureRecognizer.prototype.utils.distanceAtAngle(points, T, x2);
+				var f2 = this.distanceAtAngle(points, T, x2);
 				
 				while (Math.abs(b - a) > threshold)
 				{
@@ -221,7 +221,7 @@ define(['../../../_amd/core'], function(wink)
 						x2 = x1;
 						f2 = f1;
 						x1 = phi * a + (1.0 - phi) * b;
-						f1 = wink.ux.GestureRecognizer.prototype.utils.distanceAtAngle(points, T, x1);
+						f1 = this.distanceAtAngle(points, T, x1);
 					}
 					else
 					{
@@ -229,7 +229,7 @@ define(['../../../_amd/core'], function(wink)
 						x1 = x2;
 						f1 = f2;
 						x2 = (1.0 - phi) * a + phi * b;
-						f2 = wink.ux.GestureRecognizer.prototype.utils.distanceAtAngle(points, T, x2);
+						f2 = this.distanceAtAngle(points, T, x2);
 					}
 				}
 				return Math.min(f1, f2);
@@ -237,8 +237,8 @@ define(['../../../_amd/core'], function(wink)
 			
 			distanceAtAngle: function(points, T, radians)
 			{
-				var newpoints = wink.ux.GestureRecognizer.prototype.utils.rotateBy(points, radians);
-				return wink.ux.GestureRecognizer.prototype.utils.pathDistance(newpoints, T.points);
+				var newpoints = this.rotateBy(points, radians);
+				return this.pathDistance(newpoints, T.points);
 			},
 			
 			centroid: function(points)
@@ -275,7 +275,7 @@ define(['../../../_amd/core'], function(wink)
 			{
 				var d = 0.0;
 				for (var i = 0; i < pts1.length; i++) // assumes pts1.length == pts2.length
-					d += wink.ux.GestureRecognizer.prototype.utils.distance(pts1[i], pts2[i]);
+					d += this.distance(pts1[i], pts2[i]);
 				return d / pts1.length;
 			},
 			
@@ -283,7 +283,7 @@ define(['../../../_amd/core'], function(wink)
 			{
 				var d = 0.0;
 				for (var i = 1; i < points.length; i++)
-					d += wink.ux.GestureRecognizer.prototype.utils.distance(points[i - 1], points[i]);
+					d += this.distance(points[i - 1], points[i]);
 				return d;
 			},
 			
@@ -404,16 +404,16 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_recognize: function(points)
 		{
-			points = wink.ux.GestureRecognizer.prototype.utils.resample(points, this.numPoint);
-			var radians = wink.ux.GestureRecognizer.prototype.utils.indicativeAngle(points);
-			points = wink.ux.GestureRecognizer.prototype.utils.rotateBy(points, -radians);
-			points = wink.ux.GestureRecognizer.prototype.utils.scaleTo(points, this.squareSize);
-			points = wink.ux.GestureRecognizer.prototype.utils.translateTo(points, this.origin);
+			points = this.utils.resample(points, this.numPoint);
+			var radians = this.utils.indicativeAngle(points);
+			points = this.utils.rotateBy(points, -radians);
+			points = this.utils.scaleTo(points, this.squareSize);
+			points = this.utils.translateTo(points, this.origin);
 			var b = +Infinity;
 			var t = 0;
 			for (var i = 0; i < this._templates.length; i++)
 			{
-				var d = wink.ux.GestureRecognizer.prototype.utils.distanceAtBestAngle(points, this._templates[i], -this.angleRange, +this.angleRange, this.anglePrecision, this.phi);
+				var d = this.utils.distanceAtBestAngle(points, this._templates[i], -this.angleRange, +this.angleRange, this.anglePrecision, this.phi);
 				
 				if (d < b)
 				{
