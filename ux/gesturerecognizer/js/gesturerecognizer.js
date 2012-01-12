@@ -102,6 +102,7 @@ define(['../../../_amd/core'], function(wink)
 		
 		this._isDown               = false;
 		
+<<<<<<< HEAD
 		this.numTemplates          = 0,
 		this.numPoint              = 64,
 		this.squareSize            = 250.0,
@@ -110,6 +111,16 @@ define(['../../../_amd/core'], function(wink)
 		this.halfDiagonal          = 0.5 * this.diagonal,
 		this.angleRange            = this.utils.deg2Rad(45.0),
 		this.anglePrecision        = this.utils.deg2Rad(2.0),
+=======
+		this.numTemplates          = 8,
+		this.numPoint              = 64,
+		this.squareSize            = 250.0,
+		this.origin                = {x: 0, y: 0},
+		this.diagonal              = Math.sqrt(this.squareSize * this.squareSize + this.squareSize * this.squareSize),
+		this.halfDiagonal          = 0.5 * this.diagonal,
+		this.angleRange            = wink.ux.GestureRecognizer.prototype.utils.deg2Rad(45.0),
+		this.anglePrecision        = wink.ux.GestureRecognizer.prototype.utils.deg2Rad(2.0),
+>>>>>>> branch 'refs/heads/master' of https://winktoolkit@github.com/winktoolkit/wink.git
 		this.phi                   = 0.5 * (-1.0 + Math.sqrt(5.0));	
 	
 		this._domNode              = null;
