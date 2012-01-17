@@ -56,7 +56,7 @@ define(['../../../_amd/core', '../../../math/_matrix/js/matrix'], function(wink)
 		var matrixTransform = _getTransformMatrix(transformation);
 		referenceMatrix.multiply(matrixTransform);
 		
-		wink.fx.setTransform(node, referenceMatrix.getCssMatrix());
+		wink.fx.setTransform(node, referenceMatrix.toString());
 	};
 	/**
 	 * Initialize a composed transformation to the given node
@@ -164,7 +164,7 @@ define(['../../../_amd/core', '../../../math/_matrix/js/matrix'], function(wink)
 				{
 					item.transforms = [ finalMatrix ];
 				}
-				wink.fx.setTransform(node, finalMatrix.getCssMatrix());
+				wink.fx.setTransform(node, finalMatrix.toString());
 				break;
 			}
 		}

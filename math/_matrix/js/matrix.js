@@ -185,6 +185,21 @@ define(['../../../_amd/core'], function(wink)
 			return this._cssMatrix;
 		},
 		/**
+		 * Return the string value of the WebKitCSSMatrix
+		 * 
+		 * @returns {String} The value of the matrix
+		 */
+		toString: function()
+		{
+			if ( !(wink.ua.isBlackBerry && wink.ua.browserVersion == 7 && wink.ua.browserMinorVersion == 1) )
+			{
+				return this._cssMatrix.toString();
+			} else
+			{
+				return 'matrix3d(' + this._values.join(',') + ')';
+			}
+		},
+		/**
 		 * Validate the properties of the component
 		 * @returns {boolean} True if the properties are valid, false otherwise
 		 */
@@ -248,6 +263,7 @@ define(['../../../_amd/core'], function(wink)
 		_valuesToCssMatrix: function(values)
 		{
 			var cssMatrix = new WebKitCSSMatrix();
+			
 			cssMatrix.m11 = values[0];
 			cssMatrix.m12 = values[1];
 			cssMatrix.m13 = values[2];
@@ -267,6 +283,7 @@ define(['../../../_amd/core'], function(wink)
 			cssMatrix.m42 = values[13];
 			cssMatrix.m43 = values[14];
 			cssMatrix.m44 = values[15];
+			
 			return cssMatrix;
 		},
 		/**
