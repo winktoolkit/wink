@@ -57,6 +57,8 @@ define(['../../../_amd/core'], function(wink)
 		this._values			= [];
 		this._cssMatrix			= null;
 		
+		this._test				= (wink.ua.isBlackBerry && wink.ua.browserVersion == 7 && wink.ua.browserMinorVersion == 1);
+		
 		if (this._validateProperties() === false) return;
 		
 		this._initProperties();	
@@ -184,6 +186,7 @@ define(['../../../_amd/core'], function(wink)
 		{
 			return this._cssMatrix;
 		},
+		
 		/**
 		 * Return the string value of the WebKitCSSMatrix
 		 * 
@@ -191,7 +194,7 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		toString: function()
 		{
-			if ( !(wink.ua.isBlackBerry && wink.ua.browserVersion == 7 && wink.ua.browserMinorVersion == 1) )
+			if ( !this._test )
 			{
 				return this._cssMatrix.toString();
 			} else
