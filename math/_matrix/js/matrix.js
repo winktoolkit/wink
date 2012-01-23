@@ -53,11 +53,10 @@ define(['../../../_amd/core'], function(wink)
 		this.uId = wink.getUId();
 		
 		
-		this._properties		= properties;
-		this._values			= [];
-		this._cssMatrix			= null;
-		
-		this._test				= (wink.ua.isBlackBerry && wink.ua.browserVersion == 7 && wink.ua.browserMinorVersion == 1);
+		this._properties          = properties;
+		this._values              = [];
+		this._cssMatrix           = null;
+		this._matrixConversionBug = (wink.ua.isBlackBerry && wink.ua.browserVersion == 7 && wink.ua.browserMinorVersion == 1);
 		
 		if (this._validateProperties() === false) return;
 		
@@ -194,7 +193,7 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		toString: function()
 		{
-			if ( !this._test )
+			if ( !this._matrixConversionBug )
 			{
 				return this._cssMatrix.toString();
 			} else
