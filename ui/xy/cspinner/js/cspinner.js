@@ -33,6 +33,8 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric'], fu
 	 * @param {integer} [properties.linewidth=1] The border width
 	 * @param {string} [properties.refreshRate=40] The refresh rate
 	 * 
+	 * @requires wink.math._geometric
+	 * 
 	 * @example
 	 * 
 	 * var cspinner = new wink.ui.xy.CSpinner(
