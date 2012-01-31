@@ -16,7 +16,7 @@
 
 /* HEADER menu --------- */
 #header_menu {
-	height: 40px;
+	height: 30px;
 	background: #000;
 }
 
@@ -27,11 +27,11 @@
 }
 
 #header_menu ul li {
-	height: 40px;
+	height: 30px;
 	display: inline-block;
 	margin: 0 24px 0 0px;
-	line-height: 40px;
-	font-size: 15px;
+	line-height: 30px;
+	font-size: 13px;
 	float: right;
 }
 
