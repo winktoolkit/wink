@@ -220,7 +220,7 @@ Release 1.4 [03/10/2011]
 	- Apply a "translate" transform on the canvas tag on components that use it
 	- Added wink.plugins.completion
 	
-Release 1.4.1 [xx/xx/xxxx]
+Release 1.4.1 [01/02/2011]
 	- Corrected bug on wink.ux.window (the orientation parameter was undefined when the "/window/events/orientationchange" was published)
 	- Corrected bug on feat_css : "css-position-fixed" detection for iOS
 	- Corrected bug on feat_css : prevent loop on "css-transform" detection
