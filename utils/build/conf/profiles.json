@@ -2,7 +2,7 @@
 	"build": {
 		"jsFile": "wink-VERSION-PROFILE-TARGET.js",
 		"cssFile": "wink-VERSION-PROFILE-TARGET.css",
-		"version": "1.4.1",
+		"version": "1.4.2",
 		"defaultLocaleList": [ "en_EN" ]
 	},
 	"profiles": [
