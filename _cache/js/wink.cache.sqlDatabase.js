@@ -77,22 +77,20 @@ wink.cache.sqlDatabase.prototype = {
 	{
 		if (this._db == null)
 		{
-			// console.log('_open');
-
 			var _sqlError = function(transaction, data)
 			{
 				errCallback(this._getErrorMessage(data));
 			};
 
-			this._db = window.openDatabase(this._dbName, '1.0',
-					this._dbDescription, this._dbSize);
+			this._db = window.openDatabase(this._dbName, '1.0', this._dbDescription, this._dbSize);
 
-			this
-					._executeSql(
-							'CREATE TABLE IF NOT EXISTS '
-									+ this._dbTable
-									+ '(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, url TEXT NOT NULL UNIQUE, data TEXT NOT NULL, type TEXT NOT NULL, version REAL NOT NULL, expires REAL NOT NULL);',
-							[], callback, _sqlError);
+			this._executeSql
+			(
+				'CREATE TABLE IF NOT EXISTS ' + this._dbTable + '(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, url TEXT NOT NULL UNIQUE, data TEXT NOT NULL, type TEXT NOT NULL, version REAL NOT NULL, expires REAL NOT NULL);',
+				[], 
+				callback, 
+				wink.bind(_sqlError, this)
+			);
 		} else
 		{
 			callback();
@@ -107,14 +105,18 @@ wink.cache.sqlDatabase.prototype = {
 	 */
 	drop : function(callback, errCallback)
 	{
-		// console.log('_drop');
-
 		var _sqlError = function(transaction, data)
 		{
 			errCallback(this._getErrorMessage(data));
 		};
 
-		this._executeSql('DROP TABLE ' + this._dbTable, [], callback, _sqlError);
+		this._executeSql
+		(
+			'DROP TABLE ' + this._dbTable, 
+			[], 
+			callback, 
+			wink.bind(_sqlError, this)
+		);
 	},
 
 	/**
@@ -126,8 +128,6 @@ wink.cache.sqlDatabase.prototype = {
 	 */
 	getExpiredItems : function(callback, errCallback, urls)
 	{
-		// console.log('_getExpiredItems');
-
 		var _sqlSuccess = function(transaction, data)
 		{
 			var items = new Array();
@@ -163,7 +163,13 @@ wink.cache.sqlDatabase.prototype = {
 			$sql += 'OR url NOT IN (' + q + ');';
 		}
 
-		this._executeSql($sql, parameters, _sqlSuccess, _sqlError);
+		this._executeSql
+		(
+			$sql, 
+			parameters, 
+			_sqlSuccess, 
+			wink.bind(_sqlError, this)
+		);
 	},
 
 	/**
@@ -175,8 +181,6 @@ wink.cache.sqlDatabase.prototype = {
 	 */
 	getItem : function(url, callback, errCallback)
 	{
-		// console.log('_getItem ' + url);
-
 		var _sqlSuccess = function(transaction, data)
 		{
 			var item = null;
@@ -184,6 +188,7 @@ wink.cache.sqlDatabase.prototype = {
 			{
 				item = data.rows.item(0);
 			}
+
 			callback(item);
 		};
 
@@ -192,8 +197,13 @@ wink.cache.sqlDatabase.prototype = {
 			errCallback(this._getErrorMessage(data));
 		};
 
-		this._executeSql('SELECT version, expires, data FROM ' + this._dbTable
-				+ ' WHERE url=?;', [ url ], _sqlSuccess, _sqlError);
+		this._executeSql
+		(
+			'SELECT version, expires, data FROM ' + this._dbTable + ' WHERE url=?;', 
+			[ url ], 
+			_sqlSuccess, 
+			wink.bind(_sqlError, this)
+		);
 	},
 
 	/**
@@ -207,20 +217,26 @@ wink.cache.sqlDatabase.prototype = {
 	 * @param {function} callback Function called on success
 	 * @param {function} errCallback Function called on error
 	 */
-	storeResource : function(url, type, version, expires, data, callback,
-			errCallback)
+	storeResource : function(url, type, version, expires, data, callback, errCallback)
 	{
-		// console.log('_storeResource ' + url);
-
 		var _sqlError = function(transaction, data)
 		{
 			errCallback(this._getErrorMessage(data));
 		};
 
-		this._executeSql('INSERT INTO ' + this._dbTable
-				+ ' (url, type, version, expires, data) VALUES (?,?,?,?,?);', [
-				url, type, version, (this._now + (expires * 1000)), data ],
-				callback, _sqlError);
+		this._executeSql
+		(
+			'INSERT INTO ' + this._dbTable + ' (url, type, version, expires, data) VALUES (?,?,?,?,?);', 
+			[
+				url, 
+				type, 
+				version, 
+				(this._now + (expires * 1000)), 
+				data 
+			],
+			callback, 
+			wink.bind(_sqlError, this)
+		);
 	},
 
 	/**
@@ -232,15 +248,18 @@ wink.cache.sqlDatabase.prototype = {
 	 */
 	deleteResource : function(url, callback, errCallback)
 	{
-		// console.log('_deleteResource ' + url);
-
 		var _sqlError = function(transaction, data)
 		{
 			errCallback(this._getErrorMessage(data));
 		};
 
-		this._executeSql('DELETE FROM ' + this._dbTable + ' WHERE url=?;',
-				[ url ], callback, _sqlError);
+		this._executeSql
+		(
+			'DELETE FROM ' + this._dbTable + ' WHERE url=?;',
+			[ url ], 
+			callback, 
+			wink.bind(_sqlError, this)
+		);
 	},
 
 	/**
@@ -262,8 +281,13 @@ wink.cache.sqlDatabase.prototype = {
 	{
 		this._db.transaction(function(transaction)
 		{
-			transaction.executeSql(sqlStatement, parameters, callback,
-					errorCallback);
+			transaction.executeSql
+			(
+				sqlStatement, 
+				parameters, 
+				callback, 
+				errorCallback
+			);
 		});
 	},
 

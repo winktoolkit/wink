@@ -15,7 +15,21 @@
 
 if (typeof wink == 'undefined')
 {
-	wink = {};
+	wink = 
+	{
+		/**
+		 * @ignore
+		 */
+		bind: function(method, context)
+		{
+			var args = Array.prototype.slice.call(arguments, 2);
+			return function()
+			{
+				var finalArgs = args.concat(Array.prototype.slice.call(arguments, 0));
+				return method.apply(context, finalArgs);
+			};
+		}		
+	};
 }
 
 /**

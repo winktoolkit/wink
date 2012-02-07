@@ -82,8 +82,6 @@ wink.cache.indexedDatabase.prototype =
 		
 		if(this._db == null)
 		{
-			// console.log('_open');
-			
 			var _this = this;
 			
 			var request = window.webkitIndexedDB.open(this._dbName, this._dbDescription);
@@ -135,8 +133,6 @@ wink.cache.indexedDatabase.prototype =
 	 */
 	drop: function(callback, errCallback)
 	{
-		// console.log('_drop');
-		
 		var _this = this;
 		
 		var vtx = this._db.setVersion('1.1');
@@ -167,8 +163,6 @@ wink.cache.indexedDatabase.prototype =
 	 */
 	getExpiredItems: function(callback, errCallback, urls)
 	{
-		// console.log('_getExpiredItems');
-		
 		var _this = this;
 		
 		var items = new Array();
@@ -219,8 +213,6 @@ wink.cache.indexedDatabase.prototype =
 	 */
 	getItem: function(url, callback, errCallback)
 	{
-		// console.log('_getItem '+url);
-	
 		var tx = this._db.transaction(this._db.objectStoreNames, 1);
 		var store = tx.objectStore(this._dbTable);
 		
@@ -248,8 +240,6 @@ wink.cache.indexedDatabase.prototype =
 	 */
 	storeResource: function(url, type, version, expires, data, callback, errCallback)
 	{
-		// console.log('_storeResource '+url);
-		
 		var _this = this;
 		
 		var tx = this._db.transaction(this._db.objectStoreNames, 1);
@@ -280,8 +270,6 @@ wink.cache.indexedDatabase.prototype =
 	 */
 	deleteResource: function(url, callback, errCallback)
 	{
-		// console.log('_deleteResource '+url);
-		
 		var _this = this;
 		
 		var tx = this._db.transaction(this._db.objectStoreNames, 1);

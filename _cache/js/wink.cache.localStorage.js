@@ -67,10 +67,7 @@ wink.cache.localStorage.prototype = {
 	{
 		if (this._data == null)
 		{
-			// console.log('_open');
-
-			this._data = (localStorage.getItem(this._key) ? this
-					._parse(localStorage.getItem(this._key)) : {});
+			this._data = (localStorage.getItem(this._key) ? this._parse(localStorage.getItem(this._key)) : {});
 		}
 
 		callback();
@@ -84,8 +81,6 @@ wink.cache.localStorage.prototype = {
 	 */
 	drop : function(callback, errCallback)
 	{
-		// console.log('_drop');
-
 		this._data = {};
 
 		callback();
@@ -100,8 +95,6 @@ wink.cache.localStorage.prototype = {
 	 */
 	getExpiredItems : function(callback, errCallback, urls)
 	{
-		// console.log('_getExpiredItems');
-
 		var items = new Array();
 
 		for (url in this._data)
@@ -132,8 +125,6 @@ wink.cache.localStorage.prototype = {
 	 */
 	getItem : function(url, callback, errCallback)
 	{
-		// console.log('_getItem ' + url);
-
 		callback(this._data[url]);
 	},
 
@@ -148,12 +139,10 @@ wink.cache.localStorage.prototype = {
 	 * @param {function} callback Function called on success
 	 * @param {function} errCallback Function called on error
 	 */
-	storeResource : function(url, type, version, expires, data, callback,
-			errCallback)
+	storeResource : function(url, type, version, expires, data, callback, errCallback)
 	{
-		// console.log('_storeResource ' + url);
-
-		this._data[url] = {
+		this._data[url] = 
+		{
 			url : url,
 			type : type,
 			version : version,
@@ -173,8 +162,6 @@ wink.cache.localStorage.prototype = {
 	 */
 	deleteResource : function(url, callback, errCallback)
 	{
-		// console.log('_deleteResource ' + url);
-
 		delete (this._data[url]);
 
 		callback();
@@ -196,8 +183,7 @@ wink.cache.localStorage.prototype = {
 	 */
 	_parse : function(str)
 	{
-		if (((window.json !== undefined) && (window.json !== null))
-				&& ((window.json.parse !== undefined) && (window.json.parse !== null)))
+		if (((window.json !== undefined) && (window.json !== null)) && ((window.json.parse !== undefined) && (window.json.parse !== null)))
 		{
 			return window.json.parse(str);
 		} else
@@ -210,13 +196,14 @@ wink.cache.localStorage.prototype = {
 
 			if (cx.test(str))
 			{
-				str = str.replace(cx,
-						function(a)
-						{
-							return '\\u'
-									+ ('0000' + a.charCodeAt(0).toString(16))
-											.slice(-4);
-						});
+				str = str.replace
+				(
+					cx,
+					function(a)
+					{
+						return '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+					}
+				);
 			}
 
 			if (/^[\],:{}\s]*$/
@@ -249,8 +236,7 @@ wink.cache.localStorage.prototype = {
 			var indent = '';
 			var wrapper = new Object();
 
-			if (value
-					&& ((value.toJSON !== undefined) && (value.toJSON !== null)))
+			if (value && ((value.toJSON !== undefined) && (value.toJSON !== null)))
 			{
 				str = value.toJSON();
 
@@ -282,7 +268,8 @@ wink.cache.localStorage.prototype = {
 		{
 			function _char(c)
 			{
-				var chars = {
+				var chars = 
+				{
 					'\b' : '\\b',
 					'\t' : '\\t',
 					'\n' : '\\n',
@@ -293,9 +280,7 @@ wink.cache.localStorage.prototype = {
 				};
 
 				if (!chars[c])
-					chars[c] = '\\u'
-							+ ('0000' + (+(c.charCodeAt(0))).toString(16))
-									.slice(-4);
+					chars[c] = '\\u' + ('0000' + (+(c.charCodeAt(0))).toString(16)).slice(-4);
 
 				return chars[c];
 			}
