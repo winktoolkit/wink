@@ -227,7 +227,7 @@ define(['../../../_amd/core'], function(wink)
 		}
 	};
 	
-	window.addEventListener("DOMContentLoaded", function(){wink.ux.window._init();});
+	window.addEventListener("DOMContentLoaded", function(){wink.ux.window._init();}, false);
 	
 	/**
 	 * @deprecated
