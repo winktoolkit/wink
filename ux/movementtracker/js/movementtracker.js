@@ -11,9 +11,6 @@
  * Each point statement includes these informations : a position, a direction, a distance and a duration.
  * 
  * @author Sylvain LALANDE
- * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
- * 
  */
 
 /**
@@ -96,6 +93,8 @@ define(['../../../_amd/core'], function(wink)
 	 * wink.subscribe('/movementtracker/events/mvtbegin', { context: window, method: 'handleMovementBegin' });
 	 * wink.subscribe('/movementtracker/events/mvtchanged', { context: window, method: 'handleMovementChanged' });
 	 * wink.subscribe('/movementtracker/events/mvtstored', { context: window, method: 'handleMovementStored' });
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ux/movementtracker/test/test_movementtracker.html" target="_blank">Test page</a>
 	 */

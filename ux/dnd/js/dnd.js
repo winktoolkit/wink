@@ -12,8 +12,6 @@
  * Targets are objects that can react when particular sources are dropped over them (it defines its own events). A target MUST also define what will be its behaviour when a source is over it or not.
  * When a source is dropped on a target, the dnd object fires the event defined by the target.
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
- * 
  * @author Jerome GIRAUD
  */
 
@@ -100,6 +98,8 @@ define(['../../../_amd/core'], function(wink)
 	 * dnd.addSource(source1);
 	 * dnd.addTarget(target1);
 	 * dnd.addTarget(target2);
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ux/dnd/test/test_dnd_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ux/dnd/test/test_dnd_2.html" target="_blank">Test page (puzzle)</a>

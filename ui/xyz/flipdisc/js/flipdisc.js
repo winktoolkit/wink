@@ -9,8 +9,6 @@
  * @fileOverview The Flip Disc allows the user to browse a list of images.
  * The user can rotate the first image to display the next or previous image, following the angle of rotation.
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
- * 
  * @author Sylvain LALANDE
  */
 
@@ -44,8 +42,9 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx', '../../../../fx/
 	 * var flipdisc = new wink.ui.xyz.FlipDisc(properties);
 	 * container.appendChild(flipdisc.getDomNode());
 	 * 
-	 * @see <a href="WINK_ROOT_URL/ui/xyz/flipdisc/test/test_flipdisc.html" target="_blank">Test page</a>
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
 	 * 
+	 * @see <a href="WINK_ROOT_URL/ui/xyz/flipdisc/test/test_flipdisc.html" target="_blank">Test page</a>
 	 */
 	wink.ui.xyz.FlipDisc = function(properties) 
 	{

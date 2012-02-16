@@ -8,7 +8,6 @@
 /**
  * @fileOverview Implements an event management system based on a publish/subscribe mechanism
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
  * @author Jerome GIRAUD
  */
 
@@ -23,6 +22,8 @@ define(['../../../_base/_base/js/base', '../../error/js/error'], function(wink)
 	 * 
 	 * wink.subscribe('/test/events/alert1', {method: 'dummyMethod2', context: this});
 	 * wink.publish('/test/events/alert1', 'value1');
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/_base/topics/test/test_topics_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/_base/topics/test/test_topics_2.html" target="_blank">Test page (with scope)</a>

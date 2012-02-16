@@ -9,8 +9,6 @@
  * @fileOverview Implements a Scroller with inertia capability.
  * The Scroller allows to scroll vertically or horizontally a content ; it prevents the native scroll.
  * 
- * @compatibility Iphone OS2 (slow), Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
- * 
  * @author Sylvain LALANDE
  */
 define(['../../../../_amd/core', '../../../../ux/inertia/js/inertia'], function(wink)
@@ -55,6 +53,8 @@ define(['../../../../_amd/core', '../../../../ux/inertia/js/inertia'], function(
 	 * };
 	 * 
 	 * scroller = new wink.ui.layout.Scroller(properties);
+	 * 
+	 * @compatibility Iphone OS2 (slow), Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/layout/scroller/test/test_scroller_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/layout/scroller/test/test_scroller_2.html" target="_blank">Test page (horizontal)</a>

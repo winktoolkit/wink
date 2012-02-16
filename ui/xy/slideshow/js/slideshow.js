@@ -6,9 +6,8 @@
  *--------------------------------------------------------*/
 
 /**
- * @fileOverview Implements a slideshow based on the html canvas tag. 
-
- * @compatibility Iphone OS2, Iphone OS3, Android 1.5, Android 1.6, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+ * @fileOverview Implements a slideshow based on the html canvas tag.
+ * 
  * @author Sylvain LALANDE
  */
 
@@ -105,6 +104,8 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 	 * $('container').appendChild(slideshow.getDomNode());
 	 * 
 	 * @requires wink.ux.MovementTracker
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Android 1.5, Android 1.6, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xy/slideshow/test/test_slideshow.html" target="_blank">Test page</a>
 	 */

@@ -30,6 +30,12 @@ define(['../../_kernel/js/kernel'], function(wink)
 	/**
 	 * @namespace Gathers all things related to CSS effects
 	 * 
+	 * @compatibility 
+	 * 
+	 * <b>2D fx</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Bada 1.0, Windows Phone 7.5
+	 * <br />
+	 * <b>3D fx</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
+	 * 
 	 * @see <a href="WINK_ROOT_URL/fx/_xy/test/test_xy_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/fx/_xy/test/test_xy_2.html" target="_blank">Test page (transition)</a>
 	 * @see <a href="WINK_ROOT_URL/fx/_xyz/test/test_xyz.html" target="_blank">Test page (3d)</a>
@@ -38,6 +44,14 @@ define(['../../_kernel/js/kernel'], function(wink)
 	
 	/**
 	 * @namespace A set a of mathematical libraries and methods
+	 * 
+	 * @compatibility
+	 * 
+	 * <b>basics</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * <br />
+	 * <b>geometrics</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * <br />
+	 * <b>matrix</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @see <a href="WINK_ROOT_URL/math/_basics/test/test_basics.html" target="_blank">Test page (basics)</a>
 	 * @see <a href="WINK_ROOT_URL/math/_geometric/test/test_geometric.html" target="_blank">Test page (geometric)</a>

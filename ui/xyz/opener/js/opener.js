@@ -8,10 +8,7 @@
 /**
  * @fileOverview Implements an image opener. Creates an "image opener" with a 3D rendering
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
- * 
  * @author Jerome GIRAUD
- * 
  */
 
 /**
@@ -60,9 +57,10 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * opener = new wink.ui.xyz.Opener(properties);
 	 * $('content').appendChild(opener.getDomNode());
 	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
+	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/opener/test/test_opener_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/opener/test/test_opener_2.html" target="_blank">Test page</a>
-	 * 
 	 */
 	wink.ui.xyz.Opener = function(properties) 
 	{

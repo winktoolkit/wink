@@ -8,7 +8,6 @@
 /**
  * @fileOverview Implements a access layer to the local storage mechanism. Must be used with a DB plugin (e.g.: SafariDB, GearsDB...)
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
  * @author Jerome GIRAUD
  */
 define(['../../../_amd/core'], function(wink)
@@ -37,6 +36,8 @@ define(['../../../_amd/core'], function(wink)
 	 * storage = new wink.api.Storage();
 	 * 
 	 * storage.connect(descriptor);
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @see <a href="WINK_ROOT_URL/api/storage/test/test_storage.html" target="_blank">Test page</a>
 	 */

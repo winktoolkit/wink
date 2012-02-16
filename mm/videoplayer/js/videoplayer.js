@@ -8,7 +8,6 @@
 /**
  * @fileOverview Implements a video player
  *
- * @compatibility Ipad, BlackBerry 7
  * @author Jerome GIRAUD 
  */
 
@@ -69,6 +68,8 @@ define(['../../../_amd/core'], function(wink)
 	 * videoPlayer = new wink.mm.VideoPlayer(properties);
 	 * 
 	 * $('video').appendChild(videoPlayer.getDomNode());
+	 * 
+	 * @compatibility Ipad, BlackBerry 7
 	 * 
 	 * @see <a href="WINK_ROOT_URL/mm/videoplayer/test/test_videoplayer.html" target="_blank">Test page</a>
 	 */ 

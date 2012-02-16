@@ -8,8 +8,6 @@
 /**
  * @fileOverview This is the 'easy caching' mechanism of wink. It gives you the possibility to load and store your CSS and JS resources into the device's local database. It can be used at the page startup or afterwards
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7
- * 
  * @author Julien VAN DEN BOSSCHE, Jerome GIRAUD, Sylvain LALANDE
  */
 
@@ -17,9 +15,6 @@ if (typeof wink == 'undefined')
 {
 	wink = 
 	{
-		/**
-		 * @ignore
-		 */
 		bind: function(method, context)
 		{
 			var args = Array.prototype.slice.call(arguments, 2);
@@ -56,6 +51,8 @@ if (typeof wink == 'undefined')
  * };
  * wink.load(resources, resourcesLoaded);
  * 
+ * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7
+ *  
  * @see <a href="WINK_ROOT_URL/_cache/test/test_cache.html" target="_blank">Test page (coverflow)</a>
  * @see <a href="WINK_ROOT_URL/_cache/test/test_cache_2.html" target="_blank">Test page (tagcloud)</a>
  * @see <a href="WINK_ROOT_URL/_cache/test/test_cache_3.html" target="_blank">Test page (indexedDatabase)</a>

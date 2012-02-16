@@ -84,6 +84,32 @@
 				</section>
 			</if>
 			
+
+			<if test="data.comment.getTag('compatibility').length && !data.isBuiltin() && (data.isNamespace || data.is('CONSTRUCTOR'))">
+				<section>
+					<div class="props">
+						<table class="summaryTable" cellspacing="0" summary="Compatibility list.">
+							<caption class="sectionTitle">Compatibility</caption>
+							<thead>
+								<tr>
+									<th scope="col">Compatibility list</th>
+									<th scope="col">Supported platforms / browsers</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								<tr>
+									<td class="attributes"></td>
+									<td class="nameDescription">
+										<div class="description">{+data.comment.getTag("compatibility")+}</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+			</if>
+			
 			<if test="data.properties.length">
 				{! var ownProperties = data.properties.filter(function($){return $.memberOf == data.alias && !$.isNamespace}).sort(makeSortby("name")); !}
 				<section>

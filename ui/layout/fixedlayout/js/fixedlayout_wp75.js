@@ -8,8 +8,6 @@
 /**
  * @fileOverview Windows Phone Fixed layout implementation.
  * 
- * @compatibility Windows Phone 7.5
- * 
  * @author Donatien LEBARBIER
  */
 define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wink)
@@ -18,6 +16,8 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 	 * @class Windows Phone Fixed layout implementation
 	 * @name wink.ui.layout.FixedLayout-FixedLayoutWP
 	 * 
+	 * @compatibility Windows Phone 7.5
+	 *  
 	 * @see <a href="WINK_ROOT_URL/ui/layout/fixedlayout/test/test_fixedlayout_1_ie.html" target="_blank">Test page</a>
 	 */
 	wink.ui.layout.FixedLayout = function(properties) 

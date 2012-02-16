@@ -11,8 +11,6 @@
  * It is developed to be as flexible and configurable as possible, so the user can enable or disable some graphical options to adapt visual rendering.
  * The user must pay attention to the fact that the parameters significantly affect performance (number of covers, reflected and displayTitle especially).
  * Developed to be as flexible and configurable as possible.
- *
- * @compatibility Iphone OS2 (slow), Iphone OS3, Iphone OS4, BlackBerry 7 (partial)
  * 
  * @author Sylvain LALANDE
  */
@@ -73,9 +71,10 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * var coverflow = new wink.ui.xyz.CoverFlow(properties);
 	 * container.appendChild(coverflow.getDomNode());
 	 * 
+	 * @compatibility Iphone OS2 (slow), Iphone OS3, Iphone OS4, BlackBerry 7 (partial)
+	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/coverflow/test/test_coverflow_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/coverflow/test/test_coverflow_2.html" target="_blank">Test page (numerical)</a>
-	 * 
 	 */
 	wink.ui.xyz.CoverFlow = function(properties) {
 		/**

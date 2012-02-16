@@ -9,8 +9,6 @@
  * @fileOverview The Event object is an encapsulation of an event. Only the touch object has to create such events.
  * It can thus be seen as an only readable object.
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
- * 
  * @author Sylvain LALANDE
  */
 
@@ -31,6 +29,8 @@ define(['../../../_base/_base/js/base', '../../../_base/error/js/error', '../../
 	 * @param {HTMLElement} properties.target The target element
 	 * @param {DOMEvent} properties.srcEvent The original source event
 	 * @param {boolean} properties.multitouch Indicates whether the current event occurs in a multi-touch context
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 */
 	wink.ux.Event = function(properties)
 	{

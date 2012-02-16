@@ -8,7 +8,6 @@
 /**
  * @fileOverview Implements an audio player
  * 
- * @compatibility Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7, Windows Phone 7.5
  * @author Jerome GIRAUD
  */
 	
@@ -63,6 +62,8 @@ define(['../../../_amd/core'], function(wink)
 	 * audioPlayer = new wink.mm.AudioPlayer(properties);
 	 * 
 	 * $('audio').appendChild(audioPlayer.getDomNode());
+	 * 
+	 * @compatibility Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/mm/audioplayer/test/test_audioplayer.html" target="_blank">Test page</a>
 	 */

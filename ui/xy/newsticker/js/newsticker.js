@@ -8,7 +8,6 @@
 /**
  * @fileOverview Implement a news-ticker container
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
  * @author Jerome GIRAUD
  */
 
@@ -50,6 +49,8 @@ define(['../../../../_amd/core'], function(wink)
 	 * newsticker = new wink.ui.xy.NewsTicker(properties);
 	 * 
 	 * $('output').appendChild(newsticker.getDomNode());
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xy/newsticker/test/test_newsticker.html" target="_blank">Test page</a>
 	 */

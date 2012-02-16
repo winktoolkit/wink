@@ -8,7 +8,6 @@
 /**
  * @fileOverview Implement an image loader utility
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
  * @author Jerome GIRAUD
  */
 
@@ -59,6 +58,8 @@ define(['../../../_amd/core'], function(wink)
 	 * imagesLoader = new wink.net.ImagesLoader();
 	 * 
 	 * imagesLoader.load(datas);
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/net/imagesloader/test/test_imagesloader.html" target="_blank">Test page</a>
 	 */

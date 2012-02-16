@@ -11,8 +11,6 @@
  * inform the listeners. Gestures that can be listened are referenced in the "_knownGestures" attribute below.
  * The notifications to the listeners include parameters that depends on gesture type.
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4
- * 
  * @author Sylvain LALANDE
  */
 define(['../../../_amd/core'], function(wink)
@@ -51,6 +49,8 @@ define(['../../../_amd/core'], function(wink)
 	 * 
 	 * var node = $("nodeId");
 	 * wink.ux.gesture.listenTo(node, "two_digits_click", { context: window, method: "twoDigitsClick" }, { preventDefault: true });
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ux/gesture/test/test_gesture_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ux/gesture/test/test_gesture_2.html" target="_blank">Test page (box)</a>

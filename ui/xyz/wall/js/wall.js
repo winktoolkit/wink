@@ -8,8 +8,6 @@
 /**
  * @fileOverview Creates a 3D wall (3 rows of images)
  * Displays a 3D wall on the screen. The wall is composed of 3 rows of images. The wall is being moved with its right and left directional arrows
- *
- * @compatibility Iphone OS2 (slow), Iphone OS3, Iphone OS4, BlackBerry 7
  * 
  * @author Jerome GIRAUD
  */
@@ -82,6 +80,8 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx'], function(wink)
 	 * document.body.appendChild(wall.getDomNodes().wall);
 	 * document.body.appendChild(wall.getDomNodes().leftPad);
 	 * document.body.appendChild(wall.getDomNodes().rightPad);
+	 * 
+	 * @compatibility Iphone OS2 (slow), Iphone OS3, Iphone OS4, BlackBerry 7
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/wall/test/test_wall.html" target="_blank">Test page</a>
 	 */

@@ -8,13 +8,14 @@
 /**
  * @fileOverview Implements the database management methods for the Iphone
  * 
- * @compatibility Android 1.1, Android 1.5
  * @author Jerome GIRAUD
  */
 define(['../../../_amd/core', './storage'], function(wink)
 {
 	/**
 	 * @class Implements the database management methods for the Iphone
+	 * 
+	 * @compatibility Android 1.1, Android 1.5
 	 */
 	wink.api.storage.GearsDb = function()
 	{

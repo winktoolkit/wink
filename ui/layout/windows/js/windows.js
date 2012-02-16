@@ -8,8 +8,6 @@
 /**
  * @fileOverview Implement a windows container
  * Create a windows container container with which you can navigate through pages
- *
- * @compatibility Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
  * 
  * @author Jerome GIRAUD
  */
@@ -57,8 +55,9 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * windows = new wink.ui.layout.Windows(properties);
 	 * document.body.appendChild(windows.getDomNode());
 	 * 
-	 * @see <a href="WINK_ROOT_URL/ui/layout/windows/test/test_windows.html" target="_blank">Test page</a>
+	 * @compatibility Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
 	 * 
+	 * @see <a href="WINK_ROOT_URL/ui/layout/windows/test/test_windows.html" target="_blank">Test page</a>
 	 */
 	wink.ui.layout.Windows = function(properties)
 	{

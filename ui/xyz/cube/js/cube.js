@@ -9,8 +9,6 @@
  * @fileOverview Implements a Cube. The Cube allows to display a cube shape and to interact with it. The cube faces are nodes builded and managed by the user,
  * so the user can integrate various contents. The size, the position and the rotation axis are parameters that make the cube to be configurable.
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
- * 
  * @author Sylvain LALANDE
  */
 define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '../../../../fx/_xyz/js/3dfx', '../../../../ux/movementtracker/js/movementtracker'], function(wink)
@@ -70,10 +68,11 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * cube = new wink.ui.xyz.Cube(properties);
 	 * $("container").appendChild(cube.getDomNode());
 	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
+	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/cube/test/test_cube_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/cube/test/test_cube_2.html" target="_blank">Test page (actu)</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/cube/test/test_cube_3.html" target="_blank">Test page (navigation)</a>
-	 * 
 	 */
 	wink.ui.xyz.Cube = function(properties) 
 	{

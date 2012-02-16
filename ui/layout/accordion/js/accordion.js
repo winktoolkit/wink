@@ -8,8 +8,6 @@
 /**
  * @fileOverview Implement an accordion container. Creates an accordion container with sliding sections
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
- * 
  * @author Jerome GIRAUD
  */
 define(['../../../../_amd/core'], function(wink)
@@ -27,6 +25,8 @@ define(['../../../../_amd/core'], function(wink)
 	 * section3 = accordion.addSection('id3', '&lt;b&gt;section3&lt;/b&gt;');
 	 * 
 	 * $('output').appendChild(accordion.getDomNode());
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/accordion/layout/test/test_accordion_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/accordion/layout/test/test_accordion_2.html" target="_blank">Test page (advanced)</a>

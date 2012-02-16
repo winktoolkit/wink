@@ -8,7 +8,6 @@
 /**
  * @fileOverview Implements a tracking object
  *
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
  * @author Patrick BOSSE
  */
 
@@ -33,6 +32,8 @@ define(['../../../_amd/core'], function(wink)
 	 * tracking.push("/WINK/Test2");
 	 * 
 	 * tracking.flush();
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/net/tracking/test/test_tracking.html" target="_blank">Test page</a>
 	 */

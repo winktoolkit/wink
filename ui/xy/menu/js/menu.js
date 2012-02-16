@@ -8,7 +8,6 @@
 /**
  * @fileOverview Displays an iPhone-like popup menu
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
  * @author Frédéric MOULIS
  */
 
@@ -54,6 +53,8 @@ define(['../../../../_amd/core'], function(wink)
 	 * 	title: 'page1',
 	 * 	callback: { context: window, method: 'selectItem1' }
 	 * });
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xy/menu/test/test_menu.html" target="_blank">Test page</a>
 	 */

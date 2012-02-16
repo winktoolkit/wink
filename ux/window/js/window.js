@@ -10,8 +10,6 @@
  * It Handles these properties: screenWidth, screenHeight, fullWidth, fullHeight, width, height, orientation
  * 
  * @author Sylvain LALANDE
- * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
  */
 
 /**
@@ -49,6 +47,8 @@ define(['../../../_amd/core'], function(wink)
 	 *   alert("Orientation: " + properties.orientation);
 	 * };
 	 * wink.subscribe('/window/events/orientationchange', { context: window, method: 'handleOrientation' });
+	 * 
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ux/window/test/test_window.html" target="_blank">Test page</a>
 	 */

@@ -10,7 +10,6 @@
  * 
  * @see wink.ui.xy.Carousel
  * 
- * @compatibility Windows Phone 7.5
  * @author Jerome GIRAUD
  */
 
@@ -45,6 +44,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * @borrows wink.ui.xy.Carousel#goToItem as this.goToItem
 	 * @borrows wink.ui.xy.Carousel#refreshContainerWidth as this.refreshContainerWidth
 	 * 
+	 * @compatibility Windows Phone 7.5
 	 */
 	wink.ui.xy.Carousel = function(properties)
 	{

@@ -9,8 +9,6 @@
  * @fileOverview Windows Phone Tab container implementation
  * 
  * @see wink.ui.layout.TabContainer
- *
- * @compatibility Windows Phone 7.5
  * 
  * @author Donatien LEBARBIER
  */
@@ -34,6 +32,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * @borrows wink.ui.layout.TabContainer#selectTab as this.selectTab
 	 * @borrows wink.ui.layout.TabContainer#getDomNode as this.getDomNode
 	 * 
+	 * @compatibility Windows Phone 7.5
 	 */
 	wink.ui.layout.TabContainer = function(properties)
 	{

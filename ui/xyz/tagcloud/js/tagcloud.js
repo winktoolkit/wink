@@ -12,8 +12,6 @@
  * identifier of a node (the view) and a rating (how can impact be displayed).
  * The user can interact with the tag cloud rotating it around one or more axes, the depth and the rating has an 
  * impact when the size of the tag and makes the visual effect expected.
- *
- * @compatibility Iphone OS2 (slow), Iphone OS3, Iphone OS4, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7 (very slow), Bada 1.0 (slow)
  * 
  * @author Sylvain LALANDE
  */
@@ -83,12 +81,13 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * var tagcloud = new wink.ui.xyz.TagCloud(properties);
 	 * container.appendChild(tagcloud.getDomNode());
 	 * 
+	 * @compatibility Iphone OS2 (slow), Iphone OS3, Iphone OS4, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7 (very slow), Bada 1.0 (slow)
+	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/tagcloud/test/test_tagcloud_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/tagcloud/test/test_tagcloud_2.html" target="_blank">Test page (images)</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/tagcloud/test/test_tagcloud_3.html" target="_blank">Test page (3d menu)</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/tagcloud/test/test_tagcloud_4.html" target="_blank">Test page (3d menu images)</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/tagcloud/test/test_tagcloud_5.html" target="_blank">Test page (vertical 3d menu)</a>
-	 * 
 	 */
 	wink.ui.xyz.TagCloud = function(properties) 
 	{

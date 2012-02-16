@@ -10,7 +10,6 @@
  * Because a change of scale followed by a translation does not give the same result if you reverse the two transformations, 
  * the main role is to simplify the implementation of composed transformations, it is made by using a user-defined order.
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
  * @author Sylvain LALANDE
  */
 

@@ -7,8 +7,7 @@
 
 /**
  * @fileOverview The animation utilities
- * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
+ *
  * @author Sylvain LALANDE
  */
 
@@ -43,6 +42,8 @@ define(['../../../_amd/core'], function(wink)
 		 * animGroup.addAnimation(node5, anim2);
 		 * animGroup.addAnimation(node6, anim3);
 		 * animGroup.start();
+		 * 
+		 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 		 * 
 		 * @see <a href="WINK_ROOT_URL/fx/_animation/test/test_animation_1.html" target="_blank">Test page</a>
 		 * @see <a href="WINK_ROOT_URL/fx/_animation/test/test_animation_2.html" target="_blank">Test page (advanced)</a>
