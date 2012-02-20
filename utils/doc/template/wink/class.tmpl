@@ -84,7 +84,6 @@
 				</section>
 			</if>
 			
-
 			<if test="data.comment.getTag('compatibility').length && !data.isBuiltin() && (data.isNamespace || data.is('CONSTRUCTOR'))">
 				<section>
 					<div class="props">
@@ -102,6 +101,31 @@
 									<td class="attributes"></td>
 									<td class="nameDescription">
 										<div class="description">{+data.comment.getTag("compatibility")+}</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+			</if>
+			
+			<if test="data.comment.getTag('winkVersion').length && !data.isBuiltin() && (data.isNamespace || data.is('CONSTRUCTOR'))">
+				<section>
+					<div class="props">
+						<table class="summaryTable" cellspacing="0" summary="Wink version compatibility">
+							<caption class="sectionTitle">Plugins compatibility</caption>
+							<thead>
+								<tr>
+									<th scope="col">Wink Version compatibility</th>
+									<th scope="col">Supported Wink version</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								<tr>
+									<td class="attributes"></td>
+									<td class="nameDescription">
+										<div class="description">{+data.comment.getTag("winkVersion")+}</div>
 									</td>
 								</tr>
 							</tbody>

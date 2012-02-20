@@ -8,7 +8,6 @@
 /**
  * @fileOverview A plugin to display a wheel that can be used to share items
  * 
- * @winkVersion 1.4
  * @author Jerome GIRAUD
  */
 
@@ -44,6 +43,8 @@ define(['../../../_amd/core', '../../../fx/_xyz/js/3dfx', '../../../math/_geomet
 	 * @requires wink.math (geometric)
 	 * 
 	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7
+	 * 
+	 * @winkVersion 1.4
 	 * 
 	 * @see <a href="WINK_ROOT_URL/plugins/sharingwheel/test/test_sharingwheel.html" target="_blank">Test page</a>
 	 */
