@@ -249,5 +249,5 @@ Release 1.4.1 [01/02/2011]
 	- Added localStorage and indexedDatabse support for easy caching
 	- Integrating the latest YUI compressor version
 
-Release 1.4.2 [xx/xx/xxxx] 
+Release 1.4.2 [xx/xx/xxxx]
 	- Corrected bug in wink.cache : scope problems for error callbacks	
