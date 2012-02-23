@@ -17,6 +17,8 @@
 
 define(['../../../_amd/core'], function(wink)
 {
+	var byId = wink.byId;
+	
 	/**
 	 * @class 
 	 * 
@@ -168,10 +170,10 @@ define(['../../../_amd/core'], function(wink)
 		{
 			target.dnd = this;
 			
-			var x1 = $(target.id).offsetLeft;
-			var y1 = $(target.id).offsetTop;
-			var x2 = x1 + $(target.id).clientWidth;
-			var y2 = y1 + $(target.id).clientHeight;
+			var x1 = byId(target.id).offsetLeft;
+			var y1 = byId(target.id).offsetTop;
+			var x2 = x1 + byId(target.id).clientWidth;
+			var y2 = y1 + byId(target.id).clientHeight;
 			
 			this._targets[this._targets.length] = 
 			{
@@ -192,9 +194,9 @@ define(['../../../_amd/core'], function(wink)
 			
 			for (var i = 0; i<l; i++) 
 			{
-				if ( $(this._targets[i].target.id))
+				if ( byId(this._targets[i].target.id))
 				{
-					var t = $(this._targets[i].target.id);
+					var t = byId(this._targets[i].target.id);
 					
 					var x1 = t.offsetLeft;
 					var y1 = t.offsetTop;
@@ -523,7 +525,7 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_validateProperties: function()
 		{
-			if ( wink.isNull($(this.id)) )
+			if ( wink.isNull(byId(this.id)) )
 			{
 				wink.log('[dnd.Source] id property must be a valid DOM Node identifier');
 				return false;
@@ -535,10 +537,10 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_initDom: function()
 		{
-			wink.addClass($(this.id), 'dnd_movable');
+			wink.addClass(byId(this.id), 'dnd_movable');
 			
-			$(this.id).pozXinit = 0;
-			$(this.id).pozYinit = 0;
+			byId(this.id).pozXinit = 0;
+			byId(this.id).pozYinit = 0;
 		}
 	};
 	
@@ -628,7 +630,7 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_validateProperties: function()
 		{
-			if ( wink.isNull($(this.id)) )
+			if ( wink.isNull(byId(this.id)) )
 			{
 				wink.log('[dnd.Target] id property must be a valid DOM Node identifier');
 				return false;

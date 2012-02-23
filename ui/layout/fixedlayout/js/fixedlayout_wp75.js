@@ -63,17 +63,17 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 		 */
 		_validateProperties: function() 
 		{
-			if (wink.isUndefined(this.target) || wink.isNull($(this.target)))
+			if (wink.isUndefined(this.target) || wink.isNull(wink.byId(this.target)))
 			{
 				this._raisePropertyError('target');
 				return false;
 			}
-			if (wink.isSet(this.header) && wink.isNull($(this.header))) 
+			if (wink.isSet(this.header) && wink.isNull(wink.byId(this.header))) 
 			{
 				this._raisePropertyError('header');
 				return false;
 			}
-			if (wink.isSet(this.footer) && wink.isNull($(this.footer))) 
+			if (wink.isSet(this.footer) && wink.isNull(wink.byId(this.footer))) 
 			{
 				this._raisePropertyError('footer');
 				return false;
@@ -112,18 +112,18 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 		 */
 		_initProperties: function()
 		{
-			this._target = $(this.target);
+			this._target = wink.byId(this.target);
 			wink.fx.apply(this._target, {
 				overflowY: 'scroll'
 			});
 			
 			if (wink.isSet(this.header)) 
 			{
-				this._header = $(this.header);
+				this._header = wink.byId(this.header);
 			}
 			if (wink.isSet(this.footer)) 
 			{
-				this._footer = $(this.footer);
+				this._footer = wink.byId(this.footer);
 			}
 			
 			delete this.target, this.header, this.footer;

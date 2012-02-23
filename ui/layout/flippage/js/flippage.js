@@ -369,7 +369,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			
 			for ( var i=0; i<l; i++)
 			{
-				if ( $(this.pages[i]) == this.pages[i])
+				if ( wink.byId(this.pages[i]) == this.pages[i])
 				{
 					wink.log('[FlipPage] all the parameters should be dom nodes ids');
 					return false;
@@ -388,16 +388,16 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			{
 				if ( i==0 )
 				{
-					var page = new wink.ui.layout.FlipPage.Page({'frontNode': null, 'backNode': $(this.pages[i]), index: i, zIndex: this.Z_INDEX-i, duration: this.duration});
+					var page = new wink.ui.layout.FlipPage.Page({'frontNode': null, 'backNode': wink.byId(this.pages[i]), index: i, zIndex: this.Z_INDEX-i, duration: this.duration});
 					page.setPosition(0);
 					this._currentPage = page;
 				} else if ( i == l )
 				{
-					var page = new wink.ui.layout.FlipPage.Page({'frontNode': $(this.pages[i-1]), 'backNode': null, index: i, zIndex: this.Z_INDEX-i, duration: this.duration});
+					var page = new wink.ui.layout.FlipPage.Page({'frontNode': wink.byId(this.pages[i-1]), 'backNode': null, index: i, zIndex: this.Z_INDEX-i, duration: this.duration});
 					page.setPosition(1);
 				} else
 				{
-					var page = new wink.ui.layout.FlipPage.Page({'frontNode': $(this.pages[i-1]), 'backNode': $(this.pages[i]), index: i, zIndex: this.Z_INDEX-i});
+					var page = new wink.ui.layout.FlipPage.Page({'frontNode': wink.byId(this.pages[i-1]), 'backNode': wink.byId(this.pages[i]), index: i, zIndex: this.Z_INDEX-i});
 					page.setPosition(1);
 				}
 				
@@ -410,7 +410,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			
 			for ( var i=0; i<l; i++)
 			{
-				$(this.pages[i]).parentNode.removeChild($(this.pages[i]));
+				wink.byId(this.pages[i]).parentNode.removeChild(wink.byId(this.pages[i]));
 			}
 		
 			if (this.shadow)

@@ -612,7 +612,7 @@ define(['../../../../_amd/core'], function(wink)
 			
 			for ( var i=0; i<l; i++)
 			{
-				if ( $(this.tabs[i]) == this.tabs[i])
+				if ( wink.byId(this.tabs[i]) == this.tabs[i])
 				{
 					wink.log('[TabContainer] all the parameters should be dom nodes ids');
 					return false;
@@ -629,18 +629,18 @@ define(['../../../../_amd/core'], function(wink)
 			
 			for ( var i=0; i<l; i++)
 			{
-				var title = $(this.tabs[i]).getElementsByClassName('tc_title')[0];
+				var title = wink.byId(this.tabs[i]).getElementsByClassName('tc_title')[0];
 				
 				if ( wink.isUndefined(title) )
 				{
 					title = 'no title';
 				} else
 				{
-					$(this.tabs[i]).removeChild(title);
+					wink.byId(this.tabs[i]).removeChild(title);
 					title = title.innerHTML;
 				}
 				
-				this.addTab({'contentNode': $(this.tabs[i]), 'title': title});
+				this.addTab({'contentNode': wink.byId(this.tabs[i]), 'title': title});
 			}
 			
 			wink.setTimeout(this, 'selectTab', 100, this.tabs[this.firstSelectedTab]);

@@ -104,17 +104,17 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 					wink.log('[FixedLayout] Error: ' + property + ' missing or invalid');
 				};
 			
-			if (_undef(_target) || _isnull($(_target)))
+			if (_undef(_target) || _isnull(wink.byId(_target)))
 			{
 				_raisePropertyError('target');
 				return false;
 			}
-			if (_isset(_header) && _isnull($(_header))) 
+			if (_isset(_header) && _isnull(wink.byId(_header))) 
 			{
 				_raisePropertyError('header');
 				return false;
 			}
-			if (_isset(_footer) && _isnull($(_footer))) 
+			if (_isset(_footer) && _isnull(wink.byId(_footer))) 
 			{
 				_raisePropertyError('footer');
 				return false;
@@ -145,18 +145,18 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 			_hasHeader = _isset(this.header);
 			_hasFooter = _isset(this.footer);
 			
-			_target = $(this.target);
+			_target = wink.byId(this.target);
 			_addclass(_target, 'fl_target');
 			
 			if (_hasHeader) 
 			{
-				_header = $(this.header);
+				_header = wink.byId(this.header);
 				_addclass(_header, 'fl_bar');
 				_headerStyle = _header.style;
 			}
 			if (_hasFooter) 
 			{
-				_footer = $(this.footer);
+				_footer = wink.byId(this.footer);
 				_addclass(_footer, 'fl_bar');
 				_footerStyle = _footer.style;
 			}

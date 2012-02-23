@@ -330,7 +330,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 				this._domNode.appendChild(tagNode);
 				
 				tagNode.style.position = "absolute";
-				tagNode.appendChild($(tagi.id));
+				tagNode.appendChild(wink.byId(tagi.id));
 				
 				tagi.tagNode = tagNode;
 				tagi.colorOpacity = 1.0;

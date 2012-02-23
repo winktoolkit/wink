@@ -180,7 +180,7 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_validateProperties: function()
 		{
-			if (wink.isUndefined(this._properties.target) || wink.isNull($(this._properties.target))) {
+			if (wink.isUndefined(this._properties.target) || wink.isNull(wink.byId(this._properties.target))) {
 				this._raisePropertyError('target');
 				return false;
 			}
@@ -213,7 +213,7 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_initProperties: function()
 		{
-			this._target = $(this._properties.target);
+			this._target = wink.byId(this._properties.target);
 			if (this._properties.captureFlow === false) {
 				this._params.captureFlow = false;
 			}
