@@ -166,7 +166,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			for (var prop in faceObject) {
 				this._faces[index][prop] = faceObject[prop];
 			}
-			this._faces[index].innerNode = $(this._faces[index].faceId);
+			this._faces[index].innerNode = wink.byId(this._faces[index].faceId);
 			this._faces[index].faceNode.appendChild(this._faces[index].innerNode);
 		},
 		/**
@@ -329,7 +329,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 					height: this._view.size + "px"
 				});
 				
-				face.innerNode = $(face.faceId);
+				face.innerNode = wink.byId(face.faceId);
 				this._cubeNode.appendChild(face.faceNode);
 				face.faceNode.appendChild(face.innerNode);
 			}

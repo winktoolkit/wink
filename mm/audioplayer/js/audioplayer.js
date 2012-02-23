@@ -433,10 +433,10 @@ define(['../../../_amd/core'], function(wink)
 			if ( s >= 60 )
 			{
 				var m = Math.floor(s/60);
-				return (m + _('minutes', this) + (s-m*60) + _('seconds', this));
+				return (m + wink.translate('minutes', this) + (s-m*60) + wink.translate('seconds', this));
 			} else
 			{
-				return (s + _('seconds', this));
+				return (s + wink.translate('seconds', this));
 			}
 		},
 		

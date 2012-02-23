@@ -590,7 +590,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 					coverReflection.appendChild(titleNode);
 					titleNode.style.position = "absolute";
 					//titleNode.style.textAlign = "center";
-					var titleInnerNode = $(c.title);
+					var titleInnerNode = wink.byId(c.title);
 					titleNode.appendChild(titleInnerNode);
 					
 					c.titleNode = titleNode;
@@ -811,7 +811,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 		_prepareCoverBackFace: function(position)
 		{
 			var cp = this.covers[position];
-			var backFaceNode = $(cp.backFaceId);
+			var backFaceNode = wink.byId(cp.backFaceId);
 			
 			wink.fx.apply(backFaceNode, {
 				display: "block",
@@ -889,7 +889,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 		{
 			var cp = this.covers[position];
 			wink.fx.applyTransformTransition(cp.coverOutlineNode, '0ms', '0ms', this._TRANSITION_FUNC);
-			var backFaceNode = $(cp.backFaceId);
+			var backFaceNode = wink.byId(cp.backFaceId);
 			backFaceNode.style.display = "none";
 			this._displayMode = false;
 			this._flipping = false;
@@ -1311,7 +1311,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 				var c = cvs[i];
 				if (wink.isSet(c.backFaceId))
 				{
-					var backFaceNode = $(c.backFaceId);
+					var backFaceNode = wink.byId(c.backFaceId);
 					backFaceNode.style.display = "none";
 				}
 			}

@@ -280,7 +280,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			
 			for ( var i=0; i<l; i++)
 			{
-				if ( $(this.pages[i]) == this.pages[i])
+				if ( wink.byId(this.pages[i]) == this.pages[i])
 				{
 					wink.log('[Windows] all the parameters should be dom nodes ids');
 					return false;
@@ -299,11 +299,11 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			{
 				if (i == 0)
 				{
-					var page = new wink.ui.layout.Windows.Page({ 'node': $(pgs[i]), 'position': l-1-i, 'front': true });
+					var page = new wink.ui.layout.Windows.Page({ 'node': wink.byId(pgs[i]), 'position': l-1-i, 'front': true });
 					this._firstPage = page;
 				} else
 				{
-					var page = new wink.ui.layout.Windows.Page({ 'node': $(pgs[i]), 'position': l-1-i});
+					var page = new wink.ui.layout.Windows.Page({ 'node': wink.byId(pgs[i]), 'position': l-1-i});
 				}
 				
 				var pn = page.getDomNode();

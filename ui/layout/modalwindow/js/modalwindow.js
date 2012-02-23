@@ -191,7 +191,7 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 			this._iconImgNode = document.createElement('img');
 			this._modalNode = document.createElement('div');
 			this._modalCloseNode = document.createElement('div');
-			this._modalContentNode = $(this.modalView.content);
+			this._modalContentNode = wink.byId(this.modalView.content);
 			
 			wink.addClass(this._iconNode, 'w_icon');
 			wink.addClass(this._modalNode, 'w_box w_window w_bloc w_border w_radius w_bg_dark');

@@ -13,6 +13,8 @@
 
 define(['../../../_amd/core'], function(wink)
 {
+	var byId = wink.byId;
+	
 	/**
 	 * @class The Search object allows you to process searches in an HTML document and browse search results. 
 	 * To instantiate the search component, you need to provide the DOM node where the search should be performed, the results classname and a classname for the selected results
@@ -139,12 +141,12 @@ define(['../../../_amd/core'], function(wink)
 				this.currentResult = 1;
 				if(wink.isSet(this._properties.resultSelectClassName))
 				{
-					$('search_1').className = this._properties.resultSelectClassName;
+					byId('search_1').className = this._properties.resultSelectClassName;
 				} else
 				{
-					$('search_1').className = "";
+					byId('search_1').className = "";
 				}
-				return $('search_1');
+				return byId('search_1');
 			} else
 			{
 				this.currentResult = 0;
@@ -172,14 +174,14 @@ define(['../../../_amd/core'], function(wink)
 			{
 				this.currentResult++;
 				this._select(this.currentResult);
-				return $('search_'+this.currentResult);
+				return byId('search_'+this.currentResult);
 			} else
 			{
 				if(this.totalResults > 0)
 				{
 					this.currentResult = 1;
 					this._select(this.currentResult);
-					return $('search_'+this.currentResult);
+					return byId('search_'+this.currentResult);
 				} else
 				{
 					this.currentResult = 0;
@@ -199,14 +201,14 @@ define(['../../../_amd/core'], function(wink)
 			{
 				this.currentResult--;
 				this._select(this.currentResult);
-				return $('search_'+this.currentResult);
+				return byId('search_'+this.currentResult);
 			} else
 			{
 				if(this.totalResults > 0)
 				{
 					this.currentResult = this.totalResults;
 					this._select(this.currentResult);
-					return $('search_'+this.currentResult);
+					return byId('search_'+this.currentResult);
 				} else {
 					this.currentResult = 0;
 					return null;
@@ -263,9 +265,9 @@ define(['../../../_amd/core'], function(wink)
 		{
 			if(wink.isSet(this._properties.resultClassName))
 			{
-				$('search_'+i).className = this._properties.resultClassName;
+				byId('search_'+i).className = this._properties.resultClassName;
 			} else {
-				$('search_'+i).className = "";
+				byId('search_'+i).className = "";
 			}
 		},
 		
@@ -278,9 +280,9 @@ define(['../../../_amd/core'], function(wink)
 		{
 			if(wink.isSet(this._properties.resultSelectClassName))
 			{
-				$('search_'+i).className = this._properties.resultSelectClassName;
+				byId('search_'+i).className = this._properties.resultSelectClassName;
 			} else {
-				$('search_'+i).className = "";
+				byId('search_'+i).className = "";
 			}
 		}
 	};

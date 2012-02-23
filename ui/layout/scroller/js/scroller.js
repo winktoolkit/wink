@@ -366,7 +366,7 @@ define(['../../../../_amd/core', '../../../../ux/inertia/js/inertia'], function(
 		 */
 		_validateProperties: function() 
 		{
-			if (wink.isUndefined(this._properties.target) || wink.isNull($(this._properties.target)))
+			if (wink.isUndefined(this._properties.target) || wink.isNull(wink.byId(this._properties.target)))
 			{
 				this._raisePropertyError('target');
 				return false;
@@ -406,7 +406,7 @@ define(['../../../../_amd/core', '../../../../ux/inertia/js/inertia'], function(
 		 */
 		_initProperties: function() 
 		{
-			this._target = $(this._properties.target);
+			this._target = wink.byId(this._properties.target);
 			wink.fx.apply(this._target, {
 				"user-select": "none"
 			});

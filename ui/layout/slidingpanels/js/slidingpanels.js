@@ -354,7 +354,7 @@ define(['../../../../_amd/core'], function(wink)
 			
 			for ( var i=0; i<l; i++)
 			{
-				if ( $(this.pages[i]) == this.pages[i])
+				if ( wink.byId(this.pages[i]) == this.pages[i])
 				{
 					wink.log('[SlidingPanels] all the parameters should be dom nodes ids');
 					return false;
@@ -379,7 +379,7 @@ define(['../../../../_amd/core'], function(wink)
 			
 			for (i = 0; i < l; i++)
 			{
-				var page = new wink.ui.layout.SlidingPanels.Page({ 'node': $(pgs[i]) });
+				var page = new wink.ui.layout.SlidingPanels.Page({ 'node': wink.byId(pgs[i]) });
 		
 				if (i == 0)
 				{

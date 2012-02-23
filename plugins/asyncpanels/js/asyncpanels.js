@@ -180,7 +180,7 @@ define(['../../../_amd/core', '../../../ui/layout/slidingpanels/js/slidingpanels
 		 */
 		_onSuccess: function(result)
 		{
-			$(result.params.id).innerHTML = result.xhrObject.responseText;
+			wink.byId(result.params.id).innerHTML = result.xhrObject.responseText;
 			
 			this._loaderNode.style.visibility = "hidden";
 			wink.layer.hide();
@@ -223,7 +223,7 @@ define(['../../../_amd/core', '../../../ui/layout/slidingpanels/js/slidingpanels
 			this._loaderNode.className = "w_window w_border w_radius w_bg_dark asp_loader";
 			this._textNode.className = "asp_text";
 			
-			this._textNode.innerHTML = _("loading", this);
+			this._textNode.innerHTML = wink.translate("loading", this);
 			
 			this._spinnerNode = new wink.ui.xy.Spinner({background: "dark", size: 20}).getDomNode();
 			

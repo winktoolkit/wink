@@ -23,6 +23,8 @@
  */
 define(['../../../../_amd/core'], function(wink)
 {
+	var _t = wink.translate;
+	
 	/**
 	 * @class Implement a datepicker.
 	 * Displays a calendar. The user can select a date by clicking on a day.
@@ -55,7 +57,7 @@ define(['../../../../_amd/core'], function(wink)
 			this._template        = '';
 			this._domNode         = null;
 			this._firstDayOfMonth = new Date();
-			this._firstDayOfWeek  = _('firstDayOfWeek', this);
+			this._firstDayOfWeek  = _t('firstDayOfWeek', this);
 			this._week            = [ 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday' ];
 	
 			this._initDom();
@@ -120,7 +122,7 @@ define(['../../../../_amd/core'], function(wink)
 		
 			this._template += '<div>';
 			this._template += '<div class="dp_navigation"><div class="w_icon w_button_previous dp_previous" onclick="(new wink.ui.xy.DatePicker())._goToPreviousMonth()"></div><div class="dp_month">' + this._getMonthName(this._firstDayOfMonth.getMonth()) + ' ' + this._firstDayOfMonth.getFullYear() + '</div><div class="w_icon w_button_next dp_next" onclick="(new wink.ui.xy.DatePicker())._goToNextMonth()"></div><div class="w_icon w_float w_button_close" onClick="(new wink.ui.xy.DatePicker()).hide()"></div></div>';
-			this._template += '<div class="dp_days_container"><div class="dp_days">' + _(this._week[this._firstDayOfWeek], this) + '</div><div class="dp_days">' + _(this._week[(this._firstDayOfWeek + 1) % 7], this) + '</div><div class="dp_days">' + _(this._week[(this._firstDayOfWeek + 2) % 7], this) + '</div><div class="dp_days">' + _(this._week[(this._firstDayOfWeek + 3) % 7], this) + '</div><div class="dp_days">' + _(this._week[(this._firstDayOfWeek + 4) % 7], this) + '</div><div class="dp_days">' + _(this._week[(this._firstDayOfWeek + 5) % 7], this) + '</div><div class="dp_days">' + _(this._week[(this._firstDayOfWeek + 6) % 7], this) + '</div></div>';
+			this._template += '<div class="dp_days_container"><div class="dp_days">' + _t(this._week[this._firstDayOfWeek], this) + '</div><div class="dp_days">' + _t(this._week[(this._firstDayOfWeek + 1) % 7], this) + '</div><div class="dp_days">' + _t(this._week[(this._firstDayOfWeek + 2) % 7], this) + '</div><div class="dp_days">' + _t(this._week[(this._firstDayOfWeek + 3) % 7], this) + '</div><div class="dp_days">' + _t(this._week[(this._firstDayOfWeek + 4) % 7], this) + '</div><div class="dp_days">' + _t(this._week[(this._firstDayOfWeek + 5) % 7], this) + '</div><div class="dp_days">' + _t(this._week[(this._firstDayOfWeek + 6) % 7], this) + '</div></div>';
 			this._template += '<div class="dp_dates_container w_border_bottom">';
 		
 			if (this._firstDayOfMonth.getDay() == this._firstDayOfWeek)
@@ -296,29 +298,29 @@ define(['../../../../_amd/core'], function(wink)
 			switch (month)
 			{
 				case 0:
-					return _('january', this);
+					return _t('january', this);
 				case 1:
-					return _('february', this);
+					return _t('february', this);
 				case 2:
-					return _('march', this);
+					return _t('march', this);
 				case 3:
-					return _('april', this);
+					return _t('april', this);
 				case 4:
-					return _('may', this);
+					return _t('may', this);
 				case 5:
-					return _('june', this);
+					return _t('june', this);
 				case 6:
-					return _('july', this);
+					return _t('july', this);
 				case 7:
-					return _('august', this);
+					return _t('august', this);
 				case 8:
-					return _('september', this);
+					return _t('september', this);
 				case 9:
-					return _('october', this);
+					return _t('october', this);
 				case 10:
-					return _('november', this);
+					return _t('november', this);
 				case 11:
-					return _('december', this);
+					return _t('december', this);
 				default:
 					return '';
 			}

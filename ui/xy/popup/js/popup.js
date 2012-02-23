@@ -13,6 +13,8 @@
 
 define(['../../../../_amd/core'], function(wink)
 {
+	var byId = wink.byId;
+	
 	/**
 	 * @class Popup is a singleton that allows to open a popup window with one (alert) or two buttons (confirm) or with a fully customizable content
 	 * Options are available for each type of popup style
@@ -129,7 +131,7 @@ define(['../../../../_amd/core'], function(wink)
 	
 			var btnNode = document.createElement('div');
 			wink.addClass(btnNode, "w_button w_radius pp_popup_btn pp_popup_alert w_bg_light");
-			var btnNodeValue = _('alertOk', this);
+			var btnNodeValue = wink.translate('alertOk', this);
 			if (wink.isSet(opt.btn))
 			{
 				btnNodeValue = opt.btn;
@@ -172,12 +174,12 @@ define(['../../../../_amd/core'], function(wink)
 			wink.addClass(btnCancelNode, "w_button w_radius pp_popup_btn pp_popup_confirm w_bg_light");
 			wink.addClass(btnOkNode, "w_button w_radius pp_popup_btn pp_popup_confirm w_bg_light");
 			
-			var btnCancelValue = _('confirmCancel', this);
+			var btnCancelValue = wink.translate('confirmCancel', this);
 			if (wink.isSet(opt.btnCancel))
 			{
 				btnCancelValue = opt.btnCancel;
 			}
-			var btnOkValue = _('confirmOk', this);
+			var btnOkValue = wink.translate('confirmOk', this);
 			if (wink.isSet(opt.btnOk))
 			{
 				btnOkValue = opt.btnOk;
