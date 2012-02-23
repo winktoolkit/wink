@@ -1,4 +1,4 @@
-WINK 3
+WINK
 
 Wink Toolkit is a lightweight JavaScript toolkit which will help you build great 
 mobile web apps. It is designed and developed to meet the specific constraints 
