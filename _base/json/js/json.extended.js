@@ -41,7 +41,7 @@ define(['../../../_base/_base/js/base', './json'], function(wink)
 		
 		if ( value )
 		{				
-			if ( wink.isSet(window.JSON) && wink.isSet(window.JSON.stringify) )
+			if ( wink.has("json-stringify") )
 			{
 				str = window.JSON.stringify(value);
 			} else

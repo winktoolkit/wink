@@ -11,9 +11,6 @@
  * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
  * @author Sylvain LALANDE
  * 
- * @features:
- * 	--> TODO css-rgba
- * 
  */
 
 define(['../../../_base/_base/js/base', './feat'], function(wink) 
@@ -49,7 +46,9 @@ define(['../../../_base/_base/js/base', './feat'], function(wink)
 			r: "backface-visibility",
 			s: "tap-highlight-color",
 			t: "user-select",
-			bg: "background-image"
+			bg: "background-image",
+			tr: "transition",
+			an: "animation"
 		};
 	
 	function normalizeKey(key) {
@@ -99,6 +98,8 @@ define(['../../../_base/_base/js/base', './feat'], function(wink)
 	deferProp(cssKeys.k, cssKeys.o);
 	deferProp(cssKeys.l, cssKeys.o);
 	deferProp(cssKeys.q, cssKeys.o);
+	deferProp(cssKeys.tr, cssKeys.n);
+	deferProp(cssKeys.an, "css-animation");
 	
 	function singleProp(p) {
 		return function() {
@@ -134,7 +135,11 @@ define(['../../../_base/_base/js/base', './feat'], function(wink)
 	    	support = support && hasCss(cssKeys.c);
 	    	support = support && hasCss(cssKeys.d);
 	    	support = support && hasCss(cssKeys.e);
+	    	support = support && hasCss(cssKeys.tr);
 	    	return support;
+	    },
+	    "css-animation": function() {
+	    	return hasCss(cssKeys.an);
 	    },
 		"css-translate3d": function() {
 			return winkhas("css-matrix");
@@ -249,6 +254,9 @@ define(['../../../_base/_base/js/base', './feat'], function(wink)
 				return isSupported;
 			}
 			return false;
+	    },
+	    "css-overflow-scrolling": function() {
+	    	return hasCss("overflow-scrolling");
 	    }
 	});
 	

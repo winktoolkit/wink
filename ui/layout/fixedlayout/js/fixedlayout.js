@@ -439,9 +439,8 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 				
 				_hasTouchStart = wink.has('touchstart'),
 				_hasTouchMove = wink.has('touchmove'),
-				_prefixStyle = "Webkit", // TODO adds properties in feature detection
-				_transitionStyle = _prefixStyle + 'Transition',
-				_animationStyle = _prefixStyle + 'Animation';
+				_transitionStyle = wink.has.prop('transition'),
+				_animationStyle = wink.has.prop('animation');
 			
 			/**
 			 * Handles the scroll

@@ -37,6 +37,11 @@
 		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
 		<!-- END CORE -->
 		
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_api.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_audio.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_video.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_graphic.js"></script>
+		
 		<script type="text/javascript">
 			var infobuffer = "<tr><th><strong>Feature</strong></th><th><strong>Supported</strong></th></tr>";
 			var addInfo = function(feat) {
@@ -53,11 +58,18 @@
 				window.scrollTo(0,0);
 				
 				var features = [
-					"unknow-feature", "json-parse", 
+					"unknow-feature", "json-parse", "json-stringify",
 					"css-transform", "css-translate3d", "css-border-radius", "css-text-shadow", "css-box-shadow", 
-					"css-gradient", "css-transition", "css-perspective", "css-matrix", "css-matrix-stack-inversed",
+					"css-gradient", "css-transition", "css-animation", "css-perspective", "css-matrix", "css-matrix-stack-inversed",
+					"css-overflow-scrolling",
 					"touch", "touchstart", "touchmove", "touchend",
-					"gesture", "gesturestart", "gesturechange", "gestureend", "transitionend"
+					"gesture", "gesturestart", "gesturechange", "gestureend", "transitionend", "hashchange",
+					"dynamicBase", 
+					"native-geolocation", "native-device-orientation", "native-device-motion", "native-localstorage",
+					"native-sessionstorage", "native-websockets", "native-worker", "native-getusermedia",
+					"audio", "audio-mp3", "audio-ogg", "audio-wav", "audio-m4a",
+					"video", "video-h264", "video-ogg", "video-webm",
+					"webgl"
 				];
 	
 				var i, l = features.length;
@@ -69,9 +81,10 @@
 					"touchstart", "touchmove", "touchend",
 					"transform", "transform-property", "perspective", "perspective-origin", "transform-style", "backface-visibility",
 					"transform-origin", "transform-origin-x", "transform-origin-y", "transform-origin-z",
+					"transition", "animation",
 					"transition-property", "transition-duration", "transition-delay", "transition-timing-function", "transitionend",
 					"box-shadow", "text-shadow", "border-radius", "gradient",
-					"tap-highlight-color", "user-select"
+					"tap-highlight-color", "user-select", "overflow-scrolling"
 				];
 				var i, l = props.length;
 				for (i = 0; i < l; i++) {
