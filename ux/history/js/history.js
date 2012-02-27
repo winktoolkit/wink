@@ -56,6 +56,7 @@ define(['../../../_amd/core'], function(wink)
 		_historyQueue: [],
 		_historyIndex: 0,
 		_historyCheckInterval: 100,
+		_historyHandler: null,
 		
 		/**
 		 * Start listening to history changes. This method is automatically called when you add the history script to your page, so you don't need to call it at page startup
@@ -66,9 +67,10 @@ define(['../../../_amd/core'], function(wink)
 			
 			this._historyQueue.push({'hash': '', 'id': 'main', 'params': ''});
 			
-			if ('onhashchange' in window)
+			if (wink.has("hashchange"))
 			{  
-				window.addEventListener('hashchange', wink.bind(function(){this._check();}, this), true);
+				this._historyHandler = wink.bind(function(){this._check();}, this);
+				window.addEventListener('hashchange', this._historyHandler, true);
 			} else
 			{	
 				this._historyTimer = wink.setInterval(this, '_check', this._historyCheckInterval);
@@ -80,9 +82,10 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		stop: function()
 		{
-			if ('onhashchange' in window)
+			if (wink.has("hashchange"))
 			{
-				window.removeEventListener('hashchange', wink.bind(function(){this._check();}, this), true);
+				window.removeEventListener('hashchange', this._historyHandler, true);
+				this._historyHandler = null;
 			} else
 			{
 				clearInterval(this._historyTimer);
@@ -137,7 +140,7 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		updateCheckInterval: function(interval)
 		{
-			if ('onhashchange' in window)
+			if (wink.has("hashchange"))
 			{
 				return
 			}

@@ -250,4 +250,6 @@ Release 1.4.1 [01/02/2011]
 	- Integrating the latest YUI compressor version
 
 Release 1.4.2 [xx/xx/xxxx]
-	- Corrected bug in wink.cache : scope problems for error callbacks	
+	- Corrected bug in wink.cache : scope problems for error callbacks
+	- Corrected bug in wink.ux.history : listen and unlisten on different callbacks
+	- Feature detections added

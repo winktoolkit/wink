@@ -11,24 +11,32 @@
  * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
  * @author Sylvain LALANDE
  * 
- * @features:
- * 	--> TODO json-stringify
  */
 
 define(['../../../_base/_base/js/base', './feat'], function(wink)
 {
 	var winkhas = wink.has,
-		inquire = winkhas.inquire,
+		inquireMap = winkhas.inquireMap,
 		w = window;
 	
-	inquire("json-parse", function() {
-		var parsed, supported = false;
-		if (w["JSON"] && typeof JSON.parse == "function") {
-			parsed = JSON.parse('{"w":1}');
-			supported = !!(parsed && parsed.w);
-		}
-		return supported;
-    });
+	inquireMap({
+		"json-parse": function() {
+			var parsed, supported = false;
+			if (w["JSON"] && typeof JSON.parse == "function") {
+				parsed = JSON.parse('{"w":1}');
+				supported = !!(parsed && parsed.w);
+			}
+			return supported;
+	    },
+	    "json-stringify": function() {
+	    	var stringified, supported = false;
+	    	if (w["JSON"] && typeof JSON.stringify == "function") {
+	    		stringified = JSON.stringify({w:true});
+	    		supported = (stringified == '{"w":true}');
+	    	}
+	    	return supported;
+	    }
+	});
 	
 	return winkhas;
 });

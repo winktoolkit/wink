@@ -11,14 +11,55 @@
  * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
  * @author Sylvain LALANDE
  * 
- * @features:
- * 	--> TODO dom-addeventlistener
- * 	--> TODO dom-dataset
- * 	--> TODO dom-html5-elements
- * 	--> TODO dom-dynamic-base
  */
 
 define(['../../../_base/_base/js/base', './feat'], function(wink)
 {
+	var winkhas = wink.has,
+		inquireMap = winkhas.inquireMap,
+		w = window,
+		d = w.document,
+		de = d.documentElement;
+	
+	inquireMap({
+		"dynamicBase": function() {
+			var base,
+				ce = function(name) {
+					return d.createElement(name);
+				},
+				headf = ce('head'),
+				bodyf = ce('body'),
+				baseL = d.getElementsByTagName('base'),
+				baseUrl = location.protocol + '//' + location.host,
+				url = baseUrl + '/old/';
+			
+			de.appendChild(headf);
+			de.appendChild(bodyf);
+
+			if (baseL.length > 0) {
+				base = baseL[0];
+				url = base.href;
+			} else {
+				base = ce('base');
+				base.href = url;
+				headf.appendChild(base);
+			}
+			
+			var link = ce('a');
+			link.href = 'rlt';
+			bodyf.appendChild(link);
+			
+			var oldpath = link.pathname;
+			base.href = baseUrl + '/new/';
+			var newpath = link.pathname;
+			
+			de.removeChild(headf);
+			de.removeChild(bodyf);
+			base.href = url;
+
+			return (oldpath !== newpath);
+		}
+	});
+
 	return wink.has;
 });
