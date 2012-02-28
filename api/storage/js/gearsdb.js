@@ -66,7 +66,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 		 * 
 		 * @param {string} tableName The name of the table
 		 * @param {object} entry An object representing an element of the table
-		 * @param {object} callback The callback method to invoke after the result
+		 * @param {object|function} callback The callback method to invoke after the result
 		 */
 		insert: function(tableName, entry, callback)
 		{
@@ -79,9 +79,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 			
 			this.database.execute(request.request, request.params);
 			
-			var method = callback.method;
-			
-			if ( method )
+			if ( callback )
 			{
 				if(this.database.rowsAffected)
 				{
@@ -99,7 +97,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 		 * 
 		 * @param {string} tableName The name of the table
 		 * @param {object} entry An object representing an element of the table and containing the id of the element to update
-		 * @param {object} callback The callback method to invoke after the result
+		 * @param {object|function} callback The callback method to invoke after the result
 		 */
 		update: function(tableName, entry, callback)
 		{
@@ -112,9 +110,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 			
 			this.database.execute(request.request, request.params);
 			
-			var method = callback.method;
-			
-			if ( method )
+			if ( callback )
 			{
 				if(this.database.rowsAffected)
 				{
@@ -131,7 +127,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 		 * 
 		 * @param {string} tableName The name of the table
 		 * @param {integer} entryId The id of the element to remove
-		 * @param {object} callback The callback method to invoke after the result
+		 * @param {object|function} callback The callback method to invoke after the result
 		 */
 		remove: function(tableName, entryId, callback)
 		{
@@ -144,9 +140,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 			
 			this.database.execute(request.request, request.params);
 	
-			var method = callback.method;
-			
-			if ( method )
+			if ( callback )
 			{
 				if(this.database.rowsAffected)
 				{
@@ -162,7 +156,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 		 * Get all the entries of a table
 		 * 
 		 * @param {string} tableName The name of the table
-		 * @param {object} callback The callback method to invoke after the result
+		 * @param {object|function} callback The callback method to invoke after the result
 		 */
 		getList: function(tableName, callback)
 		{
@@ -175,9 +169,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 			
 			var result = this.database.execute(request.request, request.params);
 			
-			var method = callback.method;
-			
-			if ( method )
+			if ( callback )
 			{
 				var callbackResult = [];
 				while (result.isValidRow())
@@ -208,7 +200,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 		 * @param {string} tableName The name of the table
 		 * @param {string} fieldName The search field criteria
 		 * @param {string} fieldValue The search field value
-		 * @param {object} callback The callback method to invoke after the result
+		 * @param {object|function} callback The callback method to invoke after the result
 		 */
 		getListByField: function(tableName, fieldName, fieldValue, callback)
 		{
@@ -221,9 +213,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 			
 			var result = this.database.execute(request.request, request.params);
 			
-			var method = callback.method;
-			
-			if ( method )
+			if ( callback )
 			{
 				var callbackResult = [];
 				while (result.isValidRow())
@@ -253,7 +243,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 		 * 
 		 * @param {string} tableName The name of the table
 		 * @param {integer} entryId The id of the element to get
-		 * @param {object} callback The callback method to invoke after the result
+		 * @param {object|function} callback The callback method to invoke after the result
 		 */
 		getById: function(tableName, entryId, callback)
 		{
@@ -266,9 +256,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 			
 			var result = this.database.execute(request.request, request.params);
 			
-			var method = callback.method;
-			
-			if ( method )
+			if ( callback )
 			{
 				var callbackResultRow = {};
 				if (result.isValidRow())
@@ -297,7 +285,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 		/**
 		 * Get the list of all the tables in the database
 		 * 
-		 * @param {object} callback The callback method to invoke after the result
+		 * @param {object|function} callback The callback method to invoke after the result
 		 */
 		getTableList: function(callback)
 		{
@@ -310,9 +298,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 			
 			var result = this.database.execute(request.request, request.params);
 			
-			var method = callback.method;
-			
-			if ( method )
+			if ( callback )
 			{
 				var callbackResult = [];
 				while (result.isValidRow())

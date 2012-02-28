@@ -59,7 +59,7 @@ define(['../../../_base/_base/js/base', '../../../_base/error/js/error', '../../
 	 * 
 	 * @param {HTMLElement} domNode The DOM node reference
 	 * @param {string} eventType The event type that must match with one of { "start", "move", "end", "gesturestart", "gesturemove", "gestureend" }
-	 * @param {object} callback The callback to invoke when event is received by the node : { context, method, arguments }
+	 * @param {object|function} callback The callback to invoke when event is received by the node : { context, method, arguments }
 	 * @param {options} [options] The options associated to the listener
 	 * @param {boolean} [options.preventDefault=false] Indicates whether an automatic preventDefault must be done
 	 * @param {boolean} [options.tracking=true] Indicates whether the node must be tracked after the first start event (taken into account in the first method call)
@@ -131,7 +131,7 @@ define(['../../../_base/_base/js/base', '../../../_base/error/js/error', '../../
 	 * 
 	 * @param {HTMLElement} domNode The DOM node reference
 	 * @param {string} eventType The event type that must match with one of { "start", "move", "end", "gesturestart", "gesturemove", "gestureend" }
-	 * @param {object} callback The callback that was previously added (identified by { context, method })
+	 * @param {object|function} callback The callback that was previously added (identified by { context, method })
 	 * 
 	 */
 	wink.ux.touch.removeListener = removeListener;
@@ -346,7 +346,7 @@ define(['../../../_base/_base/js/base', '../../../_base/error/js/error', '../../
 		 * Adds a new callback associated to the given event type
 		 * 
 		 * @param {string} eventType The type of event
-		 * @param {object} callback The callback to add : { context, method, arguments }
+		 * @param {object|function} callback The callback to add : { context, method, arguments }
 		 * @param {boolean} preventDefault Lets do a "preventDefault" automatically when receiving the event
 		 * 
 		 */
@@ -371,12 +371,14 @@ define(['../../../_base/_base/js/base', '../../../_base/error/js/error', '../../
 			}
 			else 
 			{
-				var callbacks = listenedEvent.callbacks;
+				var callbacks = listenedEvent.callbacks,
+					isFn = wink.isFunction(callback);
+				
 				var j, l = callbacks.length;
 				for (j = 0; j < l; j++)
 				{
 					var cj = callbacks[j];
-					if (callback.context == cj.context && callback.method == cj.method) 
+					if ((isFn && callback == cj) || (!isFn && callback.context == cj.context && callback.method == cj.method)) 
 					{
 						return false;
 					}
@@ -390,7 +392,7 @@ define(['../../../_base/_base/js/base', '../../../_base/error/js/error', '../../
 		 * Removes a callback associated to the given event type
 		 * 
 		 * @param {string} eventType The type of event
-		 * @param {object} callback The callback to remove (identified by { context, method })
+		 * @param {object|function} callback The callback to remove (identified by { context, method })
 		 */
 		removeEventCallback: function(eventType, callback)
 		{
@@ -404,13 +406,14 @@ define(['../../../_base/_base/js/base', '../../../_base/error/js/error', '../../
 			{
 				return false;
 			}
-			var callbacks = listenedEvent.callbacks;
+			var callbacks = listenedEvent.callbacks,
+				isFn = wink.isFunction(callback);
 			
 			var j, l = callbacks.length;
 			for (j = 0; j < l; j++)
 			{
 				var cj = callbacks[j];
-				if (callback.context == cj.context && callback.method == cj.method) 
+				if ((isFn && callback == cj) || (!isFn && callback.context == cj.context && callback.method == cj.method)) 
 				{
 					listenedEvent.callbacks.splice(j, 1);
 					break;

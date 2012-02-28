@@ -87,7 +87,7 @@ define(['../../../_amd/core'], function(wink)
 		/**
 		 * Adds a Geo Location listener.
 		 * 
-		 * @param {object} callback The callback to invoke
+		 * @param {object|function} callback The callback to invoke
 		 * @param {integer} notificationInterval The interval between callback calls
 		 * @param {boolean} onlyIfPositionChanged Indicates whether the callback must be invoked only if location changed
 		 * @param {boolean} highAccuracy Indicates whether the high result accuracy is enabled
@@ -116,7 +116,7 @@ define(['../../../_amd/core'], function(wink)
 		/**
 		 * Removes the given Geo Location listener.
 		 * 
-		 * @param {object} callback The callback that identifies the listener
+		 * @param {object|function} callback The callback that identifies the listener
 		 */
 		removeListener: function(callback)
 		{
@@ -126,9 +126,11 @@ define(['../../../_amd/core'], function(wink)
 				return false;
 			}
 			
+			var isFn = wink.isFunction(callback);
 			for (var i = 0; i < this._listeners.length; i++)
 			{
-				if (this._listeners[i].callback.context == callback.context && this._listeners[i].callback.method == callback.method)
+				var cbi = this._listeners[i].callback;
+				if ((isFn && callback == cbi) || (!isFn && cbi.context == callback.context && cbi.method == callback.method))
 				{
 					this._listeners.splice(i, 1);
 					break;
@@ -353,7 +355,7 @@ define(['../../../_amd/core'], function(wink)
 		/**
 		 * Creates the listener structure with the givens parameters.
 		 * 
-		 * @param {object} callback The callback to invoke
+		 * @param {object|function} callback The callback to invoke
 		 * @param {integer} notificationInterval The interval between callback calls
 		 * @param {boolean} onlyIfPositionChanged To invoke the callback only if location changed
 		 * @param {boolean} highAccuracy To enabled high result accuracy

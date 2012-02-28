@@ -130,7 +130,7 @@ define(['../../../../_amd/core'], function(wink)
 		 * @param {object} item the item to add
 		 * @param {string} item.itemClass The class associated to the item that allows css adjustment
 		 * @param {string} item.title The title of the item
-		 * @param {object} item.callback The callback action that will be invoked when selecting the item
+		 * @param {object|function} item.callback The callback action that will be invoked when selecting the item
 		 */
 		addItem: function(item)
 		{

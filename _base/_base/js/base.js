@@ -230,14 +230,15 @@ define(['../../_kernel/js/kernel'], function(wink)
 	
 	/**
 	 * Returns true if the given callback object is valid (contains at least a method. It can also contain a context)
+	 * A callback can be also a function.
 	 * 
-	 * @parmam {object} callback The object to test
+	 * @param {object|function} callback The object to test
 	 * 
 	 * @returns {boolean} True if the object is a valid callback false otherwise
 	 */
 	wink.isCallback = function(callback) 
 	{
-		return !!(callback && callback.method);
+		return !!((callback && callback.method) || wink.isFunction(callback));
 	};
 	
 	/**
@@ -346,13 +347,32 @@ define(['../../_kernel/js/kernel'], function(wink)
 	/**
 	 * Invokes the given callback
 	 * 
-	 * @param {object} callback The callback to invoke. The callback must be an object containing a 'method' and a 'context'.
+	 * @param {object|function} callback The callback to invoke. The callback must be an object containing a 'method' and a 'context'.
 	 * @param {object} [parameters] Parameters to pass to the callback
 	 * 
 	 * @returns {function} The called function
+	 * 
+	 * @example
+	 * 
+	 * var ctx = {
+	 *   fn: function(params, message) {
+	 *     console.log("fn: ", params.property, message);
+	 *   }
+	 * };
+	 * var fn2 = function(message, params) {
+	 *   console.log("fn2: ", params.property, message);
+	 * };
+	 * wink.call({ context: ctx, method: 'fn', arguments: "message" }, { property: "value" });
+	 * wink.call(wink.bind(fn2, this, "message"), { property: "value" });
+	 * 
 	 */
 	wink.call = function(callback, parameters)
 	{
+		if (wink.isFunction(callback))
+		{
+			return callback.apply(wd, [parameters]);
+		}
+		
 		var context = wd;
 		var method = callback.method;
 		var args = [];

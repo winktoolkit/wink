@@ -472,7 +472,7 @@ define(['../../../_amd/core'], function(wink)
 		 * 
 		 * @param {string} event The name of the event (created at the instantiation of a target) we want to listen to
 		 * @param {object} context The context where to execute the callback method. It should be 'null' if the callback method is in the global scope
-		 * @param {object} method Callback method. It is called when the event is fired
+		 * @param {string} method Callback method. It is called when the event is fired
 		 * 
 		 */
 		registerEvent: function(event, context, method)

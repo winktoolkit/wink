@@ -131,7 +131,7 @@ define(['../../../_base/_base/js/base'], function(wink)
 	 * @name HTMLElement#listenToGesture
 	 * 
 	 * @param {string} gesture The gesture name to listen
-	 * @param {object} callback The callback to invoke when this gesture is done
+	 * @param {object|function} callback The callback to invoke when this gesture is done
 	 * @param {object} [options] The options associated to the listener
 	 * @param {boolean} [options.preventDefault=false] Indicates whether an automatic preventDefault must be done
 	 * 
@@ -148,7 +148,7 @@ define(['../../../_base/_base/js/base'], function(wink)
 	 * @name HTMLElement#unlistenToGesture
 	 * 
 	 * @param {string} gesture The gesture name to unlisten
-	 * @param {object} callback The callback that was previously added (identified by { context, method })
+	 * @param {object|function} callback The callback that was previously added (identified by { context, method })
 	 * 
 	 * @requires wink.ux.gesture
 	 */

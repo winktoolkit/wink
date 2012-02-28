@@ -431,7 +431,7 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx', '../../../../fx/
 		/**
 		 * Apply transformations to the elements
 		 * 
-		 * @param {object} onEnd The callback invoked when transformations are applied
+		 * @param {object|function} onEnd The callback invoked when transformations are applied
 		 */
 		_applyTransformations: function(onEnd)
 		{

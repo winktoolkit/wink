@@ -28,7 +28,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * @param {string} properties.covers.item.image URL of the cover image
 	 * @param {string} [properties.covers.item.title] The id of the title node that will appear below image (mandatory if "displayTitle" is set to true)
 	 * @param {string} [properties.covers.item.backFaceId] The id of the backface node that will appear when selecting a cover (if no action is specified)
-	 * @param {object} [properties.covers.item.action] The callback action that will be invoked when selecting a cover
+	 * @param {object|function} [properties.covers.item.action] The callback action that will be invoked when selecting a cover
 	 * @param {integer} properties.size The component size
 	 * @param {integer} [properties.position=middle] The initial selected cover
 	 * @param {integer} properties.viewportWidth The width of the viewport (viewable area)

@@ -41,7 +41,7 @@ define(['../../../_base/_base/js/base', '../../error/js/error'], function(wink)
 	 * @function
 	 * 
 	 * @param {string} topic The name of the topic we want to be notified from
-	 * @param {object} callback The callback method called when the event related to the topic is triggered. It should contain a 'method' and a 'context'.
+	 * @param {object|function} callback The callback method called when the event related to the topic is triggered. It should contain a 'method' and a 'context'.
 	 */
 	wink.topics.subscribe = subscribe;
 	function subscribe(topic, callback)
@@ -61,17 +61,18 @@ define(['../../../_base/_base/js/base', '../../error/js/error'], function(wink)
 	 * @function
 	 * 
 	 * @param {string} topic The name of the topic we don't want to be notified from anymore.
-	 * @param {object} callback This parameter should be the same as the one passed through the subscribe method
+	 * @param {object|function} callback This parameter should be the same as the one passed through the subscribe method
 	 */
 	wink.topics.unsubscribe = unsubscribe;
 	function unsubscribe(topic, callback)
 	{
-		var topicLower = topic.toLowerCase();
+		var topicLower = topic.toLowerCase(),
+			isFn = wink.isFunction(callback);
 		var i, l = _subscribed_topics.length;
 		for (i = 0; i < l; i++) 
 		{
 			var sti = _subscribed_topics[i];
-			if (sti[0] == topicLower && sti[1].method == callback.method && sti[1].context == callback.context) 
+			if (sti[0] == topicLower && ((isFn && callback == sti[1]) || (!isFn && sti[1].method == callback.method && sti[1].context == callback.context)))
 			{
 				_subscribed_topics.splice(i, 1);
 				break;

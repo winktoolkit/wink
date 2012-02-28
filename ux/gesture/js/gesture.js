@@ -79,7 +79,7 @@ define(['../../../_amd/core'], function(wink)
 		 * 
 		 * @param {HTMLElement} domNode the DOM node that listens to gesture
 		 * @param {string} gesture The gesture name to listen
-		 * @param {object} callback The callback to invoke when this gesture is done
+		 * @param {object|function} callback The callback to invoke when this gesture is done
 		 * @param {object} [options] The options associated to the listener
 		 * @param {boolean} [options.preventDefault=false] Indicates whether an automatic preventDefault must be done
 		 */
@@ -130,7 +130,7 @@ define(['../../../_amd/core'], function(wink)
 		 * 
 		 * @param {HTMLElement} domNode The DOM node that listens to gesture
 		 * @param {string} gesture The gesture name to unlisten
-		 * @param {object} callback The callback that was previously added (identified by { context, method })
+		 * @param {object|function} callback The callback that was previously added (identified by { context, method })
 		 */
 		unlistenTo: function(domNode, gesture, callback)
 		{
@@ -204,9 +204,11 @@ define(['../../../_amd/core'], function(wink)
 				{
 					if (this.isListening(gesture))
 					{
+						var isFn = wink.isFunction(callback);
+						
 						for (var i = 0; i < this.getGestureHandler(gesture).callbacks.length; i++) {
 							var callbackI = this.getGestureHandler(gesture).callbacks[i];
-							if (callbackI.context == callback.context && callbackI.method == callback.method)
+							if ((isFn && callbackI == callback) || (!isFn && callbackI.context == callback.context && callbackI.method == callback.method))
 							{
 								if (this.getGestureHandler(gesture).callbacks.length == 1)
 								{

@@ -80,8 +80,8 @@ define(['../../../_base/_base/js/base', '../../../_base/error/js/error'], functi
 		 * @param {string} url The URL to call
 		 * @param {array} [parameters] The parameters to add to the request URL
 		 * @param {string} [method] Either GET or POST
-		 * @param {object} [successCallback] The method to call in case of success. The 'callback' is an object that must contain a 'method' and a 'scope'
-		 * @param {object} [failureCallback] The method to call in case of success. The 'callback' is an object that must contain a 'method' and a 'scope'
+		 * @param {object|function} [successCallback] The method to call in case of success. The 'callback' is a function or an object that must contain a 'method' and a 'scope'
+		 * @param {object|function} [failureCallback] The method to call in case of success. The 'callback' is a function or an object that must contain a 'method' and a 'scope'
 		 * @param {array} [headers] The HTTP headers to add to the request
 		 * 
 		 * @returns {boolean} Returns true if the request was send, false otherwise

@@ -39,9 +39,9 @@ define(['../../../_amd/core'], function(wink)
 	 * @param {object} properties The properties object
 	 * @param {HTMLElement} properties.node The dom node on which you want to listen for the recognition
 	 * @param {array} properties.templates An array of objects. Each object contains the 'name' of the template and an array of 'points' describing the template
-	 * @param {object} properties.gestureStartCallback A callback object containing a 'method' name and the 'context' of this method. This callback will be called when the user start touching the 'node' specified earlier
-	 * @param {object} properties.gestureCallback A callback object containing a 'method' name and the 'context' of this method. This callback will be called when the user touches the 'node' specified earlier
-	 * @param {object} properties.gestureEndCallback A callback object containing a 'method' name and the 'context' of this method. This callback will be called when the user stop touching the 'node' specified earlier
+	 * @param {object|function} properties.gestureStartCallback A callback object containing a 'method' name and the 'context' of this method. This callback will be called when the user start touching the 'node' specified earlier
+	 * @param {object|function} properties.gestureCallback A callback object containing a 'method' name and the 'context' of this method. This callback will be called when the user touches the 'node' specified earlier
+	 * @param {object|function} properties.gestureEndCallback A callback object containing a 'method' name and the 'context' of this method. This callback will be called when the user stop touching the 'node' specified earlier
 	 * 
 	 * @example
 	 * 

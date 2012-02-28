@@ -24,8 +24,8 @@ define(['../../../_amd/core'], function(wink)
 	 * @param {string} properties.loadingText The loading text
 	 * @param {wink.ui.xy.Spinner} properties.spinner The spinner
 	 * @param {integer} [properties.pageSize=viewport height] The page size used to compute paging
-	 * @param {object} properties.onPageChanged The callback called when the current page changed
-	 * @param {object} properties.onLoadMore The callback called when the action to load more is raised
+	 * @param {function} properties.onPageChanged The callback called when the current page changed
+	 * @param {function} properties.onLoadMore The callback called when the action to load more is raised
 	 *
 	 * @example
 	 * 

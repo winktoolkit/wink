@@ -126,13 +126,13 @@ doh.register("wink._base._base",
         	var invalid_cb = { context: this };
         	
         	doh.assertTrue(wink.isCallback(valid_cb));
+        	doh.assertTrue(wink.isCallback(function(){}));
         	doh.assertFalse(wink.isCallback(invalid_cb));
         	doh.assertFalse(wink.isCallback(undefined));
         	doh.assertFalse(wink.isCallback(null));
         	doh.assertFalse(wink.isCallback(true));
         	doh.assertFalse(wink.isCallback(1));
         	doh.assertFalse(wink.isCallback('test'));
-        	doh.assertFalse(wink.isCallback(function(){}));
         },
         
         // Test isString

@@ -116,7 +116,7 @@ define(['../../../../_amd/core'], function(wink)
 		 * @param {object} options The options object
 		 * @param {string} options.msg The message to display
 		 * @param {string} options.btn The text to display in the button. If nothing specified, the default translation is used
-		 * @param {object} options.callback The callback to invoke when the user clicks on the button
+		 * @param {object|function} options.callback The callback to invoke when the user clicks on the button
 		 * @param {boolean} options.borderRadius Indicates whether the popup must be displayed with border-radius style
 		 * @param {integer} options.duration The duration of the display transition
 		 * @param {boolean} options.followScrollY Allows to follow the scroll on y-axis
@@ -154,9 +154,9 @@ define(['../../../../_amd/core'], function(wink)
 		 * @param {object} options The options object
 		 * @param {string} options.msg The message to display
 		 * @param {string} options.btnCancel The text to display in the "cancel" button. If nothing specified, the default translation is used
-		 * @param {object} options.callbackCancel The callback to invoke when the user clicks on the 'cancel' button { context, method }
+		 * @param {object|function} options.callbackCancel The callback to invoke when the user clicks on the 'cancel' button { context, method }
 		 * @param {string} options.btnOk The text to display in the "ok" button. If nothing specified, the default translation is used
-		 * @param {callback} options.callbackOk The callback to invoke when the user clicks on the 'ok' button { context, method }
+		 * @param {object|function} options.callbackOk The callback to invoke when the user clicks on the 'ok' button { context, method }
 		 * @param {boolean} options.borderRadius Indicates whether the popup must be displayed with border-radius style
 		 * @param {integer} options.duration The duration of the display transition
 		 * @param {boolean} options.followScrollY Allows to follow the scroll on y-axis
@@ -216,7 +216,7 @@ define(['../../../../_amd/core'], function(wink)
 		 * @param {boolean} options.borderRadius Indicates whether the popup must be displayed with border-radius style
 		 * @param {integer} options.duration The duration of the display transition
 		 * @param {boolean} options.followScrollY Allows to follow the scroll on y-axis
-		 * @param {object} options.layerCallback The callback invoked when the user click on the layer, if not specified the default action is the popup hiding
+		 * @param {object|function} options.layerCallback The callback invoked when the user click on the layer, if not specified the default action is the popup hiding
 		 */
 		popup: function(options)
 		{
@@ -473,7 +473,7 @@ define(['../../../../_amd/core'], function(wink)
 		/**
 		 * Invokes the given callback
 		 * 
-		 * @param {object} cb The callback to invoke
+		 * @param {object|function} cb The callback to invoke
 		 */
 		_invokeCallback: function(cb)
 		{

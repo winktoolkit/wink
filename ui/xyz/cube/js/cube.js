@@ -22,7 +22,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * @param {array} properties.faces.item A face
 	 * @param {integer} properties.faces.item.id Position of the face (1 to 6)
 	 * @param {string} properties.faces.item.faceId The node id
-	 * @param {object} properties.faces.item.callback The click callback
+	 * @param {object|function} properties.faces.item.callback The click callback
 	 * @param {integer} properties.size The size of the Cube
 	 * @param {integer} [properties.shiftX=0] The shift of the Cube on x-axis
 	 * @param {integer} [properties.shiftY=0] the shift of the Cube on y-axis
@@ -33,8 +33,8 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * @param {boolean} [properties.focus=false] Indicates whether a focus on a face must be performed after a rotation
 	 * @param {integer} [properties.focusDuration=0] The duration of the auto focus
 	 * @param {boolean} [properties.dispatch=false] Indicates whether the face callback must be invoked when a face is selected
-	 * @param {object} [properties.rotationCallback] The callback to invoke when a rotation is performed
-	 * @param {object} [properties.rotationEndCallback] The callback to invoke when a rotation end occurs
+	 * @param {object|function} [properties.rotationCallback] The callback to invoke when a rotation is performed
+	 * @param {object|function} [properties.rotationEndCallback] The callback to invoke when a rotation end occurs
 	 * 
 	 * @requires wink.math._geometric
 	 * @requires wink.math._matrix
@@ -157,7 +157,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 		 * @param {object} faceObject A face object that will replace the previous
 		 * @param {integer} faceObject.id Position of the face (1 to 6)
 		 * @param {string} faceObject.faceId The node id
-		 * @param {object} faceObject.callback The click callback
+		 * @param {object|function} faceObject.callback The click callback
 		 */
 		setFace: function(faceObject)
 		{

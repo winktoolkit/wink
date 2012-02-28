@@ -64,7 +64,7 @@ define(['../../../_amd/core'], function(wink)
 	 * @param {object} transitions An object (or an array of objects) that constructs a transition : { property, value, duration, delay, func }. Note: the value may be a callback
 	 * @param {object} [options] The animations options
 	 * @param {boolean} [options.start] False to prevent the animation to start (useful when chaining animations: the sequence of animation should be started when the definition of the sequence is performed)
-	 * @param {object} [options.onEnd] Callback that will be invoked at the end of the transition
+	 * @param {object|function} [options.onEnd] Callback that will be invoked at the end of the transition
 	 * 
 	 * @returns {wink.fx.animation.Animation} The animation
 	 */
@@ -78,7 +78,7 @@ define(['../../../_amd/core'], function(wink)
 	 * @param {HTMLElement} node The node to animate
 	 * @param {object} [options] The animations options
 	 * @param {boolean} [options.start] False to prevent the animation to start
-	 * @param {object} [options.onEnd] Callback that will be invoked at the end of the transition
+	 * @param {object|function} [options.onEnd] Callback that will be invoked at the end of the transition
 	 * @param {integer} [options.duration] The duration of the animation
 	 * @param {integer} [options.delay] The delay before starting animation
 	 * @param {string} [options.func] The transition function to apply
@@ -95,7 +95,7 @@ define(['../../../_amd/core'], function(wink)
 	 * @param {HTMLElement} node The node to animate
 	 * @param {object} [options] The animations options
 	 * @param {boolean} [options.start] False to prevent the animation to start
-	 * @param {object} [options.onEnd] Callback that will be invoked at the end of the transition
+	 * @param {object|function} [options.onEnd] Callback that will be invoked at the end of the transition
 	 * @param {integer} [options.duration] The duration of the animation
 	 * @param {integer} [options.delay] The delay before starting animation
 	 * @param {string} [options.func] The transition function to apply
@@ -119,7 +119,7 @@ define(['../../../_amd/core'], function(wink)
 	 * @param {number} options.y The y coordinate of the starting point of the effect
 	 * @param {number} options.dx The x coordinate of the destination point of the effect
 	 * @param {number} options.dy The y coordinate of the destination point of the effect
-	 * @param {object} [options.onEnd] The callback of the end of the effect
+	 * @param {object|function} [options.onEnd] The callback of the end of the effect
 	 */
 	wink.fx.collapse = function(node, options)
 	{
@@ -175,15 +175,12 @@ define(['../../../_amd/core'], function(wink)
 		}
 		
 		var onEndCallback = wink.isCallback(opts.onEnd) ? opts.onEnd : null;
-		var ctx = {
-			onEnd: function() {
-				node.parentNode.removeChild(clone.copy.container.node);
-				if (wink.isSet(onEndCallback)) {
-					wink.call(onEndCallback, {});
-				}
+		animGroup.start({ onEnd: function() {
+			node.parentNode.removeChild(clone.copy.container.node);
+			if (wink.isSet(onEndCallback)) {
+				wink.call(onEndCallback, {});
 			}
-		};
-		animGroup.start({ onEnd: { context: ctx, method: 'onEnd' } });
+		} });
 	};
 	/**
 	 * Returns a clone structure that identifies the copy splited into subparts.
@@ -223,7 +220,7 @@ define(['../../../_amd/core'], function(wink)
 	 * @param {object} transitions An object (or an array of objects) that constructs a transition : { property, value, duration, delay, func }. Note: the value may be a callback
 	 * @param {object} [options] The animations options
 	 * @param {boolean} options.start False to prevent the animation to start
-	 * @param {object} options.onEnd Callback that will be invoked at the end of the transition 
+	 * @param {object|function} options.onEnd Callback that will be invoked at the end of the transition 
 	 * 
 	 * @returns {wink.fx.animation.Animation} The animation
 	 */
@@ -268,7 +265,7 @@ define(['../../../_amd/core'], function(wink)
 	 * @param {number} to The targeted opacity value
 	 * @param {object} [options] The animations options
 	 * @param {boolean} options.start False to prevent the animation to start,
-	 * @param {object} options.onEnd Callback that will be invoked at the end of the transition
+	 * @param {object|function} options.onEnd Callback that will be invoked at the end of the transition
 	 * @param {integer} options.duration The duration of the animation
 	 * @param {integer} options.delay The delay before starting animation
 	 * @param {string} options.func The transition function to apply
@@ -475,7 +472,7 @@ define(['../../../_amd/core'], function(wink)
 	 * 
 	 * @param {object} properties The properties object
 	 * @param {HTMLElement} [properties.node] The default node on which the animation will be applied if none is specified with start() method
-	 * @param {object} [properties.onEnd] The default callback of the animation which will be invoked if none is specified with start() method
+	 * @param {object|function} [properties.onEnd] The default callback of the animation which will be invoked if none is specified with start() method
 	 */
 	wink.fx.animation.Animation = function(properties) 
 	{
@@ -539,7 +536,7 @@ define(['../../../_amd/core'], function(wink)
 		 * 
 		 * @param {HTMLElement} node The node on which the animation must be applied, may be optional if one was specified at instanciation
 		 * @param {object} [options] The animations options
-		 * @param {object} [options.onEnd] The callback of the animation which will be invoked at the end of the animation
+		 * @param {object|function} [options.onEnd] The callback of the animation which will be invoked at the end of the animation
 		 */
 		start: function(node, options)
 		{
@@ -737,7 +734,7 @@ define(['../../../_amd/core'], function(wink)
 		 * Starts the animation group
 		 * 
 		 * @param {object} [options] The animations options
-		 * @param {object} [options.onEnd] The callback of the animation group which will be invoked at the end of the animation group
+		 * @param {object|function} [options.onEnd] The callback of the animation group which will be invoked at the end of the animation group
 		 */
 		start: function(options)
 		{
