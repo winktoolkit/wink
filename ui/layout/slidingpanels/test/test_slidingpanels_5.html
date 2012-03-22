@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<link rel="stylesheet" href="../css/slidingpanels.css" type="text/css">
+		
+		<style>
+			.page
+			{
+				margin: auto;
+				width: 98%;
+			}
+		</style>
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/slidingpanels.js"></script>
+		
+		<script>	
+			var slidingPanels,
+				pageCount = 0,
+				pageIndex = 0,
+				isSliding = false;
+
+			var init = function()
+			{
+				wink.error.logLevel = 1;
+				slidingPanels = new wink.ui.layout.SlidingPanels({
+					'duration': 500,
+					'pages': []
+				});
+				addPage();
+				changeTitle({ id: "page0" });
+
+				wink.subscribe('/slidingpanels/events/slidestart', slidestart);
+				wink.subscribe('/slidingpanels/events/slideend', slideend);
+				
+				$('container').appendChild(slidingPanels.getDomNode());
+			};
+			
+			var slidestart = function(params)
+			{
+				isSliding = true;
+				changeTitle(params);
+			};
+			var slideend = function()
+			{
+				isSliding = false;
+				if (pageIndex < (pageCount - 1))
+				{
+					slidingPanels.remove("page" + (pageCount - 1), { fromdom: true });
+					pageCount--;
+				}
+			};
+
+			var slidePrevious = function(id)
+			{
+				slidingPanels.slideTo(id);
+				pageIndex--;
+			};
+			
+			var slideNext = function(id)
+			{
+				if (isSliding) {
+					return;
+				}
+				addPage();
+				slidingPanels.slideTo(id);
+				pageIndex++;
+			};
+
+			var slideBack = function()
+			{
+				slidingPanels.slideBack();
+				pageIndex--;
+			};
+
+			var changeTitle = function(params)
+			{
+				switch (params.id)
+				{
+					case 'page0':
+						$('back').style.visibility = 'hidden';
+						break;
+					default:
+						$('back').style.visibility = 'visible';
+				}
+				
+				$('title').innerHTML = 'Dynamic slidingpanels - ' + params.id;
+			};
+			
+			var addPage = function()
+			{
+				var pageId = "page" + pageCount,
+					previous = "page" + (pageCount - 1),
+					next = "page" + (pageCount + 1),
+					page = document.createElement('div'),
+					lines = [];
+				
+				lines.push('<div class="w_box" id="' + pageId + '">');
+				lines.push('<div class="page">');
+				lines.push('<ul id="list1" class="w_list w_border w_radius">');
+				
+				lines.push('<li class="w_list_item w_border_bottom w_bg_light">');
+				lines.push('<a href="#" onclick="slideNext(\'' + next + '\')">Go to next page</a>');
+				lines.push('<span class="w_icon w_chevron"></span>');
+				lines.push('</li>');
+				
+				if (pageCount > 0) {
+					lines.push('<li class="w_list_item w_border_bottom w_bg_light">');
+					lines.push('<a href="#" onclick="slidePrevious(\'' + previous + '\')">Go to previous page</a>');
+					lines.push('<span class="w_icon w_chevron"></span>');
+					lines.push('</li>');
+				}
+				
+				lines.push('</ul>');
+				lines.push('<br>');
+				lines.push('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec purus risus.');
+				lines.push('Quisque cursus, erat sit amet feugiat sagittis, sem est iaculis tellus, lobortis ultricies magna felis eget ipsum.');
+				lines.push('In aliquet porttitor tortor nec scelerisque. Vestibulum pellentesque odio ac nulla tincidunt dignissim.');
+				lines.push('</div>');
+				lines.push('</div>');
+				
+				content = lines.join("");
+				page.innerHTML = content;
+				$('hidden_pages').appendChild(page);
+				slidingPanels.add(pageId);
+				$('hidden_pages').removeChild(page);
+				
+				pageCount++;
+			};
+		</script>
+	</head>
+<body onload="init()">
+	<div class="w_box w_header w_bg_dark">
+		<input type="button" value="back" class="w_button w_radius w_bg_light" id="back" style="visibility: hidden" onclick="slideBack()"/>
+		<span id="title"></span>
+		<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../../..?theme='+theme"/>
+	</div>
+	<div id="container" style="height:100%; overflow-y: hidden;"></div>
+	<div id="hidden_pages" style="display: none;"></div>
+</body>
+</html>

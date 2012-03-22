@@ -60,6 +60,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * @see <a href="WINK_ROOT_URL/ui/layout/slidingpanels/test/test_slidingpanels_2.html" target="_blank">Test page (cover)</a>
 	 * @see <a href="WINK_ROOT_URL/ui/layout/slidingpanels/test/test_slidingpanels_3.html" target="_blank">Test page (reveal)</a>
 	 * @see <a href="WINK_ROOT_URL/ui/layout/slidingpanels/test/test_slidingpanels_4.html" target="_blank">Test page (with history)</a>
+	 * @see <a href="WINK_ROOT_URL/ui/layout/slidingpanels/test/test_slidingpanels_5.html" target="_blank">Test page (dynamic)</a>
 	 */
 	wink.ui.layout.SlidingPanels = function(properties)
 	{
@@ -125,6 +126,28 @@ define(['../../../../_amd/core'], function(wink)
 		getDomNode: function()
 		{
 			return this._domNode;
+		},
+		
+		/**
+		 * Add a page
+		 * 
+		 * @param {string} id The id of the page to add
+		 */
+		add: function(id)
+		{
+			this._add([id]);
+		},
+		
+		/**
+		 * Remove a page
+		 * 
+		 * @param {string} id The id of the page to remove
+		 * @param {object} options options
+		 * @param {boolean} options.fromdom allow to remove the node from the DOM
+		 */
+		remove: function(id, options)
+		{
+			this._remove(id, options);
 		},
 		
 		/**
@@ -308,16 +331,31 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		_getPageById: function(id)
 		{
+			var idx = this._getPageIndex(id);
+			if (idx !== false)
+			{
+				return this._pagesList[idx];
+			}
+			return null;
+		},
+		
+		/**
+		 * Get the index of the given page in the list. Searches only in right pages in order to slide to or remove pages that are not in queue.
+		 * 
+		 * @param {string} id The id of the page
+		 */
+		_getPageIndex: function(id)
+		{
 			var i, pl = this._pagesList, l = pl.length;
 			for (i = 0; i < l; i++)
 			{
 				var page = pl[i];
 				if (page.id == id && page.position == 1)
 				{
-					return page;
+					return i;
 				}
 			}
-			return null;
+			return false;
 		},
 		
 		/**
@@ -336,6 +374,87 @@ define(['../../../../_amd/core'], function(wink)
 				}
 			}
 			return false;
+		},
+		
+		/**
+		 * Add the given pages
+		 * 
+		 * @param {array} pages The page ids
+		 */
+		_add: function(pages)
+		{
+			var i, l = pages.length;
+			for (i = 0; i < l; i++)
+			{
+				var page = this._getNewPage(pages[i], this._pagesList.length == 0);
+				var pn = page.getDomNode();
+				pn.parentNode.removeChild(pn);
+				this._domNode.appendChild(pn);
+				this._pagesList.push(page);
+				if (this._pagesList.length == 1) {
+					this._firstPage = page;
+				}
+			}
+		},
+		
+		/**
+		 * Remove the given page
+		 * 
+		 * @param {string} id The id of the page to remove
+		 * @param {object} options options
+		 * @param {boolean} options.fromdom allow to remove the node from the DOM
+		 */
+		_remove: function(id, options)
+		{
+			var opts = options || {};
+			var idx = this._getPageIndex(id); // gets only right pages
+			
+			if (idx !== false)
+			{
+				var page = this._pagesList[idx];
+				if (opts.fromdom) {
+					this._domNode.removeChild(page.getDomNode());
+				}
+				this._pagesList.splice(idx, 1);
+			}
+		},
+		
+		/**
+		 * @param {string} id The id of the page
+		 * @param {boolean} firstpage Whether it's the first page
+		 */
+		_getNewPage: function(id, firstpage)
+		{
+			var tt = this.transitionType;
+			var page = new wink.ui.layout.SlidingPanels.Page({ 'node': wink.byId(id) });
+			
+			var xPos = 0,
+				pos = 0;
+			
+			if (!firstpage)
+			{
+				var xPos = '100%';
+				if (tt == this._TRANSITION_REVEAL)
+				{
+					xPos = 0;
+				}
+				pos = 1;
+			}
+			
+			page.translate(xPos);
+			page.setPosition(pos);
+			
+			if (tt != this._TRANSITION_DEFAULT)
+			{
+				if (firstpage)
+				{
+					page.setZIndex(this.HIGHER_INDEX);
+				} else
+				{
+					page.setZIndex(this.LOWER_INDEX);
+				}
+			}
+			return page;
 		},
 		
 		/**
@@ -373,52 +492,12 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		_initProperties: function()
 		{
-			var tt = this.transitionType;
-	
-			var i, pgs = this.pages, l = pgs.length;
-			
-			for (i = 0; i < l; i++)
-			{
-				var page = new wink.ui.layout.SlidingPanels.Page({ 'node': wink.byId(pgs[i]) });
-		
-				if (i == 0)
-				{
-					page.translate(0);
-					page.setPosition(0);
-					this._firstPage = page;
-				} else
-				{
-					var xPos = '100%';
-					if (tt == this._TRANSITION_REVEAL)
-					{
-						xPos = 0;
-					}
-					page.translate(xPos);
-					page.setPosition(1);
-				}
-				
-				if (tt != this._TRANSITION_DEFAULT)
-				{
-					if (i == 0)
-					{
-						page.setZIndex(this.HIGHER_INDEX);
-					} else
-					{
-						page.setZIndex(this.LOWER_INDEX);
-					}
-				}
-				
-				var pn = page.getDomNode();
-				pn.parentNode.removeChild(pn);
-				this._domNode.appendChild(pn);
-				this._pagesList.push(page);
-			}
+			this._add(this.pages);
 			
 			if ( wink.isInteger(this.duration))
 			{
 				this.duration += 'ms';
 			}
-			
 		},
 		
 		/**
