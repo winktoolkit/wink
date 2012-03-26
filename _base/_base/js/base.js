@@ -370,7 +370,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 	{
 		if (wink.isFunction(callback))
 		{
-			return callback.apply(wd, [parameters]);
+			return callback.apply(wd, wink.isArray(parameters) ? parameters : [parameters]);
 		}
 		
 		var context = wd;
@@ -406,43 +406,34 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 */
 	wink.connect = function(source, method, callback)
 	{
-		if (!wink.isSet(callback.context)) callback.context = wd;
+		var isFn = wink.isFunction(callback);
+		if (!isFn && !wink.isSet(callback.context))
+		{
+			callback.context = wd;
+		}
 		
 		var f = source[method];
 		
 		if ( wink.isNull(f) || wink.isUndefined(f.cbs) )
 		{
-
 			var _source = function()
 			{
-				var target = arguments.callee.target;
-				var args = [];
-				
-				var i, l = arguments.length;
-				for ( i=0; i<l; i++ )
-				{
-					var argi = arguments[i];
-					if ( wink.isArray(argi))
-					{
-						args = args.concat([argi]);
-					} else
-					{
-						args = args.concat(argi);
-					}
-				}
+				var target = _source.target,
+					args = [].splice.call(arguments, 0);
 				
 				target && target.apply(source, args);
-				
-				var cbs = source[method].cbs;
-				
-				for ( var cb in cbs)
+
+				var i, cbs = _source.cbs, l = cbs.length;
+				for (i = 0; i < l; i++)
 				{
-					if ( !wink.isArray(cbs[cb].arguments) )
+					var cb = cbs[i];
+					if (wink.isFunction(cb))
 					{
-						wink.call({context: cbs[cb].context, method: cbs[cb].method, arguments: args.concat([cbs[cb].arguments])});
-					} else
+						wink.call(cb, args);
+					}
+					else
 					{
-						wink.call({context: cbs[cb].context, method: cbs[cb].method, arguments: args.concat(cbs[cb].arguments)});
+						wink.call({ context: cb.context, method: cb.method, arguments: args.concat(cb.arguments) });
 					}
 				}
 			};
@@ -453,15 +444,17 @@ define(['../../_kernel/js/kernel'], function(wink)
 			f = source[method] = _source;
 		}
 
-		for ( var cb in f.cbs)
+		var i, cbs = f.cbs, l = cbs.length;
+		for (i = 0; i < l; i++)
 		{
-			if ( (f.cbs[cb].context == callback.context) && (f.cbs[cb].method == callback.method))
+			var cb = cbs[i];
+			if ((isFn && callback == cb) || (!isFn && cb.context == callback.context && cb.method == callback.method))
 			{
 				return
 			}
 		}
 
-		f.cbs.push(callback);
+		cbs.push(callback);
 	};
 	
 	/**
@@ -473,17 +466,24 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 */
 	wink.disconnect = function(source, method, callback)
 	{
-		if (!wink.isSet(callback.context)) callback.context = wd;
+		var isFn = wink.isFunction(callback);
+		if (!isFn && !wink.isSet(callback.context))
+		{
+			callback.context = wd;
+		}
 		
 		var f = source[method];
 		
 		if ( !wink.isUndefined(f.cbs) )
 		{
-			for ( var cb in f.cbs)
+			var i, cbs = f.cbs, l = cbs.length;
+			for (i = 0; i < l; i++)
 			{
-				if ( (f.cbs[cb].context == callback.context) && (f.cbs[cb].method == callback.method))
+				var cb = cbs[i];
+				if ((isFn && callback == cb) || (!isFn && cb.context == callback.context && cb.method == callback.method))
 				{
-					delete f.cbs[cb];
+					cbs.splice(i, 1);
+					break;
 				}
 			}
 		}

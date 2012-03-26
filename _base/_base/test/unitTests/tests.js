@@ -363,6 +363,43 @@ doh.register("wink._base._base",
         	return d;
         },
         
+        // Test connect_bis
+        function connect_bis(t)
+        {
+        	var d = new doh.Deferred();
+            
+        	var ctx = {
+        		method: function() {
+        			
+        		},
+        		onMethod: function(param1, param2, param3, param4, param5) {
+        			try
+    				{
+        				doh.is('test', param1);
+            			doh.is(3, param2.length);
+            			doh.is('test', param3.test);
+            			doh.is('a', param4);
+            			doh.is(1, param5[0]);
+            			
+    					d.callback(true);
+    	
+    				} catch(e)
+    				{
+    					d.errback(e);
+    				}
+        		}
+        	};
+        	
+        	var cb = wink.bind(ctx.onMethod, ctx, 'test', [1, 2, 3], {test: 'test'});
+        	wink.connect(ctx, 'method', cb);
+        	doh.is(1, ctx['method'].cbs.length);
+        	ctx.method('a', [1, 2]);
+        	wink.disconnect(ctx, 'method', cb);
+        	doh.is(0, ctx['method'].cbs.length);
+        	
+        	return d;
+        },
+        
         // Test connect multiple methods
         function connectMultipleMethods(t)
         {
@@ -375,6 +412,7 @@ doh.register("wink._base._base",
         {
         	wink.disconnect(wink, 'connectTestTrigger', {method: 'connectTest', context: wink});
         	doh.is(undefined, wink['connectTestTrigger'].cbs[0]);
+        	doh.is(0, wink['connectTestTrigger'].cbs.length);
         },
         
         // Test setTimeout
