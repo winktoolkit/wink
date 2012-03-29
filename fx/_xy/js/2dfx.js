@@ -60,6 +60,19 @@ define(['../../../_base/_base/js/base', '../../../_base/_feat/js/feat_css'], fun
 		}
 	};
 	/**
+	 * Returns true if the node has the specified class
+	 *  
+	 * @function
+	 * 
+	 * @param {HTMLElement} node The DOM node
+	 * @param {string} classStr The css class to search for	 
+	 */
+	wink.fx.hasClass = hasClass;
+	function hasClass(node, classStr)
+	{
+	   return ((" "+ node.className +" ").indexOf(" " + classStr + " ") >= 0);
+	};
+	/**
 	 * Apply styles to a given node
 	 * 
 	 * @function
@@ -428,6 +441,12 @@ define(['../../../_base/_base/js/base', '../../../_base/_feat/js/feat_css'], fun
 	 * @see wink.fx.removeClass
 	 */
 	wink.removeClass = removeClass;
+	
+	/**
+	 * @function
+	 * @see wink.fx.hasClass
+	 */
+	wink.hasClass = hasClass;
 	
 	return wink.fx;
 });
