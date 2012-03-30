@@ -63,6 +63,8 @@ define(['../../../../_amd/core'], function(wink)
 			this._btnsNode 		= null;
 			this._arrowNode		= null;
 			this._absolutePos	= false;
+			this._nodeAsContent = false;
+			this._contentParentNode = null;
 			this._followScrollY = false;
 			this._scrollHandler = null;
 			this._popupClasses	= "";
@@ -208,7 +210,7 @@ define(['../../../../_amd/core'], function(wink)
 		 * Opens a fully customizable popup
 		 * 
 		 * @param {object} options The options object
-		 * @param {string} options.content The HTML code of the content
+		 * @param {string|HTMLElement} options.content The HTML code of the content or a dom node
 		 * @param {string} options.arrow The position of the arrow, if needed, values: "top", "bottom", "none" (default value)
 		 * @param {integer|string} options.top The top position of the window
 		 * @param {HTMLElement} options.targetNode The node pointed by the arrow (top is then ignored)
@@ -287,15 +289,25 @@ define(['../../../../_amd/core'], function(wink)
 		 * Initialize the popup template
 		 * 
 		 * @param {string} arrowType The arrow type ("top", "bottom" or "none")
-		 * @param {string} content The content
+		 * @param {string|HTMLElement} content The content
 		 * @param {string} arrowLeftPos The left-position of the arrow
 		 */
 		_initTemplate: function(arrowType, content, arrowLeftPos)
 		{
 			this._absolutePos = false;
 			this._followScrollY = false;
+			this._nodeAsContent = false;
+            this._contentParentNode = null;  
 			this._popupClasses = "w_box w_window pp_popup pp_hidden w_bg_dark";
-			this._contentNode.innerHTML = content;
+			if(wink.isString(content)){
+              this._contentNode.innerHTML = content;
+            }else{
+              if (content && content.nodeType != undefined){
+                this._nodeAsContent = true;
+                this._contentParentNode = content.parentNode;
+                this._contentNode.appendChild(content);
+              }
+            }
 			this._btnsNode.innerHTML = "";
 			this._arrowNode.className = "pp_popup_arrow pp_" + arrowType;
 			this._arrowNode.style.left = arrowLeftPos;
@@ -464,6 +476,10 @@ define(['../../../../_amd/core'], function(wink)
 		_postHide: function()
 		{
 			wink.addClass(this._domNode, "pp_hidden");
+			
+			if (this._nodeAsContent){
+              (this._contentParentNode || document.body).appendChild(this._contentNode.firstChild);
+            }
 			
 			this._contentNode.innerHTML = "";
 			
