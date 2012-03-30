@@ -111,6 +111,14 @@ define(['../../../../_amd/core'], function(wink)
 			return this._domNode;
 		},
 		/**
+      	 * Destroy the singleton
+      	 */
+      	destroy : function(){
+      		wink.ui.xy.Menu.singleton = null;
+      		this._contentNode.innerHTML = "";
+      		delete wink.ui.xy.Menu.singleton;
+      	},
+		/**
 		 * Hides / Displays the menu
 		 */
 		toggle: function()
@@ -147,7 +155,7 @@ define(['../../../../_amd/core'], function(wink)
 			itemNode.appendChild(imageNode);
 			itemNode.appendChild(titleNode);
 			titleNode.appendChild(titleTextNode);
-			this._domNode.appendChild(itemNode);
+			this._contentNode.appendChild(itemNode);
 			
 			wink.addClass(itemNode, 'mn_menu_item w_border_right w_border_bottom');
 			wink.addClass(imageNode, 'mn_image');
@@ -178,6 +186,8 @@ define(['../../../../_amd/core'], function(wink)
 		_initDom: function()
 		{		
 			this._domNode = document.createElement('div');
+			this._contentNode = document.createElement('div');
+			this._domNode.appendChild(this._contentNode);
 			
 			this._closeNode = document.createElement('div');
 			this._closeNode.className = "w_icon w_float w_button_close";
@@ -222,7 +232,12 @@ define(['../../../../_amd/core'], function(wink)
 		 * Shows the Menu
 		 */
 		_show: function()
-		{
+		{   
+		    if (this._displayed == true)
+    		{
+    			return;
+    		}
+		
 			wink.layer.show();
 			
 			if(wink.has('css-transition'))
@@ -257,6 +272,11 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		_hide: function()
 		{
+		    if (this._displayed == false)
+      		{
+      			return;
+      		}
+		
 			if(wink.has('css-transition'))
 			{
 				wink.fx.applyTransition(this._domNode, 'opacity', this._DISPLAY_DURATION + 'ms', '0ms', 'ease-out');
