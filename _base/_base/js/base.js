@@ -347,7 +347,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 	/**
 	 * Invokes the given callback
 	 * 
-	 * @param {object|function} callback The callback to invoke. The callback must be an object containing a 'method' and a 'context'.
+	 * @param {object|function} callback The callback to invoke
 	 * @param {object} [parameters] Parameters to pass to the callback
 	 * 
 	 * @returns {function} The called function
@@ -402,7 +402,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * 
 	 * @param {object} source The source context
 	 * @param {string} method The source method
-	 * @param {object} callback A callback that will be called once the source method will be invoked
+	 * @param {object|function} callback A callback that will be called once the source method will be invoked
 	 */
 	wink.connect = function(source, method, callback)
 	{
@@ -462,7 +462,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * 
 	 * @param {object} source The source context that was previously connected
 	 * @param {string} method The source method that was previously connected
-	 * @param {object} callback The callback that was previously connected
+	 * @param {object|function} callback The callback that was previously connected
 	 */
 	wink.disconnect = function(source, method, callback)
 	{
