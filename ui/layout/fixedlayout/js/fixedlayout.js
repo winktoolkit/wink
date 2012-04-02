@@ -101,6 +101,8 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 				_target = _p.target,
 				_header = _p.header,
 				_footer = _p.footer,
+				_hasHeaderFixed = _p.hasHeaderFixed,
+				_hasFooterFixed = _p.hasFooterFixed,
 				_displayDuration = _p.displayDuration,
 				_moveDuration = _p.moveDuration,
 				_activated = _p.activated,
@@ -121,6 +123,16 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 			if (_isset(_footer) && _isnull(wink.byId(_footer))) 
 			{
 				_raisePropertyError('footer');
+				return false;
+			}
+            if (_isset(_hasHeaderFixed) && !_isbool(_hasHeaderFixed)) 
+			{
+				_raisePropertyError('hasHeaderFixed');
+				return false;
+			} 
+			if (_isset(_hasFooterFixed) && !_isbool(_hasFooterFixed)) 
+			{   
+				_raisePropertyError('hasFooterFixed');
 				return false;
 			}
 			if (_isset(_displayDuration) && !_isint(_displayDuration)) 
