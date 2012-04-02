@@ -23,6 +23,8 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 	 * @param {HTMLElement|string} properties.target The target node or its identifier
 	 * @param {HTMLElement|string} [properties.header] The header node or its identifier
 	 * @param {HTMLElement|string} [properties.footer] The footer node or its identifier
+	 * @param {boolean} [properties.hasHeaderFixed=true] Indicates if the header node is fixed
+	 * @param {boolean} [properties.hasFooterFixed=true] Indicates if the footer node is fixed	 
 	 * @param {boolean} [properties.nativeFixed=true] False to enable the default implementation even if the fixed positioning is supported
 	 * @param {integer} [properties.displayDuration=0] The duration of the opacity transition when bars appear
 	 * @param {integer} [properties.moveDuration=0] The duration of the top transition when bars are partially visible (cut)
@@ -69,6 +71,8 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 			_addclass = wink.addClass,
 			_hasHeader = false,
 			_hasFooter = false,
+			_hasHeaderFixed = true,
+			_hasFooterFixed = true,
 			_header = null,
 			_footer = null,
 			_target = null,
@@ -144,17 +148,22 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 		{
 			_hasHeader = _isset(this.header);
 			_hasFooter = _isset(this.footer);
+			_hasHeaderFixed = _isset(this.hasHeaderFixed)?this.hasHeaderFixed:true;
+			_hasFooterFixed = _isset(this.hasFooterFixed)?this.hasFooterFixed:true;
 			
 			_target = wink.byId(this.target);
 			_addclass(_target, 'fl_target');
 			
-			if (_hasHeader) 
-			{
-				_header = wink.byId(this.header);
-				_addclass(_header, 'fl_bar');
-				_headerStyle = _header.style;
-			}
-			if (_hasFooter) 
+			if (_hasHeader)
+		    {
+		      _header = wink.byId(this.header);
+		    }
+            if (_hasHeaderFixed) 
+  			{
+  				_addclass(_header, 'fl_bar');
+  				_headerStyle = _header.style;
+  			} 
+			if (_hasFooterFixed) 
 			{
 				_footer = wink.byId(this.footer);
 				_addclass(_footer, 'fl_bar');
@@ -172,11 +181,11 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 			_paddingTop = this.paddingTop;
 			_paddingBottom = this.paddingBottom;
 
-			if (_hasHeader)
+			if (_hasHeaderFixed)
 			{
 				_ts.paddingTop = (_isset(_paddingTop) ? _paddingTop : _header.offsetHeight) + 'px';
 			}
-			if (_hasFooter)
+			if (_hasFooterFixed)
 			{
 				_ts.paddingBottom = (_isset(_paddingBottom) ? _paddingBottom : _footer.offsetHeight) + 'px';
 			}
@@ -261,11 +270,11 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 			var _initProperties = function() 
 			{
 				_sharedInitProperties.call(_instance);
-				if (_hasHeader) 
+				if (_hasHeaderFixed) 
 				{
 					_addclass(_header, 'fl_header fixed');
 				}
-				if (_hasFooter) 
+				if (_hasFooterFixed) 
 				{
 					_addclass(_footer, 'fl_footer fixed');
 				}
@@ -461,15 +470,15 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 					// priority should be given to visibility job in order to hide the bars ASAP and prevent bar glued
 					if (!_stateHidden && !_isScrolling)
 					{
-						if (_hasHeader) 
+						if (_hasHeaderFixed) 
 						{
 							_headerStyle.visibility = 'hidden';
 						}
-						if (_hasFooter) 
+						if (_hasFooterFixed) 
 						{
 							_footerStyle.visibility = 'hidden';
 						}
-						if (_hasHeader) 
+						if (_hasHeaderFixed) 
 						{
 							var _pos = 0;
 							if (_headerTop != _pos)
@@ -481,9 +490,11 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 							}
 							_headerStyle.visibility = '';
 						}
-						if (_hasFooter) 
+						if (_hasFooterFixed) 
 						{
 							var _pos = (_target.offsetHeight - _footer.offsetHeight);
+							if (!_hasHeaderFixed && _hasHeader)
+                                _pos += _header.offsetHeight; 
 							if (_footerTop != _pos)
 							{
 								_footerStyle.top = _pos + 'px';
@@ -576,7 +587,7 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 				var windowHeight = _window.innerHeight,
 					_by = _scrollY + windowHeight;
 				
-				if (_hasHeader) 
+				if (_hasHeaderFixed) 
 				{
 					var _withMove = false,
 						_pos = _scrollY,
@@ -602,7 +613,7 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 					}
 				}
 	
-				if (_hasFooter) 
+				if (_hasFooterFixed) 
 				{
 					var _withMove = false,
 						_foh = _footer.offsetHeight,
@@ -694,11 +705,11 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 				_clickPhase = true;
 				
 				_stateHidden = !_stateHidden;
-				if (_hasHeader) 
+				if (_hasHeaderFixed) 
 				{
 					_applyAnim(_headerStyle, _stateHidden);
 				}
-				if (_hasFooter) 
+				if (_hasFooterFixed) 
 				{
 					_applyAnim(_footerStyle, _stateHidden);
 				}
@@ -754,12 +765,12 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 							method : method
 						});
 					};
-					if (_hasHeader) 
+					if (_hasHeaderFixed) 
 					{
 						_listenTo(_header, 'start', '_onTouchBar');
 						_listenTo(_header, 'end', '_onTouchBar');
 					}
-					if (_hasFooter) 
+					if (_hasFooterFixed) 
 					{
 						_listenTo(_footer, 'start', '_onTouchBar');
 						_listenTo(_footer, 'end', '_onTouchBar');
@@ -806,7 +817,7 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 		})();
 	
 		if ((properties.nativeFixed !== false) && wink.has('css-position-fixed')) 
-		{
+		{   
 			return new FixedLayoutPF(properties);
 		}
 		else
