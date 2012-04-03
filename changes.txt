@@ -256,3 +256,8 @@ Release 1.4.2 [xx/xx/xxxx]
 	- Callback : a callback can now be a function
 	- slidingpanels : methods "add" and "remove" added
 	- changes of handling HTMLElement and dollar
+	- Added new method "modulo" to wink.math
+	- Added new method "hasClass" to wink.fx
+	- Added the possibility to pass a dom node instead of an HTML content to the "popup" method in wink.ui.xy.Popup
+    - Added new method "destroy" to wink.ui.xy.Menu
+    - Added hasHeaderFixed/hasFooterFixed properties to wink.ui.layout.FixedLayout 
