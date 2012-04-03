@@ -10,7 +10,7 @@
  * 
  * @author Sylvain LALANDE
  */
-define(['../../../_amd/core'], function(wink)
+define(['../../../_amd/core'], function()
 {
 	console.log("dom.js is deprecated: the use of wink and wink.fx methods is recommanded");
 	return wink;
