@@ -44,8 +44,11 @@
 
 				wink.error.logLevel = 1;
 				
-				var r = wink.math.round(Math.PI, 2);
-				$('container').innerHTML = "PI rounded to 2 decimal places = " + r;
+				var r1 = wink.math.round(Math.PI, 2);
+				wink.byId('containerRound').innerHTML = "PI rounded to 2 decimal places = " + r1;
+				
+				var r2 = wink.math.modulo(17, 3);
+				wink.byId('containerModulo').innerHTML = "17 modulo 3 = " + r2;
 			};
 		</script>
 	</head>
@@ -56,6 +59,7 @@
 			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
 		</div>
 		
-		<div class="w_bloc" id="container"></div>
+		<div class="w_bloc" id="containerRound"></div>
+		<div class="w_bloc" id="containerModulo"></div>
 	</body>
 </html>

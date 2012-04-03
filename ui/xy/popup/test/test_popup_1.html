@@ -18,6 +18,10 @@
 			{
 				min-height: 1500px;
 			}
+			
+			.popupContents{
+              display:none;
+            }
 		</style>
 		
 		<!-- THEME UTILITY -->
@@ -79,9 +83,9 @@
 				});
 			};
 			
-			var showPopup = function(position, targetNode, arrowPos) {
+			var showPopup = function(position, targetNode, arrowPos, contentNode) {
 				popup.popup({
-					content: "<div class='w_bloc'>This is a fully customizable popup</div>",
+					content: contentNode ? contentNode : "<div class='w_bloc'>This is a fully customizable popup</div>",
 					arrow: position,
 					arrowLeftPos: arrowPos,
 					targetNode: targetNode,
@@ -90,23 +94,23 @@
 			};
 			
 			var alertOk1 = function() {
-				$('result').innerHTML = "you just closed the first alert";
+				wink.byId('result').innerHTML = "you just closed the first alert";
 			};
 			
 			var alertOk2 = function() {
-				$('result').innerHTML = "you just closed the second alert";
+				wink.byId('result').innerHTML = "you just closed the second alert";
 			};
 			
 			var confirmOk = function() {
-				$('result').innerHTML = "you just confirmed";
+				wink.byId('result').innerHTML = "you just confirmed";
 			};
 			
 			var confirmCancel = function() {
-				$('result').innerHTML = "you just canceled";
+				wink.byId('result').innerHTML = "you just canceled";
 			};
 
 			var closePopup = function() {
-				$('result').innerHTML = "popup closed by layer handler";
+				wink.byId('result').innerHTML = "popup closed by layer handler";
 				popup.hide();
 			};
 			
@@ -149,6 +153,9 @@
 				<li class="w_list_item w_border_bottom w_bg_light">
 					<a href="#" onclick="showPopup('top', this, '10em');">show a popup with a top arrow (custom left)</a>
 				</li>
+				<li class="w_list_item w_border_bottom w_bg_light">
+					<a href="#" onclick="showPopup('top', this, '10em', $('content'));">show popup with a domNode for content</a>
+				</li>
 			</ul>
 		</div>
 		
@@ -163,5 +170,10 @@
 			</ul>
 		</div>
 		
+		<div class="popupContents">
+          <div id="content">
+            this is a content coming from a node
+          </div>
+        </div>
 	</body>
 </html>
