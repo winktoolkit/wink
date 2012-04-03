@@ -138,11 +138,11 @@
 
 				init: function()
 				{
-					wink.ux.touch.addListener($('header'), "start", { context: this, method: "onTouchHeaderFooter" });
-					wink.ux.touch.addListener($('header'), "end", { context: this, method: "onTouchHeaderFooter" });
+					wink.ux.touch.addListener(wink.byId('header'), "start", { context: this, method: "onTouchHeaderFooter" });
+					wink.ux.touch.addListener(wink.byId('header'), "end", { context: this, method: "onTouchHeaderFooter" });
 					
-					wink.ux.touch.addListener($('footer'), "start", { context: this, method: "onTouchHeaderFooter" });
-					wink.ux.touch.addListener($('footer'), "end", { context: this, method: "onTouchHeaderFooter" });
+					wink.ux.touch.addListener(wink.byId('footer'), "start", { context: this, method: "onTouchHeaderFooter" });
+					wink.ux.touch.addListener(wink.byId('footer'), "end", { context: this, method: "onTouchHeaderFooter" });
 				},
 
 				onTouchHeaderFooter: function(uxEvent) 
@@ -307,7 +307,7 @@
 					
 					this.carousel = new wink.ui.xy.Carousel(propertiesSlideshow);
 					
-					$('carousel').appendChild(this.carousel.getDomNode());
+					wink.byId('carousel').appendChild(this.carousel.getDomNode());
 				},
 
 				buildSlidingPanels: function() 
@@ -320,7 +320,7 @@
 					
 					this.slidingPanels = new wink.ui.layout.SlidingPanels(properties);
 					
-					$('wrapper').appendChild(this.slidingPanels.getDomNode());
+					wink.byId('wrapper').appendChild(this.slidingPanels.getDomNode());
 				},
 
 				slideBack: function() 
@@ -346,7 +346,7 @@
 				onCarousel: function(node) 
 				{
 					var p = node;
-					var crs = $('carousel');
+					var crs = wink.byId('carousel');
 					while (p && p != document.body) 
 					{
 						if (p == crs) 
@@ -366,7 +366,7 @@
 				
 				init: function()
 				{
-					this.node = $('wrapper');
+					this.node = wink.byId('wrapper');
 					
 					wink.ux.touch.addListener(this.node, "start", { context: this, method: "_start" }, { captureFlow: true });
 					wink.ux.touch.addListener(this.node, "move", { context: this, method: "_move" }, { captureFlow: true });
@@ -417,9 +417,9 @@
 				
 				var heightRemains = wink.ux.window.height - headerHeight - footerHeight;
 				
-				$('wrapper').style.height = heightRemains + "px";
-				$('view1').style.height = heightRemains + "px";
-				$('view2').style.height = heightRemains + "px";
+				wink.byId('wrapper').style.height = heightRemains + "px";
+				wink.byId('view1').style.height = heightRemains + "px";
+				wink.byId('view2').style.height = heightRemains + "px";
 
 				var properties = 
 				{

@@ -72,7 +72,7 @@ define(['../../../_amd/core'], function()
 	 *   alert("Start At: " + uxEvent.x + ", " + uxEvent.y);
 	 * };
 	 * 
-	 * wink.ux.touch.addListener($("nodeId"), "start", { context: window, method: "handleStart" });
+	 * wink.ux.touch.addListener(wink.byId("nodeId"), "start", { context: window, method: "handleStart" });
 	 * 
 	 */
 	wink.ux.touch.addListener = addListener;

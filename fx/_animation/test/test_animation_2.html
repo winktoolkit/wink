@@ -133,7 +133,7 @@
 						animGroup.addAnimation(n, this._getAnimLetter2(i * 100));
 					}
 					animGroup.start();
-					this._getAnimText(1000).start($('text2'), { onEnd: { context: this, method: '_animLetters3' } });
+					this._getAnimText(1000).start(wink.byId('text2'), { onEnd: { context: this, method: '_animLetters3' } });
 				},
 				/**
 				 *
@@ -152,29 +152,29 @@
 				 */
 				_animLogo: function()
 				{
-					this._getAnimLogo(100).start($('logo'), { onEnd: { context: this, method: '_animTarget' } });
+					this._getAnimLogo(100).start(wink.byId('logo'), { onEnd: { context: this, method: '_animTarget' } });
 				},
 				/**
 				 *
 				 */
 				_animTarget: function()
 				{
-					this._getAnimTarget(100).start($('target'), { onEnd: { context: this, method: '_animCollapse' } });
+					this._getAnimTarget(100).start(wink.byId('target'), { onEnd: { context: this, method: '_animCollapse' } });
 				},
 				/**
 				 *
 				 */
 				_animCollapse: function()
 				{
-					this.collapse($('container'), { onEnd: { context: this, method: '_animEnd' } });
+					this.collapse(wink.byId('container'), { onEnd: { context: this, method: '_animEnd' } });
 				},
 				/**
 				 *
 				 */
 				_animEnd: function()
 				{
-					this._getAnimTargetEnd(0).start($('target'));
-					wink.fx.fadeIn($('container'), { duration: 3000, delay: 1000 });
+					this._getAnimTargetEnd(0).start(wink.byId('target'));
+					wink.fx.fadeIn(wink.byId('container'), { duration: 3000, delay: 1000 });
 				},
 				/**
 				 *
@@ -398,7 +398,7 @@
 				_translate: function(params, x, y)
 				{
 					var n = params.node;
-					n.translate(x, y);
+					wink.fx.translate(n, x, y);
 				},
 				/**
 				 *
@@ -406,7 +406,7 @@
 				_scale: function(params, x, y)
 				{
 					var n = params.node;
-					n.scale(x, y);
+					wink.fx.scale(n, x, y);
 				},
 				/**
 				 *
@@ -434,15 +434,15 @@
 				window.scrollTo(0,0);
 
 				wink.error.logLevel = 1;
-				$('text').translate(0, -100);
-				$('text2').translate(-250, 0);
-				$('logo').translate(70, 0);
-				$('target').translate(320, -120);
-				$('container').style.display = 'block';
-				$('target').style.display = 'block';
+				wink.fx.translate(wink.byId('text'), 0, -100);
+				wink.fx.translate(wink.byId('text2'), -250, 0);
+				wink.fx.translate(wink.byId('logo'), 70, 0);
+				wink.fx.translate(wink.byId('target'), 320, -120);
+				wink.byId('container').style.display = 'block';
+				wink.byId('target').style.display = 'block';
 				
 				var letters = [ 'W', 'I', 'N', 'K' ];
-				animator.setLetters($('text'), letters);
+				animator.setLetters(wink.byId('text'), letters);
 				animator.animLetters(450);
 			};
 		</script>

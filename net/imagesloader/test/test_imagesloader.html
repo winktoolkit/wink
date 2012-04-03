@@ -53,7 +53,7 @@
 			
 			initProgressBar = function()
 			{
-				$('progress').innerHTML = '0%';
+				wink.byId('progress').innerHTML = '0%';
 			}
 			
 			displayProgressBar = function(params)
@@ -63,11 +63,11 @@
 				
 				if (progress == 100) 
 				{
-					$('progress').innerHTML = '100%';
+					wink.byId('progress').innerHTML = '100%';
 					displayImages(params.items);
 				} else 
 				{
-					$('progress').innerHTML = progress + '%';
+					wink.byId('progress').innerHTML = progress + '%';
 				}
 			}
 			
@@ -83,7 +83,7 @@
 					img.style.height = '30px';
 					img.style.width = '30px';
 					
-					$('container').appendChild(img);
+					wink.byId('container').appendChild(img);
 				}
 				
 			}

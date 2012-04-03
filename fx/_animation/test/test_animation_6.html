@@ -168,16 +168,16 @@
 						
 						switchNode(node);
 						node.style.opacity = 1;
-						window.anim((node == $('page1')) ? $('page2') : $('page1'), rows, cols, delay);
+						window.anim((node == wink.byId('page1')) ? wink.byId('page2') : wink.byId('page1'), rows, cols, delay);
 					}
 				};
 				animGroup.start({ onEnd: { context: ctx, method: 'reloadAnim', arguments: [ node, clone, rows, cols, delay ] } });
 			};
 
 			var switchNode = function(node) {
-				var oneToTwo = (node == $('page1'));
-				$('page1').style.zIndex = oneToTwo ? 1 : 2;
-				$('page2').style.zIndex = oneToTwo ? 2 : 1;
+				var oneToTwo = (node == wink.byId('page1'));
+				wink.byId('page1').style.zIndex = oneToTwo ? 1 : 2;
+				wink.byId('page2').style.zIndex = oneToTwo ? 2 : 1;
 			};
 		
 			var init = function() {
@@ -185,8 +185,8 @@
 
 				wink.error.logLevel = 1;
 
-				switchNode($('page2'));
-				anim($('page1'), 1, 2, 2000);
+				switchNode(wink.byId('page2'));
+				anim(wink.byId('page1'), 1, 2, 2000);
 			};
 		</script>
 	</head>

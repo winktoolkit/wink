@@ -1130,7 +1130,7 @@ define(['../../../../_amd/core', '../../../../ux/inertia/js/inertia'], function(
 			
 			this._view.x = parseInt(targetX);
 			this._view.y = parseInt(targetY);
-			this._target.translate(this._view.x, this._view.y - this._view.shiftOriginY);
+			wink.fx.translate(this._target, this._view.x, this._view.y - this._view.shiftOriginY);
 
 			if (this._view.scrollbars.active == true) {
 				if (this._view.scrollbars.x != null) {
@@ -1425,7 +1425,7 @@ define(['../../../../_amd/core', '../../../../ux/inertia/js/inertia'], function(
 			wink.fx.apply(cn, {
 				position: "absolute"
 			});
-			cn.translate(0, 0);
+			wink.fx.translate(cn, 0, 0);
 		},
 		/**
 		 * Draws the scrollbar
@@ -1496,7 +1496,7 @@ define(['../../../../_amd/core', '../../../../ux/inertia/js/inertia'], function(
 		{
 			this._view.x = x;
 			this._view.y = y;
-			this._domNode.translate(x, y);
+			wink.fx.translate(this._domNode, x, y);
 		}
 	};
 	

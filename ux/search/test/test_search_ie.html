@@ -75,13 +75,13 @@
 				window.scrollTo(0, 0);
 				wink.error.logLevel = 1;
 
-				var heightRemains = wink.ux.window.height - ($('header').offsetHeight + $('search_process').offsetHeight + $('search_result').offsetHeight + 30);
+				var heightRemains = wink.ux.window.height - (wink.byId('header').offsetHeight + wink.byId('search_process').offsetHeight + wink.byId('search_result').offsetHeight + 30);
 				
-				$('wrapper').style.height = heightRemains + "px";
+				wink.byId('wrapper').style.height = heightRemains + "px";
 				
 				
 				search = new wink.ux.Search({
-					textNode: $('wrapper'),
+					textNode: wink.byId('wrapper'),
 					resultClassName: 'over',
 					resultSelectClassName: 'over_selected'
 				});
@@ -90,7 +90,7 @@
 			processSearch = function()
 			{
 				window.scrollTo(0, 0);
-				var input = $('search');
+				var input = wink.byId('search');
 
 				if ( input.value == '' )return;
 				
@@ -98,35 +98,35 @@
 
 				if(search.totalResults > 0)
 				{
-					$("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
-					$("previous").style.display = "inline";
-					$("next").style.display = "inline";
+					wink.byId("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
+					wink.byId("previous").style.display = "inline";
+					wink.byId("next").style.display = "inline";
 					scrollToResult(firstResult);
 				} else {
-					$("nbResults").innerHTML = "no result";
-					$("previous").style.display = "none";
-					$("next").style.display = "none";
+					wink.byId("nbResults").innerHTML = "no result";
+					wink.byId("previous").style.display = "none";
+					wink.byId("next").style.display = "none";
 				}
 			};
 			
 			previousResult = function()
 			{
 				var newResult = search.previous();
-				$("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
+				wink.byId("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
 				scrollToResult(newResult);
 			};
 			
 			nextResult = function()
 			{
 				var newResult = search.next();
-				$("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
+				wink.byId("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
 				scrollToResult(newResult);
 			};
 			
 			scrollToResult = function(result)
 			{
-				var newPos = result.getTopPosition($('wrapper')) - 50;
-				$('wrapper').scrollTop = newPos;
+				var newPos = wink.getTopPosition(result, wink.byId('wrapper')) - 50;
+				wink.byId('wrapper').scrollTop = newPos;
 			};
 		</script>
 	</head>

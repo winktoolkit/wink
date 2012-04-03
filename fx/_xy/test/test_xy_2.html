@@ -64,7 +64,7 @@
 				this.y = 0;
 				this.box = box;
 
-				this.box.translate(0, 0);
+				wink.fx.translate(this.box, 0, 0);
 				
 				this.handleBoxStart = function(uxEvent)
 				{
@@ -76,7 +76,7 @@
 					var targetPosX = document.documentElement.offsetWidth * 0.7;
 					var targetPosY = document.documentElement.offsetHeight * 0.7;
 
-					this.box.translate(targetPosX, targetPosY);
+					wink.fx.translate(this.box, targetPosX, targetPosY);
 
 					this._monitor = wink.setInterval(this, '_monitorMovement', 50);
 				};
@@ -89,7 +89,7 @@
 					summary += "[x=" + instantPosition.x;
 					summary += ", y=" + instantPosition.y + "]";
 					
-					$("result").innerHTML = summary;
+					wink.byId("result").innerHTML = summary;
 				};
 				this._handleTransitionEnd = function(e)
 				{
@@ -97,7 +97,7 @@
 
 					wink.fx.applyTransformTransition(box, "0ms", "0ms", "default");
 
-					this.box.translate(0, 0);
+					wink.fx.translate(this.box, 0, 0);
 					this._monitorMovement();
 				};
 			};
@@ -106,7 +106,7 @@
 			{
 				wink.error.logLevel = 1;
 				
-				var box = $("box");
+				var box = wink.byId("box");
 				
 				wink.addClass(box, 'box');
 				

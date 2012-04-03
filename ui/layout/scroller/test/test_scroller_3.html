@@ -94,19 +94,19 @@
 				window.scrollTo(0,0);
 				wink.error.logLevel = 1;
 				
-				wink.ux.touch.addListener($('header'), "start", { context: this, method: "onTouchHeader" });
-				wink.ux.touch.addListener($('header'), "end", { context: this, method: "onTouchHeader" });
+				wink.ux.touch.addListener(wink.byId('header'), "start", { context: this, method: "onTouchHeader" });
+				wink.ux.touch.addListener(wink.byId('header'), "end", { context: this, method: "onTouchHeader" });
 
 				var headerHeight = 55;
 				var heightRemains = wink.ux.window.height - headerHeight;
 				
-				$('wrapper').style.height = heightRemains - 12 + "px";
+				wink.byId('wrapper').style.height = heightRemains - 12 + "px";
 			
 				var widthRemains = wink.ux.window.width;
 				
-				$('wrapper').style.width = widthRemains - 12 + "px";
+				wink.byId('wrapper').style.width = widthRemains - 12 + "px";
 				
-				$('scrollContent').style.width = wink.ux.window.width * 2 + "px";
+				wink.byId('scrollContent').style.width = wink.ux.window.width * 2 + "px";
 
 				var scroller = new wink.ui.layout.Scroller({
 					target: "scrollContent",

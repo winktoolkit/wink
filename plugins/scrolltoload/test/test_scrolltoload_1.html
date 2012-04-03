@@ -87,7 +87,7 @@
 				helper.addItems(10, false);
 
 				var scrollToLoad = new wink.plugins.ScrollToLoad({
-					content: $('scrollContent'),
+					content: wink.byId('scrollContent'),
 					waitText: 'Click here to load more',
 					loadingText: 'Loading...',
 					spinner: new wink.ui.xy.CSpinner({
@@ -126,9 +126,9 @@
 						this.index++;
 						wink.addClass(li, "w_list_item w_border_bottom w_bg_light");
 						if (atbegin) {
-							$('content').insertBefore(li, $('content').childNodes[0]);
+							wink.byId('content').insertBefore(li, wink.byId('content').childNodes[0]);
 						} else {
-							$('content').appendChild(li);
+							wink.byId('content').appendChild(li);
 						}
 					}
 				},

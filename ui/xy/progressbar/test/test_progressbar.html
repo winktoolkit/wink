@@ -71,9 +71,9 @@
 				progressBar2 = new wink.ui.xy.ProgressBar(properties2);
 				progressBar3 = new wink.ui.xy.ProgressBar(properties3);
 				
-				$('output1').appendChild(progressBar1.getDomNode());
-				$('output2').appendChild(progressBar2.getDomNode());
-				$('output3').appendChild(progressBar3.getDomNode());
+				wink.byId('output1').appendChild(progressBar1.getDomNode());
+				wink.byId('output2').appendChild(progressBar2.getDomNode());
+				wink.byId('output3').appendChild(progressBar3.getDomNode());
 
 				timer = wink.setInterval(window, 'animate', 800);
 			}

@@ -41,7 +41,7 @@ define(['../../../_amd/core'], function(wink)
 	 * 			endScrolling: { context: ctx, method: 'onEndScrolling' }
 	 * 		}
 	 * 	}),
-	 * 	scrollerContent: $('scrollContent'),
+	 * 	scrollerContent: wink.byId('scrollContent'),
 	 * 	topsection: 
 	 * 	{
 	 * 		waitText: 'Pull down to refresh...',
@@ -243,8 +243,8 @@ define(['../../../_amd/core'], function(wink)
 			angle: (cssClass == "top") ? 180 : 0,
 			rotate: function() {
 				this.angle = (this.angle == 0) ? 180 : 0;
-				this.icon.translate(0, 0);
-				this.icon.rotate(this.angle);
+				wink.fx.translate(this.icon, 0, 0);
+				wink.fx.rotate(this.icon, this.angle);
 			}
 		};
 		wink.mixin(section, properties);

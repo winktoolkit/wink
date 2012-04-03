@@ -89,10 +89,10 @@
 					if (nodeId == "positionChangeStatus")
 					{
 						positionChangedCount++;
-						$(nodeId).innerHTML = "Position has changed " + positionChangedCount + " times [" + text1 + "]";
+						wink.byId(nodeId).innerHTML = "Position has changed " + positionChangedCount + " times [" + text1 + "]";
 					} else 
 					{
-						$(nodeId).innerHTML = $(nodeId).innerHTML + text2 + "<br/>";
+						wink.byId(nodeId).innerHTML = wink.byId(nodeId).innerHTML + text2 + "<br/>";
 					}
 					
 					this.highlight(nodeId);
@@ -101,27 +101,27 @@
 				
 				this.highlight = function(nodeId) 
 				{
-					$(nodeId).style.color = "#b51a1a";
+					wink.byId(nodeId).style.color = "#b51a1a";
 				};
 				
 				this.turnOff = function(nodeId, color) 
 				{
-					$(nodeId).style.color = '';
+					wink.byId(nodeId).style.color = '';
 				};
 			};
 
 			var accuracyChanged = function() 
 			{
 				removeListeners();
-				highAccuracy = ($("accuracy").checked === true);
+				highAccuracy = (wink.byId("accuracy").checked === true);
 				addListeners();
 				
-				if ( $("accuracy").checked === true )
+				if ( wink.byId("accuracy").checked === true )
 				{
-					$("label1").innerHTML = "High accuracy activated";
+					wink.byId("label1").innerHTML = "High accuracy activated";
 				} else
 				{
-					$("label1").innerHTML = "High accuracy deactivated";
+					wink.byId("label1").innerHTML = "High accuracy deactivated";
 				}
 			};
 

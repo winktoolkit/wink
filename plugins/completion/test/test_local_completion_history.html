@@ -67,7 +67,7 @@
         {
             var activityProperties = 
             {
-                "input": $('myInputActivity'),
+                "input": wink.byId('myInputActivity'),
                 "managers": {
                 
                     "data": {
@@ -124,7 +124,7 @@
             activityCompleter.start();
             
 
-            $('myInputActivity').form.onsubmit = function() {activityCompleter.saveSelectedSuggestionInHistory();};
+            wink.byId('myInputActivity').form.onsubmit = function() {activityCompleter.saveSelectedSuggestionInHistory();};
         };
 
         /**
@@ -199,7 +199,7 @@
         </style>
     </head>
     
-    <body onload="init(); $('myInputActivity').focus();">
+    <body onload="init(); wink.byId('myInputActivity').focus();">
         <div class="w_box w_header w_bg_dark">
             <input type="button" class="w_button w_radius w_bg_light" id="back" value="back" style="visibility: visible; " onclick="document.location.href='index.html'" />
             history

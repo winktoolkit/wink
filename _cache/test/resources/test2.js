@@ -48,7 +48,7 @@ function initTagCloud()
 		axis: "xy"										// optional
 	};
 	var tagcloud = new wink.ui.xyz.TagCloud(properties);
-	$("container").appendChild(tagcloud.getDomNode());
+	wink.byId("container").appendChild(tagcloud.getDomNode());
 
 	wink.subscribe('/tagcloud/events/selection', { context: window, method: 'handleTagSelection' });
 }

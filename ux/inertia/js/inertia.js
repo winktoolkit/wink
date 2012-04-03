@@ -37,7 +37,7 @@ define(['../../../_amd/core', '../../movementtracker/js/movementtracker'], funct
 	 * 
 	 * @example
 	 * 
-	 * var node = $("nodeId");
+	 * var node = wink.byId("nodeId");
 	 * var movementtracker = new wink.ux.MovementTracker({ target: node });
 	 * var inertia = new wink.ux.Inertia({ movementtracker: movementtracker });
 	 * wink.subscribe('/inertia/events/inertiacomputed', { context: window, method: 'displaySpeed' });

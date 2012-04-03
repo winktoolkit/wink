@@ -95,9 +95,9 @@
 				var headerHeight = 55;
 				var heightRemains = wink.ux.window.height - headerHeight;
 				
-				$('wrapper').style.height = heightRemains + "px";
+				wink.byId('wrapper').style.height = heightRemains + "px";
 				
-				wink.ux.touch.addListener($('header'), "start", { context: helper, method: "onTouchHeader" });
+				wink.ux.touch.addListener(wink.byId('header'), "start", { context: helper, method: "onTouchHeader" });
 
 				var ctx = {};
 				var scrollToRefresh = new wink.plugins.ScrollToRefresh({
@@ -109,7 +109,7 @@
 							endScrolling:	{ context: ctx, method: 'onEndScrolling' }
 						}
 					}),
-					scrollerContent: $('scrollContent'),
+					scrollerContent: wink.byId('scrollContent'),
 					topsection: {
 						waitText: 'Pull down to refresh...',
 						triggeredText: 'Release to refresh...',
@@ -148,9 +148,9 @@
 						this.index++;
 						wink.addClass(li, "w_list_item w_border_bottom w_bg_light");
 						if (atbegin) {
-							$('content').insertBefore(li, $('content').childNodes[0]);
+							wink.byId('content').insertBefore(li, wink.byId('content').childNodes[0]);
 						} else {
-							$('content').appendChild(li);
+							wink.byId('content').appendChild(li);
 						}
 					}
 				},

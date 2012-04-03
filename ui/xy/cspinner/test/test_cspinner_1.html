@@ -50,7 +50,7 @@
 			{
 				var sp = new wink.ui.xy.CSpinner(props);
 				var node = sp.getDomNode();
-				$(id).appendChild(node);
+				wink.byId(id).appendChild(node);
 				sp.toggle();
 				wink.addClass(node, "spinner_canvas");
 				node.onclick = function() {

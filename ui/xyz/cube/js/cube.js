@@ -66,7 +66,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 *   rotationEndCallback: null
 	 * };
 	 * cube = new wink.ui.xyz.Cube(properties);
-	 * $("container").appendChild(cube.getDomNode());
+	 * wink.byId("container").appendChild(cube.getDomNode());
 	 * 
 	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
 	 * 

@@ -387,7 +387,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			{
 				var movement = publishedInfos.movement;
 				var firstPoint = movement.pointStatement[0];
-				var absPos = this._overNode.getPosition(null, true);
+				var absPos = wink.getPosition(this._overNode, null, true);
 				this._selectCoords = { x: (firstPoint.x - absPos.x), y: (firstPoint.y - absPos.y) };
 			}
 		},

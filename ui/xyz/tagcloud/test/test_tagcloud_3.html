@@ -74,7 +74,7 @@
 			var handleTagSelection = function(param)
 			{
 				popup.alert({
-					msg: "You clicked on : " + $(param.tag.id).innerHTML,
+					msg: "You clicked on : " + wink.byId(param.tag.id).innerHTML,
 					callback: { context: { m: function() {} }, method:'m' }
 				});
 			};
@@ -116,7 +116,7 @@
 					}
 				};
 				var tagcloud = new wink.ui.xyz.TagCloud(properties);
-				$("container").appendChild(tagcloud.getDomNode());
+				wink.byId("container").appendChild(tagcloud.getDomNode());
 
 				popup = new wink.ui.xy.Popup();
 				document.body.appendChild(popup.getDomNode());

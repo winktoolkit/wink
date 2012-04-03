@@ -65,7 +65,7 @@
 				 */
 				startAnim: function(nextStep)
 				{
-					wink.fx.fadeOut($('text2'), {
+					wink.fx.fadeOut(wink.byId('text2'), {
 						duration: 1000,
 						delay: 500,
 						onEnd: { context: animator, method: '_step2' }
@@ -76,7 +76,7 @@
 				 */
 				_step2: function()
 				{
-					wink.fx.animate($('text'), [
+					wink.fx.animate(wink.byId('text'), [
 						{ property: 'background-color', value: 'rgba(0, 0, 0, 0.8)', duration: 1500 },
 						{ property: 'color', value: 'rgba(255, 255, 255, 1.0)', duration: 1000, delay: 50, func: 'ease-in' }
 					], { onEnd: { context: animator, method: '_step3' } });
@@ -98,28 +98,28 @@
 						duration: 500, 
 						delay: 0 
 					}, { start: false }));
-					anim.start($('text'), { onEnd: { context: animator, method: '_step4' } });
+					anim.start(wink.byId('text'), { onEnd: { context: animator, method: '_step4' } });
 				},
 				/**
 				 *
 				 */
 				_step4: function()
 				{
-					var anim = wink.fx.fadeIn($('text2'), { start: false });
+					var anim = wink.fx.fadeIn(wink.byId('text2'), { start: false });
 					anim.chain(wink.fx.animate(null, { 
 						property: '-webkit-transform', 
 						value: { context: this, method: '_translateRotate', arguments: [ 20, 0, 0 ] }, 
 						duration: 500
 					}, { start: false }));
-					anim.start($('text2'));
+					anim.start(wink.byId('text2'));
 				},
 				/**
 				 *
 				 */
 				_translateRotate: function(params, x, y, angle) {
 					var n = params.node;
-					n.translate(x, y);
-					n.rotate(angle);
+					wink.fx.translate(n, x, y);
+					wink.fx.rotate(n, angle);
 				}
 			};
 

@@ -196,7 +196,7 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		_translateButton: function(value)
 		{
-			this._switchBtnNode.translate(value, 0);
+			wink.fx.translate(this._switchBtnNode, value, 0);
 		},
 		
 		/**

@@ -10,9 +10,9 @@ doh.register("wink._base._base",
         // Test byId
         function byId(t)
         {
-        	doh.is(document.getElementById('test'), $('test'));
-        	doh.is(null, $('dumb'));
-        	doh.is(document.getElementById('test'), $(document.getElementById('test')));
+        	doh.is(document.getElementById('test'), wink.byId('test'));
+        	doh.is(null, wink.byId('dumb'));
+        	doh.is(document.getElementById('test'), wink.byId(document.getElementById('test')));
         },
         
      	// Test query
@@ -461,6 +461,22 @@ doh.register("wink._base._base",
         	wink.testInterval = wink.setInterval(wink, 'intervalTest', 100, 'test');
         	
         	return d;
+        },
+        
+        // Test getLeftPosition
+        function winkGetLeftPosition(t)
+        {
+    		var nodeToTransform = wink.byId('test');
+    		
+    		doh.assertTrue(wink.isInteger(wink.getLeftPosition(nodeToTransform)));
+        },
+        
+        // Test getTopPosition
+        function winkGetTopPosition(t)
+        {
+    		var nodeToTransform = wink.byId('test');
+    		
+    		doh.assertTrue(wink.isInteger(wink.getTopPosition(nodeToTransform)));
         },
         
         // Test UId

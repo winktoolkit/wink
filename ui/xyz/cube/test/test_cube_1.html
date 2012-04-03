@@ -135,7 +135,7 @@
 					rotationEndCallback: { context: window, method: 'handleRotationEnd' }
 				};
 				cube = new wink.ui.xyz.Cube(properties);
-				$("container").appendChild(cube.getDomNode());
+				wink.byId("container").appendChild(cube.getDomNode());
 				cube.setFace({ id: 6, faceId: "face6" });
 
 				setTimeout(function() {

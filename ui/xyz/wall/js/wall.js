@@ -201,7 +201,7 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx'], function(wink)
 	
 				rowNode.appendChild(img);
 				
-				img.translate((i*(this.thumbWidth+this.thumbMargins)), 0);
+				wink.fx.translate(img, (i*(this.thumbWidth+this.thumbMargins)), 0);
 			}
 		},
 		
@@ -225,7 +225,7 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx'], function(wink)
 			wink.fx.applyTransformTransition(this._wallNode, (x2/this.speed) + 'ms', 0, 'ease-in');
 			
 			wink.fx.set3dTransform(this._rollerNode, { type: "rotate", x: 0, y: 1, z: 0, angle: 30 }, false);
-			this._wallNode.translate(-(this._rollerWidth - document.documentElement.offsetWidth - this._slidingDist), 0, 0);
+			wink.fx.translate(this._wallNode, -(this._rollerWidth - document.documentElement.offsetWidth - this._slidingDist), 0, 0);
 			
 			this._motionTimer = wink.setTimeout(this, '_padLeftEnd', x2/this.speed);
 		},
@@ -245,7 +245,7 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx'], function(wink)
 				wink.fx.applyTransformTransition(this._wallNode, 3*(this._slidingDist/this.speed) + 'ms', 0, 'ease-out');
 				
 				wink.fx.set3dTransform(this._rollerNode, { type: "rotate", x: 0, y: 1, z: 0, angle: 0 }, false);
-				this._wallNode.translate(x - this._slidingDist, 0, 0);
+				wink.fx.translate(this._wallNode, x - this._slidingDist, 0, 0);
 				
 				this._stopped = true;
 			}
@@ -271,7 +271,7 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx'], function(wink)
 			wink.fx.applyTransformTransition(this._wallNode, (x2/this.speed) + 'ms', 0, 'ease-in');
 			
 			wink.fx.set3dTransform(this._rollerNode, { type: "rotate", x: 0, y: 1, z: 0, angle: -30 }, false);
-			this._wallNode.translate(-this._slidingDist, 0, 0);
+			wink.fx.translate(this._wallNode, -this._slidingDist, 0, 0);
 			
 			this._motionTimer = wink.setTimeout(this, '_padRightEnd', x2/this.speed);
 		},
@@ -291,7 +291,7 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx'], function(wink)
 				wink.fx.applyTransformTransition(this._wallNode, 3*(this._slidingDist/this.speed) + 'ms', 0, 'ease-out');
 		
 				wink.fx.set3dTransform(this._rollerNode, { type: "rotate", x: 0, y: 1, z: 0, angle: 0 }, false);
-				this._wallNode.translate(x + this._slidingDist + this.thumbMargins, 0, 0);
+				wink.fx.translate(this._wallNode, x + this._slidingDist + this.thumbMargins, 0, 0);
 				
 				this._stopped = true;
 			}

@@ -55,7 +55,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * }
 	 * 
 	 * opener = new wink.ui.xyz.Opener(properties);
-	 * $('content').appendChild(opener.getDomNode());
+	 * wink.byId('content').appendChild(opener.getDomNode());
 	 * 
 	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
 	 * 
@@ -495,7 +495,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 				wink.publish('/opener_panel/events/click', {'panelId': this.uId});
 			};
 			
-			this._domNode.winkTranslate(0, this.index*this.height);
+			wink.fx.translate(this._domNode, 0, this.index*this.height);
 		}
 	};
 	

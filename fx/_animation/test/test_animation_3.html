@@ -306,18 +306,18 @@
 				 *
 				 */
 				init: function() {
-					this.key1 = $('door_digit_key_1');
-					this.key2 = $('door_digit_key_2');
-					this.digit1 = $('digit1');
-					this.digit2 = $('digit2');
-					this.container = $('container');
-					this.doorLock = $('door_lock');
-					this.doorKey = $('door_key');
-					this.doorLeft = $('door_left');
-					this.doorRight = $('door_right');
-					this.yin = $('lock_image_yin');
-					this.yang = $('lock_image_yang');
-					this.text = $('text');
+					this.key1 = wink.byId('door_digit_key_1');
+					this.key2 = wink.byId('door_digit_key_2');
+					this.digit1 = wink.byId('digit1');
+					this.digit2 = wink.byId('digit2');
+					this.container = wink.byId('container');
+					this.doorLock = wink.byId('door_lock');
+					this.doorKey = wink.byId('door_key');
+					this.doorLeft = wink.byId('door_left');
+					this.doorRight = wink.byId('door_right');
+					this.yin = wink.byId('lock_image_yin');
+					this.yang = wink.byId('lock_image_yang');
+					this.text = wink.byId('text');
 					
 					this._listen();
 
@@ -326,8 +326,8 @@
 					this.colorAnimKey1.start();
 					this.colorAnimKey2.start();
 					
-					this.text.scale(0.01, 0.01);
-					this.doorLock.rotate(-90);
+					wink.fx.scale(this.text, 0.01, 0.01);
+					wink.fx.rotate(this.doorLock, -90);
 
 					this.doorKey.style.display = 'block';
 					this.key1.style.display = 'block';
@@ -340,7 +340,7 @@
 				_listen: function() {
 					wink.ux.touch.addListener(this.container, "start", { context: this, method: "_handleStart" }, { preventDefault: true });
 					wink.ux.touch.addListener(this.container, "end", { context: this, method: "_handleEnd" });
-					this.container.listenToGesture("instant_rotation", { context: this, method: "_rotation" }, { preventDefault: true });
+					wink.ux.gesture.listenTo(this.container, "instant_rotation", { context: this, method: "_rotation" }, { preventDefault: true });
 				},
 				/**
 				 *
@@ -368,7 +368,7 @@
 
 					if (d1) {
 						wink.addClass(this.digit1, "active");
-						this.digit1.translate(d1.x - (this.digit1.offsetWidth / 2), d1.y - (this.digit1.offsetHeight / 2));
+						wink.fx.translate(this.digit1, d1.x - (this.digit1.offsetWidth / 2), d1.y - (this.digit1.offsetHeight / 2));
 						if (d1Key1 || d1Key2) {
 							this.key1Activated = true;
 							wink.removeClass(this.digit1, "red");
@@ -383,7 +383,7 @@
 					}
 					if (d2) {
 						wink.addClass(this.digit2, "active");
-						this.digit2.translate(d2.x - (this.digit2.offsetWidth / 2), d2.y - (this.digit2.offsetHeight / 2));
+						wink.fx.translate(this.digit2, d2.x - (this.digit2.offsetWidth / 2), d2.y - (this.digit2.offsetHeight / 2));
 						if (d2Key1 || d2Key2) {
 							this.key2Activated = true;
 							wink.removeClass(this.digit2, "red");
@@ -426,12 +426,12 @@
 						wink.fx.applyTransformTransition(this.doorLock, '0ms', '0ms', 'default');
 						wink.fx.applyTransformTransition(this.key1, '0ms', '0ms', 'default');
 						wink.fx.applyTransformTransition(this.key2, '0ms', '0ms', 'default');
-						this.doorLock.rotate(-90 + gestureInfos.rotation);
-						this.key1.rotate(gestureInfos.rotation);
-						this.key2.rotate(gestureInfos.rotation);
+						wink.fx.rotate(this.doorLock, -90 + gestureInfos.rotation);
+						wink.fx.rotate(this.key1, gestureInfos.rotation);
+						wink.fx.rotate(this.key2, gestureInfos.rotation);
 						
-						this.digit1.translate(d1.x - (this.digit1.offsetWidth / 2), d1.y - (this.digit1.offsetHeight / 2));
-						this.digit2.translate(d2.x - (this.digit2.offsetWidth / 2), d2.y - (this.digit2.offsetHeight / 2));
+						wink.fx.translate(this.digit1, d1.x - (this.digit1.offsetWidth / 2), d1.y - (this.digit1.offsetHeight / 2));
+						wink.fx.translate(this.digit2, d2.x - (this.digit2.offsetWidth / 2), d2.y - (this.digit2.offsetHeight / 2));
 
 						if (gestureInfos.rotation > 90) {
 							this._unlock();
@@ -443,11 +443,11 @@
 				 */
 				_unlock: function() {
 					this.unlocked = true;
-					this.doorLock.rotate(0);
+					wink.fx.rotate(this.doorLock, 0);
 					
 					wink.ux.touch.removeListener(this.container, "start", { context: this, method: "_handleStart" });
 					wink.ux.touch.removeListener(this.container, "end", { context: this, method: "_handleEnd" });
-					this.container.unlistenToGesture("instant_rotation", { context: this, method: "_rotation" });
+					wink.ux.gesture.unlistenTo(this.container, "instant_rotation", { context: this, method: "_rotation" });
 
 					wink.removeClass(this.digit1, "active");
 					wink.removeClass(this.digit2, "active");
@@ -477,8 +477,8 @@
 				 *
 				 */
 				_onKey: function(keyNode, x, y) {
-					var xmin = keyNode.getLeftPosition();
-					var ymin = keyNode.getTopPosition();
+					var xmin = wink.getLeftPosition(keyNode);
+					var ymin = wink.getTopPosition(keyNode);
 					var xmax = xmin + keyNode.offsetWidth;
 					var ymax = ymin + keyNode.offsetHeight;
 					if (x >= xmin && x <= xmax && y >= ymin && y <= ymax) {
@@ -491,12 +491,12 @@
 				 */
 				_transform: function(params, x, y, angle, sx, sy) {
 					var n = params.node;
-					n.translate(x, y);
+					wink.fx.translate(n, x, y);
 					if (angle) {
-						n.rotate(angle);
+						wink.fx.rotate(n, angle);
 					}
 					if (sx && sy) {
-						n.scale(sx, sy);
+						wink.fx.scale(n, sx, sy);
 					}
 				},
 				/**

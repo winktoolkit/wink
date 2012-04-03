@@ -95,10 +95,10 @@
 		
 			var init = function()
 			{
-				wink.ux.touch.addListener($("square1"), "move", { context: squareSelector, method: "squareSelected", arguments: null });
-				wink.ux.touch.addListener($("square2"), "move", { context: squareSelector, method: "squareSelected", arguments: null });
-				wink.ux.touch.addListener($("square3"), "start", { context: squareSelector, method: "squareSelected", arguments: null });
-				wink.ux.touch.addListener($("square4"), "end", { context: squareSelector, method: "squareSelected", arguments: null });
+				wink.ux.touch.addListener(wink.byId("square1"), "move", { context: squareSelector, method: "squareSelected", arguments: null });
+				wink.ux.touch.addListener(wink.byId("square2"), "move", { context: squareSelector, method: "squareSelected", arguments: null });
+				wink.ux.touch.addListener(wink.byId("square3"), "start", { context: squareSelector, method: "squareSelected", arguments: null });
+				wink.ux.touch.addListener(wink.byId("square4"), "end", { context: squareSelector, method: "squareSelected", arguments: null });
 			};
 		</script>
 	</head>

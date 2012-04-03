@@ -60,6 +60,19 @@ define(['../../../_amd/core'], function()
 		}
 	};
 	/**
+	 * Returns true if the node has the specified class
+	 *  
+	 * @function
+	 * 
+	 * @param {HTMLElement} node The DOM node
+	 * @param {string} classStr The css class to search for	 
+	 */
+	wink.fx.hasClass = hasClass;
+	function hasClass(node, classStr)
+	{
+	   return ((" "+ node.className +" ").indexOf(" " + classStr + " ") >= 0);
+	};
+	/**
 	 * Apply styles to a given node
 	 * 
 	 * @function
@@ -203,6 +216,12 @@ define(['../../../_amd/core'], function()
 	 * @param {boolean} [force2d] True to prevent "translate3d"
 	 */
 	wink.fx.applyTranslate = applyTranslate;
+	/**
+	 * @function
+	 * 
+	 * @see wink.fx.applyTranslate
+	 */
+	wink.fx.translate = applyTranslate;
 	function applyTranslate(node, x, y, force2d)
 	{
 		_computeTransform(node, x, y, _local.u, _local.u, _local.u, force2d);
@@ -217,6 +236,12 @@ define(['../../../_amd/core'], function()
 	 * @param {integer} y The y ratio of the scale
 	 */
 	wink.fx.applyScale = applyScale;
+	/**
+	 * @function
+	 * 
+	 * @see applyScale
+	 */
+	wink.fx.scale = applyScale;
 	function applyScale(node, x, y)
 	{
 		_computeTransform(node, _local.u, _local.u, x, y, _local.u, _local.u);
@@ -230,6 +255,12 @@ define(['../../../_amd/core'], function()
 	 * @param {number} angle The angle of the rotation in degrees
 	 */
 	wink.fx.applyRotate = applyRotate;
+	/**
+	 * @function
+	 * 
+	 * @see applyRotate
+	 */
+	wink.fx.rotate = applyRotate;
 	function applyRotate(node, angle)
 	{
 		_computeTransform(node, _local.u, _local.u, _local.u, _local.u, angle, _local.u);
@@ -428,6 +459,12 @@ define(['../../../_amd/core'], function()
 	 * @see wink.fx.removeClass
 	 */
 	wink.removeClass = removeClass;
+	
+	/**
+	 * @function
+	 * @see wink.fx.hasClass
+	 */
+	wink.hasClass = hasClass;
 	
 	return wink.fx;
 });

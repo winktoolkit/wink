@@ -69,24 +69,24 @@
 					uxEvent.preventDefault();
 					this.startX = uxEvent.x - this.x;
 					this.startY = uxEvent.y - this.y;
-					this.box.scale(1.2, 1.2);
+					wink.fx.scale(this.box, 1.2, 1.2);
 				};
 				this.handleBoxMove = function(uxEvent)
 				{
 					this.x = uxEvent.x - this.startX;
 					this.y = uxEvent.y - this.startY;
-					this.box.translate(this.x, this.y);
+					wink.fx.translate(this.box, this.x, this.y);
 				};
 				this.handleBoxEnd = function(uxEvent)
 				{
-					this.box.scale(1, 1);
+					wink.fx.scale(this.box, 1, 1);
 				};
 			};
 
 			var init = function() {
 				wink.error.logLevel = 1;
 				
-				var box = $("box");
+				var box = wink.byId("box");
 
 				wink.addClass(box, 'box');
 				

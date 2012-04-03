@@ -95,11 +95,11 @@
 
 				var properties = {
 					images: images,
-					offsetY: ($("container").clientHeight / 12),
-					shiftY: ($("container").clientHeight / 7)
+					offsetY: (wink.byId("container").clientHeight / 12),
+					shiftY: (wink.byId("container").clientHeight / 7)
 				};
 				flipdisc = new wink.ui.xyz.FlipDisc(properties);
-				$("container").appendChild(flipdisc.getDomNode());
+				wink.byId("container").appendChild(flipdisc.getDomNode());
 				wink.subscribe('/flipdisc/events/click', { context: this, method: 'handleClick' });
 			};
 		</script>

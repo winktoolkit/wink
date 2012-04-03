@@ -391,7 +391,7 @@ define(['../../../../_amd/core'], function(wink)
 		{
 			wink.fx.applyTransformTransition(this._moveableNode, duration + "ms", "0ms", "default");
 			this._currentPosition = x;
-			this._moveableNode.translate(-this._currentPosition);
+			wink.fx.translate(this._moveableNode, -this._currentPosition);
 		},
 		
 		/**

@@ -48,7 +48,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * 
 	 * newsticker = new wink.ui.xy.NewsTicker(properties);
 	 * 
-	 * $('output').appendChild(newsticker.getDomNode());
+	 * wink.byId('output').appendChild(newsticker.getDomNode());
 	 * 
 	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
@@ -332,7 +332,7 @@ define(['../../../../_amd/core'], function(wink)
 			wink.fx.apply(this._domNode, {
 				"transition-duration": animationDuration + 'ms'
 			});
-			this._domNode.translate(-this._domNode.clientWidth, 0);
+			wink.fx.translate(this._domNode, -this._domNode.clientWidth, 0);
 			
 			wink.fx.onTransitionEnd(this._domNode, this._animationHandler);
 		},
@@ -354,7 +354,7 @@ define(['../../../../_amd/core'], function(wink)
 			wink.fx.apply(this._domNode, {
 				"transition-duration": ''
 			});
-			this._domNode.translate(document.documentElement.offsetWidth, 0);
+			wink.fx.translate(this._domNode, document.documentElement.offsetWidth, 0);
 		}
 	};
 	

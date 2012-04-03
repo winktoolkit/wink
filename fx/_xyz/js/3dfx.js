@@ -96,7 +96,7 @@ define(['../../../_amd/core', '../../../math/_matrix/js/matrix'], function(wink)
 	 *    [angle: rotation angle ]
 	 * }
 	 * 
-	 * var node = $("nodeId");
+	 * var node = wink.byId("nodeId");
 	 * wink.fx.initComposedTransform(node);
 	 * wink.fx.setTransformPart(node, 1, { type: "scale", x: 1.2, y: 1.2, z: 1 });
 	 * wink.fx.setTransformPart(node, 2, { type: "translate", x: 50, y: 50, z: 0 });

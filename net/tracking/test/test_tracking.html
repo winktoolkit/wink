@@ -64,23 +64,23 @@
 
 			cbAfterSend = function(response)
 			{
-				var result = $("panelResultDefaultTracker").innerHTML;
+				var result = wink.byId("panelResultDefaultTracker").innerHTML;
 				result += response;
-				$("panelResultDefaultTracker").innerHTML = result;
+				wink.byId("panelResultDefaultTracker").innerHTML = result;
 			}
 
 			flush = function()
 			{
-				$("panelResultDefaultTracker").innerHTML = "";
+				wink.byId("panelResultDefaultTracker").innerHTML = "";
 				tracking.flush();
 				_appendPanelResult("> flushed");
 			}
 
 			push = function()
 			{
-				$("panelResultDefaultTracker").innerHTML = "";
+				wink.byId("panelResultDefaultTracker").innerHTML = "";
 
-				var intervalFlush = $("configIntervalFlush").value;
+				var intervalFlush = wink.byId("configIntervalFlush").value;
 
 				tracking.push("/WINK/Test1");
 				tracking.push("/WINK/Test2");
@@ -101,20 +101,20 @@
 
 			reset = function()
 			{
-				$("panelResult").innerHTML = "";
-				$("panelResultDefaultTracker").innerHTML = "";
+				wink.byId("panelResult").innerHTML = "";
+				wink.byId("panelResultDefaultTracker").innerHTML = "";
 
 				tracking.reset();
 			}
 
 			setConfig = function()
 			{
-				$("panelResultDefaultTracker").innerHTML = "";
+				wink.byId("panelResultDefaultTracker").innerHTML = "";
 
-				var intervalFlush = $("configIntervalFlush").value;
+				var intervalFlush = wink.byId("configIntervalFlush").value;
 				tracking.setIntervalFlush(intervalFlush);
 
-				var statTrackerName = $("configStatTracker").value;
+				var statTrackerName = wink.byId("configStatTracker").value;
 
 				switch ( statTrackerName )
 				{
@@ -133,14 +133,14 @@
 
 			_appendPanelResult = function(msg)
 			{
-				var panelResult = $("panelResult").innerHTML;
+				var panelResult = wink.byId("panelResult").innerHTML;
 
 				if ( panelResult != "" )
 				{
 					panelResult += "<br>";
 				}
 
-				$("panelResult").innerHTML = panelResult + msg;
+				wink.byId("panelResult").innerHTML = panelResult + msg;
 			}
 		</script>
 	</head>

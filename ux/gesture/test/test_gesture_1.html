@@ -103,36 +103,36 @@
 			{
 				this.twoDigitsClick = function(gestureInfos, boxId)
 				{
-					$(boxId).innerHTML = "click";
+					wink.byId(boxId).innerHTML = "click";
 				};
 				this.twoDigitsPress = function(gestureInfos, boxId)
 				{
-					$(boxId).innerHTML = "press";
+					wink.byId(boxId).innerHTML = "press";
 				};
 				this.enlargement = function(gestureInfos, boxId)
 				{
-					$(boxId).innerHTML = "enlargement [" + gestureInfos.scale + "]";
+					wink.byId(boxId).innerHTML = "enlargement [" + gestureInfos.scale + "]";
 				};
 				this.narrowing = function(gestureInfos, boxId)
 				{
-					$(boxId).innerHTML = "narrowing [" + gestureInfos.scale + "]";
+					wink.byId(boxId).innerHTML = "narrowing [" + gestureInfos.scale + "]";
 				};
 				this.rotation = function(gestureInfos, boxId)
 				{
-					$(boxId).innerHTML = "rotation [" + gestureInfos.rotation + "deg]";
+					wink.byId(boxId).innerHTML = "rotation [" + gestureInfos.rotation + "deg]";
 				};
 				
 				this.instantRotation = function(gestureInfos, boxId)
 				{
-					$("digit1").style.display = "block";
-					$("digit2").style.display = "block";
-					$("digit1").translate(gestureInfos.digit1.x - ($("digit1").offsetWidth / 2), gestureInfos.digit1.y - ($("digit1").offsetHeight / 2));
-					$("digit2").translate(gestureInfos.digit2.x - ($("digit2").offsetWidth / 2), gestureInfos.digit2.y - ($("digit2").offsetHeight / 2));
+					wink.byId("digit1").style.display = "block";
+					wink.byId("digit2").style.display = "block";
+					wink.fx.translate(wink.byId("digit1"), gestureInfos.digit1.x - (wink.byId("digit1").offsetWidth / 2), gestureInfos.digit1.y - (wink.byId("digit1").offsetHeight / 2));
+					wink.fx.translate(wink.byId("digit2"), gestureInfos.digit2.x - (wink.byId("digit2").offsetWidth / 2), gestureInfos.digit2.y - (wink.byId("digit2").offsetHeight / 2));
 				};
 				this.gestureEnd = function(gestureInfos, boxId)
 				{
-					$("digit1").style.display = "none";
-					$("digit2").style.display = "none";
+					wink.byId("digit1").style.display = "none";
+					wink.byId("digit2").style.display = "none";
 				};
 			};
 
@@ -140,23 +140,23 @@
 			{
 				var bl = new BoxListener();
 
-				wink.ux.gesture.listenTo($("box1"), "two_digits_click", { context: bl, method: "twoDigitsClick", arguments: [ "box1" ] }, { preventDefault: true });
-				wink.ux.gesture.listenTo($("box1"), "two_digits_press", { context: bl, method: "twoDigitsPress", arguments: [ "box1" ] }, { preventDefault: true });
-				wink.ux.gesture.listenTo($("box1"), "enlargement", { context: bl, method: "enlargement", arguments: [ "box1" ] }, { preventDefault: true });
-				wink.ux.gesture.listenTo($("box1"), "narrowing", { context: bl, method: "narrowing", arguments: [ "box1" ] }, { preventDefault: true });
-				wink.ux.gesture.listenTo($("box1"), "rotation", { context: bl, method: "rotation", arguments: [ "box1" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box1"), "two_digits_click", { context: bl, method: "twoDigitsClick", arguments: [ "box1" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box1"), "two_digits_press", { context: bl, method: "twoDigitsPress", arguments: [ "box1" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box1"), "enlargement", { context: bl, method: "enlargement", arguments: [ "box1" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box1"), "narrowing", { context: bl, method: "narrowing", arguments: [ "box1" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box1"), "rotation", { context: bl, method: "rotation", arguments: [ "box1" ] }, { preventDefault: true });
 
-				wink.ux.gesture.listenTo($("box1"), "instant_rotation", { context: bl, method: "instantRotation", arguments: [ "box1" ] }, { preventDefault: true });
-				wink.ux.gesture.listenTo($("box1"), "gesture_end", { context: bl, method: "gestureEnd", arguments: [ "box1" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box1"), "instant_rotation", { context: bl, method: "instantRotation", arguments: [ "box1" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box1"), "gesture_end", { context: bl, method: "gestureEnd", arguments: [ "box1" ] }, { preventDefault: true });
 				
-				wink.ux.gesture.listenTo($("box2"), "two_digits_click", { context: bl, method: "twoDigitsClick", arguments: [ "box2" ] }, { preventDefault: true });
-				wink.ux.gesture.listenTo($("box2"), "two_digits_press", { context: bl, method: "twoDigitsPress", arguments: [ "box2" ] }, { preventDefault: true });
-				wink.ux.gesture.listenTo($("box2"), "enlargement", { context: bl, method: "enlargement", arguments: [ "box2" ] }, { preventDefault: true });
-				wink.ux.gesture.listenTo($("box2"), "narrowing", { context: bl, method: "narrowing", arguments: [ "box2" ] }, { preventDefault: true });
-				wink.ux.gesture.listenTo($("box2"), "rotation", { context: bl, method: "rotation", arguments: [ "box2" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box2"), "two_digits_click", { context: bl, method: "twoDigitsClick", arguments: [ "box2" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box2"), "two_digits_press", { context: bl, method: "twoDigitsPress", arguments: [ "box2" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box2"), "enlargement", { context: bl, method: "enlargement", arguments: [ "box2" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box2"), "narrowing", { context: bl, method: "narrowing", arguments: [ "box2" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box2"), "rotation", { context: bl, method: "rotation", arguments: [ "box2" ] }, { preventDefault: true });
 
-				wink.ux.gesture.listenTo($("box2"), "instant_rotation", { context: bl, method: "instantRotation", arguments: [ "box2" ] }, { preventDefault: true });
-				wink.ux.gesture.listenTo($("box2"), "gesture_end", { context: bl, method: "gestureEnd", arguments: [ "box2" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box2"), "instant_rotation", { context: bl, method: "instantRotation", arguments: [ "box2" ] }, { preventDefault: true });
+				wink.ux.gesture.listenTo(wink.byId("box2"), "gesture_end", { context: bl, method: "gestureEnd", arguments: [ "box2" ] }, { preventDefault: true });
 			};
 		</script>
 	</head>

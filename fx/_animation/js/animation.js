@@ -23,7 +23,7 @@ define(['../../../_amd/core'], function(wink)
 		 * 
 		 * @example
 		 * 
-		 * var node1 = $('nodeId1'), node2 = $('nodeId2'), node3 = $('nodeId3'), node4 = $('nodeId4'), node5 = $('nodeId5'), node6 = $('nodeId6');
+		 * var node1 = wink.byId('nodeId1'), node2 = wink.byId('nodeId2'), node3 = wink.byId('nodeId3'), node4 = wink.byId('nodeId4'), node5 = wink.byId('nodeId5'), node6 = wink.byId('nodeId6');
 		 * 
 		 * wink.fx.fadeOut(node1);
 		 * wink.fx.animate(node2, { property: 'background-color', value: '#000', duration: 500 });
@@ -147,7 +147,7 @@ define(['../../../_amd/core'], function(wink)
 		var translator = {
 			translate: function(params, x, y) {
 				var n = params.node;
-				n.translate(x, y);
+				wink.fx.translate(n, x, y);
 			}
 		};
 
@@ -344,8 +344,8 @@ define(['../../../_amd/core'], function(wink)
 		};
 		
 		var p = {
-			x: node.getLeftPosition(),
-			y: node.getTopPosition(),
+			x: wink.getLeftPosition(node),
+			y: wink.getTopPosition(node),
 			h: s(node, "height", true),
 			w: s(node, "width", true),
 			bh: s(node, "border-top-width", true) + s(node, "border-bottom-width", true),

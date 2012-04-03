@@ -67,7 +67,7 @@ define(['../../../_amd/core'], function(wink)
 	 * 
 	 * videoPlayer = new wink.mm.VideoPlayer(properties);
 	 * 
-	 * $('video').appendChild(videoPlayer.getDomNode());
+	 * wink.byId('video').appendChild(videoPlayer.getDomNode());
 	 * 
 	 * @compatibility Ipad, BlackBerry 7
 	 * 
@@ -325,7 +325,7 @@ define(['../../../_amd/core'], function(wink)
 			
 			if ( this.customControls == 1 )
 			{
-				this._cursor.translate(this._cursorPosition, 0);
+				wink.fx.translate(this._cursor, this._cursorPosition, 0);
 			}
 			
 			this._updateDuration();
@@ -430,7 +430,7 @@ define(['../../../_amd/core'], function(wink)
 						
 						if ( !this._cursorDragging )
 						{
-							this._cursor.translate(((this._currentProgress/this._currentDuration)*this._progressBarNode.clientWidth), 0);
+							wink.fx.translate(this._cursor, ((this._currentProgress/this._currentDuration)*this._progressBarNode.clientWidth), 0);
 							this._cursorCurrentX = (this._currentProgress/this._currentDuration)*this._progressBarNode.clientWidth;
 						}
 					}
@@ -560,7 +560,7 @@ define(['../../../_amd/core'], function(wink)
 			
 			if ( (this._cursorCurrentX + event.x - this._cursorBeginX) >= 0 && (this._cursorCurrentX + event.x - this._cursorBeginX) <= this._progressBarNode.clientWidth)
 			{
-				this._cursor.translate(this._cursorPosition, 0);
+				wink.fx.translate(this._cursor, this._cursorPosition, 0);
 				this._setDuration(this._convert(this._cursorPosition, this._progressBarNode.clientWidth));
 				this._updateProgressBar();
 			}

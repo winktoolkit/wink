@@ -347,7 +347,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 	/**
 	 * Invokes the given callback
 	 * 
-	 * @param {object|function} callback The callback to invoke. The callback must be an object containing a 'method' and a 'context'.
+	 * @param {object|function} callback The callback to invoke
 	 * @param {object} [parameters] Parameters to pass to the callback
 	 * 
 	 * @returns {function} The called function
@@ -402,7 +402,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * 
 	 * @param {object} source The source context
 	 * @param {string} method The source method
-	 * @param {object} callback A callback that will be called once the source method will be invoked
+	 * @param {object|function} callback A callback that will be called once the source method will be invoked
 	 */
 	wink.connect = function(source, method, callback)
 	{
@@ -462,7 +462,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * 
 	 * @param {object} source The source context that was previously connected
 	 * @param {string} method The source method that was previously connected
-	 * @param {object} callback The callback that was previously connected
+	 * @param {object|function} callback The callback that was previously connected
 	 */
 	wink.disconnect = function(source, method, callback)
 	{
@@ -529,6 +529,64 @@ define(['../../_kernel/js/kernel'], function(wink)
 		return setInterval(toExecute, delay);
 	};
 	
+	/**
+	 * Retrieve the position of a node (top, left and transform if specified)
+	 * 
+	 * @param {HTMLElement} node The node
+	 * @param {HTMLElement} [parentNode] If specified, the returned value is relative to the parentNode node. If parentNode is not a parent node of the current HTML element or if not specified, the returned value will be an absolute position
+	 * @param {boolean} [transform] Take CSS transforms into account while calculating the position
+	 * 
+	 * @returns {object} the x and y position of the element
+	 */
+	wink.getPosition = function(node, parentNode, transform)
+	{
+		var position = {x: 0, y: 0};
+		var obj = node;
+
+		while (obj && obj != parentNode) 
+		{
+			position.x += obj.offsetLeft;
+			position.y += obj.offsetTop;
+
+			if ( transform )
+			{
+				position.x += wink.fx.getTransformPosition(obj).x;
+				position.y += wink.fx.getTransformPosition(obj).y;
+			}
+			
+			obj = obj.offsetParent;
+		}
+		
+		return position;
+	};
+		
+	/**
+	 * Retrieve the top position of a node (top and transform if specified)
+	 * 
+	 * @param {HTMLElement} node The node
+	 * @param {HTMLElement} [parentNode] If specified, the returned value is relative to the parentNode node. If parentNode is not a parent node of the current HTML element or if not specified, the returned value will be an absolute top position
+	 * @param {boolean} [transform] Take CSS transforms into account while calculating the position
+	 * 
+	 * @returns {integer} the y position of the element
+	 */
+	wink.getTopPosition = function(node, parentNode, transform)
+	{
+		return (wink.getPosition(node, parentNode, transform).y);
+	};
+	
+	/**
+	 * Retrieve the top position of a node (left and transform if specified)
+	 * 
+	 * @param {HTMLElement} node The node
+	 * @param {HTMLElement} [parentNode] If specified, the returned value is relative to the parentNode node. If parentNode is not a parent node of the current HTML element or if not specified, the returned value will be an absolute left position
+	 * @param {boolean} [transform] Take CSS transforms into account while calculating the position
+	 * 
+	 * @returns {integer} The x position of the element
+	 */
+	wink.getLeftPosition = function(node, parentNode, transform)
+	{
+		return (wink.getPosition(node, parentNode, transform).x);
+	};
 
 	var _uidSequence = 100;
 	/**
@@ -558,15 +616,6 @@ define(['../../_kernel/js/kernel'], function(wink)
 		 * @see wink.query
 		 */
 		$$ = wink.bind(wink.query, wink);
-	}
-	
-	if (wink.isUndefined(wd.$))
-	{
-		/**
-		 * @function
-		 * @see wink.byId
-		 */
-		$ = wink.bind(wink.byId, wink);
 	}
 	
 	return wink;

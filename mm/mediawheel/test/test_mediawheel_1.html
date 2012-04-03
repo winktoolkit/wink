@@ -87,24 +87,24 @@
 				
 				window.scrollTo(0,0);
 
-				var _w = $('content').offsetWidth,
-					_h = $('content').offsetHeight;
+				var _w = wink.byId('content').offsetWidth,
+					_h = wink.byId('content').offsetHeight;
 
-				$('content').style.width = _w + "px";
-				$('content').style.height = _h + "px";
+				wink.byId('content').style.width = _w + "px";
+				wink.byId('content').style.height = _h + "px";
 				
 				var mediaWheel = new wink.mm.MediaWheel({
 					width: _w,
 					height: _h
 				});
 
-				$('content').appendChild(mediaWheel.getDomNode());
+				wink.byId('content').appendChild(mediaWheel.getDomNode());
 
 				var ready = false;
-				$('time_container').innerHTML = _formatTime(0);
+				wink.byId('time_container').innerHTML = _formatTime(0);
 
-				$('player').style.left = $('player').offsetLeft - ($('player').offsetWidth / 2) + "px";
-				$('time_container').style.left = $('time_container').offsetLeft - ($('time_container').offsetWidth / 2) + "px";
+				wink.byId('player').style.left = wink.byId('player').offsetLeft - (wink.byId('player').offsetWidth / 2) + "px";
+				wink.byId('time_container').style.left = wink.byId('time_container').offsetLeft - (wink.byId('time_container').offsetWidth / 2) + "px";
 
 				wink.subscribe('/mediawheel/events/timeupdate', { context: {
 					ontimeupdate: function(params) {
@@ -139,7 +139,7 @@
 							return;
 						}
 						mediaWheel.setTime(audioplayer.getCurrentTime());
-						$('time_container').innerHTML = _formatTime(audioplayer.getCurrentTime());
+						wink.byId('time_container').innerHTML = _formatTime(audioplayer.getCurrentTime());
 					}
 				});
 			};
@@ -161,8 +161,8 @@
 
 				ap.init = function(props) {
 					_url = props.url;
-					_parent = $(props.parent);
-					_playBtn = $(props.playBtn);
+					_parent = wink.byId(props.parent);
+					_playBtn = wink.byId(props.playBtn);
 					_onready = props.onready;
 					_onprogress = props.onprogress;
 					_ontimeupdate = props.ontimeupdate;

@@ -420,8 +420,8 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 				wink.addClass(this._leftShadowNode, 'fb_page');
 				wink.addClass(this._rightShadowNode, 'fb_page');
 				
-				this._leftShadowNode.translate('-100%', 0);
-				this._rightShadowNode.translate(0, 0);
+				wink.fx.translate(this._leftShadowNode, '-100%', 0);
+				wink.fx.translate(this._rightShadowNode, 0, 0);
 				this._leftShadowNode.style.backgroundColor = 'rgba(0, 0, 0, 0.0)';
 				this._rightShadowNode.style.backgroundColor = 'rgba(0, 0, 0, 0.0)';
 				

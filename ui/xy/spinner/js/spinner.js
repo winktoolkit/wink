@@ -36,7 +36,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * 
 	 * var spinner = new wink.ui.xy.Spinner(properties);
 	 * 
-	 * $('output').appendChild(spinner.getDomNode());
+	 * wink.byId('output').appendChild(spinner.getDomNode());
 	 * 
 	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 

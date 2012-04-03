@@ -89,7 +89,7 @@ define(['../../../_amd/core'], function(wink)
 	 * 
 	 * @example
 	 * 
-	 * var mvt = new wink.ux.MovementTracker({ target: $("nodeId") });
+	 * var mvt = new wink.ux.MovementTracker({ target: wink.byId("nodeId") });
 	 * wink.subscribe('/movementtracker/events/mvtbegin', { context: window, method: 'handleMovementBegin' });
 	 * wink.subscribe('/movementtracker/events/mvtchanged', { context: window, method: 'handleMovementChanged' });
 	 * wink.subscribe('/movementtracker/events/mvtstored', { context: window, method: 'handleMovementStored' });

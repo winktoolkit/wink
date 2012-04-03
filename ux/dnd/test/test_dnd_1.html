@@ -58,19 +58,19 @@
 				{
 					params.target.onSourceOut();
 
-					$(params.source.id).src = './img/test1.jpg';
+					wink.byId(params.source.id).src = './img/test1.jpg';
 				}
 
 				source1.drop2 = function(params)
 				{
 					params.target.onSourceOut();
 
-					$(params.source.id).src = './img/test2.jpg';
+					wink.byId(params.source.id).src = './img/test2.jpg';
 				}
 
 				source1.getAvatar = function()
 				{
-					var avatar = $(this.id).cloneNode(true);
+					var avatar = wink.byId(this.id).cloneNode(true);
 					
 					avatar.style.height = avatar.height * 3 + 'px';
 					avatar.style.width = avatar.width * 3 + 'px';
@@ -91,7 +91,7 @@
 					if(!this._isOver)
 					{
 						this.over();
-						$(this.id).style.border = '1px dotted #000';
+						wink.byId(this.id).style.border = '1px dotted #000';
 					}
 				} 
 
@@ -100,7 +100,7 @@
 					if(this._isOver)
 					{
 						this.out();
-						$(this.id).style.border = '1px solid #fff';
+						wink.byId(this.id).style.border = '1px solid #fff';
 					}
 				} 
 

@@ -94,13 +94,13 @@
 		
 			var init = function()
 			{
-				wink.ux.touch.addListener($("square1"), "start", { context: squareSelector, method: "squareSelected", arguments: [ "#FFFE6F" ] });
-				wink.ux.touch.addListener($("square2"), "start", { context: squareSelector, method: "squareSelected", arguments: [ "#FFFEAA" ] });
-				wink.ux.touch.addListener($("square3"), "start", { context: squareSelector, method: "squareSelected", arguments: [ "#FFFE33" ] });
-				wink.ux.touch.addListener($("square4"), "start", { context: squareSelector, method: "squareSelected", arguments: [ "#FFFE00" ] });
+				wink.ux.touch.addListener(wink.byId("square1"), "start", { context: squareSelector, method: "squareSelected", arguments: [ "#FFFE6F" ] });
+				wink.ux.touch.addListener(wink.byId("square2"), "start", { context: squareSelector, method: "squareSelected", arguments: [ "#FFFEAA" ] });
+				wink.ux.touch.addListener(wink.byId("square3"), "start", { context: squareSelector, method: "squareSelected", arguments: [ "#FFFE33" ] });
+				wink.ux.touch.addListener(wink.byId("square4"), "start", { context: squareSelector, method: "squareSelected", arguments: [ "#FFFE00" ] });
 
-				wink.ux.touch.addListener($("square1"), "end", { context: squareSelector, method: "squareSelected", arguments: [ "#FFFE6F" ] });
-				wink.ux.touch.removeListener($("square1"), "end", { context: squareSelector, method: "squareSelected", arguments: null });
+				wink.ux.touch.addListener(wink.byId("square1"), "end", { context: squareSelector, method: "squareSelected", arguments: [ "#FFFE6F" ] });
+				wink.ux.touch.removeListener(wink.byId("square1"), "end", { context: squareSelector, method: "squareSelected", arguments: null });
 			};
 		</script>
 	</head>

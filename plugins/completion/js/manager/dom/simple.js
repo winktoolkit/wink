@@ -228,8 +228,8 @@ define(['../../../../../_amd/core'], function(wink)
 	    	this.domNode.style.width = (this._component.input.offsetWidth - 2 * this.borderSize) + 'px';    
 	    	this.domNode.parentNode.style.top = 0;
             this.domNode.parentNode.style.left = 0;
-	    	this.domNode.parentNode.style.top = (this._component.input.offsetHeight + this._component.input.getTopPosition() - this.domNode.parentNode.getTopPosition()) + 'px';
-	        this.domNode.parentNode.style.left = (this._component.input.getLeftPosition() - this.domNode.parentNode.getLeftPosition()) + 'px';
+	    	this.domNode.parentNode.style.top = (this._component.input.offsetHeight + wink.getTopPosition(this._component.input) - wink.getTopPosition(this.domNode.parentNode)) + 'px';
+	        this.domNode.parentNode.style.left = (wink.getLeftPosition(this._component.input) - wink.getLeftPosition(this.domNode.parentNode)) + 'px';
 	    },
 	    
 	    /**

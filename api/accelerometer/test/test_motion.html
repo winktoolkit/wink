@@ -136,85 +136,85 @@
 				var beta = (y == 0)?90:wink.math.radToDeg(Math.asin(y/9.81));
 				var gamma = (x == 0)?90:wink.math.radToDeg(Math.asin(x/9.81));
 				
-				wink.fx.initComposedTransform($('device'));
-				wink.fx.setTransformPart($('device'), 1, { type: "translate", x: 0, y: 0, z: 0.1 });
-				wink.fx.setTransformPart($('device'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 90 + gamma });
-				wink.fx.setTransformPart($('device'), 3, { type: "rotate", x: 0, y: 0, z: 1, angle: beta });
-				wink.fx.applyComposedTransform($('device'));
+				wink.fx.initComposedTransform(wink.byId('device'));
+				wink.fx.setTransformPart(wink.byId('device'), 1, { type: "translate", x: 0, y: 0, z: 0.1 });
+				wink.fx.setTransformPart(wink.byId('device'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 90 + gamma });
+				wink.fx.setTransformPart(wink.byId('device'), 3, { type: "rotate", x: 0, y: 0, z: 1, angle: beta });
+				wink.fx.applyComposedTransform(wink.byId('device'));
 				
-				wink.fx.initComposedTransform($('backface'));
-				wink.fx.setTransformPart($('backface'), 1, { type: "translate", x: 0, y: 0, z: -0.1 });
-				wink.fx.setTransformPart($('backface'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 270 + gamma });
-				wink.fx.setTransformPart($('backface'), 3, { type: "rotate", x: 0, y: 0, z: 1, angle: beta });
-				wink.fx.applyComposedTransform($('backface'));
+				wink.fx.initComposedTransform(wink.byId('backface'));
+				wink.fx.setTransformPart(wink.byId('backface'), 1, { type: "translate", x: 0, y: 0, z: -0.1 });
+				wink.fx.setTransformPart(wink.byId('backface'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 270 + gamma });
+				wink.fx.setTransformPart(wink.byId('backface'), 3, { type: "rotate", x: 0, y: 0, z: 1, angle: beta });
+				wink.fx.applyComposedTransform(wink.byId('backface'));
 				
 			}, false);
 			
 			init = function()
 			{
-				$('container').style.height = height + 'px';
-				$('container').style.width = width + 'px';
+				wink.byId('container').style.height = height + 'px';
+				wink.byId('container').style.width = width + 'px';
 				
-				$('x').style.height = height + 'px';
-				$('x').style.width = width + 'px';
+				wink.byId('x').style.height = height + 'px';
+				wink.byId('x').style.width = width + 'px';
 				
-				$('y').style.height = height + 'px';
-				$('y').style.width = width + 'px';
+				wink.byId('y').style.height = height + 'px';
+				wink.byId('y').style.width = width + 'px';
 				
-				$('z').style.height = height + 'px';
-				$('z').style.width = width + 'px';
+				wink.byId('z').style.height = height + 'px';
+				wink.byId('z').style.width = width + 'px';
 				
-				$('device').style.height = iconHeight + 'px';
-				$('device').style.width = iconWidth + 'px';
+				wink.byId('device').style.height = iconHeight + 'px';
+				wink.byId('device').style.width = iconWidth + 'px';
 				
-				$('backface').style.height = iconHeight + 'px';
-				$('backface').style.width = iconWidth + 'px';
+				wink.byId('backface').style.height = iconHeight + 'px';
+				wink.byId('backface').style.width = iconWidth + 'px';
 				
-				$('container').style.top = '50px';
+				wink.byId('container').style.top = '50px';
 				
-				$('device').style.top = (height - iconHeight)/2 + 'px';
-				$('device').style.left = (width - iconWidth)/2 + 'px';
+				wink.byId('device').style.top = (height - iconHeight)/2 + 'px';
+				wink.byId('device').style.left = (width - iconWidth)/2 + 'px';
 				
-				$('backface').style.top = (height - iconHeight)/2 + 'px';
-				$('backface').style.left = (width - iconWidth)/2 + 'px';
+				wink.byId('backface').style.top = (height - iconHeight)/2 + 'px';
+				wink.byId('backface').style.left = (width - iconWidth)/2 + 'px';
 				
-				wink.fx.initComposedTransform($('plan'));
-				wink.fx.setTransformPart($('plan'), 1, { type: "rotate", x: 0, y: 1, z: 0, angle: 20 });
-				wink.fx.setTransformPart($('plan'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: -20 });
-				wink.fx.applyComposedTransform($('plan'));
+				wink.fx.initComposedTransform(wink.byId('plan'));
+				wink.fx.setTransformPart(wink.byId('plan'), 1, { type: "rotate", x: 0, y: 1, z: 0, angle: 20 });
+				wink.fx.setTransformPart(wink.byId('plan'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: -20 });
+				wink.fx.applyComposedTransform(wink.byId('plan'));
 				
-				wink.fx.initComposedTransform($('x'));
-				wink.fx.setTransformPart($('x'), 1, { type: "rotate", x: 1, y: 0, z: 0, angle: 90 });
-				wink.fx.setTransformPart($('x'), 2, { type: "translate", x: 0, y: width/2, z: -height/2 });
-				wink.fx.applyComposedTransform($('x'));
+				wink.fx.initComposedTransform(wink.byId('x'));
+				wink.fx.setTransformPart(wink.byId('x'), 1, { type: "rotate", x: 1, y: 0, z: 0, angle: 90 });
+				wink.fx.setTransformPart(wink.byId('x'), 2, { type: "translate", x: 0, y: width/2, z: -height/2 });
+				wink.fx.applyComposedTransform(wink.byId('x'));
 				
-				wink.fx.initComposedTransform($('z'));
-				wink.fx.setTransformPart($('z'), 1, { type: "rotate", x: 0, y: 1, z: 0, angle: 90 });
-				wink.fx.setTransformPart($('z'), 2, { type: "translate", x: width/2, y: 0, z: 120 });
-				wink.fx.applyComposedTransform($('z'));
+				wink.fx.initComposedTransform(wink.byId('z'));
+				wink.fx.setTransformPart(wink.byId('z'), 1, { type: "rotate", x: 0, y: 1, z: 0, angle: 90 });
+				wink.fx.setTransformPart(wink.byId('z'), 2, { type: "translate", x: width/2, y: 0, z: 120 });
+				wink.fx.applyComposedTransform(wink.byId('z'));
 				
-				wink.fx.initComposedTransform($('device'));
-				wink.fx.setTransformPart($('device'), 1, { type: "translate", x: 0, y: 0, z: 0.1 });
-				wink.fx.setTransformPart($('device'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 90 });
-				wink.fx.applyComposedTransform($('device'));
+				wink.fx.initComposedTransform(wink.byId('device'));
+				wink.fx.setTransformPart(wink.byId('device'), 1, { type: "translate", x: 0, y: 0, z: 0.1 });
+				wink.fx.setTransformPart(wink.byId('device'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 90 });
+				wink.fx.applyComposedTransform(wink.byId('device'));
 				
-				wink.fx.initComposedTransform($('backface'));
-				wink.fx.setTransformPart($('backface'), 1, { type: "translate", x: 0, y: 0, z: -0.1 });
-				wink.fx.setTransformPart($('backface'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 270 });
-				wink.fx.applyComposedTransform($('backface'));
+				wink.fx.initComposedTransform(wink.byId('backface'));
+				wink.fx.setTransformPart(wink.byId('backface'), 1, { type: "translate", x: 0, y: 0, z: -0.1 });
+				wink.fx.setTransformPart(wink.byId('backface'), 2, { type: "rotate", x: 1, y: 0, z: 0, angle: 270 });
+				wink.fx.applyComposedTransform(wink.byId('backface'));
 			}
 			
 			rotateContainer = function()
 			{
 				rotation += 181;
 				
-				wink.fx.applyTransformTransition($('container'), "4s", "0ms", "linear");
+				wink.fx.applyTransformTransition(wink.byId('container'), "4s", "0ms", "linear");
 				
-				wink.fx.initComposedTransform($('container'));
-				wink.fx.setTransformPart($('container'), 1, { type: "rotate", x: 0, y: 1, z: 0, angle: rotation});
-				wink.fx.applyComposedTransform($('container'));
+				wink.fx.initComposedTransform(wink.byId('container'));
+				wink.fx.setTransformPart(wink.byId('container'), 1, { type: "rotate", x: 0, y: 1, z: 0, angle: rotation});
+				wink.fx.applyComposedTransform(wink.byId('container'));
 				
-				wink.fx.onTransitionEnd($('container'), rotateContainer);
+				wink.fx.onTransitionEnd(wink.byId('container'), rotateContainer);
 			}
 		</script>
 	</head>

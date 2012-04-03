@@ -87,7 +87,7 @@
 			init = function()
 			{
 				share = new wink.plugins.SharingWheel(properties);
-				$('wheel').appendChild(share.getDomNode());
+				wink.byId('wheel').appendChild(share.getDomNode());
 				
 				wink.subscribe('/share/events/select', {method: 'hideShare'});	
 			}
@@ -96,23 +96,23 @@
 			{
 				wink.layer.show();
 				
-				$('wheel').style.left = (window.innerWidth/2 - 100) + 'px';
-				$('wheel').style.top = (window.innerHeight/2 - 100) + 'px'
+				wink.byId('wheel').style.left = (window.innerWidth/2 - 100) + 'px';
+				wink.byId('wheel').style.top = (window.innerHeight/2 - 100) + 'px'
 				
-				$('wheel').style.visibility = 'visible';
+				wink.byId('wheel').style.visibility = 'visible';
 				
-				wink.fx.fadeIn($('wheel'), {duration: 500});
+				wink.fx.fadeIn(wink.byId('wheel'), {duration: 500});
 			}
 			
 			hideShare = function()
 			{
-				wink.fx.fadeOut($('wheel'), {duration: 500, onEnd: {method: 'onHideEnd'}});
+				wink.fx.fadeOut(wink.byId('wheel'), {duration: 500, onEnd: {method: 'onHideEnd'}});
 				wink.layer.hide();
 			}
 				
 			onHideEnd = function()
 			{
-				$('wheel').style.visibility = 'hidden';
+				wink.byId('wheel').style.visibility = 'hidden';
 			}
 			
 		</script>
