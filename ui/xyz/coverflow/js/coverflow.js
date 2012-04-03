@@ -634,12 +634,14 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			
 			if (this.handleGesture)
 			{
-				this._gestureNode.listenToGesture(
+				wink.ux.gesture.listenTo(
+					this._gestureNode,
 					"instant_rotation", 
 					{ context: this, method: "_handleRotation", arguments: null }, 
 					{ preventDefault: true }
 				);
-				this._gestureNode.listenToGesture(
+				wink.ux.gesture.listenTo(
+					this._gestureNode,
 					"gesture_end", 
 					{ context: this, method: "_handleGestureEnd", arguments: null }, 
 					{ preventDefault: true }
@@ -760,7 +762,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 				
 				var position = this._currentPosition;
 				var lastPoint = publishedInfos.movement.pointStatement[publishedInfos.movement.pointStatement.length - 1];
-				var absPos = this._domNode.getPosition(null, true);
+				var absPos = wink.getPosition(this._domNode, null, true);
 				
 				if (this._displayMode)
 				{

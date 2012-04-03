@@ -190,20 +190,20 @@
 				duration = ipad ? 120000 : 80000;
 				delayNext = ipad ? 5000 : 5000;
 
-				$('container').style["-webkit-perspective"] = 400;
-				$('container').style["-webkit-transform-style"] = 'preserve-3d';
+				wink.byId('container').style["-webkit-perspective"] = 400;
+				wink.byId('container').style["-webkit-transform-style"] = 'preserve-3d';
 
-				nodeList = [ $('page1'), $('page2'), $('page3'), $('page4'), $('page5'), $('page6'), $('page7'), $('page8'), $('page9') ];
+				nodeList = [ wink.byId('page1'), wink.byId('page2'), wink.byId('page3'), wink.byId('page4'), wink.byId('page5'), wink.byId('page6'), wink.byId('page7'), wink.byId('page8'), wink.byId('page9') ];
 
 				for (var i = 0; i < nodeList.length; i++) {
 					setFrontPosition(nodeList[i]);
 					nodeList[i].style.display = "block";
 				}
-				transformer.transform({ node: $('back') }, [ 
+				transformer.transform({ node: wink.byId('back') }, [ 
 					{ type: "translate", x: 0, y: 0, z: 200 },
 					{ type: "scale", x: 0.5, y: 0.5, z: 1 }
 				]);
-				bringToBack($('page1'), 0);
+				bringToBack(wink.byId('page1'), 0);
 			};
 		</script>
 	</head>

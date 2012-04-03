@@ -69,7 +69,7 @@
 				
 				audioPlayer = new wink.mm.AudioPlayer(properties);
 	
-				$('audio').appendChild(audioPlayer.getDomNode());
+				wink.byId('audio').appendChild(audioPlayer.getDomNode());
 			}
 
 			forward = function(seconds)

@@ -96,20 +96,20 @@
 			init = function()
 			{
 				flipPage = new wink.ui.layout.FlipPage(flipPageProperties);
-				$('view').appendChild(flipPage.getDomNode());
+				wink.byId('view').appendChild(flipPage.getDomNode());
 
 				var headerHeight = 55;
 				var footerHeight = 45;
 				
 				var heightRemains = wink.ux.window.height - headerHeight - footerHeight;
 
-				$('wrapper').style.height = heightRemains + "px";
+				wink.byId('wrapper').style.height = heightRemains + "px";
 
 				scroller = new wink.ui.layout.Scroller(scrollerProperties);
 
 				// Reconnect the touch events with the flippage
-				wink.ux.touch.addListener($('view'), "start", { context: flipPage, method: "_touchStart", arguments: null }, { preventDefault: false });
-				wink.ux.touch.addListener($('view'), "end", { context: flipPage, method: "_touchEnd", arguments: null }, { preventDefault: false });
+				wink.ux.touch.addListener(wink.byId('view'), "start", { context: flipPage, method: "_touchStart", arguments: null }, { preventDefault: false });
+				wink.ux.touch.addListener(wink.byId('view'), "end", { context: flipPage, method: "_touchEnd", arguments: null }, { preventDefault: false });
 			}
 
 			previous = function()

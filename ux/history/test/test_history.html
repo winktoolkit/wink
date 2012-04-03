@@ -49,18 +49,18 @@
 
 			back = function(params)
 			{
-				$('console2').innerHTML += " back";
+				wink.byId('console2').innerHTML += " back";
 			}
 
 			forward = function(params)
 			{
-				$('console2').innerHTML += " forward";
+				wink.byId('console2').innerHTML += " forward";
 			}
 			
 			push = function()
 			{
 				wink.ux.history.push('test', 1);
-				$('console1').innerHTML += " push";
+				wink.byId('console1').innerHTML += " push";
 			}
 		</script>
 	</head>

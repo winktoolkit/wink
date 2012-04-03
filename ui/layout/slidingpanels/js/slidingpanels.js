@@ -609,7 +609,7 @@ define(['../../../../_amd/core'], function(wink)
 					if (t) {
 						clearTimeout(t);
 					}
-					this._domNode.translate(x, null);
+					wink.fx.translate(this._domNode, x, null);
 				}, this)	
 			};
 			

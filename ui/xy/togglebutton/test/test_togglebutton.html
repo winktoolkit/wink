@@ -66,8 +66,8 @@
 				toggle1 = new wink.ui.xy.ToggleButton({cssClass:"onoff1", position: 'left'});
 				toggle2 = new wink.ui.xy.ToggleButton({cssClass:"onoff2", position: 'right'});
 
-				$('toggle1').appendChild(toggle1.getDomNode());
-				$('toggle2').appendChild(toggle2.getDomNode());
+				wink.byId('toggle1').appendChild(toggle1.getDomNode());
+				wink.byId('toggle2').appendChild(toggle2.getDomNode());
 				
 				wink.subscribe('/togglebutton/events/switch', {method: "onswitch"});
 			};					
@@ -101,7 +101,7 @@
 					}
 				}
 				
-				$(id).innerHTML = value;
+				wink.byId(id).innerHTML = value;
 			};
 		</script>
 	</head>

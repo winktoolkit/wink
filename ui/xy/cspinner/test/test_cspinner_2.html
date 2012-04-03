@@ -91,12 +91,12 @@
 			{
 				if (spinner) {
 					spinner.toggle();
-					$('block_sp').removeChild(spinner.getDomNode());
+					wink.byId('block_sp').removeChild(spinner.getDomNode());
 					spinner = null;
 				}
 				spinner = new wink.ui.xy.CSpinner(props);
 				var node = spinner.getDomNode();
-				$('block_sp').appendChild(node);
+				wink.byId('block_sp').appendChild(node);
 				//spinner.toggle();
 				wink.addClass(node, "spinner_canvas");
 				node.onclick = function() {
@@ -107,7 +107,7 @@
 			var updateSpinner = function()
 			{
 				for (p in params) {
-					var v = $(p).value;
+					var v = wink.byId(p).value;
 					var v2 = parseFloat(v);
 					if (isNaN(v2)) {
 						v2 = v;
@@ -120,10 +120,10 @@
 			var initForm = function()
 			{
 				for (p in params) {
-					$(p).value = params[p];
-					$(p).onchange = updateSpinner;
-					$(p).onsubmit = function() {
-						$(p).blur();
+					wink.byId(p).value = params[p];
+					wink.byId(p).onchange = updateSpinner;
+					wink.byId(p).onsubmit = function() {
+						wink.byId(p).blur();
 					}
 				}
 			};

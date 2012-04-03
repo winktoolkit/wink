@@ -41,7 +41,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * 
 	 * trace = new wink.ui.xy.Trace(properties);
 	 * 
-	 * $('output').appendChild(trace.getDomNode());
+	 * wink.byId('output').appendChild(trace.getDomNode());
 	 * 
 	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
@@ -279,7 +279,7 @@ define(['../../../../_amd/core'], function(wink)
 				_this._mvtIndex = _this._movements.length - 1;
 			}
 			var lastMvt = _this._movements[_this._mvtIndex];
-			var pos = _this._domNode.getPosition(null, true);
+			var pos = wink.getPosition(_this._domNode, null, true);
 			lastMvt.push({ x: (uxEvent.x - pos.x), y: (uxEvent.y - pos.y), t: uxEvent.timestamp, absx: uxEvent.x, absy: uxEvent.y });
 		},
 		
@@ -326,7 +326,7 @@ define(['../../../../_amd/core'], function(wink)
 			var _this = this,
 				dn = _this._domNode = document.createElement('canvas');
 			
-			dn.translate(0, 0); 
+			wink.fx.translate(dn, 0, 0); 
 			
 			_this._ctx = dn.getContext('2d');
 			

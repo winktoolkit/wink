@@ -47,7 +47,7 @@ define(['../../../_amd/core'], function(wink)
 	 * 
 	 * @example
 	 * 
-	 * var node = $("nodeId");
+	 * var node = wink.byId("nodeId");
 	 * wink.ux.gesture.listenTo(node, "two_digits_click", { context: window, method: "twoDigitsClick" }, { preventDefault: true });
 	 * 
 	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4

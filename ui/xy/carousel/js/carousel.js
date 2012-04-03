@@ -74,7 +74,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * 
 	 * carousel = new wink.ui.xy.Carousel(properties);
 	 * 
-	 * $('output').appendChild(carousel.getDomNode());
+	 * wink.byId('output').appendChild(carousel.getDomNode());
 	 * 
 	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
@@ -315,10 +315,10 @@ define(['../../../../_amd/core'], function(wink)
 			
 			if ( this.display == this._HORIZONTAL_POSITION )
 			{
-				this._itemsNode.translate((this.firstItemIndex-index)*this._iD, 0);
+				wink.fx.translate(this._itemsNode, (this.firstItemIndex-index)*this._iD, 0);
 			} else
 			{
-				this._itemsNode.translate(0, (this.firstItemIndex-index)*this._iD);
+				wink.fx.translate(this._itemsNode, 0, (this.firstItemIndex-index)*this._iD);
 			}
 				
 			this._currentItemIndex = index;
@@ -434,10 +434,10 @@ define(['../../../../_amd/core'], function(wink)
 			
 			if ( this.display == this._HORIZONTAL_POSITION )
 			{
-				this._itemsNode.translate(this.position, 0);
+				wink.fx.translate(this._itemsNode, this.position, 0);
 			} else
 			{
-				this._itemsNode.translate(0, this.position);
+				wink.fx.translate(this._itemsNode, 0, this.position);
 			}
 		},
 		
@@ -540,10 +540,10 @@ define(['../../../../_amd/core'], function(wink)
 				
 				if ( this.display == this._HORIZONTAL_POSITION )
 				{
-					this._itemsNode.translate((this.firstItemIndex-minItem)*this._iD, 0);
+					wink.fx.translate(this._itemsNode, (this.firstItemIndex-minItem)*this._iD, 0);
 				} else
 				{
-					this._itemsNode.translate(0, (this.firstItemIndex-minItem)*this._iD);
+					wink.fx.translate(this._itemsNode, 0, (this.firstItemIndex-minItem)*this._iD);
 				}
 			} else
 			{
@@ -591,10 +591,10 @@ define(['../../../../_amd/core'], function(wink)
 				
 				if ( this.display == this._HORIZONTAL_POSITION )
 				{
-					this._itemsList[i].getDomNode().translate(this._itemsList[i].position, 0);
+					wink.fx.translate(this._itemsList[i].getDomNode(), this._itemsList[i].position, 0);
 				} else
 				{
-					this._itemsList[i].getDomNode().translate((this.itemsAlign == this._CENTER_POSITION)?((this.containerWidth - this.itemsWidth)/2):0, this._itemsList[i].position);
+					wink.fx.translate(this._itemsList[i].getDomNode(), (this.itemsAlign == this._CENTER_POSITION)?((this.containerWidth - this.itemsWidth)/2):0, this._itemsList[i].position);
 				}
 			}
 		},
@@ -621,19 +621,19 @@ define(['../../../../_amd/core'], function(wink)
 					{
 						if ( this.display == this._HORIZONTAL_POSITION )
 						{
-							this._itemsList[i].getDomNode().translate((this._itemsList[i].index*this._iD + (this._cD-this._iD)/2), 0);
+							wink.fx.translate(this._itemsList[i].getDomNode(), (this._itemsList[i].index*this._iD + (this._cD-this._iD)/2), 0);
 						} else
 						{
-							this._itemsList[i].getDomNode().translate((this.containerWidth - this.itemsWidth)/2, (this._itemsList[i].index*this._iD + (this._cD-this._iD)/2));
+							wink.fx.translate(this._itemsList[i].getDomNode(), (this.containerWidth - this.itemsWidth)/2, (this._itemsList[i].index*this._iD + (this._cD-this._iD)/2));
 						}
 					} else
 					{
 						if ( this.display == this._HORIZONTAL_POSITION )
 						{
-							this._itemsList[i].getDomNode().translate(this._itemsList[i].index*this._iD, 0);
+							wink.fx.translate(this._itemsList[i].getDomNode(), this._itemsList[i].index*this._iD, 0);
 						} else
 						{
-							this._itemsList[i].getDomNode().translate(0, this._itemsList[i].index*this._iD);
+							wink.fx.translate(this._itemsList[i].getDomNode(), 0, this._itemsList[i].index*this._iD);
 						}
 					} 
 				}

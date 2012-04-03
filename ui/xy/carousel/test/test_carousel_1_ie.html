@@ -138,9 +138,9 @@
 				carousel2 = new wink.ui.xy.Carousel(properties2);
 				carousel3 = new wink.ui.xy.Carousel(properties3);
 
-				$('c1').appendChild(carousel1.getDomNode());
-				$('c2').appendChild(carousel2.getDomNode());
-				$('c3').appendChild(carousel3.getDomNode());
+				wink.byId('c1').appendChild(carousel1.getDomNode());
+				wink.byId('c2').appendChild(carousel2.getDomNode());
+				wink.byId('c3').appendChild(carousel3.getDomNode());
 
 				wink.subscribe('/carousel/events/switch', {method: 'moveCarousel3'});			
 			}

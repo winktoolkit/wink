@@ -92,7 +92,7 @@
 				wink.error.logLevel = 1;
 
 				var heightRemains = wink.ux.window.height - 20;
-				$('wrapper').style.height = heightRemains + "px";
+				wink.byId('wrapper').style.height = heightRemains + "px";
 				
 				var properties = {
 					target: "scrollContent",
@@ -102,7 +102,7 @@
 				scroller = new wink.ui.layout.Scroller(properties);
 				
 				search = new wink.ux.Search({
-					textNode: $("scrollContent"),
+					textNode: wink.byId("scrollContent"),
 					resultClassName: "over",
 					resultSelectClassName: "over_selected"
 				});
@@ -111,7 +111,7 @@
 			processSearch = function()
 			{
 				window.scrollTo(0, 0);
-				var input = $('search');
+				var input = wink.byId('search');
 
 				if ( input.value == '' )return;
 				
@@ -119,35 +119,35 @@
 
 				if(search.totalResults > 0)
 				{
-					$("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
-					$("previous").style.display = "inline";
-					$("next").style.display = "inline";
+					wink.byId("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
+					wink.byId("previous").style.display = "inline";
+					wink.byId("next").style.display = "inline";
 					scrollToResult(firstResult);
 				} else {
-					$("nbResults").innerHTML = "no result";
-					$("previous").style.display = "none";
-					$("next").style.display = "none";
+					wink.byId("nbResults").innerHTML = "no result";
+					wink.byId("previous").style.display = "none";
+					wink.byId("next").style.display = "none";
 				}
 			};
 			
 			previousResult = function()
 			{
 				var newResult = search.previous();
-				$("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
+				wink.byId("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
 				scrollToResult(newResult);
 			};
 			
 			nextResult = function()
 			{
 				var newResult = search.next();
-				$("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
+				wink.byId("nbResults").innerHTML = search.currentResult+"/"+search.totalResults;
 				scrollToResult(newResult);
 			};
 			
 			scrollToResult = function(result)
 			{
-				var newPos = -result.getTopPosition($('scrollContent')) + 50;
-				var limit = -($('scrollContent').offsetHeight - $('wrapper').offsetHeight);
+				var newPos = -wink.getTopPosition(result, wink.byId('scrollContent')) + 50;
+				var limit = -(wink.byId('scrollContent').offsetHeight - wink.byId('wrapper').offsetHeight);
 				var p = Math.min(Math.max(newPos, limit), 0);
 				scroller.scrollTo(null, p, 1);
 			};

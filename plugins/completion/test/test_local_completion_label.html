@@ -67,7 +67,7 @@
         {
             var cityProperties = 
             {
-                "input": $('myInputCity'),
+                "input": wink.byId('myInputCity'),
                 "managers": {                
                     "data": {
                         "name": "LocalDataManager",
@@ -142,7 +142,7 @@
         
         <div class="w_bloc" style="text-align: center">
          <div>Choose you city :</div>
-         <input id="myInputCity" onfocus="window.scrollTo(0, this.getTopPosition());" name="city" autocomplete="off" autocorrect="off" type="text" style="height:36px;" class="w_input w_border w_radius"/>
+         <input id="myInputCity" onfocus="window.scrollTo(0, wink.getTopPosition(this));" name="city" autocomplete="off" autocorrect="off" type="text" style="height:36px;" class="w_input w_border w_radius"/>
          <input type="submit" class="w_button w_border w_radius w_bg_dark" value="ok" onclick="" />
         </div>
     </body>

@@ -177,7 +177,7 @@
 						var t = i % texts.length;
 						li.innerHTML = texts[t];
 						this.items.push(li);
-						$('content').appendChild(li);
+						wink.byId('content').appendChild(li);
 						wink.addClass(li, "w_list_item w_border_bottom w_bg_light");
 					}
 				}
@@ -189,11 +189,11 @@
 
 				wink.error.logLevel = 1;
 
-				scrollerHelper.buildContent($('scrollContent'));
+				scrollerHelper.buildContent(wink.byId('scrollContent'));
 
 				var headerHeight = 55;
 				var heightRemains = wink.ux.window.height - headerHeight;
-				$('wrapper').style.height = heightRemains + "px";
+				wink.byId('wrapper').style.height = heightRemains + "px";
 				
 				var properties = 
 				{

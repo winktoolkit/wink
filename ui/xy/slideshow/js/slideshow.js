@@ -101,7 +101,7 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 	 * 
 	 * var slideshow = new wink.ui.xy.Slideshow(properties);
 	 * 
-	 * $('container').appendChild(slideshow.getDomNode());
+	 * wink.byId('container').appendChild(slideshow.getDomNode());
 	 * 
 	 * @requires wink.ux.MovementTracker
 	 * 
@@ -1568,7 +1568,7 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 			this._canvasNode.width = this._view.w;
 			this._ctx = this._canvasNode.getContext('2d');
 			this._domNode.appendChild(this._canvasNode);
-			this._canvasNode.translate(0, 0);
+			wink.fx.translate(this._canvasNode, 0, 0);
 			
 			wink.addClass(this._domNode, 'ss_container');
 			wink.addClass(this._canvasNode, 'ss_canvas');

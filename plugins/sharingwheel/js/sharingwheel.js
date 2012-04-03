@@ -37,7 +37,7 @@ define(['../../../_amd/core', '../../../fx/_xyz/js/3dfx', '../../../math/_geomet
 	 * 
 	 * share = new wink.plugins.SharingWheel(properties);
 	 * 
-	 * $('output').appendChild(share.getDomNode());
+	 * wink.byId('output').appendChild(share.getDomNode());
 	 * 
 	 * @requires wink.fx (3dfx)
 	 * @requires wink.math (geometric)
@@ -156,7 +156,7 @@ define(['../../../_amd/core', '../../../fx/_xyz/js/3dfx', '../../../math/_geomet
 				}
 				wink.fx.apply(petal, petalStyle);
 
-				petal.rotate((i*( 360 / this._nbPetals)) + (180 / this._nbPetals));
+				wink.fx.rotate(petal, (i*( 360 / this._nbPetals)) + (180 / this._nbPetals));
 				
 				var content = document.createElement('div');
 				content.className = 'sh_content';
@@ -206,15 +206,15 @@ define(['../../../_amd/core', '../../../fx/_xyz/js/3dfx', '../../../math/_geomet
 		 */
 		_touchStart: function(e)
 		{
-			this._originX = (this._petalsNode.getLeftPosition(null, true)) + (this.height/2);
-			this._originY = (this._petalsNode.getTopPosition(null, true)) + (this.height/2);
+			this._originX = (wink.getLeftPosition(this._petalsNode, null, true)) + (this.height/2);
+			this._originY = (wink.getTopPosition(this._petalsNode, null, true)) + (this.height/2);
 			
 			this._startX = e.x;
 			this._startY = e.y;
 			
 			this._slope = (this._originY - this._startY) / (this._startX - this._originX);
 			
-			this._petalsNode.rotate(this._originAngle);
+			wink.fx.rotate(this._petalsNode, this._originAngle);
 		},
 		
 		/**
@@ -245,7 +245,7 @@ define(['../../../_amd/core', '../../../fx/_xyz/js/3dfx', '../../../math/_geomet
 				this._currentAngle =  -this._currentAngle;
 			}
 
-			this._petalsNode.rotate(this._originAngle + this._currentAngle);
+			wink.fx.rotate(this._petalsNode, this._originAngle + this._currentAngle);
 			
 			this._selectPetal();
 		},

@@ -65,7 +65,7 @@
 				wink.subscribe('/slidingpanels/events/slidestart', slidestart);
 				wink.subscribe('/slidingpanels/events/slideend', slideend);
 				
-				$('container').appendChild(slidingPanels.getDomNode());
+				wink.byId('container').appendChild(slidingPanels.getDomNode());
 			};
 			
 			var slidestart = function(params)
@@ -110,13 +110,13 @@
 				switch (params.id)
 				{
 					case 'page0':
-						$('back').style.visibility = 'hidden';
+						wink.byId('back').style.visibility = 'hidden';
 						break;
 					default:
-						$('back').style.visibility = 'visible';
+						wink.byId('back').style.visibility = 'visible';
 				}
 				
-				$('title').innerHTML = 'Dynamic slidingpanels - ' + params.id;
+				wink.byId('title').innerHTML = 'Dynamic slidingpanels - ' + params.id;
 			};
 			
 			var addPage = function()
@@ -153,9 +153,9 @@
 				
 				content = lines.join("");
 				page.innerHTML = content;
-				$('hidden_pages').appendChild(page);
+				wink.byId('hidden_pages').appendChild(page);
 				slidingPanels.add(pageId);
-				$('hidden_pages').removeChild(page);
+				wink.byId('hidden_pages').removeChild(page);
 				
 				pageCount++;
 			};

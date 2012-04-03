@@ -21,7 +21,7 @@ doh.register("wink.ux.touch",
 	 		{
 	 			clearTimeout(doh.timer);
 	 			
-	 			$('test').style.backgroundColor = 'red';
+	 			wink.byId('test').style.backgroundColor = 'red';
 	 			
 	 			if ( !wink.isInteger(params.x) || !wink.isInteger(params.y) || wink.isUndefined(params.target) )
 	 			{
@@ -31,7 +31,7 @@ doh.register("wink.ux.touch",
 	 		
 	 		handleTouchEnd: function(params)
 	 		{
-	 			$('test').style.backgroundColor = 'yellow';
+	 			wink.byId('test').style.backgroundColor = 'yellow';
 	 			
 	 			if ( !wink.isInteger(params.x) || !wink.isInteger(params.y) || wink.isUndefined(params.target) )
 	 			{
@@ -45,16 +45,16 @@ doh.register("wink.ux.touch",
 			{
 	 			this.d = new doh.Deferred();
 	 			
-	 			wink.ux.touch.addListener($('test'), "start", { context: this, method: "handleTouchStart", arguments: null }, { preventDefault: true });
-	 			wink.ux.touch.addListener($('test'), "end", { context: this, method: "handleTouchEnd", arguments: null }, { preventDefault: true });
+	 			wink.ux.touch.addListener(wink.byId('test'), "start", { context: this, method: "handleTouchStart", arguments: null }, { preventDefault: true });
+	 			wink.ux.touch.addListener(wink.byId('test'), "end", { context: this, method: "handleTouchEnd", arguments: null }, { preventDefault: true });
 	 			
 	 			return this.d;
 			},
 			
 			tearDown: function()
 	 		{
-				wink.ux.touch.removeListener($('test'), "start", { context: this, method: "handleTouchStart", arguments: null });
-	 			wink.ux.touch.removeListener($('test'), "end", { context: this, method: "handleTouchEnd", arguments: null });
+				wink.ux.touch.removeListener(wink.byId('test'), "start", { context: this, method: "handleTouchStart", arguments: null });
+	 			wink.ux.touch.removeListener(wink.byId('test'), "end", { context: this, method: "handleTouchEnd", arguments: null });
 	 		}
 	 	},
 	 	
@@ -92,9 +92,9 @@ doh.register("wink.ux.touch",
 	 			point.style.position = 'absolute';
 	 			
 	 			point.style.left = params.x + 'px';
-	 			point.style.top = (params.y - $('sandbox').winkGetTopPosition()) + 'px';
+	 			point.style.top = (params.y - wink.getTopPosition(wink.byId('sandbox'))) + 'px';
 	 			
-	 			$('sandbox').appendChild(point);
+	 			wink.byId('sandbox').appendChild(point);
 	 			
 	 			this.points.push(point);
 	 		},
@@ -108,22 +108,22 @@ doh.register("wink.ux.touch",
 			{
 	 			this.d = new doh.Deferred();
 	 			
-	 			wink.ux.touch.addListener($('sandbox'), "start", { context: this, method: "handleTouchStart", arguments: null }, { preventDefault: true });
-	 			wink.ux.touch.addListener($('sandbox'), "move", { context: this, method: "handleTouchMove", arguments: null }, { preventDefault: true });
-	 			wink.ux.touch.addListener($('sandbox'), "end", { context: this, method: "handleTouchEnd", arguments: null }, { preventDefault: true });
+	 			wink.ux.touch.addListener(wink.byId('sandbox'), "start", { context: this, method: "handleTouchStart", arguments: null }, { preventDefault: true });
+	 			wink.ux.touch.addListener(wink.byId('sandbox'), "move", { context: this, method: "handleTouchMove", arguments: null }, { preventDefault: true });
+	 			wink.ux.touch.addListener(wink.byId('sandbox'), "end", { context: this, method: "handleTouchEnd", arguments: null }, { preventDefault: true });
 	 			
 	 			return this.d;
 			},
 			
 			tearDown: function()
 	 		{
-				wink.ux.touch.removeListener($('sandbox'), "start", { context: this, method: "handleTouchStart", arguments: null });
-				wink.ux.touch.removeListener($('sandbox'), "move", { context: this, method: "handleTouchMove", arguments: null });
-	 			wink.ux.touch.removeListener($('sandbox'), "end", { context: this, method: "handleTouchEnd", arguments: null });
+				wink.ux.touch.removeListener(wink.byId('sandbox'), "start", { context: this, method: "handleTouchStart", arguments: null });
+				wink.ux.touch.removeListener(wink.byId('sandbox'), "move", { context: this, method: "handleTouchMove", arguments: null });
+	 			wink.ux.touch.removeListener(wink.byId('sandbox'), "end", { context: this, method: "handleTouchEnd", arguments: null });
 
 	 			for ( var i=0; i<this.points.length; i++ )
 	 			{
-	 				$('sandbox').removeChild(this.points[i]);
+	 				wink.byId('sandbox').removeChild(this.points[i]);
 	 			}
 	 		}
 	 	},
@@ -137,8 +137,8 @@ doh.register("wink.ux.touch",
 	 		{
 	 			alert("After this message disappears, you will have 5 seconds to try to rotate the yellow square");
 	 			
-	 			$('test').style.height = '200px';
-	 			$('test').style.width = '200px';
+	 			wink.byId('test').style.height = '200px';
+	 			wink.byId('test').style.width = '200px';
 	 		},
 	 		
 	 		handleGestureStart: function()
@@ -153,7 +153,7 @@ doh.register("wink.ux.touch",
 	 				this.d.errback(new Error("Event: wrong rotation parameters"));
 	 			}
 	 			
-	 			$('test').winkRotate(params.srcEvent.rotation);
+	 			wink.fx.rotate(wink.byId('test'), params.srcEvent.rotation);
 	 		},
 	 		
 	 		handleGestureEnd: function(params)
@@ -165,20 +165,20 @@ doh.register("wink.ux.touch",
 			{
 	 			this.d = new doh.Deferred();
 	 			
-	 			wink.ux.touch.addListener($('test'), "gesturestart", { context: this, method: "handleGestureStart", arguments: null }, { preventDefault: true });
-	 			wink.ux.touch.addListener($('test'), "gesturechange", { context: this, method: "handleGestureChange", arguments: null }, { preventDefault: true });
-	 			wink.ux.touch.addListener($('test'), "gestureend", { context: this, method: "handleGestureEnd", arguments: null }, { preventDefault: true });
+	 			wink.ux.touch.addListener(wink.byId('test'), "gesturestart", { context: this, method: "handleGestureStart", arguments: null }, { preventDefault: true });
+	 			wink.ux.touch.addListener(wink.byId('test'), "gesturechange", { context: this, method: "handleGestureChange", arguments: null }, { preventDefault: true });
+	 			wink.ux.touch.addListener(wink.byId('test'), "gestureend", { context: this, method: "handleGestureEnd", arguments: null }, { preventDefault: true });
 	 			
 	 			return this.d;
 			},
 			
 			tearDown: function()
 	 		{
-				wink.ux.touch.removeListener($('test'), "gesturestart", { context: this, method: "handleGestureStart", arguments: null });
-	 			wink.ux.touch.removeListener($('test'), "gesturechange", { context: this, method: "handleGestureChange", arguments: null });
-	 			wink.ux.touch.removeListener($('test'), "gestureend", { context: this, method: "handleGestureEnd", arguments: null });
+				wink.ux.touch.removeListener(wink.byId('test'), "gesturestart", { context: this, method: "handleGestureStart", arguments: null });
+	 			wink.ux.touch.removeListener(wink.byId('test'), "gesturechange", { context: this, method: "handleGestureChange", arguments: null });
+	 			wink.ux.touch.removeListener(wink.byId('test'), "gestureend", { context: this, method: "handleGestureEnd", arguments: null });
 	 			
-	 			wink.fx.apply($('test'), {
+	 			wink.fx.apply(wink.byId('test'), {
 	 				height: '50px',
 	 				width: '50px',
 	 				transform: ''

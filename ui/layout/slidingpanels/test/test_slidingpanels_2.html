@@ -65,7 +65,7 @@
 				wink.subscribe('/slidingpanels/events/slidestart', {method: 'changeTitle'});
 				//wink.subscribe('/slidingpanels/events/slideend', {method: 'changeTitle'});
 				
-				$('container').appendChild(slidingPanels.getDomNode());
+				wink.byId('container').appendChild(slidingPanels.getDomNode());
 			}
 
 			slide = function(id)
@@ -83,13 +83,13 @@
 				switch (params.id)
 				{
 					case 'page1':
-						$('back').style.visibility = 'hidden';
+						wink.byId('back').style.visibility = 'hidden';
 						break;
 					default:
-						$('back').style.visibility = 'visible';
+						wink.byId('back').style.visibility = 'visible';
 				}
 				
-				$('title').innerHTML = 'Title: ' + params.id;
+				wink.byId('title').innerHTML = 'Title: ' + params.id;
 			}	
 		</script>
 	</head>

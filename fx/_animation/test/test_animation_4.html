@@ -163,8 +163,8 @@
 						node.style.opacity = 1;
 						node2.style.opacity = 1;
 							
-						var node1 = (node == $('page1')) ? $('page2') : $('page1');
-						var node2 = (node == $('page1')) ? $('page1') : $('page2');
+						var node1 = (node == wink.byId('page1')) ? wink.byId('page2') : wink.byId('page1');
+						var node2 = (node == wink.byId('page1')) ? wink.byId('page1') : wink.byId('page2');
 						window.animStep1(node1, node2, rows, cols, delay);
 					}
 				};
@@ -173,16 +173,16 @@
 			};
 
 			var switchNode = function(node) {
-				var oneToTwo = (node == $('page1'));
-				$('page1').style.zIndex = oneToTwo ? 1 : 2;
-				$('page2').style.zIndex = oneToTwo ? 2 : 1;
+				var oneToTwo = (node == wink.byId('page1'));
+				wink.byId('page1').style.zIndex = oneToTwo ? 1 : 2;
+				wink.byId('page2').style.zIndex = oneToTwo ? 2 : 1;
 			};
 		
 			var init = function() {
 				window.scrollTo(0,0);
 
 				wink.error.logLevel = 1;
-				animStep1($('page1'), $('page2'), 6, 6, 1500);
+				animStep1(wink.byId('page1'), wink.byId('page2'), 6, 6, 1500);
 			};
 		</script>
 	</head>

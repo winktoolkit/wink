@@ -145,7 +145,7 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 		 */
 		shiftCloseNode: function(x, y)
 		{
-			this._modalCloseNode.translate(x, y, true);
+			wink.fx.translate(this._modalCloseNode, x, y, true);
 		},
 		
 		/**
@@ -222,8 +222,8 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 				left: "0px"
 			});
 			
-			this._modalCloseNode.translate(-20, -20, true);
-			this._modalNode.translate(0, 0, true); // WORKAROUND - IPhone OS2
+			wink.fx.translate(this._modalCloseNode, -20, -20, true);
+			wink.fx.translate(this._modalNode, 0, 0, true); // WORKAROUND - IPhone OS2
 	
 			this._iconNode.appendChild(this._iconImgNode);
 			this._modalNode.appendChild(this._modalContentNode);
@@ -365,8 +365,8 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 		 */
 		_enlarge: function()
 		{
-			this._domNode.scale(1, 1);
-			this._domNode.translate(this.modalView.x, this.modalView.y);
+			wink.fx.scale(this._domNode, 1, 1);
+			wink.fx.translate(this._domNode, this.modalView.x, this.modalView.y);
 		},
 		/**
 		 * Iconize the modal window
@@ -378,7 +378,7 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 			this.iconView.refX			= -(this.modalView.sizeX / 2) + (this.iconView.sizeX / 2);
 			this.iconView.refY			= -(this.modalView.sizeX / 2) + (this.iconView.sizeX / 2);
 			
-			this._domNode.scale(this._scaleX, this._scaleY);
+			wink.fx.scale(this._domNode, this._scaleX, this._scaleY);
 			this._moveIcon(this.iconView.x, this.iconView.y);
 		},
 		/**
@@ -393,7 +393,7 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 			this.iconView.x = x;
 			this.iconView.y = y;
 	
-			this._domNode.translate(this.iconView.x + this.iconView.refX, this.iconView.y + this.iconView.refY);
+			wink.fx.translate(this._domNode, this.iconView.x + this.iconView.refX, this.iconView.y + this.iconView.refY);
 		},
 		/**
 		 * Order all layers on depth

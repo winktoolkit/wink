@@ -136,7 +136,7 @@
 						var div = document.createElement('div');
 
 						var s = sources[i % sources.length];
-						div.innerHTML = $(s).innerHTML;
+						div.innerHTML = wink.byId(s).innerHTML;
 						
 						div.style["margin"] = mg + "px " + mg + "px " + mg + "px " + mg + "px";
 						div.style["padding"] = pd + "px " + pd + "px " + pd + "px " + pd + "px";
@@ -166,10 +166,10 @@
 
 				wink.error.logLevel = 1;
 
-				scrollerHelper.buildContent($('scrollContent'));
+				scrollerHelper.buildContent(wink.byId('scrollContent'));
 
 				var heightRemains = wink.ux.window.height - headerHeight;
-				$('wrapper').style.height = heightRemains + "px";
+				wink.byId('wrapper').style.height = heightRemains + "px";
 				
 				var properties = {
 					target: "scrollContent",

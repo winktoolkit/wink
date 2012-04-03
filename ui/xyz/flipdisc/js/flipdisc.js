@@ -358,12 +358,14 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx', '../../../../fx/
 			wink.ux.touch.addListener(this._domNode, "start", { context: this, method: "_handleOneDigitStart" }, { preventDefault: true });
 			wink.ux.touch.addListener(this._domNode, "end", { context: this, method: "_handleOneDigitClick" });
 	
-			this._domNode.listenToGesture(
+			wink.ux.gesture.listenTo(
+				this._domNode,
 				"rotation", 
 				{ context: this, method: "_handleRotation" }, 
 				{ preventDefault: true }
 			);
-			this._domNode.listenToGesture(
+			wink.ux.gesture.listenTo(
+				this._domNode,
 				"gesture_end", 
 				{ context: this, method: "_handleGestureEnd" }, 
 				{ preventDefault: true }

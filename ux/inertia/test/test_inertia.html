@@ -44,12 +44,12 @@
 			var init = function() {
 				wink.error.logLevel = 1;
 				
-				var object = $("canvas");
+				var object = wink.byId("canvas");
 				var movementtracker = new wink.ux.MovementTracker({ target: object });
 				var inertia = new wink.ux.Inertia({ movementtracker: movementtracker });
 
 				drawer = {
-					_ctx: 				$('canvas').getContext('2d'),
+					_ctx: 				wink.byId('canvas').getContext('2d'),
 					_currentPoint: 		null,
 					_previousPoint: 	null,
 				
@@ -85,7 +85,7 @@
 						text += "durationY = " + movement.dty + "<br/>";
 						text += "speedX = " + wink.math.round(movement.speedX, 4) + ", ";
 						text += "speedY = " + wink.math.round(movement.speedY, 4) + "<br/>";
-						$("console").innerHTML = text;
+						wink.byId("console").innerHTML = text;
 					},
 					_drawShape: function(p1, p2)
 					{

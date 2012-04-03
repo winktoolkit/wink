@@ -43,7 +43,7 @@ define(['../../../_amd/core'], function(wink)
 	 *			endScrolling: { context: ctx, method: 'onScroll' }
 	 *		}
 	 *	}),
-	 *	content: $('scrollContent'),
+	 *	content: wink.byId('scrollContent'),
 	 *	waitText: 'Click here to load more',
 	 *	loadingText: 'Loading...',
 	 *	spinner: new wink.ui.xy.Spinner({ background: "light", size: 20 }),

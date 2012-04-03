@@ -167,7 +167,7 @@
 						var t = i % texts.length;
 						li.innerHTML = texts[t];
 						this.items.push(li);
-						$('list').appendChild(li);
+						wink.byId('list').appendChild(li);
 						
 						if ( i == this.nbItem -1)
 						{
@@ -181,7 +181,7 @@
 				
 				buildWikipediaContent: function(result)
 				{
-					$('scrollContent23').innerHTML = result.xhrObject.responseText;
+					wink.byId('scrollContent23').innerHTML = result.xhrObject.responseText;
 
 					resizer.refresh();
 					
@@ -215,8 +215,8 @@
 					var headerHeight = 55;
 					var heightRemains = wink.ux.window.height - headerHeight;
 					
-					$('wrapper13').style.height = heightRemains + "px";
-					$('wrapper23').style.height = heightRemains + "px";
+					wink.byId('wrapper13').style.height = heightRemains + "px";
+					wink.byId('wrapper23').style.height = heightRemains + "px";
 				},
 				
 				handleOrientationChange: function() 
@@ -237,7 +237,7 @@
 
 				wink.error.logLevel = 1;
 
-				scrollerHelper.buildListContent($('scrollContent13'));
+				scrollerHelper.buildListContent(wink.byId('scrollContent13'));
 				
 				xhr = new wink.Xhr();
 				xhr.sendData('./files/wikipedia.html', null, 'GET', {method: 'buildWikipediaContent', context: scrollerHelper}, null, null);

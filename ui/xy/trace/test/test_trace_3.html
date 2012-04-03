@@ -99,15 +99,15 @@
 				
 				var trace = new wink.ui.xy.Trace(
 				{
-					height: $('container').offsetHeight,
-					width: $('container').offsetWidth,
+					height: wink.byId('container').offsetHeight,
+					width: wink.byId('container').offsetWidth,
 					duration: 300,
 					linewidth: 7,
 					linestyle: '#ff5500',
 					fadeonend: true
 				});
 				
-				$('container').appendChild(trace.getDomNode());
+				wink.byId('container').appendChild(trace.getDomNode());
 				
 				gesturerecognizer = new wink.ux.GestureRecognizer(
 				{
@@ -130,7 +130,7 @@
 				
 				if ( currentQuestion == 2 )
 				{
-					$('result').innerHTML = "Question 1: " + answers[0] + "<br />" + "Question 2: " + answers[1];
+					wink.byId('result').innerHTML = "Question 1: " + answers[0] + "<br />" + "Question 2: " + answers[1];
 				}
 				
 				if ( currentQuestion == 3 )
@@ -138,9 +138,9 @@
 					return;
 				}
 				
-				$('question_' + currentQuestion).style.display = 'none';
+				wink.byId('question_' + currentQuestion).style.display = 'none';
 				currentQuestion++;
-				$('question_' + currentQuestion).style.display = 'block';
+				wink.byId('question_' + currentQuestion).style.display = 'block';
 			}
 		</script>
 	</head>

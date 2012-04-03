@@ -67,10 +67,10 @@
 
 			var init = function()
 			{
-				var canvasOffset = $('container').offsetTop + $('canvas').offsetTop;
+				var canvasOffset = wink.byId('container').offsetTop + wink.byId('canvas').offsetTop;
 				drawer = {
 					_startTime: 		null,
-					_ctx: 				$('canvas').getContext('2d'),
+					_ctx: 				wink.byId('canvas').getContext('2d'),
 					_currentPoint: 		null,
 					_previousPoint: 	null,
 				
@@ -91,7 +91,7 @@
 					},
 					_handleTouchEnd: function(uxEvent)
 					{
-						$('text').innerHTML = "Movement duration = " + (new Date().getTime() - this._startTime) + " ms";
+						wink.byId('text').innerHTML = "Movement duration = " + (new Date().getTime() - this._startTime) + " ms";
 					},
 					_drawShape: function()
 					{
@@ -116,7 +116,7 @@
 				};	
 				drawer.clearShape();
 				
-				var object = $("canvas");
+				var object = wink.byId("canvas");
 
 				wink.ux.touch.addListener(object, "start", { context: drawer, method: "_handleTouchStart", arguments: null }, { preventDefault: true });
 				wink.ux.touch.addListener(object, "start", { context: drawer, method: "_handleTouchStart2", arguments: null });

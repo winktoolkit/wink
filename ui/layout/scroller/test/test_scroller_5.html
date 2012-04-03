@@ -108,11 +108,11 @@
 
 				init: function() 
 				{
-					wink.ux.touch.addListener($('header'), "start", { context: this, method: "onTouchHeaderFooter" });
-					wink.ux.touch.addListener($('header'), "end", { context: this, method: "onTouchHeaderFooter" });
+					wink.ux.touch.addListener(wink.byId('header'), "start", { context: this, method: "onTouchHeaderFooter" });
+					wink.ux.touch.addListener(wink.byId('header'), "end", { context: this, method: "onTouchHeaderFooter" });
 					
-					wink.ux.touch.addListener($('footer'), "start", { context: this, method: "onTouchHeaderFooter" });
-					wink.ux.touch.addListener($('footer'), "end", { context: this, method: "onTouchHeaderFooter" });
+					wink.ux.touch.addListener(wink.byId('footer'), "start", { context: this, method: "onTouchHeaderFooter" });
+					wink.ux.touch.addListener(wink.byId('footer'), "end", { context: this, method: "onTouchHeaderFooter" });
 				},
 
 				onTouchHeaderFooter: function(uxEvent) 
@@ -214,7 +214,7 @@
 				_notify: false,
 				
 				init: function() {
-					this.node = $('wrapper');
+					this.node = wink.byId('wrapper');
 					
 					wink.ux.touch.addListener(this.node, "start", { context: this, method: "_start" }, { captureFlow: true });
 					wink.ux.touch.addListener(this.node, "move", { context: this, method: "_move" }, { captureFlow: true });
@@ -263,8 +263,8 @@
 				
 				var heightRemains = wink.ux.window.height - headerHeight - footerHeight;
 				
-				$('wrapper').style.height = heightRemains + "px";
-				$('view1').style.height = heightRemains + "px";
+				wink.byId('wrapper').style.height = heightRemains + "px";
+				wink.byId('view1').style.height = heightRemains + "px";
 				
 
 				var properties = 

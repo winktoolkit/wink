@@ -65,10 +65,10 @@
 			init = function()
 			{
 				var h = document.documentElement.offsetHeight - 55;
-				$('page1').style.height = h + "px";
-				$('page2').style.height = h + "px";
-				$('page3').style.height = h + "px";
-				$('page4').style.height = h + "px";
+				wink.byId('page1').style.height = h + "px";
+				wink.byId('page2').style.height = h + "px";
+				wink.byId('page3').style.height = h + "px";
+				wink.byId('page4').style.height = h + "px";
 				
 				var properties = 
 				{
@@ -79,12 +79,12 @@
 
 				wink.subscribe('/windows/events/slidestart', {method: 'changeTitle'});
 				
-				wink.fx.apply($('container'), {
+				wink.fx.apply(wink.byId('container'), {
 					height: h + "px",
 					width: '100%',
 					overflow: "hidden"
 				});
-				$('container').appendChild(windows.getDomNode());
+				wink.byId('container').appendChild(windows.getDomNode());
 			}
 			
 			slide = function(page)
@@ -94,7 +94,7 @@
 			
 			changeTitle = function(params)
 			{
-				$('title').innerHTML = 'Title: ' + params.id;
+				wink.byId('title').innerHTML = 'Title: ' + params.id;
 			}
 		</script>
 	</head>

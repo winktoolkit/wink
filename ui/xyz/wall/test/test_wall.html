@@ -175,9 +175,9 @@
 				
 				wall = new wink.ui.xyz.Wall(wallProperties);
 
-				$('container').appendChild(wall.getDomNodes().wall);
-				$('container').appendChild(wall.getDomNodes().leftPad);
-				$('container').appendChild(wall.getDomNodes().rightPad);
+				wink.byId('container').appendChild(wall.getDomNodes().wall);
+				wink.byId('container').appendChild(wall.getDomNodes().leftPad);
+				wink.byId('container').appendChild(wall.getDomNodes().rightPad);
 				
 				wink.subscribe('/wall/events/click', {method: 'onImageClick'});
 			}

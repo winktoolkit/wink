@@ -72,7 +72,7 @@ define(['../../../_base/_base/js/base', '../../../_base/error/js/error', '../../
 	 *   alert("Start At: " + uxEvent.x + ", " + uxEvent.y);
 	 * };
 	 * 
-	 * wink.ux.touch.addListener($("nodeId"), "start", { context: window, method: "handleStart" });
+	 * wink.ux.touch.addListener(wink.byId("nodeId"), "start", { context: window, method: "handleStart" });
 	 * 
 	 */
 	wink.ux.touch.addListener = addListener;

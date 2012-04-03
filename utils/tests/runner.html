@@ -139,6 +139,14 @@
 				width: 50px;
 			}
 			
+			.test2
+			{
+				background-color: red;
+				
+				height: 50px;
+				width: 50px;
+			}
+			
 			#explanations
 			{
 				background: #fff;
@@ -303,8 +311,8 @@
 					
 					if ( nbScriptsLoaded == nbScriptsToLoad )
 					{
-						$('launch').value = 'launch tests';
-						$('launch').disabled = false;
+						wink.byId('launch').value = 'launch tests';
+						wink.byId('launch').disabled = false;
 					}
 				}
 
@@ -349,6 +357,8 @@
 	    
 	    <div id="sandbox" class="sandbox">
 	    	<div id="test" class="test"></div>
+	    	<br />
+	    	<div id="test2" class="test2"></div>
 	    </div>
 	    
 	    <div id="explanations">

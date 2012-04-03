@@ -28,7 +28,7 @@ define(['../../../_amd/core'], function(wink)
 	 * 
 	 * var searchProperties = 
 	 * {
-	 *  textNode: $("moveable"),
+	 *  textNode: wink.byId("moveable"),
 	 *  resultClassName: "surligne",
 	 *  resultSelectClassName: "surligneSelect"
 	 * }

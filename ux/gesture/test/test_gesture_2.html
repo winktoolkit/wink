@@ -68,9 +68,9 @@
 				this._x = 0;
 				this._y = 0;
 
-				this.node.listenToGesture("instant_scale", { context: this, method: "instantScale" }, { preventDefault: true });
-				this.node.listenToGesture("instant_rotation", { context: this, method: "instantRotation" }, { preventDefault: true });
-				this.node.listenToGesture("gesture_end", { context: this, method: "gestureEnd" }, { preventDefault: true });
+				wink.ux.gesture.listenTo(this.node, "instant_scale", { context: this, method: "instantScale" }, { preventDefault: true });
+				wink.ux.gesture.listenTo(this.node, "instant_rotation", { context: this, method: "instantRotation" }, { preventDefault: true });
+				wink.ux.gesture.listenTo(this.node, "gesture_end", { context: this, method: "gestureEnd" }, { preventDefault: true });
 
 				this.instantScale = function(gestureInfos)
 				{
@@ -79,14 +79,14 @@
 					if (nextScale > 0.5 && nextScale < 1.1)
 					{
 						this._currentScale = nextScale;
-						this.node.scale(this._currentScale, this._currentScale);
+						wink.fx.scale(this.node, this._currentScale, this._currentScale);
 					}
 				};
 				this.instantRotation = function(gestureInfos)
 				{
 					this.node.style.backgroundColor = "#ccc";
 					this._currentRotation = (gestureInfos.rotation + this._rotation) % 360;
-					this.node.rotate(this._currentRotation);
+					wink.fx.rotate(this.node, this._currentRotation);
 				};
 				this.gestureEnd = function(gestureInfos)
 				{
@@ -98,7 +98,7 @@
 
 			var init = function()
 			{
-				var box = new Box($("box"));
+				var box = new Box(wink.byId("box"));
 			};
 		</script>
 	</head>

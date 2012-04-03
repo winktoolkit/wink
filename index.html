@@ -582,7 +582,7 @@
 		
 			var init = function()
 			{
-				$(theme + '_theme').checked = true;
+				wink.byId(theme + '_theme').checked = true;
 				
 				var pageId = wink.ua.isIE ? 'page_ie' : null;
 				for(sectionLabel in tests)
@@ -596,7 +596,7 @@
 					wink.addClass(title, 'w_list_item w_list_header w_border_bottom w_bg_dark');
 					title.innerHTML = sectionLabel;
 
-					$('tests').appendChild(sectionNode);
+					wink.byId('tests').appendChild(sectionNode);
 					sectionNode.appendChild(title);
 					
 					for(i in section)

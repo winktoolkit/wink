@@ -51,7 +51,7 @@
 				wink.ux.touch.addListener(document, "move", { context: window, method: "move", arguments: null }, { preventDefault: true });
 				wink.ux.touch.addListener(document, "end", { context: window, method: "end", arguments: null }, { preventDefault: true });
 
-				_ctx = $('canvas').getContext('2d');
+				_ctx = wink.byId('canvas').getContext('2d');
 
 				clearShape();
 			}
@@ -88,9 +88,9 @@
 
 				templateString += '{x: ' + x + ', y: ' + y + '})';
 
-				if ( $('email').value != '' )
+				if ( wink.byId('email').value != '' )
 				{
-					$('mailto').href = 'mailto:' + $('email').value + '?subject=' + encodeURIComponent('gesture recognition') + '&body=' + encodeURIComponent(templateString);
+					wink.byId('mailto').href = 'mailto:' + wink.byId('email').value + '?subject=' + encodeURIComponent('gesture recognition') + '&body=' + encodeURIComponent(templateString);
 					generateClick();
 				} else
 				{
@@ -124,10 +124,10 @@
 			{
 				var event = document.createEvent('MouseEvents');
 				
-			    if (event && event.initMouseEvent && $('mailto').dispatchEvent )
+			    if (event && event.initMouseEvent && wink.byId('mailto').dispatchEvent )
 			    {
 			    	event.initMouseEvent( 'click', true, true, document.defaultView, 1, 0, 0, 0, 0, false, false, false, false, 0, null);   
-			    	$('mailto').dispatchEvent(event);
+			    	wink.byId('mailto').dispatchEvent(event);
 			    }
 			
 			}

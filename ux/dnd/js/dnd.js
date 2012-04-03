@@ -83,7 +83,7 @@ define(['../../../_amd/core'], function(wink)
 	 * 	if(!this._isOver)
 	 * 	{
 	 * 		this.over();
-	 * 		$(this.id).style.border = '1px dotted #000';
+	 * 		wink.byId(this.id).style.border = '1px dotted #000';
 	 * 	}
 	 * } 
 	 * 
@@ -92,7 +92,7 @@ define(['../../../_amd/core'], function(wink)
 	 * 	if(this._isOver)
 	 * 	{
 	 * 		this.out();
-	 * 		$(this.id).style.border = '1px solid #fff';
+	 * 		wink.byId(this.id).style.border = '1px solid #fff';
 	 * 	}
 	 * } 
 	 * 
@@ -276,7 +276,7 @@ define(['../../../_amd/core'], function(wink)
 				this._currentAvatar.target.pozXinit = this._currentAvatar.pozX + event.x - this._currentAvatar.beginX;	
 				this._currentAvatar.target.pozYinit = this._currentAvatar.pozY + event.y - this._currentAvatar.beginY;	
 				
-				this._currentAvatar.target.translate(this._currentAvatar.target.pozXinit, this._currentAvatar.target.pozYinit);
+				wink.fx.translate(this._currentAvatar.target, this._currentAvatar.target.pozXinit, this._currentAvatar.target.pozYinit);
 				
 				// check if we are over a drop target
 				this._currentTarget = this._getTarget(event.x, event.y);

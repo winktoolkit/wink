@@ -62,7 +62,7 @@
 				smartLoader = new wink.net.SmartLoader(progressBarProperties);
 
 				// Add the progress bar to the screen
-				$('progress').appendChild(smartLoader.getDomNode());
+				wink.byId('progress').appendChild(smartLoader.getDomNode());
 				
 				smartLoader.load({'scripts': scripts, 'styles': styles, 'images': images});
 			}
@@ -72,10 +72,10 @@
 				alert('ressources loaded');
 
 				// Remove the progress bar from the screen
-				//$('progress').removeChild(smartLoader.getDomNode());
+				//wink.byId('progress').removeChild(smartLoader.getDomNode());
 
 				// display the preloaded contents
-				$('test').style.display = 'block';
+				wink.byId('test').style.display = 'block';
 			}
 		</script>
 	</head>

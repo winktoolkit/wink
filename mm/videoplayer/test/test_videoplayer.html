@@ -74,7 +74,7 @@
 				
 				videoPlayer = new wink.mm.VideoPlayer(properties);
 
-				$('video').appendChild(videoPlayer.getDomNode());
+				wink.byId('video').appendChild(videoPlayer.getDomNode());
 			}
 
 			forward = function(seconds)

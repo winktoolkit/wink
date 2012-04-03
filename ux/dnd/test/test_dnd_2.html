@@ -62,7 +62,7 @@
 				for ( var i=1; i<=puzzleSize; i++)
 				{
 					pieces.sort(function(){return 0.5 - Math.random()});
-					$('piece' + i).src = './img/piece' + pieces.pop() + '.jpg';
+					wink.byId('piece' + i).src = './img/piece' + pieces.pop() + '.jpg';
 				}
 
 				/************************************************/
@@ -95,19 +95,19 @@
 					var targetId = params.target.id;
 					var sourceId = params.source.id;
 					
-					var from = $(sourceId).src;
-					var to = $(targetId).childNodes[1].src;
+					var from = wink.byId(sourceId).src;
+					var to = wink.byId(targetId).childNodes[1].src;
 					
-					$(sourceId).src = to;
-					$(targetId).childNodes[1].src = from;
+					wink.byId(sourceId).src = to;
+					wink.byId(targetId).childNodes[1].src = from;
 				}
 
             	wink.ux.dnd.Source.prototype.getAvatar = function()
 				{
-					var X = $(this.id).getLeftPosition();
-					var Y = $(this.id).getTopPosition();
+					var X = wink.getLeftPosition(wink.byId(this.id));
+					var Y = wink.getTopPosition(wink.byId(this.id));
 					
-					var avatar = $(this.id).cloneNode(true);
+					var avatar = wink.byId(this.id).cloneNode(true);
 					
 					avatar.style.top = Y + 'px';
 					avatar.style.left = X + 'px';
@@ -140,7 +140,7 @@
 					if(!this._isOver)
 					{
 						this.over();
-						$(this.id).childNodes[1].style.display = 'none';
+						wink.byId(this.id).childNodes[1].style.display = 'none';
 					}
 				} 
 
@@ -149,7 +149,7 @@
 					if(this._isOver)
 					{
 						this.out();
-						$(this.id).childNodes[1].style.display = 'block';
+						wink.byId(this.id).childNodes[1].style.display = 'block';
 					}
 				}
 

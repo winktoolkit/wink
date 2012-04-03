@@ -71,7 +71,7 @@
 				storage = new wink.api.Storage();	
 				storage.connect(descriptor);
 				
-				$('dbname').innerHTML += descriptor.name;	
+				wink.byId('dbname').innerHTML += descriptor.name;	
 			}
 			
 			// Callbacks without context

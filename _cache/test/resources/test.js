@@ -48,7 +48,7 @@ function initCoverflow()
 	
 	var coverflow = new wink.ui.xyz.CoverFlow(properties);
 	
-	$("container").appendChild(coverflow.getDomNode());
+	wink.byId("container").appendChild(coverflow.getDomNode());
 }
 
 

@@ -48,7 +48,7 @@
 			
 			init = function()
 			{
-				dnd = new wink.ux.Dnd({zone: $('list')});
+				dnd = new wink.ux.Dnd({zone: wink.byId('list')});
 
 				// Define the d&d source and its methods
 				
@@ -78,12 +78,12 @@
 
 				wink.ux.dnd.Source.prototype.getAvatar = function()
 				{
-					var avatar = $(this.id).parentNode.cloneNode(true);
+					var avatar = wink.byId(this.id).parentNode.cloneNode(true);
 
 					avatar.style.position = 'absolute';
 					avatar.style.opacity = '0.5';
 
-					avatar.style.top = $(this.id).winkGetTopPosition() + 'px';
+					avatar.style.top = wink.getTopPosition(wink.byId(this.id)) + 'px';
 					avatar.style.left = '0px';
 					
 					
@@ -106,7 +106,7 @@
 					if(!this._isOver)
 					{
 						this.over();
-						$(this.id).style.color = '#ff0000';
+						wink.byId(this.id).style.color = '#ff0000';
 					}
 				} 
 
@@ -115,7 +115,7 @@
 					if(this._isOver)
 					{
 						this.out();
-						$(this.id).style.color = 'inherit';
+						wink.byId(this.id).style.color = 'inherit';
 					}
 				} 
 
@@ -164,7 +164,7 @@
 				                pozY: event.target.pozYinit
 				            };
 							
-							$('list').appendChild(this._currentAvatar.target);
+							wink.byId('list').appendChild(this._currentAvatar.target);
 						}
 						
 				    }
@@ -199,7 +199,7 @@
 						}
 						
 						// remove the avatar
-						$('list').removeChild(this._currentAvatar.target);
+						wink.byId('list').removeChild(this._currentAvatar.target);
 						
 						// reset the drag and drop
 						this._currentSource.deactivate();
@@ -228,7 +228,7 @@
 						this._currentAvatar.target.pozXinit = this._currentAvatar.pozX + event.x - this._currentAvatar.beginX;	
 						this._currentAvatar.target.pozYinit = this._currentAvatar.pozY + event.y - this._currentAvatar.beginY;	
 						
-						this._currentAvatar.target.translate(0, this._currentAvatar.target.pozYinit);
+						wink.fx.translate(this._currentAvatar.target, 0, this._currentAvatar.target.pozYinit);
 						
 						// check if we are over a drop target
 						this._currentTarget = this._getTarget(event.x, event.y);
@@ -275,25 +275,25 @@
 			{
 				params.target.onSourceOut();
 
-				var sourceId = $(params.source.id).parentNode.id;
+				var sourceId = wink.byId(params.source.id).parentNode.id;
 				var targetId = params.target.id;
 
 				if ( sourceId != targetId )
 				{
-					var sourceTop = $(sourceId).winkGetTopPosition();
-					var targetTop = $(targetId).winkGetTopPosition();
+					var sourceTop = wink.getTopPosition(wink.byId(sourceId));
+					var targetTop = wink.getTopPosition(wink.byId(targetId));
 
 					if( targetTop < sourceTop)
 					{
-						$(targetId).parentNode.insertBefore($(sourceId), $(targetId));
+						wink.byId(targetId).parentNode.insertBefore(wink.byId(sourceId), wink.byId(targetId));
 					} else 
 					{
-						if( $(targetId) == $(targetId).parentNode.lastChild)
+						if( wink.byId(targetId) == wink.byId(targetId).parentNode.lastChild)
 						{
-							$(targetId).parentNode.appendChild($(sourceId));
+							wink.byId(targetId).parentNode.appendChild(wink.byId(sourceId));
 						} else 
 						{
-							$(targetId).parentNode.insertBefore($(sourceId), $(targetId).nextSibling);
+							wink.byId(targetId).parentNode.insertBefore(wink.byId(sourceId), wink.byId(targetId).nextSibling);
 						}
 					}
 				} else

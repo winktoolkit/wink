@@ -214,7 +214,7 @@
     <code_sample>
 var cityProperties = 
 {
-    "input": $('myInputCity'),
+    "input": wink.byId('myInputCity'),
     "managers": {                
         "data": {
             "name": "LocalDataManager",

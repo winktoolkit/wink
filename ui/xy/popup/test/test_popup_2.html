@@ -81,7 +81,7 @@
 						}
 					}
 					
-					this._domNode.translate(0, y);
+					wink.fx.translate(this._domNode, 0, y);
 				};
 			}
 			
@@ -107,7 +107,7 @@
 			
 			var savePopupState = function()
 			{
-				localStorage.setItem("popupToHide", $('dontshow').checked ? 1:0 );
+				localStorage.setItem("popupToHide", wink.byId('dontshow').checked ? 1:0 );
 			};
 			
 			var init = function()

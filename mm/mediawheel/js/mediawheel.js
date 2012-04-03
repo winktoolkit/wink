@@ -46,8 +46,8 @@ define(['../../../_amd/core', '../../../math/_geometric/js/geometric', '../../..
 	  * 
 	  * var mediaWheel = new wink.mm.MediaWheel(
 	  * {
-	  * 	width: $('content').offsetWidth,
-	  * 	height: $('content').offsetHeight
+	  * 	width: wink.byId('content').offsetWidth,
+	  * 	height: wink.byId('content').offsetHeight
 	  * });
 	  * 
 	  * @requires wink.math (geometric)
@@ -314,8 +314,8 @@ define(['../../../_amd/core', '../../../math/_geometric/js/geometric', '../../..
 			dn.appendChild(cn);
 			dn.appendChild(cnc);
 			
-			cn.translate(0, 0);
-			cnc.translate(0, 0);
+			wink.fx.translate(cn, 0, 0);
+			wink.fx.translate(cnc, 0, 0);
 			
 			cn.width = _this.width;
 			cn.height = _this.height;
@@ -623,7 +623,7 @@ define(['../../../_amd/core', '../../../math/_geometric/js/geometric', '../../..
 	 */
 	var _getPolarCoordinates = function(node, absX, absY, cx, cy)
 	{
-		var pos = node.getPosition(null, true);
+		var pos = wink.getPosition(node, null, true);
 			offsetX = absX - pos.x,
 			offsetY = absY - pos.y,
 			xTrigo = (offsetX - cx),
