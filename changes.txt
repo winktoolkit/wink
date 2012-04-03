@@ -255,3 +255,4 @@ Release 1.4.2 [xx/xx/xxxx]
 	- Feature detections added
 	- Callback : a callback can now be a function
 	- slidingpanels : methods "add" and "remove" added
+	- changes of handling HTMLElement and dollar
