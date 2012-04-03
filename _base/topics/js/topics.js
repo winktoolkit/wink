@@ -11,7 +11,7 @@
  * @author Jerome GIRAUD
  */
 
-define(['../../../_base/_base/js/base', '../../error/js/error'], function(wink)
+define(['../../../_amd/core'], function()
 {
 	var _subscribed_topics = [];
 	

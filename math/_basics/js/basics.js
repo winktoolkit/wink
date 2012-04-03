@@ -10,7 +10,7 @@
  * 
  * @author Sylvain LALANDE
  */
-define(['../../../_base/_base/js/base'], function(wink)
+define(['../../../_amd/core'], function()
 {
 	wink.math = 
 	{
@@ -30,7 +30,20 @@ define(['../../../_base/_base/js/base'], function(wink)
 			}
 			var nd = Math.pow(10, d);
 			return Math.round(n * nd) / nd;
-		}
+		},
+	
+        /**
+         * Returns the positive modulo of two numbers
+         * 
+         * @param {number} dd The dividend
+         * @param {number} dr The divisor  	 
+         *  
+         * @returns {number} The positive modulo       	 
+         */
+        modulo: function(dd, dr){
+        	var mod = dd % dr;
+        	return mod < 0 ? mod + dr : mod;	
+        }
 	};
 	
 	return wink.math;

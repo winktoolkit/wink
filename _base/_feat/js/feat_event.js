@@ -13,7 +13,7 @@
  * 
  */
 
-define(['../../../_base/_base/js/base', './feat'], function(wink)
+define(['../../../_amd/core'], function()
 {
 	var winkhas = wink.has,
 		inquireMap = winkhas.inquireMap,

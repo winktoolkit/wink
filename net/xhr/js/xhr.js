@@ -11,7 +11,7 @@
  * @author Jerome GIRAUD
  */
 
-define(['../../../_base/_base/js/base', '../../../_base/error/js/error'], function(wink) 
+define(['../../../_amd/core'], function() 
 {
 	var isSet = wink.isSet;
 	var isArray = wink.isArray;

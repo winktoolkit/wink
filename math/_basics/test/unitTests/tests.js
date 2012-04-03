@@ -11,6 +11,11 @@ doh.register("wink.math._basics",
         function round(t)
         {
         	doh.is(3.14, wink.math.round(Math.PI, 2));
+        },
+        // Test round
+        function modulo(t)
+        {
+        	doh.is(2, wink.math.modulo(17, 3));
         }
     ]
 );

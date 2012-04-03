@@ -12,7 +12,7 @@
  *
  * @author Sylvain LALANDE
  */
-define(['../../../_base/_base/js/base', '../../../_base/error/js/error', '../../../_base/_feat/js/feat_event', '../../event/js/event'], function(wink) 
+define(['../../../_amd/core'], function() 
 {
 	var _els = []; // touch elements
 	
