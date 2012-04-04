@@ -11,7 +11,7 @@
  * @author Jerome GIRAUD
  */
 
-define(['../../../../_base/_base/js/base', '../../../../fx/_xy/js/2dfx'], function(wink) 
+define(['../../../../_amd/core'], function() 
 {
 	var applyStyle = wink.fx.apply;
 	var _container = null;
