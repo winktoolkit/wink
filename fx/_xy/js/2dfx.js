@@ -10,7 +10,7 @@
  *
  * @author Sylvain LALANDE
  */
-define(['../../../_base/_base/js/base', '../../../_base/_feat/js/feat_css'], function(wink) 
+define(['../../../_amd/core'], function() 
 {
 	var _isSet = wink.isSet;
 	var getprop = wink.has.prop;

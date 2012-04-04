@@ -12,7 +12,7 @@
  * @author Sylvain LALANDE
  */
 
-define(['../../../_base/_base/js/base', '../../../_base/error/js/error', '../../../_base/json/js/json'], function(wink)
+define(['../../../_amd/core'], function()
 {	
 	var undef = wink.isUndefined;
 	var isSet = wink.isSet;

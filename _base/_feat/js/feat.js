@@ -11,7 +11,7 @@
  * @author Sylvain LALANDE
  */
 
-define(['../../../_base/_base/js/base'], function(wink)
+define(['../../../_amd/core'], function()
 {
 	var features = {},
 		properties = {},

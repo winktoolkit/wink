@@ -11,7 +11,7 @@
  * @author Jerome GIRAUD
  */
 
-define(['../../../_base/_base/js/base'], function(wink)
+define(['../../../_amd/core'], function()
 {
 	var windowJson = window.JSON;
 	
