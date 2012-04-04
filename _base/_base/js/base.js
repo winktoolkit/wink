@@ -609,6 +609,18 @@ define(['../../_kernel/js/kernel'], function(wink)
 		_ = wink.bind(wink.translate, wink);
 	}
 	
+	if (wink.isUndefined(wd.$))
+	{
+		/**
+		 * @function
+		 * @see wink.query
+		 */
+		$ = function() {
+			console && console.log("$ is deprecated: the use of wink.query or $$ methods is recommanded");
+			return wink.query.apply(wink, arguments);
+		};
+	}
+	
 	if (wink.isUndefined(wd.$$))
 	{
 		/**
