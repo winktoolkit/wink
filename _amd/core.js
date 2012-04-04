@@ -12,21 +12,23 @@
  * @author Jerome GIRAUD
  */
 
-var dojoBaseUrl = '../..';
-
 define(
 	[
-	 	'./wink.dojo',
-		
+		'../_base/_base/js/base',
 		'../_base/error/js/error',
+		'../math/_basics/js/basics',
 		'../_base/_feat/js/feat',
+		'../_base/_feat/js/feat_json',
 		'../_base/_feat/js/feat_css',
 		'../_base/_feat/js/feat_event',
 		'../_base/_feat/js/feat_dom',
+		'../_base/json/js/json',
 		'../_base/ua/js/ua',
 		'../_base/_dom/js/dom',
+		'../_base/topics/js/topics',
 		'../fx/_xy/js/2dfx',
 		'../net/xhr/js/xhr',
+		'../ui/xy/layer/js/layer',
 		'../ux/event/js/event',
 		'../ux/touch/js/touch'
 	], 
