@@ -10,7 +10,7 @@
  * 
  * @author Mathieu HELIOT
  */
-define(['../../../_base/_base/js/base', './json'], function(wink)
+define(['../../../_amd/core'], function()
 {
 	var _stack = new Array();
 	
