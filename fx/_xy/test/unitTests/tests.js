@@ -33,7 +33,7 @@ doh.register("wink.fx._xy",
 	 	//Test hasClass
 		function hasClass(t)
 		{     
-	 		doh.assertTrue(wink.fx.hasClass($('sandbox'), 'testCSS'));
+	 		doh.assertTrue(wink.fx.hasClass(wink.byId('sandbox'), 'testCSS'));
 		},
 	 	//Test removeClass
 		function removeClass(t)
