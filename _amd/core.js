@@ -24,7 +24,6 @@ define(
 		'../_base/_feat/js/feat_dom',
 		'../_base/json/js/json',
 		'../_base/ua/js/ua',
-		'../_base/_dom/js/dom',
 		'../_base/topics/js/topics',
 		'../fx/_xy/js/2dfx',
 		'../net/xhr/js/xhr',
