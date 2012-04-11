@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<!-- THEME UTILITY -->
+		<link rel="stylesheet" href="../../../_themes/utils/loader.css" type="text/css">
+		<!-- END THEME UTILITY -->
+		
+		<!-- THEME UTILITY -->
+		<script type="text/javascript" src="../../../_themes/utils/loader.js"></script>
+		<!-- END THEME UTILITY -->
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<style>
+			#container {
+				background-color: #fff;
+				height: 200px;
+				width: 300px;
+				border: 1px solid #000;
+				margin: 5px;
+			}
+			
+			#actions {
+				width: 300px;
+			}
+			
+			.box {
+				background-color: #00f;
+				height: 50px;
+				width: 50px;
+				position: relative;
+				top: 10px;
+				left: 10px;
+			}
+		</style>
+		
+		<script>
+			var init = function()
+			{
+				var box = $$('#box');
+				box.addClass('box');
+				if (!box.hasClass('box')) {
+					raiseError(1);
+					return;
+				}
+				
+				if (box[0] != wink.byId('box')) {
+					raiseError(2);
+					return;
+				}
+				
+				if (!wink.isArray(box.toArray())) {
+					raiseError(3);
+					return;
+				}
+				
+				var toGreen = function() {
+					var boxes = $$('.box');
+					boxes.apply({ "background-color": "#0f0" });
+					var i, positions = boxes.getPosition(null, true), l = boxes.size();
+					for (i = 0; i < l; i++) {
+						var p = positions[i];
+						boxes[i].innerHTML = "[x:" + p.x + ", y:" + p.y + "]";
+					}
+					
+					if (boxes.indexOf(wink.byId('box')) !== 0) {
+						raiseError(4);
+						return;
+					}
+					if (boxes.indexOf(wink.byId('box2')) !== 1) {
+						raiseError(5);
+						return;
+					}
+				};
+				box.onTransitionEnd(toGreen).applyTransformTransition("1s", "500ms", "linear").translate(200, 100).rotate(45);
+			};
+			
+			var raiseError = function(id) {
+				wink.byId('box').style.backgroundColor = "red";
+				wink.byId('box').innerHTML = "error " + id;
+				wink.byId('box2').style.backgroundColor = "red";
+				wink.byId('box2').innerHTML = "error " + id;
+			};
+		</script>
+	</head>
+	<body onload="init()">
+		<div class="w_box w_header w_bg_dark">
+			<span id="title">base</span>
+			<input type="button" value="home" class="w_button w_radius w_bg_light w_right" onclick="window.location='../../..?theme='+theme"/>
+		</div>
+		
+		<div class="w_bloc">
+			Test base
+		</div>
+		
+		<div id="container">
+			<div id="box"></div>
+			<div id="box2" class="box" style="top: 60px;"></div>
+		</div>
+	</body>
+</html>
