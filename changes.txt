@@ -255,7 +255,7 @@ Release 1.4.2 [xx/xx/xxxx]
 	- Feature detections added
 	- Callback : a callback can now be a function
 	- slidingpanels : methods "add" and "remove" added
-	- changes of handling HTMLElement and dollar
+	- $, $$, wink.query : changes of handling HTMLElement and dollar, bring a wrapper for DOM selections
 	- Added new method "modulo" to wink.math
 	- Added new method "hasClass" to wink.fx
 	- Added the possibility to pass a dom node instead of an HTML content to the "popup" method in wink.ui.xy.Popup

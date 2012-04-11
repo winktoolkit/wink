@@ -134,18 +134,149 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * @param {string} selector The query selector you want to use
 	 * @param {HTMLElement} [element] The element where you want to search
 	 * 
-	 * @returns {array} Returns an array containing the DOM elements corresponding to the query
+	 * @returns {object} Returns a wrapper containing an array of the DOM elements corresponding to the query
 	 * 
 	 * @example
 	 * 
 	 * var test = wink.query('.MyClass');
 	 * var test2 = $$('input[type=radio]');
 	 * 
+	 * $$(".MyClass").removeClass("hidden").addClass("active");
+
+	 * $$(".MyClass").translate(20, 20).rotate(2);
+	 * var positions = $$(".MyClass").getPosition();
+	 * 
+	 * if ($$("#box").hasClass("visible")) {
+	 *   $$("#box").applyTransition("background-color", "1s", "1ms", "linear").apply({ "background-color": "blue" });
+	 *   $$("#box").listenTo("rotation", function(gestureInfos) {
+	 *     console.log("rotation [" + gestureInfos.rotation + "deg]");
+	 *   });
+	 * }
+	 * 
 	 */
 	wink.query = function(selector, element)
 	{
-		return slice.call((element||document).querySelectorAll(selector));
+		return new QueryWrapper(selector, element);
 	};
+	
+	/**
+	 * The QueryWrapper wraps the result of a query selection, allowing to chain some wink calls for each element
+	 */
+	var QueryWrapper = (function() {
+		var wrapper = function(selector, element) {
+			if (wink.isUndefined(wrapper.prototype.initialized)) {
+				this.init();
+			}
+			
+			var r;
+			try {
+				r = slice.call((element||document).querySelectorAll(selector));
+			} catch (e) {
+				r = [];
+			}
+			var l = this.length = r.length;
+			
+			for (var i = 0; i < l; i++) {
+				this[i] = r[i];
+			}
+			this.selector = selector;
+			
+			return this;
+		};
+		
+		var wp = wrapper.prototype = {
+			/**
+			 * Initialize the wrapper prototype's methods
+			 * @ignore
+			 */
+			init: function() {
+				wp.each([
+					"pop", "push", "reverse", "shift", "sort", "splice", "unshift", "slice", "indexOf", "lastIndexOf"
+				], function(i, name) {
+					wp[name] = [][name];
+				});
+				
+				wink.query.extend(wink, [ "getPosition", "getTopPosition", "getLeftPosition" ], true);
+				wink.query.extend(wink.fx, [ "getTransformPosition", "hasClass" ], true);
+				wink.query.extend(wink.fx, [ "translate", "rotate", "scale", "addClass", "removeClass", 
+				                             "apply", "applyTransition", "applyTransformTransition", "onTransitionEnd" ], false);
+				wink.query.extend(wink.ux.gesture, [ "listenTo", "unlistenTo" ], false);
+				
+				wp.initialized = true;
+			},
+			/**
+			 * Extends the wrapper. The user can extend another wrapper by giving it as a parameter.
+			 * @ignore
+			 */
+			extend: function(context, methods, withResult, wrapper) {
+				var thewp = wrapper || wp,
+					map = {};
+				
+				var i, l = methods.length;
+				for (var i = 0; i < l; i++) {
+					var mi = methods[i],
+						f = context ? context[mi] : null;
+					if (wink.isFunction(f)) {
+						map[mi] = { c: context, f: f, r: withResult };
+					}
+				}
+				
+				wp.each(map, function(method, props) {
+					var f = props.f,
+						ctx = props.c,
+						withResult = props.r;
+					thewp[method] = function() {
+						var l = this.size();
+						if (l == 0) {
+							return;
+						}
+						var i, nodes = this.toArray(), res = [], argus = this.splice.call(arguments, 0);
+						for (i = 0; i < l; i++) {
+							res.push(f.apply(ctx, [ nodes[i] ].concat(argus)));
+						}
+						if (!withResult) {
+							return this;
+						}
+						if (res.length == 1) {
+							return res[0];
+						}
+						return res;
+					};
+				});
+			},
+			/**
+			 * @ignore
+			 */
+			size: function() {
+				return this.length;
+			},
+			/**
+			 * Gets an array of selected elements
+			 * @ignore
+			 */
+			toArray: function() {
+				return slice.call(this, 0);
+			},
+			/**
+			 * Call the callback for each element of the list
+			 * @ignore
+			 */
+			each: function(list, callback) {
+				for (i in list) {
+					var li = list[i];
+					callback.call(li, i, li);
+				}
+			}
+		};
+		
+		return wrapper;
+	})();
+	
+	/**
+	 * Extends the wrapper
+	 */
+	wink.query.extend = QueryWrapper.prototype.extend;
+	
 	
 	var _winklocale = "en_EN";
 	/**
