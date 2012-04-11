@@ -23,6 +23,7 @@ doh.register("wink._base._base",
 	 			test1 = document.createElement('span');
 	 			test2 = document.createElement('span');
 	 			
+	 			test1.id = 'testQuery1';
 	 			test1.className = 'testQuery';
 	 			test2.className = 'testQuery';
 	 			
@@ -31,7 +32,38 @@ doh.register("wink._base._base",
 	 		},
 	 		runTest: function(t)
 	        {
-	        	doh.is(2, $$('.testQuery').length);
+	 			var testQueries = $$('.testQuery');
+	 			
+	        	doh.is(2, testQueries.length);
+	        	doh.is(2, testQueries.size());
+	        	doh.assertTrue(wink.isArray(testQueries.toArray()));
+	        	
+	        	doh.assertTrue(wink.isSet(testQueries.getPosition));
+	        	doh.assertTrue(wink.isSet(testQueries.getTopPosition));
+	        	doh.assertTrue(wink.isSet(testQueries.getLeftPosition));
+	        	doh.assertTrue(wink.isSet(testQueries.getTransformPosition));
+	        	doh.assertTrue(wink.isSet(testQueries.hasClass));
+	        	doh.assertTrue(wink.isSet(testQueries.addClass));
+	        	doh.assertTrue(wink.isSet(testQueries.removeClass));
+	        	doh.assertTrue(wink.isSet(testQueries.translate));
+	        	doh.assertTrue(wink.isSet(testQueries.rotate));
+	        	doh.assertTrue(wink.isSet(testQueries.scale));
+	        	doh.assertTrue(wink.isSet(testQueries.apply));
+	        	doh.assertTrue(wink.isSet(testQueries.applyTransition));
+	        	doh.assertTrue(wink.isSet(testQueries.applyTransformTransition));
+	        	doh.assertTrue(wink.isSet(testQueries.onTransitionEnd));
+	        	
+	        	testQueries.addClass("another");
+	        	
+	        	doh.assertTrue(testQueries[0].className.indexOf("another") !== -1);
+	        	doh.assertTrue(testQueries[1].className.indexOf("another") !== -1);
+	        	doh.assertTrue(testQueries.hasClass("another")[0]);
+	        	doh.assertTrue(testQueries.hasClass("another")[1]);
+	        	
+	        	var pos = $$('#testQuery1').getPosition();
+	        	doh.assertFalse(wink.isArray(pos));
+	        	doh.assertTrue(wink.isSet(pos.x));
+	        	doh.assertTrue(wink.isSet(pos.y));
 	        },
 	        tearDown: function()
 	 		{
