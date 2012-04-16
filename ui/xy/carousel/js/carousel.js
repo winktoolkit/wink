@@ -8,7 +8,7 @@
 /**
  * @fileOverview Implements a carousel
  * 
- * @author Jerome GIRAUD
+ * @author Jerome GIRAUD, William MARKLE
  */
 
 /**
@@ -80,6 +80,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xy/carousel/test/test_carousel_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xy/carousel/test/test_carousel_2.html" target="_blank">Test page (vertical)</a>
+	 * @see <a href="WINK_ROOT_URL/ui/xy/carousel/test/test_carousel_3.html" target="_blank">Test page (add, remove items)</a>
 	 */
 	wink.ui.xy.Carousel = function(properties)
 	{
@@ -340,6 +341,114 @@ define(['../../../../_amd/core'], function(wink)
 		},
 		
 		/**
+		 * Insert a new item in an existing Carousel
+		 * 
+		 * @param {string} type The type of the new content ("node" or "string")
+		 * @param {string|HTMLElement} content The content of the new item
+		 * @param {integer} index The position of the new item in the carousel items array (0 -> length of array)
+		 */
+		insertItem: function(type, content, index)
+		{
+			var l = this._itemsList.length,
+                dot,
+                i;
+
+			if (wink.isUndefined(index)) 
+			{
+                wink.log('[Carousel] The index parameter is required');
+				return;
+            }
+			if (index < 0 || index >= this._itemsList.length) 
+			{
+                index = l;// append item
+            }
+			
+            this._addItem(type, content, index);
+            
+            if (this._itemsNode.hasChildNodes() && index < l) 
+            {
+                this._itemsNode.insertBefore(this._itemsList[index].getDomNode(), this._itemsNode.childNodes[index]);
+            } else 
+            {
+                this._itemsNode.appendChild(this._itemsList[index].getDomNode());
+            }
+            
+            this._dotsList = [];
+            while (this._dotsNode.firstChild) 
+            {
+               this._dotsNode.removeChild(this._dotsNode.firstChild);
+            };
+            
+			for ( i=0; i <= l; i++)//go through old and new items and fix up classes and indexes
+			{
+
+				this._itemsList[i].index = i - this.firstItemIndex;
+                dot = document.createElement('div');
+                dot.className = 'ca_dot';
+				if ( i == l )
+				{
+					dot.style.clear = 'both';
+				}
+				this._dotsList.push(dot);
+				this._dotsNode.appendChild(dot);
+            }
+			
+            this._positionItems();
+            this.goToItem(index);
+		},
+		
+		/**
+		 * Remove an item from an existing Carousel
+		 * 
+		 * @param {string} index The position of the node to remove
+		 */
+		removeItem: function(index)
+		{	
+			var l = this._itemsList.length - 1,
+                dot,
+                i;
+                
+			if (wink.isUndefined(index)) 
+			{
+                wink.log('[Carousel] The index parameter is required');
+				return;
+            }
+			if (index < 0 || index >= this._itemsList.length) 
+			{
+                wink.log('[Carousel] The index parameter must be a positive integer from 0 up to the number of nodes.');
+                return;
+            }
+		
+            this._itemsList.splice(index, 1);
+            this._itemsNode.removeChild(this._itemsNode.childNodes[index]);
+            
+            this._dotsList = [];
+            while (this._dotsNode.firstChild) 
+            {
+               this._dotsNode.removeChild(this._dotsNode.firstChild);
+            };
+            
+			for ( i=0; i < l; i++)//go through items and fix up classes and indexes
+			{
+				this._itemsList[i].index = i - this.firstItemIndex;
+
+                dot = document.createElement('div');
+                dot.className = 'ca_dot';
+				if ( i == (l - 1) )
+				{
+					dot.style.clear = 'both';
+				}
+				this._dotsList.push(dot);
+				this._dotsNode.appendChild(dot);
+            }
+            if (l > 0) 
+            {
+                this._positionItems();
+                this.goToItem(index == 0 ? 0 : index - 1);
+            }
+		},
+		
+		/**
 		 * Add a new item in the Carousel
 		 * 
 		 * @param {string} type The type of the content ("node" or "string")
@@ -361,7 +470,7 @@ define(['../../../../_amd/core'], function(wink)
 			
 			item = new wink.ui.xy.Carousel.Item({'width': this.itemsWidth, 'height': this.itemsHeight, 'node': node, 'index': (index-this.firstItemIndex)});
 		
-			this._itemsList.push(item);
+			 this._itemsList.splice(index, 0, item);
 		},
 		
 		/**

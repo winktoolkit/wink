@@ -260,4 +260,5 @@ Release 1.4.2 [xx/xx/xxxx]
 	- Added new method "hasClass" to wink.fx
 	- Added the possibility to pass a dom node instead of an HTML content to the "popup" method in wink.ui.xy.Popup
     - Added new method "destroy" to wink.ui.xy.Menu
-    - Added hasHeaderFixed/hasFooterFixed properties to wink.ui.layout.FixedLayout 
+    - Added hasHeaderFixed/hasFooterFixed properties to wink.ui.layout.FixedLayout
+    - Added the insertItem and removeItem methods on the carousel
