@@ -114,7 +114,6 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * @example
 	 * 
 	 * var test = wink.byId('myComponent');
-	 * var test2 = $('myComponent');
 	 * 
 	 */
 	wink.byId = function(id)
