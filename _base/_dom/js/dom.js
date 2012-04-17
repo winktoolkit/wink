@@ -12,6 +12,9 @@
  */
 define(['../../../_amd/core'], function()
 {
-	console && console.log("dom.js is deprecated: the use of wink and wink.fx methods is recommanded");
+	if ( console )
+	{
+		console.log("dom.js is deprecated: the use of wink and wink.fx methods is recommanded");
+	}
 	return wink;
 });

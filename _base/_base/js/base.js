@@ -746,7 +746,10 @@ define(['../../_kernel/js/kernel'], function(wink)
 		 * @see wink.query
 		 */
 		$ = function() {
-			console && console.log("$ is deprecated: the use of wink.query or $$ methods is recommanded");
+			if ( console )
+			{
+				console.log("$ is deprecated: the use of wink.query or $$ methods is recommanded");
+			}
 			return wink.query.apply(wink, arguments);
 		};
 	}
