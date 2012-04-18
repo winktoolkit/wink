@@ -130,14 +130,14 @@ define(['../../../../_amd/core'], function(wink)
 				for ( var i = 0; i < 7; i++)
 				{
 					currentDay.setTime(this._firstDayOfMonth.getTime() - (7 - i) * (24 * 3600 * 1000));
-					this._template += '<a href="#" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+					this._template += '<a href="javascript:void(0)" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 				}
 			} else if (this._firstDayOfMonth.getDay() == ((this._firstDayOfWeek + 6) % 7))
 			{
 				for ( var i = 0; i < 6; i++)
 				{
 					currentDay.setTime(this._firstDayOfMonth.getTime() - (6 - i) * (24 * 3600 * 1000));
-					this._template += '<a href="#" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+					this._template += '<a href="javascript:void(0)" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 				}
 		
 				currentDay.setTime(this._firstDayOfMonth.getTime());
@@ -146,20 +146,20 @@ define(['../../../../_amd/core'], function(wink)
 				{
 					if (currentDay.getDate() == today.getDate())
 					{
-						this._template += '<a href="#" class="dp_date dp_today w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + this._firstDayOfMonth.getTime() + ')">' + this._firstDayOfMonth.getDate() + '</a>';
+						this._template += '<a href="javascript:void(0)" class="dp_date dp_today w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + this._firstDayOfMonth.getTime() + ')">' + this._firstDayOfMonth.getDate() + '</a>';
 					} else
 					{
-						this._template += '<a href="#" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + this._firstDayOfMonth.getTime() + ')">' + this._firstDayOfMonth.getDate() + '</a>';
+						this._template += '<a href="javascript:void(0)" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + this._firstDayOfMonth.getTime() + ')">' + this._firstDayOfMonth.getDate() + '</a>';
 					}
 		
 				} else
 				{
 					if (currentDay.getMonth() == this._firstDayOfMonth.getMonth() && currentDay.getYear() == this._firstDayOfMonth.getYear())
 					{
-						this._template += '<a href="#" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+						this._template += '<a href="javascript:void(0)" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 					} else
 					{
-						this._template += '<a href="#" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+						this._template += '<a href="javascript:void(0)" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 					}
 				}
 			} else
@@ -167,7 +167,7 @@ define(['../../../../_amd/core'], function(wink)
 				for ( var i = this._firstDayOfWeek; i < this._firstDayOfMonth.getDay(); i++)
 				{
 					currentDay.setTime(this._firstDayOfMonth.getTime() - (this._firstDayOfMonth.getDay() - i) * (24 * 3600 * 1000));
-					this._template += '<a href="#" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+					this._template += '<a href="javascript:void(0)" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 				}
 		
 				currentDay.setTime(this._firstDayOfMonth.getTime());
@@ -176,19 +176,19 @@ define(['../../../../_amd/core'], function(wink)
 				{
 					if (currentDay.getDate() == today.getDate())
 					{
-						this._template += '<a href="#" class="dp_date dp_today w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + this._firstDayOfMonth.getTime() + ')">' + this._firstDayOfMonth.getDate() + '</a>';
+						this._template += '<a href="javascript:void(0)" class="dp_date dp_today w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + this._firstDayOfMonth.getTime() + ')">' + this._firstDayOfMonth.getDate() + '</a>';
 					} else
 					{
-						this._template += '<a href="#" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + this._firstDayOfMonth.getTime() + ')">' + this._firstDayOfMonth.getDate() + '</a>';
+						this._template += '<a href="javascript:void(0)" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + this._firstDayOfMonth.getTime() + ')">' + this._firstDayOfMonth.getDate() + '</a>';
 					}
 				} else
 				{
 					if (currentDay.getMonth() == this._firstDayOfMonth.getMonth() && currentDay.getYear() == this._firstDayOfMonth.getYear())
 					{
-						this._template += '<a href="#" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+						this._template += '<a href="javascript:void(0)" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 					} else
 					{
-						this._template += '<a href="#" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+						this._template += '<a href="javascript:void(0)" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 					}
 				}
 		
@@ -200,19 +200,19 @@ define(['../../../../_amd/core'], function(wink)
 					{
 						if (currentDay.getDate() == today.getDate())
 						{
-							this._template += '<a href="#" class="dp_date dp_today w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+							this._template += '<a href="javascript:void(0)" class="dp_date dp_today w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 						} else
 						{
-							this._template += '<a href="#" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+							this._template += '<a href="javascript:void(0)" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 						}
 					} else
 					{
 						if (currentDay.getMonth() == this._firstDayOfMonth.getMonth() && currentDay.getYear() == this._firstDayOfMonth.getYear())
 						{
-							this._template += '<a href="#" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+							this._template += '<a href="javascript:void(0)" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 						} else
 						{
-							this._template += '<a href="#" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+							this._template += '<a href="javascript:void(0)" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 						}
 					}
 				}
@@ -230,19 +230,19 @@ define(['../../../../_amd/core'], function(wink)
 					{
 						if (currentDay.getMonth() == this._firstDayOfMonth.getMonth() && currentDay.getYear() == this._firstDayOfMonth.getYear())
 						{
-							this._template += '<a href="#" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+							this._template += '<a href="javascript:void(0)" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 						} else
 						{
-							this._template += '<a href="#" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+							this._template += '<a href="javascript:void(0)" class="dp_date dp_finished w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 						}
 					} else
 					{
 						if (currentDay.getDate() == today.getDate())
 						{
-							this._template += '<a href="#" class="dp_date dp_today w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+							this._template += '<a href="javascript:void(0)" class="dp_date dp_today w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 						} else
 						{
-							this._template += '<a href="#" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
+							this._template += '<a href="javascript:void(0)" class="dp_date w_border_bottom w_border_right" onClick="(new wink.ui.xy.DatePicker())._selectDate(' + currentDay.getTime() + ')">' + currentDay.getDate() + '</a>';
 						}
 					}
 				}
