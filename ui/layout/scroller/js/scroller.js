@@ -479,7 +479,7 @@ define(['../../../../_amd/core', '../../../../ux/inertia/js/inertia'], function(
 			wink.subscribe('/movementtracker/events/mvtchanged', { context: this, method: '_handleMovementChanged' });
 			
 			this._inertia = new wink.ux.Inertia({ movementtracker: this._movementtracker });
-			wink.subscribe('/inertia/events/inertiaComputed', { context: this, method: '_handleMovementStored' });
+			wink.subscribe('/inertia/events/inertiacomputed', { context: this, method: '_handleMovementStored' });
 			
 			this._transition.endHandler = wink.fx.onTransitionEnd(this._target, wink.bind(this._handleTransitionEnd, this), true);
 		},
@@ -491,7 +491,7 @@ define(['../../../../_amd/core', '../../../../ux/inertia/js/inertia'], function(
 			wink.unsubscribe('/movementtracker/events/notrack', { context: this, method: '_handleTouchNotTracked' });
 			wink.unsubscribe('/movementtracker/events/mvtbegin', { context: this, method: '_handleMovementBegin' });
 			wink.unsubscribe('/movementtracker/events/mvtchanged', { context: this, method: '_handleMovementChanged' });
-			wink.unsubscribe('/inertia/events/inertiaComputed', { context: this, method: '_handleMovementStored' });
+			wink.unsubscribe('/inertia/events/inertiacomputed', { context: this, method: '_handleMovementStored' });
 			this._target.removeEventListener(wink.has.prop("transitionend"), this._transition.endHandler, false);
 			this._transition.endHandler = null;
 			this._listenToContentChanges(false);
