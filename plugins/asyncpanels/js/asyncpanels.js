@@ -32,7 +32,7 @@ define(['../../../_amd/core', '../../../ui/layout/slidingpanels/js/slidingpanels
 	 * 	[
 	 * 		'page1',
 	 * 		{id: 'page2', url: './data.php'},
-	 * 		{id: 'page3', url: './data.php', method: 'GET', parameters: [{name: 'parameter1', value: 'test1'}]},
+	 * 		{id: 'page3', url: './data.php', method: 'GET', parameters: [{name: 'parameter1', value: 'test1'}], onload: function(){alert('loaded')}},
 	 * 		{id: 'page4', url: './data.php', method: 'POST', parameters: [{name: 'parameter1', value: 'test1'}]},
 	 * 	]
 	 * }
@@ -139,7 +139,7 @@ define(['../../../_amd/core', '../../../ui/layout/slidingpanels/js/slidingpanels
 					this._sp.slideTo(id);
 				} else if ( !wink.isString(this.pages[i]) && this.pages[i].id == id && !wink.isSet(this.pages[i].loaded) )
 				{
-					this._xhr = new wink.Xhr({'id': id, index: i});
+					this._xhr = new wink.Xhr({'id': id, index: i, onLoad: this.pages[i].onLoad});
 					
 					wink.layer.show();
 					
@@ -181,6 +181,11 @@ define(['../../../_amd/core', '../../../ui/layout/slidingpanels/js/slidingpanels
 		_onSuccess: function(result)
 		{
 			wink.byId(result.params.id).innerHTML = result.xhrObject.responseText;
+
+			if ( wink.isSet(result.params.onLoad) )
+			{
+				wink.call(result.params.onLoad);
+			}
 			
 			this._loaderNode.style.visibility = "hidden";
 			wink.layer.hide();
