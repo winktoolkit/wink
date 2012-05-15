@@ -201,6 +201,21 @@ define(['../../_kernel/js/kernel'], function(wink)
 				                             "apply", "applyTransition", "applyTransformTransition", "onTransitionEnd" ], false);
 				wink.query.extend(wink.ux.gesture, [ "listenTo", "unlistenTo" ], false);
 				
+				wp.each([
+					"start", "move", "end"
+				], function(i, name) {
+					wp[name] = function() {
+						var l = this.size();
+						if (l == 0) {
+							return;
+						}
+						var i, nodes = this.toArray(), argus = this.splice.call(arguments, 0), t = wink.ux.touch;
+						for (i = 0; i < l; i++) {
+							t.addListener.apply(t, [ nodes[i], name ].concat(argus));
+						}
+					}
+				});
+				
 				wp.initialized = true;
 			},
 			/**
