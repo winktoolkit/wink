@@ -465,7 +465,7 @@ define(['../../../_amd/core'], function()
 		 */
 		_validateProperties: function()
 		{
-			if (!wink.isSet(this.domNode) || this.domNode == '')
+			if (!wink.isSet(this.domNode))
 			{
 				wink.log('[touch.Element] domNode must be specified');
 				return false;
