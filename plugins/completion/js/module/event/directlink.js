@@ -8,7 +8,7 @@
 /**
  * The direct link event module that handle all suggestions DOM node with "link" type
  * 
- * @winkVersion 1.4.0
+ * @winkVersion 1.4
  *  
  * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7
  * 
