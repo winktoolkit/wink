@@ -71,7 +71,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * var coverflow = new wink.ui.xyz.CoverFlow(properties);
 	 * container.appendChild(coverflow.getDomNode());
 	 * 
-	 * @compatibility Iphone OS2 (slow), Iphone OS3, Iphone OS4, BlackBerry 7 (partial)
+	 * @compatibility Iphone OS2 (slow), Iphone OS3, Iphone OS4, Android 4.0, BlackBerry 7 (partial)
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/coverflow/test/test_coverflow_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/coverflow/test/test_coverflow_2.html" target="_blank">Test page (numerical)</a>
