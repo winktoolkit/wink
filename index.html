@@ -522,17 +522,17 @@
 						page: './api/storage/test/test_storage.html'
 					},
 					{
-						name: 'accelerometer',
+						name: 'deviceorientation',
 						label: 'Device orientation',
 						page: './api/accelerometer/test/test_orientation.html'
 					},
 					{
-						name: 'accelerometer',
+						name: 'deviceorientation',
 						label: 'Device orientation (room)',
 						page: './api/accelerometer/test/test_orientation_room.html'
 					},
 					{
-						name: 'accelerometer',
+						name: 'devicemotion',
 						label: 'Device motion',
 						page: './api/accelerometer/test/test_motion.html'
 					}
@@ -700,9 +700,14 @@
 					disableTestPage('geolocation');
 				}
 				
+				if ( !wink.has('native-device-orientation'))
+				{
+					disableTestPage('deviceorientation');
+				}
+				
 				if ( !wink.has('native-device-motion'))
 				{
-					disableTestPage('accelerometer');
+					disableTestPage('devicemotion');
 				}
 
 				// iOS
