@@ -263,3 +263,4 @@ Release 1.4.2 [xx/xx/xxxx]
     - Added hasHeaderFixed/hasFooterFixed properties to wink.ui.layout.FixedLayout
     - Added the insertItem and removeItem methods on the carousel
     - Corrected bug on touch : removal of an inappropriate test in validateProperties
+    - Android 4.0 compatibility
