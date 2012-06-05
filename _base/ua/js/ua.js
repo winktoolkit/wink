@@ -12,7 +12,7 @@
  */
 define(['../../../_amd/core'], function()
 {
-	var a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, t, u, v, w, bb, ba, op, ie;
+	var a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, t, u, v, w, bb, ba, op, ie, ti;
 	a = b = c = d = e = f = g = h = bb = ba = op = ie = false;
 	i = j= k = l = m = n = o = p = q = r = 0;
 	
@@ -74,6 +74,7 @@ define(['../../../_amd/core'], function()
 	a = regTest(" AppleWebKit/", u);
 	ba = regTest(/bada/gi, u);
 	op = regTest(/Opera/gi, u);
+	ti = regTest(/Tizen/gi, u);
 		
 	if (isSet(v))
 	{
@@ -125,7 +126,7 @@ define(['../../../_amd/core'], function()
 		h = regTest(/mozilla/i, u);
 	}
 	
-	b = c || d || f || bb || ba || regTest(" Mobile/", u);
+	b = c || d || f || bb || ba || ti || regTest(" Mobile/", u);
 	
 	if (a)
 	{
@@ -140,6 +141,9 @@ define(['../../../_amd/core'], function()
 		var regvOs = f ? [ "( Android )([^ ]+)", "." ] : [ "( OS )([^ ]+)", "_" ];
 		if (bb) {
 			regvOs = [ "( BlackBerry )([^ ]+)", "." ];
+		}
+		if (ti) {
+			regvOs = [ "( Tizen )([^ ]+)", "." ];
 		}
 		var vOs = _ext(w, regvOs[0], regvOs[1]);
 		p = vOs.v;
@@ -265,6 +269,13 @@ define(['../../../_amd/core'], function()
 		 * @type boolean
 		 */
 		isIE : ie,
+		/**
+		 * The webapp is running on Tizen
+		 * 
+		 * @property isTizen
+		 * @type boolean
+		 */
+		isTizen : ti,
 		/**
 		 * The webkit version
 		 * 
