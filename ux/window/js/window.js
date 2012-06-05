@@ -199,7 +199,7 @@ define(['../../../_amd/core'], function(wink)
 		{
 			var o;
 	
-			if ( wink.isSet(window.orientation) && wink.ua.isIOS )
+			if ( wink.isSet(window.orientation) && (wink.ua.isIOS || wink.ua.isTizen) )
 			{
 				if ( Math.abs(window.orientation) == 90 )
 				{
