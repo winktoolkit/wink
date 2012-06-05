@@ -229,34 +229,5 @@ define(['../../../_amd/core'], function(wink)
 	
 	window.addEventListener("DOMContentLoaded", function(){wink.ux.window._init();}, false);
 	
-	/**
-	 * @deprecated
-	 * @since 1.3.0
-	 */
-	wink.ux.Window = function()
-	{
-		wink.log('[Deprecated] use wink.ux.window instead');
-		
-		/**
-		 * @deprecated
-		 * @since 1.3.0
-		 */
-		this.getProperties = function()
-		{
-			wink.log('[Deprecated] use wink.ux.window properties instead');
-			
-			var p =
-			{
-				screenWidth: wink.ux.window.screenWidth,
-				screenHeight: wink.ux.window.screenHeight,
-				width: wink.ux.window.width,
-				height:  wink.ux.window.height,
-				orientation:  wink.ux.window.orientation
-			};
-			
-			return p;
-		};
-	};
-	
 	return wink.ux.window;
 });
