@@ -20,7 +20,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * @property
 	 * @type string
 	 */
-	wink.version = '1.4.2';
+	wink.version = '1.4.3';
 	
 	/**
 	 * @namespace Gathers all the HTML5 APIs related components

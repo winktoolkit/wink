@@ -264,3 +264,5 @@ Release 1.4.2 [06/06/2012]
     - Added the insertItem and removeItem methods on the carousel
     - Corrected bug on touch : removal of an inappropriate test in validateProperties
     - Android 4.0 compatibility
+    
+Release 1.4.3 [xx/xx/xxxx]
