@@ -247,7 +247,9 @@ wink.cache = (function()
 		_cacheErrors = [];
 		_errors = [];
 		_loadErrors = [];
-		_resourcesCleaned = [], _resourcesOldVersion = [], _cleaned = false;
+		_resourcesCleaned = [];
+		_resourcesOldVersion = [];
+		_cleaned = false;
 	};
 
 	/**
