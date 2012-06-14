@@ -48,7 +48,7 @@ define(['../../../_amd/core'], function(wink)
 	 * };
 	 * wink.subscribe('/window/events/orientationchange', { context: window, method: 'handleOrientation' });
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ux/window/test/test_window.html" target="_blank">Test page</a>
 	 */
@@ -199,7 +199,7 @@ define(['../../../_amd/core'], function(wink)
 		{
 			var o;
 	
-			if ( wink.isSet(window.orientation) && wink.ua.isIOS )
+			if ( wink.isSet(window.orientation) && (wink.ua.isIOS || wink.ua.isTizen) )
 			{
 				if ( Math.abs(window.orientation) == 90 )
 				{
@@ -228,35 +228,6 @@ define(['../../../_amd/core'], function(wink)
 	};
 	
 	window.addEventListener("DOMContentLoaded", function(){wink.ux.window._init();}, false);
-	
-	/**
-	 * @deprecated
-	 * @since 1.3.0
-	 */
-	wink.ux.Window = function()
-	{
-		wink.log('[Deprecated] use wink.ux.window instead');
-		
-		/**
-		 * @deprecated
-		 * @since 1.3.0
-		 */
-		this.getProperties = function()
-		{
-			wink.log('[Deprecated] use wink.ux.window properties instead');
-			
-			var p =
-			{
-				screenWidth: wink.ux.window.screenWidth,
-				screenHeight: wink.ux.window.screenHeight,
-				width: wink.ux.window.width,
-				height:  wink.ux.window.height,
-				orientation:  wink.ux.window.orientation
-			};
-			
-			return p;
-		};
-	};
 	
 	return wink.ux.window;
 });

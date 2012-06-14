@@ -249,7 +249,7 @@ Release 1.4.1 [01/02/2011]
 	- Added localStorage and indexedDatabse support for easy caching
 	- Integrating the latest YUI compressor version
 
-Release 1.4.2 [xx/xx/xxxx]
+Release 1.4.2 [06/06/2012]
 	- Corrected bug in wink.cache : scope problems for error callbacks
 	- Corrected bug in wink.ux.history : listen and unlisten on different callbacks
 	- Feature detections added
@@ -263,3 +263,6 @@ Release 1.4.2 [xx/xx/xxxx]
     - Added hasHeaderFixed/hasFooterFixed properties to wink.ui.layout.FixedLayout
     - Added the insertItem and removeItem methods on the carousel
     - Corrected bug on touch : removal of an inappropriate test in validateProperties
+    - Android 4.0 compatibility
+    
+Release 1.4.3 [xx/xx/xxxx]

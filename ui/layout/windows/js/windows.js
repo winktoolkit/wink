@@ -55,7 +55,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * windows = new wink.ui.layout.Windows(properties);
 	 * document.body.appendChild(windows.getDomNode());
 	 * 
-	 * @compatibility Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
+	 * @compatibility Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, Android 4.0, BlackBerry 7
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/layout/windows/test/test_windows.html" target="_blank">Test page</a>
 	 */

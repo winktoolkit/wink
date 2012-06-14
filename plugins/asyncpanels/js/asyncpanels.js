@@ -44,7 +44,7 @@ define(['../../../_amd/core', '../../../ui/layout/slidingpanels/js/slidingpanels
 	 * @requires wink.ui.layout.SlidingPanels
 	 * @requires wink.ui.xy.Spinner
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @winkVersion 1.4
 	 * 
