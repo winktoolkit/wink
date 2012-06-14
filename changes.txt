@@ -266,3 +266,4 @@ Release 1.4.2 [06/06/2012]
     - Android 4.0 compatibility
     
 Release 1.4.3 [xx/xx/xxxx]
+	- Fix syntax issues: unused local variable, prevent non local variable, comma/semicolon syntax errors
