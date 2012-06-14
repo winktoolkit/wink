@@ -37,7 +37,7 @@ define(['../../../_amd/core'], function(wink)
 	 * 
 	 * storage.connect(descriptor);
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @see <a href="WINK_ROOT_URL/api/storage/test/test_storage.html" target="_blank">Test page</a>
 	 */
@@ -473,7 +473,6 @@ define(['../../../_amd/core'], function(wink)
 			updateRequest.request += tableName;
 			updateRequest.request += ' SET ';
 			
-			var paramString = '';
 			var separator = '';
 			
 			for(var field in entry)
@@ -769,7 +768,7 @@ define(['../../../_amd/core'], function(wink)
 		{
 			var string = "";
 			var i = 0;
-			var c = c1 = c2 = 0;
+			var c = 0, c2 = 0, c3 = 0;
 	 
 			while ( i < utftext.length ) {
 	 

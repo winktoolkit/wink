@@ -126,7 +126,9 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 				this._footer = wink.byId(this.footer);
 			}
 			
-			delete this.target, this.header, this.footer;
+			delete this.target;
+			delete this.header;
+			delete this.footer;
 			
 			this._updateTargetSize();
 		},

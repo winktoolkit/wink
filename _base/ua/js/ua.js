@@ -12,7 +12,7 @@
  */
 define(['../../../_amd/core'], function()
 {
-	var a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, t, u, v, w, bb, ba, op, ie;
+	var a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, t, u, v, w, bb, ba, op, ie, ti;
 	a = b = c = d = e = f = g = h = bb = ba = op = ie = false;
 	i = j= k = l = m = n = o = p = q = r = 0;
 	
@@ -68,12 +68,13 @@ define(['../../../_amd/core'], function()
 		return result;
 	};
 
-	t = navigator || {}, u = t.userAgent, v = t.platform, w = t.appVersion;
+	t = navigator || {}; u = t.userAgent; v = t.platform; w = t.appVersion;
 
 	// Retrieve all necessary informations about the platform.
 	a = regTest(" AppleWebKit/", u);
 	ba = regTest(/bada/gi, u);
 	op = regTest(/Opera/gi, u);
+	ti = regTest(/Tizen/gi, u);
 		
 	if (isSet(v))
 	{
@@ -125,7 +126,7 @@ define(['../../../_amd/core'], function()
 		h = regTest(/mozilla/i, u);
 	}
 	
-	b = c || d || f || bb || ba || regTest(" Mobile/", u);
+	b = c || d || f || bb || ba || ti || regTest(" Mobile/", u);
 	
 	if (a)
 	{
@@ -140,6 +141,9 @@ define(['../../../_amd/core'], function()
 		var regvOs = f ? [ "( Android )([^ ]+)", "." ] : [ "( OS )([^ ]+)", "_" ];
 		if (bb) {
 			regvOs = [ "( BlackBerry )([^ ]+)", "." ];
+		}
+		if (ti) {
+			regvOs = [ "( Tizen )([^ ]+)", "." ];
 		}
 		var vOs = _ext(w, regvOs[0], regvOs[1]);
 		p = vOs.v;
@@ -168,7 +172,7 @@ define(['../../../_amd/core'], function()
 	 * 	...
 	 * }
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/_base/ua/test/test_ua.html" target="_blank">Test page</a>
 	 */
@@ -265,6 +269,13 @@ define(['../../../_amd/core'], function()
 		 * @type boolean
 		 */
 		isIE : ie,
+		/**
+		 * The webapp is running on Tizen
+		 * 
+		 * @property isTizen
+		 * @type boolean
+		 */
+		isTizen : ti,
 		/**
 		 * The webkit version
 		 * 

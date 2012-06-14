@@ -76,7 +76,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * 
 	 * wink.byId('output').appendChild(carousel.getDomNode());
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xy/carousel/test/test_carousel_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xy/carousel/test/test_carousel_2.html" target="_blank">Test page (vertical)</a>
@@ -377,7 +377,7 @@ define(['../../../../_amd/core'], function(wink)
             while (this._dotsNode.firstChild) 
             {
                this._dotsNode.removeChild(this._dotsNode.firstChild);
-            };
+            }
             
 			for ( i=0; i <= l; i++)//go through old and new items and fix up classes and indexes
 			{
@@ -426,7 +426,7 @@ define(['../../../../_amd/core'], function(wink)
             while (this._dotsNode.firstChild) 
             {
                this._dotsNode.removeChild(this._dotsNode.firstChild);
-            };
+            }
             
 			for ( i=0; i < l; i++)//go through items and fix up classes and indexes
 			{
@@ -482,12 +482,13 @@ define(['../../../../_amd/core'], function(wink)
 		{
 			this._startEvent = event;
 			
+			var _c;
 			if (this.display == this._HORIZONTAL_POSITION)
 			{
-				var _c = event.x;
+				_c = event.x;
 			} else
 			{
-				var _c = event.y;
+				_c = event.y;
 			}
 			
 			if (this.touchPropagation == false)
@@ -516,12 +517,13 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		_touchMove: function(event)
 		{
+			var _c;
 			if (this.display == this._HORIZONTAL_POSITION)
 			{
-				var _c = event.x;
+				_c = event.x;
 			} else
 			{
-				var _c = event.y;
+				_c = event.y;
 			}
 			
 			// If the auto adjust parameter is not set, stop the movement at both ends of the carousel
@@ -559,14 +561,15 @@ define(['../../../../_amd/core'], function(wink)
 		{
 			this._endEvent = event;
 			
+			var _sc, _ec;
 			if (this.display == this._HORIZONTAL_POSITION)
 			{
-				var _sc = this._startEvent.x;
-				var _ec = this._endEvent.x;
+				_sc = this._startEvent.x;
+				_ec = this._endEvent.x;
 			} else
 			{
-				var _sc = this._startEvent.y;
-				var _ec = this._endEvent.y;
+				_sc = this._startEvent.y;
+				_ec = this._endEvent.y;
 			}
 			
 			// Check if a click event must be generated

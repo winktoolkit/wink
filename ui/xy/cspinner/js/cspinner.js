@@ -45,7 +45,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric'], fu
 	 * 	space: 20
 	 * }
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xy/cspinner/test/test_cspinner_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xy/cspinner/test/test_cspinner_2.html" target="_blank">Test page (custom)</a>
@@ -201,8 +201,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric'], fu
 	};
 	
 	var _round = wink.math.round,
-		_degToRad = wink.math.degToRad,
-		_radToDeg = wink.math.radToDeg;
+		_degToRad = wink.math.degToRad;
 	
 	/**
 	 * 
@@ -248,9 +247,6 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric'], fu
 	
 		ctx.closePath();
 	
-		var gradientP1 = _getCirclePoint(cx, cy, r1, a1 + (Math.abs(a2 - a1) / 2));
-		var gradientP2 = _getCirclePoint(cx, cy, r2, a1 + (Math.abs(a2 - a1) / 2));
-		
 		ctx.fillStyle = color;
 		ctx.fill();
 

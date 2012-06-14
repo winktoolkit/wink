@@ -53,7 +53,7 @@ define(['../../../_amd/core', '../../../math/_geometric/js/geometric', '../../..
 	  * @requires wink.math (geometric)
 	  * @requires wink.ux.MovementTracker
 	  * 
-	  * @compatibility Iphone OS4, Ipad, Android 3.0, Android 3.1, BlackBerry 7
+	  * @compatibility Iphone OS4, Ipad, Android 3.0, Android 3.1, Android 4.0, BlackBerry 7
 	  * 
 	  * @see <a href="WINK_ROOT_URL/mm/mediawheel/test/test_mediawheel_1.html" target="_blank">Test page (audio)</a>
 	  * @see <a href="WINK_ROOT_URL/mm/mediawheel/test/test_mediawheel_2.html" target="_blank">Test page (video)</a>
@@ -623,7 +623,7 @@ define(['../../../_amd/core', '../../../math/_geometric/js/geometric', '../../..
 	 */
 	var _getPolarCoordinates = function(node, absX, absY, cx, cy)
 	{
-		var pos = wink.getPosition(node, null, true);
+		var pos = wink.getPosition(node, null, true),
 			offsetX = absX - pos.x,
 			offsetY = absY - pos.y,
 			xTrigo = (offsetX - cx),

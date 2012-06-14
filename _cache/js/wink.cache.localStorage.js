@@ -233,8 +233,6 @@ wink.cache.localStorage.prototype = {
 		var _str = function(value)
 		{
 			var str;
-			var indent = '';
-			var wrapper = new Object();
 
 			if (value && ((value.toJSON !== undefined) && (value.toJSON !== null)))
 			{

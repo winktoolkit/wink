@@ -8,7 +8,7 @@
 /**
  * @fileOverview Wink main object and core methods
  * 
- * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+ * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
  * @author Jerome GIRAUD
  */
 
@@ -20,7 +20,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * @property
 	 * @type string
 	 */
-	wink.version = '1.4.2';
+	wink.version = '1.4.3';
 	
 	/**
 	 * @namespace Gathers all the HTML5 APIs related components
@@ -32,9 +32,9 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * 
 	 * @compatibility 
 	 * 
-	 * <b>2D fx</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Bada 1.0, Windows Phone 7.5
+	 * <b>2D fx</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, Bada 1.0, Windows Phone 7.5
 	 * <br />
-	 * <b>3D fx</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, BlackBerry 7
+	 * <b>3D fx</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 3.0, Android 3.1, Android 4.0, BlackBerry 7
 	 * 
 	 * @see <a href="WINK_ROOT_URL/fx/_xy/test/test_xy_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/fx/_xy/test/test_xy_2.html" target="_blank">Test page (transition)</a>
@@ -47,11 +47,11 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * 
 	 * @compatibility
 	 * 
-	 * <b>basics</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * <b>basics</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * <br />
-	 * <b>geometrics</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * <b>geometrics</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * <br />
-	 * <b>matrix</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0
+	 * <b>matrix</b> Iphone OS2, Iphone OS3, Iphone OS4, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @see <a href="WINK_ROOT_URL/math/_basics/test/test_basics.html" target="_blank">Test page (basics)</a>
 	 * @see <a href="WINK_ROOT_URL/math/_geometric/test/test_geometric.html" target="_blank">Test page (geometric)</a>
@@ -226,7 +226,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 				var thewp = wrapper || wp,
 					map = {};
 				
-				var i, l = methods.length;
+				var l = methods.length;
 				for (var i = 0; i < l; i++) {
 					var mi = methods[i],
 						f = context ? context[mi] : null;

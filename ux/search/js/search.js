@@ -34,7 +34,7 @@ define(['../../../_amd/core'], function(wink)
 	 * }
 	 * search = new wink.ux.Search(searchProperties);
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ux/search/test/test_search.html" target="_blank">Test page</a>
 	 */
@@ -93,17 +93,11 @@ define(['../../../_amd/core'], function(wink)
 		{
 			var resultText = this._originalText;
 			var lowerCaseText = resultText.toLowerCase();
-			var searchfinished = false;
 			var sLowerCase = s.toLowerCase();
 			
 			var idxSearch = 0;
 			var idxResults = [];
-			var lastIdx = lowerCaseText.lastIndexOf(sLowerCase);
 			
-			if(lastIdx == -1)
-			{
-				searchfinished = true;
-			}
 			while(true)
 			{
 				var idxResult = lowerCaseText.indexOf(sLowerCase, idxSearch);
