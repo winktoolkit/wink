@@ -566,7 +566,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 				var target = _source.target,
 					args = [].splice.call(arguments, 0);
 				
-				target && target.apply(source, args);
+				var result = target && target.apply(source, args);
 
 				var i, cbs = _source.cbs, l = cbs.length;
 				for (i = 0; i < l; i++)
@@ -581,6 +581,8 @@ define(['../../_kernel/js/kernel'], function(wink)
 						wink.call({ context: cb.context, method: cb.method, arguments: args.concat(cb.arguments) });
 					}
 				}
+				
+				return result;
 			};
 			
 			_source.target = f;
