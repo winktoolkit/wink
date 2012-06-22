@@ -623,7 +623,7 @@ define(['../../../_amd/core', '../../../math/_geometric/js/geometric', '../../..
 	 */
 	var _getPolarCoordinates = function(node, absX, absY, cx, cy)
 	{
-		var pos = wink.getPosition(node, null, true);
+		var pos = wink.getPosition(node, null, true),
 			offsetX = absX - pos.x,
 			offsetY = absY - pos.y,
 			xTrigo = (offsetX - cx),

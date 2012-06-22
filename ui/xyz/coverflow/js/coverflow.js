@@ -1191,8 +1191,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 		 */
 		_initTransformations: function()
 		{
-			var cp = this._currentPosition,
-				cvs = this.covers,
+			var cvs = this.covers,
 				l = cvs.length,
 				middle = Math.floor(l / 2),
 				i, depth1 = 0, depth2 = (l - 1) + middle;

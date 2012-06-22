@@ -473,7 +473,6 @@ define(['../../../_amd/core'], function(wink)
 			updateRequest.request += tableName;
 			updateRequest.request += ' SET ';
 			
-			var paramString = '';
 			var separator = '';
 			
 			for(var field in entry)
@@ -769,7 +768,7 @@ define(['../../../_amd/core'], function(wink)
 		{
 			var string = "";
 			var i = 0;
-			var c = c1 = c2 = 0;
+			var c = 0, c2 = 0, c3 = 0;
 	 
 			while ( i < utftext.length ) {
 	 

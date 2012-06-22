@@ -53,7 +53,7 @@ define(['../../../_amd/core'], function()
 		}
 		var subscription = [topic.toLowerCase(), callback];
 		_subscribed_topics.push(subscription);
-	};
+	}
 	
 	/**
 	 * Detach from the given topic
@@ -78,7 +78,7 @@ define(['../../../_amd/core'], function()
 				break;
 			}
 		}
-	};
+	}
 	
 	/**
 	 * Publish an event to all the subscribers
@@ -92,7 +92,7 @@ define(['../../../_amd/core'], function()
 	function publish(topic, value)
 	{
 		_dispatch(topic.toLowerCase(), value);
-	};
+	}
 	
 	/**
 	 * Triggers all the events which are in the queue

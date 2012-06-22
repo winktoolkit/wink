@@ -142,7 +142,7 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 			animDuration: 800,
 			refreshRate: 40,
 			fpms: 0.025
-		},
+		};
 		this._view				= {
 			h: 0,
 			w: 0,
@@ -179,7 +179,7 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 			wrap: 17,
 			scaleIn: 18,
 			scaleOut: 19
-		},
+		};
 		
 		this._domNode			= null;
 		this._canvasNode		= null;

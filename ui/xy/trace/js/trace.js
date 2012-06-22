@@ -408,10 +408,9 @@ define(['../../../../_amd/core'], function(wink)
 	 */
 	var _getRGB = function(colorS)
 	{
-		var mt = null,
-			rgb = null;
+		var rgb = null,
+			mt = (/^data:image.*/).exec(colorS);
 		
-		var mt = (/^data:image.*/).exec(colorS);
 		if (mt) {
 			return null;
 		}

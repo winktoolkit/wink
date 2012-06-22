@@ -138,8 +138,6 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		loadCssTransform: function(transformation)
 		{
-			var result = null;
-			
 			if (isString(transformation))
 			{
 				var search = "matrix3d";

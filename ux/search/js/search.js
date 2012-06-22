@@ -93,17 +93,11 @@ define(['../../../_amd/core'], function(wink)
 		{
 			var resultText = this._originalText;
 			var lowerCaseText = resultText.toLowerCase();
-			var searchfinished = false;
 			var sLowerCase = s.toLowerCase();
 			
 			var idxSearch = 0;
 			var idxResults = [];
-			var lastIdx = lowerCaseText.lastIndexOf(sLowerCase);
 			
-			if(lastIdx == -1)
-			{
-				searchfinished = true;
-			}
 			while(true)
 			{
 				var idxResult = lowerCaseText.indexOf(sLowerCase, idxSearch);

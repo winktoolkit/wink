@@ -340,7 +340,6 @@ define(['../../../_amd/core', './storage'], function(wink)
 		 */
 		_dropTables: function(tableList)
 		{
-			var requests = [];
 			for(var i=0; i<tableList.length; i++)
 			{
 				var request = wink.api.storage.sqlite.getDropTableRequest(this._descriptor, tableList[i]);

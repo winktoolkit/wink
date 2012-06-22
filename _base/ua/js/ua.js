@@ -68,7 +68,7 @@ define(['../../../_amd/core'], function()
 		return result;
 	};
 
-	t = navigator || {}, u = t.userAgent, v = t.platform, w = t.appVersion;
+	t = navigator || {}; u = t.userAgent; v = t.platform; w = t.appVersion;
 
 	// Retrieve all necessary informations about the platform.
 	a = regTest(" AppleWebKit/", u);

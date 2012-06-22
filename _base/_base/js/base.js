@@ -226,7 +226,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 				var thewp = wrapper || wp,
 					map = {};
 				
-				var i, l = methods.length;
+				var l = methods.length;
 				for (var i = 0; i < l; i++) {
 					var mi = methods[i],
 						f = context ? context[mi] : null;

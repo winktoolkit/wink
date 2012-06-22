@@ -201,8 +201,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric'], fu
 	};
 	
 	var _round = wink.math.round,
-		_degToRad = wink.math.degToRad,
-		_radToDeg = wink.math.radToDeg;
+		_degToRad = wink.math.degToRad;
 	
 	/**
 	 * 
@@ -248,9 +247,6 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric'], fu
 	
 		ctx.closePath();
 	
-		var gradientP1 = _getCirclePoint(cx, cy, r1, a1 + (Math.abs(a2 - a1) / 2));
-		var gradientP2 = _getCirclePoint(cx, cy, r2, a1 + (Math.abs(a2 - a1) / 2));
-		
 		ctx.fillStyle = color;
 		ctx.fill();
 

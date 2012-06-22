@@ -441,7 +441,6 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 			};
 			
 			var _addlistener = wink.ux.touch.addListener,
-				_isAndroid = wink.ua.isAndroid,
 				
 				_scrollY = null,
 				_isScrolling = false,
