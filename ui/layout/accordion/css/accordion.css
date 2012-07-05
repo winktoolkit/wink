@@ -8,11 +8,14 @@
 	background-color: #fff;
 }
 
+.w_list.ac_accordion .w_list_item.w_no_wrap.ac_title
+{
+	min-height: 44px;
+}
+
 .ac_section
 {	
-	position: absolute;
-	height: 44px;
-	width: 100%;
+	position: relative;
 }
 .ac_content
 {
