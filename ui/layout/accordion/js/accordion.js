@@ -62,7 +62,6 @@ define(['../../../../_amd/core'], function(wink)
 		if (this._validateProperties() === false) return;
 		
 		this._initDom();
-		this._subscribeToEvents();
 	};
 	
 	wink.ui.layout.Accordion.prototype = 
@@ -235,13 +234,13 @@ define(['../../../../_amd/core'], function(wink)
 		},
 	
 		/**
-		 * Select a section after a '/section/events/selectsection' event has been fired
+		 * Select a section
 		 * 
-		 * @param {object} params the object returned when a '/section/events/selectsection' event is fired
+		 * @param {integer} id the id of the selected section
 		 */
-		_selectSection: function(params)
+		_selectSection: function(id)
 		{
-			this.selectSection(params.sectionId);
+			this.selectSection(id);
 		},
 	
 		/**
@@ -251,15 +250,6 @@ define(['../../../../_amd/core'], function(wink)
 		{
 			this._domNode = document.createElement('div');
 			this._domNode.className = 'w_list w_border_top ac_accordion';
-		},
-		
-		
-		/**
-		 * Listen to the '/section/events/selectsection' events
-		 */
-		_subscribeToEvents: function()
-		{
-			wink.subscribe('/section/events/selectsection', {context: this, method: '_selectSection'});
 		},
 		
 		/**
@@ -495,9 +485,11 @@ define(['../../../../_amd/core'], function(wink)
 			this.titleNode.innerHTML = this.title;
 			this.titleNode.className = 'w_box w_list_item w_no_wrap w_border_bottom w_border_left w_border_right w_bg_light ac_title';
 			
-			this.titleNode.onclick = wink.bind(function(e)
+			this.titleNode.onclick = wink.bind(function()
 			{
-				wink.publish('/section/events/selectsection', {'sectionId': this.uId});
+				this._accordion._selectSection(this.uId);
+				
+				wink.publish('/section/events/selectsection', {sectionId: this.uId, accordionId: this._accordion.uId});
 			}, this);
 			
 			this.chevronNode = document.createElement('div');
