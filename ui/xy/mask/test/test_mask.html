@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+		<style>
+			html, body
+			{
+				margin: 0;
+				padding: 0
+			}
+			
+			#layer1, #layer2, #layer3
+			{
+				margin: 30px auto;
+				
+				border: 1px solid red;
+				background: blue;
+				
+				height: 50px;
+				width: 200px;
+			}
+			
+			#layer2
+			{
+				background: orange;
+			}
+			
+			#layer3
+			{
+				background: green;
+			}
+		</style>
+		
+		<!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../../../_base/_dom/js/dom.js"></script>
+		<script type="text/javascript" src="../../../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+		
+		<script type="text/javascript" src="../js/mask.js"></script>
+				
+		<script>
+			var mask1, mask2;
+			
+			var init = function()
+			{
+				mask1 = new wink.ui.xy.Mask();
+				mask2 = new wink.ui.xy.Mask();
+				
+				mask1.onclick = function()
+				{
+					mask1.hide();
+				}
+				
+				mask2.onclick = function()
+				{
+					mask2.hide();
+				}
+			}
+			
+			var test1 = function()
+			{
+				mask1.show(wink.byId('layer1'));
+			}
+			
+			var test2 = function()
+			{
+				mask1.show(wink.byId('layer2'));
+			}
+			
+			var test3 = function()
+			{
+				mask2.show(wink.byId('layer3'));
+			}
+		</script>
+	</head>
+	<body onload="init();">
+		<input type="button" value="show layer on first rectangle" onclick="test1();" />
+		<input type="button" value="show layer on second rectangle" onclick="test2();" />
+		<input type="button" value="show layer on third rectangle" onclick="test3();" />
+		
+		<div id="layer1">
+		</div>
+		
+		<div id="layer2">
+		</div>
+		
+		<div id="layer3">
+		</div>
+	</body>
+</html>
