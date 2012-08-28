@@ -125,6 +125,42 @@ doh.register("wink.net.xhr",
 			a1.sendData('unavailable.html', null, 'GET', {method: 'successCallback'}, {method: 'errorCallback'}, null);
 			
 			return d;
+		},
+		
+		//Test abort
+		function abort(t)
+		{
+			var d = new doh.Deferred();
+		
+			var a1 = new wink.net.Xhr();
+			
+			/**
+			 * @ignore
+			 */
+			successCallback = function(params)
+			{
+				d.errback(new Error("Error: should have received a 0 status"));
+			};
+			
+			/**
+			 * @ignore
+			 */
+			errorCallback = function(params)
+			{
+				try
+				{
+					doh.is('0', params.xhrObject.status);
+					d.callback(true);
+	
+				} catch(e)
+				{
+					d.errback(e);
+				}
+			};
+			
+			a1.sendData('../base64.php', null, 'GET', {method: 'successCallback'}, {method: 'errorCallback'}, null, 1);
+			
+			return d;
 		}
     ]
 );

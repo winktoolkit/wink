@@ -270,3 +270,4 @@ Release 1.4.3 [xx/xx/xxxx]
 	- Added a return value to wink.connect
 	- Added openMultipleSections option in wink.ui.layout.Accordion. Sections titles can now have a variable height
 	- Added wink.ui.xy.Mask
+	- Added a timeout parameter to the wink.net.Xhr sendData method

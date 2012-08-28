@@ -83,19 +83,23 @@ define(['../../../_amd/core'], function()
 		 * @param {object|function} [successCallback] The method to call in case of success. The 'callback' is a function or an object that must contain a 'method' and a 'scope'
 		 * @param {object|function} [failureCallback] The method to call in case of success. The 'callback' is a function or an object that must contain a 'method' and a 'scope'
 		 * @param {array} [headers] The HTTP headers to add to the request
+		 * @param {integer} [timeout] The HTTP request timeout
 		 * 
 		 * @returns {boolean} Returns true if the request was send, false otherwise
 		 */
-		sendData: function(url, parameters, method, successCallback, failureCallback, headers)
+		sendData: function(url, parameters, method, successCallback, failureCallback, headers, timeout)
 		{
-			var r = this.request, xo = r.xhrObject, enc = encodeURIComponent;
-		
-			method = method.toUpperCase();
+			var r = this.request, xo = r.xhrObject, enc = encodeURIComponent, method = method.toUpperCase(), t = null;
 			
 			if ( isSet(parameters) && !isArray(parameters) )
 			{
 				wink.log('[Xhr] parameters must be in an array of objects containing the parameter name and value');
 				return;
+			}
+			
+			if ( isSet(timeout) )
+			{
+				t = wink.setTimeout(this, '_abort', timeout, failureCallback);
 			}
 		
 			if (xo)
@@ -171,6 +175,8 @@ define(['../../../_amd/core'], function()
 						return
 					}
 					
+					clearTimeout(t);
+					
 					var status = xo.status;
 					
 					if (!((status >= 200 && status < 400) || status == 0))
@@ -193,6 +199,22 @@ define(['../../../_amd/core'], function()
 			}
 		
 			return true;
+		},
+		
+		/**
+		 * Abort the current request
+		 * 
+		 * @param {object|function} [failureCallback] The method to call in case of success. The 'callback' is a function or an object that must contain a 'method' and a 'scope'
+		 */
+		_abort: function(failureCallback)
+		{
+			this.request.xhrObject.onreadystatechange = null;
+			this.request.xhrObject.abort();
+			
+			if ( isSet(failureCallback) )
+			{
+				wink.call(failureCallback, this.request);
+			}
 		},
 	
 		/**
