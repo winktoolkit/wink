@@ -35,7 +35,7 @@ define(
 	 	
 	 	
 	 	dojoBaseUrl + '/dijit/_base/manager',
-	 	dojoBaseUrl + '/dijit/dialogUnderlay',
+	 	dojoBaseUrl + '/dijit/DialogUnderlay',
 	 	
 	 	dojoBaseUrl + '/dojox/math/round'
 	 	
