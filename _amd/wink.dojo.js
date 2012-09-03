@@ -413,7 +413,7 @@ define(
 		
 		wink.net.Xhr.prototype =
 		{
-			sendData: function(url, parameters, method, successCallback, failureCallback, headers)
+			sendData: function(url, parameters, method, successCallback, failureCallback, headers, timeout)
 			{
 				var p = this.properties;
 				var success, failure;
@@ -452,6 +452,7 @@ define(
 					url: url,
 					handleAs: 'text',
 					headers: headers,
+					timeout: timeout,
 					content: content,
 					load: success,
 					error: failure
