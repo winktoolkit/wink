@@ -272,3 +272,4 @@ Release 1.4.3 [xx/xx/xxxx]
 	- Added wink.ui.xy.Mask
 	- Added a timeout parameter to the wink.net.Xhr sendData method
 	- Corrected bug on slideshow: freezing after next/previous calls due to no notification of activity
+	- Build system: option build.js.options.warninglevel added
