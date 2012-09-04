@@ -358,7 +358,7 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 				else
 				{
 					var elapsed = ct - this._renderingTiming;
-					if (elapsed > this._params.inactivityDuration)
+					if (elapsed > this._params.inactivityDuration && !this._sliding && !this._animated)
 					{
 						this._stopRendering();
 					}
@@ -694,6 +694,7 @@ define(['../../../../_amd/core', '../../../../ux/movementtracker/js/movementtrac
 			{
 				this._goToItem(this._view.nearestItem);
 			}
+			this._notifyActivity();
 		},
 		/**
 		 * Goes to the given position index
