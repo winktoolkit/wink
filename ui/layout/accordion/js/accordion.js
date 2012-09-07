@@ -263,8 +263,6 @@ define(['../../../../_amd/core'], function(wink)
 		{
 			this._domNode = document.createElement('div');
 			this._domNode.className = 'w_list w_border_top ac_accordion';
-			
-			//wink.fx.applyTransition(this._domNode, 'height', this.DURATION + 'ms', '', 'ease-in-out');
 		},
 		
 		/**
@@ -275,7 +273,13 @@ define(['../../../../_amd/core'], function(wink)
 		{
 			if ( !wink.isBoolean(this.openMultipleSections) )
 			{
-				wink.log('[Accordion] openMultipleSections parameters must be a boolean');
+				wink.log('[Accordion] openMultipleSections parameter must be a boolean');
+				return false;
+			}
+			
+			if ( !wink.isBoolean(this.autoScroll) )
+			{
+				wink.log('[Accordion] autoScroll parameter must be a boolean');
 				return false;
 			}
 		}
@@ -413,7 +417,7 @@ define(['../../../../_amd/core'], function(wink)
 				this.opened = false;
 			}
 			
-			if(!wink.has('css-transition'))
+			if(!wink.has('css-transition') && this._accordion.autoScroll)
 			{
 				this._scroll();
 			}
