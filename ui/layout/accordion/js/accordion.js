@@ -47,13 +47,23 @@ define(['../../../../_amd/core'], function(wink)
 		 * @property openMultipleSections
 		 * @type boolean
 		 */
-		this.openMultipleSections = false;   
+		this.openMultipleSections = false;  
+		
+		/**
+		 * Scroll automatically one a section is being opened
+		 * 
+		 * @property autoScroll
+		 * @type boolean
+		 */
+		this.autoScroll           = true;
 		
 		this._sectionsList        = [];
 		
 		this._selectedSection     = 0;
 		this._height              = 0;
 		this._visibleContent      = 0;
+		
+		this._animated            = false;
 		
 		this._domNode             = null;
 
@@ -85,7 +95,7 @@ define(['../../../../_amd/core'], function(wink)
 			this._domNode.appendChild(section.containerNode);
 			
 			this._updateHeight();
-			
+
 			return section.uId;
 		},
 	
@@ -180,10 +190,13 @@ define(['../../../../_amd/core'], function(wink)
 				}
 			}
 
-			if ( (this._sectionsList[f].TITLE_HEIGHT * this._sectionsList.length) + this._visibleContent > this._height )
+			if ( !this._animated )
 			{
-				this._updateHeight();
+				wink.fx.applyTransition(this._domNode, 'height', this.DURATION + 'ms', '', 'ease-in-out');
+				this._animated = true;
 			}
+			
+			this._updateHeight();
 		},
 		
 		/**
@@ -250,6 +263,8 @@ define(['../../../../_amd/core'], function(wink)
 		{
 			this._domNode = document.createElement('div');
 			this._domNode.className = 'w_list w_border_top ac_accordion';
+			
+			//wink.fx.applyTransition(this._domNode, 'height', this.DURATION + 'ms', '', 'ease-in-out');
 		},
 		
 		/**
@@ -381,7 +396,7 @@ define(['../../../../_amd/core'], function(wink)
 			wink.fx.translate(this.containerNode, 0, position);
 			wink.fx.rotate(this.chevronNode, 0);
 			
-			if(wink.has('css-transition'))
+			if(wink.has('css-transition') && this._accordion.autoScroll)
 			{
 				wink.fx.onTransitionEnd(this.contentNode, wink.bind(this._scroll, this));
 			}
