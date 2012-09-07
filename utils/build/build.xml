@@ -159,7 +159,7 @@
 			<arg line="${file}" />
 			<arg line="--js_output_file" />
 			<arg line="${build.js.destdir}/${name.min}" />
-			<arg line="--warning_level=DEFAULT" />
+			<arg line="--warning_level=${build.js.options.warninglevel}" />
 		</java>
 		
 		<if><not><equals arg1="${build.js.keep.nomin}" arg2="true" /></not>
