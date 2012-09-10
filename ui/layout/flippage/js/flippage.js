@@ -282,7 +282,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 		 * Simulates the shadow of pages
 		 * 
 		 * @param {HTMLElement} node1 The node that will shade
-		 * @param {HTMLElement} node1 The node that will brighten
+		 * @param {HTMLElement} node2 The node that will brighten
 		 */
 		_shade: function(node1, node2) {
 			if (this._shadeState == true) {

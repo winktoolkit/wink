@@ -91,13 +91,13 @@ wink.cache = (function()
 	 * @param {string} [resources.version=1.0] The version of the resource: very useful for versioning of code, an outdated resource is seen as an expired resource
 	 * 
 	 * @param {function} [onload] A function called once all the resources have been loaded. 
-	 * @returns {object} p The result parameter passed to the callback function
-	 * @returns {integer} p.loadTime The loading duration in ms
-	 * @returns {boolean} p.useOfLocalDatabase Specify whether the local database is used (false when an error occurs)
-	 * @returns {array} p.errors An array of cache system errors
-	 * @returns {array} p.loadErrors An array of network loading errors
-	 * @returns {array} p.resourcesCleaned An array of resources cleaned
-	 * @returns {array} p.resourcesOldVersion An array of outdated resources deleted
+	 * @param {object} p The result parameter passed to the callback function
+	 * @param {integer} p.loadTime The loading duration in ms
+	 * @param {boolean} p.useOfLocalDatabase Specify whether the local database is used (false when an error occurs)
+	 * @param {array} p.errors An array of cache system errors
+	 * @param {array} p.loadErrors An array of network loading errors
+	 * @param {array} p.resourcesCleaned An array of resources cleaned
+	 * @param {array} p.resourcesOldVersion An array of outdated resources deleted
 	 * 
 	 * @param {object} [options] Options
 	 * @param {object} [options.enable=true] Specify to use the local storage or not
@@ -166,8 +166,8 @@ wink.cache = (function()
 	 * @name wink.cache.resetDatabase
 	 * 
 	 * @param {function} [onreset] A function called once the database is reseted.
-	 * @returns {object} p The result parameter passed to the callback function
-	 * @returns {integer} p.errors An array of cache system errors
+	 * @param {object} p The result parameter passed to the callback function
+	 * @param {integer} p.errors An array of cache system errors
 	 */
 	cache.resetDatabase = function(onreset)
 	{
