@@ -25,7 +25,8 @@
 	width: 100%;
 }
 
-.ac_title
+.ac_title_container
 {
+	position: relative;
 	z-index: 50;
 }
