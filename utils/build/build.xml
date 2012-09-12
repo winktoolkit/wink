@@ -154,6 +154,42 @@
 		
 		<echo message="Create minimized JS File ${name.min}" level="info" />
 		
+		<!-- replace bad parsed tag param with function keyword -->
+		<replaceregexp 
+			file="${file}"
+			match="(@param|@returns)(.*)(function\})"
+			replace="\1\2function()}"
+			byline="true"
+			flags="g"
+		/>
+		
+		<!-- replace bad parsed tag param with [] -->
+		<replaceregexp 
+			file="${file}"
+			match="(@param)([^\[]*)(\[)([^=]*)(=)([^\]]*)(\[)([^\]]*)(\])([^\]]*)(\])"
+			replace="\1\2\3\4\5\6replacement1\9"
+			byline="true"
+			flags="g"
+		/>
+		
+		<!-- replace bad parsed tag param with () -->
+		<replaceregexp 
+			file="${file}"
+			match="(@param)([^\[]*)(\[)([^=]*)(=)([^\]]*)(\()([^\]]*)(\])"
+			replace="\1\2\3\4\5replacement2\9"
+			byline="true"
+			flags="g"
+		/>
+		
+		<!-- remove unused console test code -->
+		<replaceregexp 
+			file="${file}"
+			match="(if[^\(]*\()[ \t]*console[^\)]*\)[^\{]*\{[ \t\n]*\}"
+			replace="/* unused console test removed */"
+			byline="false"
+			flags="gm"
+		/>
+		
 		<java dir="." fork="true" jar="${jar.compiler.google}">
 			<arg line="--js" />
 			<arg line="${file}" />

@@ -165,9 +165,9 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx'], function(wink)
 	{
 		/**
 		 * @returns {object} The 'wall' main dom node but also the 'leftPad' and 'rightPad'
-		 * @returns {HTMLElement} object.wall
-		 * @returns {HTMLElement} object.leftPad
-		 * @returns {HTMLElement} object.rightPad
+		 * @param {HTMLElement} object.wall
+		 * @param {HTMLElement} object.leftPad
+		 * @param {HTMLElement} object.rightPad
 		 */
 		getDomNodes: function()
 		{
