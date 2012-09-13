@@ -30,6 +30,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/layout/test/test_accordion_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/layout/test/test_accordion_2.html" target="_blank">Test page (advanced)</a>
+	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/layout/test/test_accordion_3.html" target="_blank">Test page (section titles with margins)</a>
 	 */
 	wink.ui.layout.Accordion = function(properties)
 	{
