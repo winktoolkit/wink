@@ -35,6 +35,7 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 	 * @param {boolean} [properties.scrollAtStart=false] Indicates if the component needs to listen the start event in order to hide bars properly
 	 * @param {string} [properties.paddingTop=header.offsetHeight] Allows to explicitly define the paddingTop of the content
 	 * @param {string} [properties.paddingBottom=footer.offsetHeight] Allows to explicitly define the paddingBottom of the content
+	 * @param {boolean} [properties.hideMode=true] Allows to adapt the behavior of the bars to the expected mode
 	 * 
 	 * @requires wink.ux.window
 	 * 
@@ -80,6 +81,7 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 			_footerStyle = null,
 			_paddingTop = null,
 			_paddingBottom = null;
+			_hideMode = true;
 		
 		/**
 		 * Scroll explicitly to the given position
@@ -103,6 +105,7 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 				_footer = _p.footer,
 				_hasHeaderFixed = _p.hasHeaderFixed,
 				_hasFooterFixed = _p.hasFooterFixed,
+				_hideMode = _p.hideMode,
 				_displayDuration = _p.displayDuration,
 				_moveDuration = _p.moveDuration,
 				_activated = _p.activated,
@@ -135,6 +138,11 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 				_raisePropertyError('hasFooterFixed');
 				return false;
 			}
+			if (_isset(_hideMode) && !_isbool(_hideMode)) 
+			{   
+				_raisePropertyError('hideMode');
+				return false;
+			}
 			if (_isset(_displayDuration) && !_isint(_displayDuration)) 
 			{
 				_raisePropertyError('displayDuration');
@@ -160,15 +168,16 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 		{
 			_hasHeader = _isset(this.header);
 			_hasFooter = _isset(this.footer);
-			_hasHeaderFixed = _isset(this.hasHeaderFixed)?this.hasHeaderFixed:true;
-			_hasFooterFixed = _isset(this.hasFooterFixed)?this.hasFooterFixed:true;
+			_hasHeaderFixed = _isset(this.hasHeaderFixed) ? this.hasHeaderFixed : true;
+			_hasFooterFixed = _isset(this.hasFooterFixed) ? this.hasFooterFixed : true;
+			_hideMode = _isset(this.hideMode) ? this.hideMode : true;
 			
 			_target = wink.byId(this.target);
 			_addclass(_target, 'fl_target');
 			
 			if (_hasHeader)
 		    {
-		      _header = wink.byId(this.header);
+				_header = wink.byId(this.header);
 		    }
             if (_hasHeaderFixed) 
   			{
@@ -441,6 +450,7 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 			};
 			
 			var _addlistener = wink.ux.touch.addListener,
+				_applyTransition = wink.fx.applyTransition,
 				
 				_scrollY = null,
 				_isScrolling = false,
@@ -481,13 +491,16 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 					// priority should be given to visibility job in order to hide the bars ASAP and prevent bar glued
 					if (!_stateHidden && !_isScrolling)
 					{
-						if (_hasHeaderFixed) 
+						if (_hideMode)
 						{
-							_headerStyle.visibility = 'hidden';
-						}
-						if (_hasFooterFixed) 
-						{
-							_footerStyle.visibility = 'hidden';
+							if (_hasHeaderFixed) 
+							{
+								_headerStyle.visibility = 'hidden';
+							}
+							if (_hasFooterFixed) 
+							{
+								_footerStyle.visibility = 'hidden';
+							}
 						}
 						if (_hasHeaderFixed) 
 						{
@@ -658,17 +671,33 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 				{
 					if (withMove)
 					{
-						wink.fx.applyTransition(node, 'top', _instance.moveDuration + 'ms', '0ms', 'ease-in');
+						_applyTransition(node, 'top', _instance.moveDuration + 'ms', '0ms', 'ease-in');
+						_nstyle.top = y + 'px';
 					}
 					else
 					{
 						if (_instance.displayDuration > 0)
 						{
-							_applyAnim(_nstyle);
+							if (_hideMode)
+							{
+								_applyAnim(_nstyle);
+								_nstyle.top = y + 'px';
+							}
+							else
+							{
+								var _hopTop = (node == _header) ? y - node.offsetHeight : ((node == _footer) ? y + node.offsetHeight : y); 
+								_applyTransition(node, 'top', '0s', '0s', 'linear');
+								_nstyle.top = _hopTop + 'px';
+								
+								var _t = setTimeout(function() {
+									clearTimeout(_t);
+									_applyTransition(node, 'top', _instance.moveDuration + 'ms', '0s', 'linear');
+									_nstyle.top = y + 'px';
+								}, 0);
+							}
 						}
 					}
 				}
-				_nstyle.top = y + 'px';
 			};
 			
 			/**
@@ -716,6 +745,14 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 				_clickPhase = true;
 				
 				_stateHidden = !_stateHidden;
+				
+				if (!_stateHidden)
+				{
+					_headerTop--;
+					_footerTop++;
+					_positionBars();
+				}
+				
 				if (_hasHeaderFixed) 
 				{
 					_applyAnim(_headerStyle, _stateHidden);
@@ -839,3 +876,4 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 	
 	return wink.ui.layout.FixedLayout;
 });
+
