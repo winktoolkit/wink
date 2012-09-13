@@ -30,6 +30,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/layout/test/test_accordion_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/layout/test/test_accordion_2.html" target="_blank">Test page (advanced)</a>
+	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/layout/test/test_accordion_3.html" target="_blank">Test page (section titles with margins)</a>
 	 */
 	wink.ui.layout.Accordion = function(properties)
 	{
@@ -88,7 +89,7 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		addSection: function(title, content)
 		{
-			var section = new wink.ui.layout.Accordion.Section({'title': title, 'content': content, 'position': this._sectionsList.length, 'accordion': this});
+			var section = new wink.ui.layout.Accordion.Section({title: title, content: content, position: this._sectionsList.length, accordion: this});
 			
 			this._sectionsList.push(section);
 			
@@ -235,10 +236,10 @@ define(['../../../../_amd/core'], function(wink)
 			{
 				if ( this._sectionsList[i].contentNode.offsetHeight != 0 )
 				{
-					h += this._sectionsList[i].titleNode.offsetHeight;
+					h += this._sectionsList[i].titleNodeContainer.offsetHeight;
 				} else
 				{
-					h += this._sectionsList[i].TITLE_HEIGHT;
+					h += (this._sectionsList[i].TITLE_HEIGHT + this._sectionsList[i].PADDING);
 				}
 			}
 			
@@ -392,6 +393,9 @@ define(['../../../../_amd/core'], function(wink)
 	
 	wink.ui.layout.Accordion.Section.prototype =
 	{	
+		PADDING: 0,
+		BACKGROUND: 'transparent',
+		
 		/**
 		 * Display the section
 		 */
@@ -499,8 +503,18 @@ define(['../../../../_amd/core'], function(wink)
 				this.contentNode.appendChild(this.content);
 			}
 			
+			this.titleNodeContainer = document.createElement('div');
+			this.titleNodeContainer.className = 'w_box ac_title_container';
+			
+			wink.fx.translate(this.titleNodeContainer, 0, 0);
+			
+			wink.fx.apply(this.titleNodeContainer,
+			{
+				paddingTop: this.PADDING + 'px',
+				backgroundColor: this.BACKGROUND
+			});
+			
 			this.titleNode = document.createElement('div');
-			wink.fx.translate(this.titleNode, 0, 0);
 			this.titleNode.innerHTML = this.title;
 			this.titleNode.className = 'w_box w_list_item w_no_wrap w_border_bottom w_border_left w_border_right w_bg_light ac_title';
 			
@@ -519,8 +533,9 @@ define(['../../../../_amd/core'], function(wink)
 			wink.fx.applyTransformTransition(this.chevronNode, this.DURATION + 'ms', '', 'ease-in-out');
 			
 			this.titleNode.appendChild(this.chevronNode);
+			this.titleNodeContainer.appendChild(this.titleNode);
 			
-			this.containerNode.appendChild(this.titleNode);
+			this.containerNode.appendChild(this.titleNodeContainer);
 			this.containerNode.appendChild(this.contentNode);
 		}
 	};
