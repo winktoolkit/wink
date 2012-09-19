@@ -38,13 +38,13 @@ define(['../../../_amd/core'], function()
 			return support;
 		},
 		"video-h264": function() {
-			return winkhas("video") && formats["h264"];
+			return winkhas("video") && formats["h264"] ? true : false;
 		},
 		"video-ogg": function() {
-			return winkhas("video") && formats["ogg"];
+			return winkhas("video") && formats["ogg"] ? true : false;
 		},
 		"video-webm": function() {
-			return winkhas("video") && formats["webm"];
+			return winkhas("video") && formats["webm"] ? true : false;
 		}
 	});
 	

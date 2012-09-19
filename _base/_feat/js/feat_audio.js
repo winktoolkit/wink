@@ -38,16 +38,16 @@ define(['../../../_amd/core'], function()
 			return support;
 		},
 		"audio-mp3": function() {
-			return winkhas("audio") && formats["mp3"];
+			return winkhas("audio") && formats["mp3"] ? true : false;
 		},
 		"audio-ogg": function() {
-			return winkhas("audio") && formats["ogg"];
+			return winkhas("audio") && formats["ogg"] ? true : false;
 		},
 		"audio-wav": function() {
-			return winkhas("audio") && formats["wav"];
+			return winkhas("audio") && formats["wav"] ? true : false;
 		},
 		"audio-m4a": function() {
-			return winkhas("audio") && formats["m4a"];
+			return winkhas("audio") && formats["m4a"] ? true : false;
 		}
 	});
 	

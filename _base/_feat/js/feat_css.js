@@ -68,13 +68,13 @@ define(['../../../_amd/core'], function()
 			setProp(prop, prop);
 			supported = true;
 		} else {
-			var pr = winkhas.prefix;
+			var pr = wink.has.prefix;
 			var prfs = (pr != null) ? [ pr ] : prefixes;
 	    	var i, l = prfs.length;
 	    	for (i = 0; i < l; i++) {
 				var key = normalizeKey(prfs[i] + prop);
 				if (typeof style[key] == stringV) {
-					winkhas.prefix = prfs[i];
+					wink.has.prefix = prfs[i];
 					setProp(prop, key);
 					supported = true;
 					break;
@@ -114,7 +114,7 @@ define(['../../../_amd/core'], function()
 		"css-transform": function() {
 			var support = hasCss(cssKeys.m);
 			
-			var pr = winkhas.prefix;
+			var pr = wink.has.prefix;
 	    	var trp = cssKeys.m;
 	    	if (pr != null) {
 	    		trp = (pr + trp);
@@ -159,7 +159,7 @@ define(['../../../_amd/core'], function()
             	gr = prop,
             	grval = '(linear,left top,right bottom,from(#9f9),to(white));';
 	    	
-	    	var pr = winkhas.prefix;
+	    	var pr = wink.has.prefix;
 	    	var prfs = (pr != null) ? [ "", pr ] : [ "" ].concat(prefixes);
 	    	var i, l = prfs.length;
 	    	for (i = 0; i < l; i++) {
@@ -179,7 +179,7 @@ define(['../../../_amd/core'], function()
 	    	if (!prs) {
 	    		return false;
 	    	}
-	    	var pr = winkhas.prefix || "";
+	    	var pr = wink.has.prefix || "";
 	    	var s = d.createElement('style');
 	    	s.textContent = '@media (' + pr + 'transform-3d){#wink_has{height:2px}}';
 	    	d.getElementsByTagName('head')[0].appendChild(s);
