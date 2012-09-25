@@ -93,6 +93,7 @@ function publish(symbolSet) {
 		var classPublisher = new Object();
 		classPublisher.symbol = symbol;
 		classPublisher.fileName = folder + fileName;
+		classPublisher.dir = publish.conf.symbolsDir + fileName;
 		
 		if (defined(JSDOC.PluginManager)) 
 		{
@@ -152,7 +153,7 @@ function publish(symbolSet) {
 	catch(e) { print(e.message); quit(); }
 	
 	var search = searchTemplate.process();
-	IO.saveFile(publish.conf.outDir, "search.html", search);
+	IO.saveFile(publish.conf.outDir, "results.html", search);
 	
 	searchTemplate = search = null;
 	

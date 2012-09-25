@@ -2,9 +2,8 @@ JSDOC.PluginManager.registerPlugin("JSDOC.buildSearchIndex", {
 	onClassPublish: function(arg) {
 		try {
 			var indexEntry = "s[" + SearchIndexContainer.currentCounter + "] = \"";
-			var link = (new Link()).toClass(arg.symbol.alias).toString();
-			link = link.match(/<a href="(.*)"(.*)/)[1];
-			indexEntry += arg.symbol.alias + "^" + link + "^";
+			indexEntry += arg.symbol.alias + "^" + arg.dir + "^";
+
 			if (arg.symbol.classDesc != "")  {
 				var desc = arg.symbol.classDesc.replace(/[\r\n]+/g, "");
 				desc = desc.replace(/["]+/g, "");
@@ -55,10 +54,7 @@ JSDOC.PluginManager.registerPlugin("JSDOC.buildSearchIndex", {
 	
 	afterFileProcess: function(directories) {
 		IO.mkPath((directories.outDir+"search").split("/"));
-		IO.saveFile(directories.outDir + "search", "tipue_data.js", SearchIndexContainer.fileIndexString);
-		IO.copyFile(directories.templatesDir+"search/index.html", directories.outDir+"search/");
-		IO.copyFile(directories.templatesDir+"search/results.html", directories.outDir+"search/");
-		IO.copyFile(directories.templatesDir+"search/styles.css", directories.outDir+"search/");
+		IO.saveFile(directories.outDir+"search", "tipue_data.js", SearchIndexContainer.fileIndexString);
 		IO.copyFile(directories.templatesDir+"search/tipue_set.js", directories.outDir+"search/");
 		IO.copyFile(directories.templatesDir+"search/tipue.js", directories.outDir+"search/");
 	}
