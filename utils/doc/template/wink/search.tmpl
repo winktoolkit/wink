@@ -1,0 +1,35 @@
+{! Link.base = ""; /* all generated links will be relative to this */ !}
+{+subtemplate("subtemplates/head.tmpl", {subtitle: "File Index"})+}
+{+subtemplate("subtemplates/menu.tmpl")+}
+<div class="content">
+	<div class="innerContent">
+		<script language="JavaScript" type="text/javascript" src="{+Link.base+}search/tipue_data.js"></script>
+		<script language="JavaScript" type="text/javascript" src="{+Link.base+}search/tipue_set.js"></script>
+		<script language="JavaScript" type="text/javascript" src="{+Link.base+}search/tipue.js"></script>
+
+		<article>
+			<h1 class="classTitle"><span>Search Result</span></h1>
+			
+			<script language="JavaScript" type="text/javascript">tip_query()</script>
+			
+			<br>
+			
+			<!-- The following line shows the results header -->
+			
+			<script language="JavaScript" type="text/javascript">tip_header()</script>
+			
+			<hr>
+			
+			<!-- The following line shows the results -->
+			
+			<script language="JavaScript" type="text/javascript">tip_out()</script>
+			
+			<br>
+			
+			<!-- The following line shows the results footer -->
+			
+			<script language="JavaScript" type="text/javascript">tip_footer()</script>
+		</article>
+	</div>
+</div>
+{+subtemplate("subtemplates/foot.tmpl")+}

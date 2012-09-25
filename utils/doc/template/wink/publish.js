@@ -85,7 +85,21 @@ function publish(symbolSet) {
 		var output = "";
 		output = classTemplate.process(symbol);
 		
-		IO.saveFile(publish.conf.outDir+publish.conf.symbolsDir, ((JSDOC.opt.u)? Link.filemap[symbol.alias] : symbol.alias) + publish.conf.ext, output);
+		//IO.saveFile(publish.conf.outDir+publish.conf.symbolsDir, ((JSDOC.opt.u)? Link.filemap[symbol.alias] : symbol.alias) + publish.conf.ext, output);
+		
+		var folder = publish.conf.outDir+publish.conf.symbolsDir;
+		var fileName = ((JSDOC.opt.u)? Link.filemap[symbol.alias] : symbol.alias) + publish.conf.ext;
+		
+		var classPublisher = new Object();
+		classPublisher.symbol = symbol;
+		classPublisher.fileName = folder + fileName;
+		
+		if (defined(JSDOC.PluginManager)) 
+		{
+			JSDOC.PluginManager.run("onClassPublish", classPublisher);
+		}
+		
+		IO.saveFile(folder, fileName, output);
 	}
 	
 	// create the class index page
@@ -117,11 +131,30 @@ function publish(symbolSet) {
 	}
 		
 	allFiles = allFiles.sort(makeSortby("name"));
+	
+	// after process
+	if (defined(JSDOC.PluginManager)) {
+		var directories = new Object();
+		directories.outDir = publish.conf.outDir;
+		directories.templatesDir = publish.conf.templatesDir;
+		JSDOC.PluginManager.run("afterFileProcess", directories);
+	}
 
 	// output the file index page
 	var filesIndex = fileindexTemplate.process(allFiles);
 	IO.saveFile(publish.conf.outDir, (JSDOC.opt.D.index=="files"?"index":"files")+publish.conf.ext, filesIndex);
 	fileindexTemplate = filesIndex = files = null;
+	
+	// create the search page
+	try {
+		var searchTemplate = new JSDOC.JsPlate(publish.conf.templatesDir+"search.tmpl");
+	}
+	catch(e) { print(e.message); quit(); }
+	
+	var search = searchTemplate.process();
+	IO.saveFile(publish.conf.outDir, "search.html", search);
+	
+	searchTemplate = search = null;
 	
 	// copy static files
 	IO.copyFile(publish.conf.templatesDir+"/"+publish.conf.cssDir+"all.css", publish.conf.outDir+"/"+publish.conf.cssDir);

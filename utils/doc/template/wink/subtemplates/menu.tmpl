@@ -5,6 +5,21 @@
 			{+new Link().toFile(JSDOC.opt.D.index=="files"?"index.html":"files.html").withText("Files")+}
 		</div>
 	
+		<h2 class="heading1">Search</h2>
+		
+		<form method="get" name="tipue" action="{+Link.base+}search.html">
+			<table cellpadding=0 cellspacing=0 class="form_table">
+				<tr>
+					<td class="form_td_left">
+						<input type="text" name="d" placeholder="search query" class="field">
+					</td>
+					<td class="form_td_right">
+						<input type="submit" value="search" class="button">
+					</td>
+				</tr>
+			</table>
+		</form>
+		
 		<h2 class="heading1">Classes</h2>
 		
 		<input type="text" name="classFilter" class="classFilter" id="ClassFilter" placeholder="Filter"></input>

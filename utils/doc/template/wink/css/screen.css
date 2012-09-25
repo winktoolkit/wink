@@ -113,7 +113,7 @@ div.index div.menu {
 }
 
 div.index div.indexLinks {
-	margin-top: 13px;
+	margin-top: 80px;
 	position: absolute;
 	right: 30px;
 }
@@ -129,7 +129,7 @@ div.index div.indexLinks a:first-child {
 	padding-right: 5px;
 }
 
-div.index input.classFilter {
+div.index input.classFilter, .form_td_left input {
 	margin-bottom: 4px;
 	width: 100%;
 	border-width: 1px;
@@ -138,6 +138,18 @@ div.index input.classFilter {
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	-border-radius: 3px;
+}
+
+.form_td_left input {
+	margin-bottom: 0;
+}
+
+.form_td_right input {
+	background: #ccc;
+	float: right;
+	width: 80%;
+	margin: auto;
+	border: none;
 }
 
 div.index ul.classList a {

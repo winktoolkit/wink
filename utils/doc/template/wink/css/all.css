@@ -132,6 +132,21 @@ div.safeBox:after {
 /*
  * BEGIN JSDOC
  */
+ 
+.form_table
+{
+	width: 100%;
+}
+
+.form_td_left
+{
+	width: 70%;
+}
+
+.form_td_right
+{
+	width: 30%;
+}
 
 /* Start menu */
 div.index *.heading1 {
