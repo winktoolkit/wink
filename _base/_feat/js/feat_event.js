@@ -74,7 +74,7 @@ define(['../../../_amd/core'], function()
 		},
 		"transitionend": function() {
 			if (winkhas("css-transition")) {
-				var prefix = winkhas.prefix;
+				var prefix = wink.has.prefix;
 				var val = events.tre;
 				if (prefix == "-webkit-") {
 					val = "webkitTransitionEnd";

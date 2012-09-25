@@ -38,7 +38,7 @@ define(['../../../_amd/core'], function()
 		 */
 		parse: function(str)
 		{
-			if (wink.isSet(windowJson) && wink.isSet(windowJson.parse))
+			if (wink.has("json-parse"))
 			{
 				return windowJson.parse(str);
 			} else

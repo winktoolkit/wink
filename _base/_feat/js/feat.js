@@ -92,7 +92,7 @@ define(['../../../_amd/core'], function()
 	 */
 	wink.has.inquire = inquire;
 	function inquire(feature, assertSupported, now) {
-		if (typeof features[feature] != "undefined") {
+		if (wink.isBoolean(features[feature])) {
 			return;
 		}
 		var assert = assertSupported;
@@ -130,7 +130,7 @@ define(['../../../_amd/core'], function()
 	function setProp(key, value) {
 		properties[key] = value;
 	}
-	
+
 	/**
 	 * Defer the property recovery on a function or on a feature detection
 	 * 
@@ -144,7 +144,7 @@ define(['../../../_amd/core'], function()
 			setProp(key, proc);
 		} else {
 			setProp(key, function() {
-				has(proc);
+				wink.has(proc);
 			});
 		}
 	}
@@ -166,6 +166,26 @@ define(['../../../_amd/core'], function()
 			}
 		}
 		return v || key;
+	}
+	
+	/**
+	 * Get all features
+	 * 
+	 * @returns {object} the features object
+	 */
+	wink.has.getFeatures = getFeatures;
+	function getFeatures() {
+		return features;
+	}
+	
+	/**
+	 * Get all properties
+	 * 
+	 * @returns {object} the properties object
+	 */
+	wink.has.getProperties = getProperties;
+	function getProperties() {
+		return properties;
 	}
 	
 	return wink.has;
