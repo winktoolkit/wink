@@ -48,7 +48,7 @@ define(['../../../_amd/core'], function(wink)
 	 * };
 	 * wink.subscribe('/window/events/orientationchange', { context: window, method: 'handleOrientation' });
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ux/window/test/test_window.html" target="_blank">Test page</a>
 	 */
@@ -128,26 +128,26 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_init: function()
 		{
-			var h = wink.bind(this._updateData, this);
+			var a = wink.bind(this._updateData, this),
+				b = wink.bind(this._updateOrientation, this);
 			
-			if ( "onorientationchange" in window )
+			if ( wink.has("orientationchange") )
 			{
-				window.addEventListener("orientationchange", h, true);
-			} else
-			{
-				window.addEventListener("resize", h, true);
+				window.addEventListener("orientationchange", b, true);
+				b();
 			}
+			
+			window.addEventListener("resize", a, true);
+			a();
 			
 			if ( wink.ua.isAndroid )
 			{
 				scrollTo(0, 1, 0);
-				this._i = setInterval(h, 1000);
+				this._i = setInterval(a, 1000);
 			} else
 			{
-				window.addEventListener("scroll", h, true);
+				window.addEventListener("scroll", a, true);
 			}
-			
-			h();
 		},
 		
 		/**
@@ -166,7 +166,11 @@ define(['../../../_amd/core'], function(wink)
 			}
 			
 			this._updateSize();
-			this._updateOrientation();
+			
+			if ( !wink.has("orientationchange") )
+			{
+				this._updateOrientation();
+			}
 			
 			if ( b )
 			{
