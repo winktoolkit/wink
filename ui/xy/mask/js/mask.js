@@ -23,7 +23,7 @@ define(['../../../../_amd/core'], function(wink)
 	 * mask = new wink.ui.xy.Mask();
 	 * mask.show(wink.byId('myDOMElement'));
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xy/mask/test/test_mask.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xy/mask/test/test_mask_2.html" target="_blank">Test page (Mask in a Tab Container)</a>

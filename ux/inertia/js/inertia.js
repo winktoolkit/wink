@@ -42,7 +42,7 @@ define(['../../../_amd/core', '../../movementtracker/js/movementtracker'], funct
 	 * var inertia = new wink.ux.Inertia({ movementtracker: movementtracker });
 	 * wink.subscribe('/inertia/events/inertiacomputed', { context: window, method: 'displaySpeed' });
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ux/inertia/test/test_inertia.html" target="_blank">Test page</a>
 	 */

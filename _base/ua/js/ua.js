@@ -158,8 +158,8 @@ define(['../../../_amd/core'], function()
 	 * |-----------------------------------------------------------------------------------|
 	 * | Plaform          | webkitV | wMV | wUV | browserV | bMV | bUV | osV | osMV | osUV |
 	 * |-----------------------------------------------------------------------------------|
-	 * |IPhone OS 3       | 528     | 18  | 0   | 4        | 0   | 0   | 3   | 1    | 2    |
-	 * |IPhone OS 2       | 525     | 18  | 1   | 3        | 1   | 1   | 2   | 2    | 1    |
+	 * |iOS 3       | 528     | 18  | 0   | 4        | 0   | 0   | 3   | 1    | 2    |
+	 * |iOS 2       | 525     | 18  | 1   | 3        | 1   | 1   | 2   | 2    | 1    |
 	 * |Android HTC Hero  | 528     | 5   | 0   | 3        | 1   | 2   | 1   | 5    | 0    |
 	 * |PC                | 531     | 21  | 8   | 4        | 0   | 4   | 0   | 0    | 0    |
 	 * |-----------------------------------------------------------------------------------|
@@ -172,7 +172,7 @@ define(['../../../_amd/core'], function()
 	 * 	...
 	 * }
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
 	 * 
 	 * @see <a href="WINK_ROOT_URL/_base/ua/test/test_ua.html" target="_blank">Test page</a>
 	 */

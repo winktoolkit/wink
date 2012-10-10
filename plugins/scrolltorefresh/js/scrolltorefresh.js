@@ -65,7 +65,7 @@ define(['../../../_amd/core'], function(wink)
 	 *  
 	 * @requires wink.ui.layout.Scroller
 	 * 
-	 * @compatibility Iphone OS3, Iphone OS4, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0
+	 * @compatibility iOS3, iOS4, iOS5, iOS6, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0
 	 * 
 	 * @winkVersion 1.4
 	 * 

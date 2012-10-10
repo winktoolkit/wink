@@ -50,7 +50,7 @@ define(['../../../_amd/core'], function(wink)
 	 * var node = wink.byId("nodeId");
 	 * wink.ux.gesture.listenTo(node, "two_digits_click", { context: window, method: "twoDigitsClick" }, { preventDefault: true });
 	 * 
-	 * @compatibility Iphone OS2, Iphone OS3, Iphone OS4
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ux/gesture/test/test_gesture_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ux/gesture/test/test_gesture_2.html" target="_blank">Test page (box)</a>

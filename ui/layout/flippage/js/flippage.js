@@ -41,7 +41,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * flipPage = new wink.ui.layout.FlipPage(properties);
 	 * document.body.appendChild(flipPage.getDomNode());
 	 * 
-	 * @compatibility Iphone OS3, Iphone OS4, BlackBerry 7 (partial)
+	 * @compatibility iOS3, iOS4, iOS5, iOS6, BlackBerry 7 (partial)
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/layout/flippage/test/test_flippage_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/layout/flippage/test/test_flippage_2.html" target="_blank">Test page (with history)</a>
