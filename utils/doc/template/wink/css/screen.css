@@ -294,8 +294,9 @@ dl.detailList.nomargin + dl.detailList.nomargin {
 }
 
 dl.detailList dt {
-	display: inline;
+	display: block;
 	margin-right: 5px;
+	margin-top: 20px;
 }
 
 dl.detailList dt:before {
@@ -304,7 +305,7 @@ dl.detailList dt:before {
 }
 
 dl.detailList dd {
-	display: inline;
+	display: block;
 }
 
 dl.detailList.params dt {
