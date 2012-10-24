@@ -1,3 +1,4 @@
 
 /.project
-/nbproject/private/
+/nbproject
+/nbproject/*
