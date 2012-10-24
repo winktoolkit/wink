@@ -1,2 +1,2 @@
-/builds/*
-/tmp/*
+/builds/**/*
+/tmp/**/*
