@@ -361,7 +361,8 @@ function unlockItem(checkbox)
 {
     checkbox.disabled = false;
     var inputHidden = wink.query('input[type="hidden"]', checkbox.parentNode)[0];
-    inputHidden.parentNode.removeChild(inputHidden);
+    if(wink.isSet(inputHidden))
+        inputHidden.parentNode.removeChild(inputHidden);
 }
 
 /**

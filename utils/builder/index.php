@@ -93,7 +93,27 @@
             </div>
         </div>
         
-        <script type="text/javascript" src="web/js/wink_1.4.2.min.js"></script>
+        <!-- CORE -->
+		<!-- Can be replaced by wink.min.js -->
+		<script type="text/javascript" src="../../_amd/js/amd.js"></script>
+		<script type="text/javascript" src="../../_base/_base/js/base.js"></script>
+		<script type="text/javascript" src="../../_base/error/js/error.js"></script>
+		<script type="text/javascript" src="../../_base/json/js/json.js"></script>
+		<script type="text/javascript" src="../../_base/ua/js/ua.js"></script>
+		<script type="text/javascript" src="../../_base/topics/js/topics.js"></script>
+		<script type="text/javascript" src="../../_base/_feat/js/feat.js"></script>
+		<script type="text/javascript" src="../../_base/_feat/js/feat_json.js"></script>
+		<script type="text/javascript" src="../../_base/_feat/js/feat_css.js"></script>
+		<script type="text/javascript" src="../../_base/_feat/js/feat_event.js"></script>
+		<script type="text/javascript" src="../../_base/_feat/js/feat_dom.js"></script>
+		<script type="text/javascript" src="../../fx/_xy/js/2dfx.js"></script>
+		<script type="text/javascript" src="../../math/_basics/js/basics.js"></script>
+		<script type="text/javascript" src="../../net/xhr/js/xhr.js"></script>
+		<script type="text/javascript" src="../../ui/xy/layer/js/layer.js"></script>
+		<script type="text/javascript" src="../../ux/event/js/event.js"></script>
+		<script type="text/javascript" src="../../ux/touch/js/touch.js"></script>
+		<!-- END CORE -->
+        
         <script type="text/javascript" src="web/js/functions.js"></script>
         <script type="text/javascript">
             /**
