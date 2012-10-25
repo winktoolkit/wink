@@ -76,6 +76,8 @@ function searchInDir(array $patterns, $directory, $recurse = FALSE)
                 $css_list[] = $path;
     }
     
+    closedir($dir_handle);
+    
     return $css_list;
 }
 
@@ -125,6 +127,8 @@ function zip_directory($directory, ZipArchive $zip, $parent = '')
         
         $zip->addFile($path, $parent.$f);
     }
+    
+    closedir($dir_handle);
     
     return $zip;
 }
@@ -474,6 +478,8 @@ function wink_get_themes($themes_directory)
         if(is_dir($themes_directory.'/'.$f)
         && ($f != '.' && $f != '..'))
             $themes[] = $f;
+        
+    closedir($dir_handle);
         
     return $themes;
 }

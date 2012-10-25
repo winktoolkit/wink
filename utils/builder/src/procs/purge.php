@@ -26,3 +26,5 @@ while(FALSE !== ($f = readdir($dir_handle)))
     if($diff_time > $expired_in_sec)
         rrmdir($path);
 }
+
+closedir($dir_handle);
