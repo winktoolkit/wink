@@ -324,6 +324,8 @@ function sortItemList(ulParent)
 
     elems = Vinke.toArray(elems);
     elems.sort(function (a, b) {
+        if(a.id == 'li_core') // Exception the core is in the top
+            return -1;
         return (a.id < b.id) ? -1 : ((a.id > b.id) || a.id == null ? 1 : 0);
     });
 
@@ -343,6 +345,10 @@ function sortItemList(ulParent)
  */
 function lockItem(checkbox)
 {
+    // Check if input hidden existed
+    if(wink.query('input[type="hidden"]', checkbox.parentNode).length > 0)
+        return;
+    
     checkbox.disabled = true;
     var inputHidden = document.createElement('input');
     inputHidden.type = 'hidden';

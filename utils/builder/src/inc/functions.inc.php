@@ -44,6 +44,17 @@ function param($var)
 }
 
 /**
+ * print_r structured
+ * 
+ * @param mixed $datas
+ */
+function myPrint_r($datas) {
+    echo '<pre>';
+    print_r($datas);
+    echo '</pre>';
+}
+
+/**
  * Search file(s) in directory
  * 
  * @param array $patterns
@@ -93,6 +104,33 @@ function rrmdir($dir) {
         else
             unlink($file);
     } rmdir($dir);
+}
+
+/**
+ * Sort an array according to a template
+ * 
+ * @example
+ *  $toSort     = array('toto', 'tutu', 'tata')
+ *  $template   = array('tata', 'titi', 'toto', 'tutu')
+ *  $result     = array('tata', 'toto', 'tutu')
+ * 
+ * @param array $toSort
+ * @param array $template
+ * @return array
+ */
+function sortByTemplate(array $toSort, array $template) {
+    $arrSorted = array();
+    
+    do {
+        foreach ($template as $k => $value1) {
+            foreach ($toSort as $value2)
+                if($value1 == $value2)
+                    $arrSorted[] = $value2;
+            unset($template[$k]);
+        }
+    } while(count($template) > 0);
+    
+    return $arrSorted;
 }
 
 /**
@@ -266,6 +304,54 @@ function parseJsonFile($pathJsonFile, $assoc = FALSE)
     $jsonContent = file_get_contents($pathJsonFile);
     $result = json_minify($jsonContent);
     return json_decode($result, $assoc);
+}
+
+
+
+/**
+ * Transform multi dimensionnal modules array in a simple array
+ * 
+ * @param array $modules
+ * @return array
+ */
+function flatListModules(array $modules) {
+    $target = array();
+    foreach ($modules as $module) 
+    {
+        if(array_search($module->name, $target) === FALSE)
+            $target[] = $module->name;
+        
+        if(isset($module->modules)) {
+            foreach ($module->modules as $moduleName) {
+                if(array_search($moduleName, $target) === FALSE) {
+                    $sub_modules = modulesFromCategory($moduleName, $modules);
+                    
+                    $target[] = $moduleName;
+                    if(is_array($sub_modules) && count($sub_modules) > 0) {
+                        $n_modules = array_diff($target, $sub_modules);
+                        $target = array_merge($n_modules, $sub_modules);
+                    }
+                }
+            }
+        }    
+    } 
+    
+    return $target;
+}
+
+/**
+ * Get module wink of a category of modules
+ * 
+ * @param string $moduleName
+ * @param array $modules
+ * @return array or NULL
+ */
+function modulesFromCategory($moduleName, array $modules) {
+    foreach ($modules as $module) {
+        if($moduleName == $module->name) {
+            return isset($module->modules) ? $module->modules : NULL;
+        }
+    }
 }
 
 /**
