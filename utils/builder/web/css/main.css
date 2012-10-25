@@ -1,0 +1,221 @@
+/* 
+    Document   : main
+    Created on : 17 oct. 2012, 15:52:07
+    Author     : wdvq9874
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* --------- GENERAL styles --------- */
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	color: #000;
+	background: #f8f8f8;
+	margin: 0;
+}
+
+/* main divs  --------- */
+#main {
+	margin: auto;
+	width: 960px;
+	background: #f8f8f8;
+}
+
+/* main_content divs  --------- */
+div#main_content {
+    border: 2px solid #fff;
+    padding: 25px 15px;
+    margin: 15px 0;
+    min-height: 530px;
+}
+
+/* generic classes  --------- */
+.bg_white {
+    background-color: #fff;
+}
+
+.description {
+    background: #fff;
+    color: #999999;
+}
+
+.msg_error {
+    background-color: #F2DEDE;
+    border-color: #EED3D7;
+    color: #B94A48;
+    font-size: 0.8em;
+    padding: 5px 15px;
+    
+}
+
+/* tag : h1 --------- */
+h1 {
+	height: 80px;
+	line-height: 76px;
+	font-weight: 400;
+	font-size: 30px;
+	margin: 0 24px 0 24px;
+	color: #595959;
+}
+
+/* tag : h2 --------- */
+h2 {
+	height: 80px;
+	line-height: 76px;
+	font-weight: 400;
+	font-size: 31px;
+	margin: 0 0 36px 0;
+	padding: 0 24px 0 24px;
+	background: #F8F8F8;
+	color: #595959;
+}
+
+/* tag : h3 --------- */
+h3 {
+	font-weight: 400;
+	font-size: 31px;
+	margin: 30px 10px 20px 10px;
+	padding: 0 24px 0 44px;
+	color: #595959;
+    background: url('../../web/img/wink_icon_target.png') no-repeat 0 3px;
+}
+
+/* tag : h4 --------- */
+h4 {
+	font-weight: 300;
+	font-size: 22px;
+	margin: 24px 0 24px 0;
+	padding: 0 24px 0 24px;
+}
+
+h1#header_title {
+    float: right;
+    margin-right: 35px;
+    margin-top: 20px;
+}
+
+/* tag : inputs --------- */
+input,button,textarea,select {
+	border: 0px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300; /* In order to see the input contents much better */
+	font-size: 17px;
+}
+
+button,input[type=submit] {
+	font-weight: 400;
+}
+
+button, input[type=submit],button[type=submit] {
+	color: #FFFFFF;
+	background-color: #595959;
+	padding: 1px 10px;
+	cursor: pointer;
+	height: 27px;
+}
+
+button:hover, input[type=submit]:hover,button[type=submit]:hover {
+	background-color: #FF5500;
+}
+
+input[type=text],input[type=password],select,textarea {
+	color: #000;
+	padding: 2px 5px;
+}
+
+input[type=text]:focus,input[type=password]:focus,textarea:focus {
+	padding: 1px 4px;
+	border: 1px solid #FF6600;
+}
+
+input[type=text].sffocus,input[type=password].sffocus,textarea.sffocus {
+	padding: 1px 4px;
+	border: 1px solid #FF6600;
+}
+
+/* Form part  --------- */
+div.fields > ul,
+div#tree > ul {
+    display: inline;
+    padding: 0;
+}
+
+ul li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li.checkable label {
+    cursor: pointer;
+    color: #525252;
+}
+
+li.checkable label:hover  {
+    color: #FF6600;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+div.action {
+    background-color: #F8F8F8;
+    margin: 5px 0;
+    padding: 5px 10px;
+}
+
+div.action > label {
+    color: #595959;
+    float: left;
+    font-weight: bold;
+    margin-top: 5px; 
+}
+
+div.action > div.fields {
+    margin-left: 100px;
+}
+
+div.fields {
+    margin: 5px 0;
+}
+
+/* Flash result part  --------- */
+div#flash div.result {
+    margin: 10px auto;
+    padding: 0 10px;
+}
+
+div#flash div.result > ul {
+    border: 1px dashed #cdcdcd;
+    margin: 5px 0;
+    padding: 5px 15px;
+    font-size: 0.7em;
+}
+
+div#flash div.result h3 {
+    margin: 5px 20px;
+}
+
+span.big {
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 1.8em;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+}
+
+img#img_loading {
+    margin-top: 0px;
+    padding-bottom: 2px; 
+    vertical-align: middle; 
+}
+
+button#dl {
+    margin-left: 10px;
+}
+
