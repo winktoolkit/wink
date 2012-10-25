@@ -35,15 +35,19 @@ try
     $list_keys[] = $css_theme;
     $list_keys[] = implode('', $languages);
 
-    $modules_used = array();
+    
+    $modules_choosed = array();
     foreach ($modules as $moduleName) {   
         $details = getModuleDetailsFromName($moduleName, $list_modules->modules);
         if(!isset($details->defaultImpl))
             continue;
 
         $list_keys[] = getModuleKey($moduleName, $list_modules->modules);
-        $modules_used[] = $details->name;
+        $modules_choosed[] = $details->name;
     }
+    
+    $flat_modules = flatListModules($list_modules->modules);
+    $modules_used = sortByTemplate($modules_choosed, $flat_modules);
 
     $guid = md5(implode('-', $list_keys));
     $build_directory = PROJECT_BUILD_DIR.'/'.$guid;
