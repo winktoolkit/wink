@@ -18,7 +18,6 @@
 				height: 300px;
 				width: 320px;
 				background-color: #ddd;
-				background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0, #000), color-stop(1, #385b43));
 				overflow: hidden;
 			}
 			
@@ -35,20 +34,24 @@
 			{
 				background-color: #afafaf;
 				background-image: -webkit-gradient(linear, 0 0, 100% 0, color-stop(0, #fff), color-stop(1, #afafaf));
+				background-image: linear-gradient(to right, #fff 0%, #afafaf 100%);
 				left: 0;
 			}
 			.door.right {
 				background-color: #4f4f4f;
 				background-image: -webkit-gradient(linear, 0 0, 100% 0, color-stop(0, #4f4f4f), color-stop(1, #000));
+				background-image: linear-gradient(to right, #4f4f4f 0%, #000 100%);
 				left: 160px;
 			}
 			.door.left.active {
 				background-color: #81cd8a;
 				background-image: -webkit-gradient(linear, 0 0, 100% 0, color-stop(0, #fff), color-stop(1, #81cd8a));
+				background-image: linear-gradient(to right, #fff 0%, #81cd8a 100%);
 			}
 			.door.right.active {
 				background-color: #81cd8a;
 				background-image: -webkit-gradient(linear, 0 0, 100% 0, color-stop(0, #000), color-stop(1, #81cd8a));
+				background-image: linear-gradient(to right, #000 0%, #81cd8a 100%);
 			}
 			
 			.lock {

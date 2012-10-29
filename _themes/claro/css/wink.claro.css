@@ -11,6 +11,7 @@
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#cddde9), to(#fff), color-stop(50%, #fff));
 	background-image: -moz-linear-gradient(top, #cddde9, #fff, #fff 50%);
+	background-image: linear-gradient(to bottom, #cddde9 0%, #fff 50%, #fff 100%);
 	
 	background-repeat: no-repeat;
 	
@@ -30,6 +31,7 @@
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#61acf2), to(#acd5fc));
 	background-image: -moz-linear-gradient(top, #61acf2, #acd5fc);
+	background-image: linear-gradient(to bottom, #61acf2 0%, #acd5fc 100%);
 	
 	color: #131313;
 }
@@ -40,6 +42,7 @@
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#e7f3ff), to(#b6dbff));
 	background-image: -moz-linear-gradient(top, #e7f3ff, #b6dbff);
+	background-image: linear-gradient(to bottom, #e7f3ff 0%, #b6dbff 100%);
 	
 	color: #131313;
 }
@@ -47,12 +50,14 @@
 /* layouts */
 .claro .w_header
 {
+	box-shadow: -5px 3px 5px rgba(0, 0, 0, 0.7);
 	-webkit-box-shadow: -5px 3px 5px rgba(0, 0, 0, 0.7);
 	-moz-box-shadow: -5px 3px 5px rgba(0, 0, 0, 0.7);
 }
 
 .claro .w_window
 {
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 	-webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 }
@@ -70,6 +75,7 @@
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#61acf2), to(#acd5fc));
 	background-image: -moz-linear-gradient(top, #61acf2, #acd5fc);
+	background-image: linear-gradient(to bottom, #61acf2 0%, #acd5fc 100%);
 }
 
 /* icons */
@@ -85,6 +91,7 @@
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#909090), to(#dedede));
 	background-image: -moz-linear-gradient(top, #909090, #dedede);
+	background-image: linear-gradient(to bottom, #909090 0%, #dedede 100%);
 }
 
 .claro .w_bar .w_bar_progress
@@ -93,4 +100,5 @@
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#a80d0d), to(#f67777));
 	background-image: -moz-linear-gradient(top, #a80d0d, #f67777);
+	background-image: linear-gradient(to bottom, #a80d0d 0%, #f67777 100%);
 }

@@ -4,6 +4,7 @@
     border-width: 1px;
     -webkit-border-radius: .8em;
     -moz-border-radius: .8em;
+    border-radius: .8em;
     background-color: #fff;
     overflow: hidden;
     text-align: left;

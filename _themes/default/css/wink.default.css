@@ -23,6 +23,7 @@ body
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#4d525a), to(#17191f), color-stop(50%, #151515));
 	background-image: -moz-linear-gradient(top, #4d525a, #17191f, #151515 50%);
+	background-image: linear-gradient(to bottom, #4d525a 0%, #151515 50%, #17191f 100%);
 	
 	color: #dedede;
 }
@@ -33,6 +34,7 @@ body
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#a1a1a1));
 	background-image: -moz-linear-gradient(top, #f8f8f8, #a1a1a1);
+	background-image: linear-gradient(to bottom, #f8f8f8 0%, #a1a1a1 100%);
 	
 	color: #2f2f2f;
 }
@@ -40,12 +42,14 @@ body
 /* layouts */
 .w_header
 {
+	box-shadow: -5px 3px 5px rgba(0, 0, 0, 0.7);
 	-webkit-box-shadow: -5px 3px 5px rgba(0, 0, 0, 0.7);
 	-moz-box-shadow: -5px 3px 5px rgba(0, 0, 0, 0.7);
 }
 
 .w_window
 {
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 	-webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 }
@@ -57,6 +61,7 @@ body
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#fdfdfd), to(#eee));
 	background-image: -moz-linear-gradient(top, #fdfdfd, #eee);
+	background-image: linear-gradient(to bottom, #fdfdfd 0%, #eee 100%);
 }
 
 .w_list_item.w_bg_dark
@@ -65,6 +70,7 @@ body
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#2f2f2f), to(#000), color-stop(50%, #151515));
 	background-image: -moz-linear-gradient(top, #2f2f2f, #000, #151515 50%);
+	background-image: linear-gradient(to bottom, #2f2f2f 0%, #151515 50%, #000 100%);
 }
 
 /* icons */
@@ -80,6 +86,7 @@ body
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#909090), to(#dedede));
 	background-image: -moz-linear-gradient(top, #909090, #dedede);
+	background-image: linear-gradient(to bottom, #909090 0%, #dedede 100%);
 }
 
 .w_bar .w_bar_progress
@@ -88,4 +95,5 @@ body
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#a80d0d), to(#f67777));
 	background-image: -moz-linear-gradient(top, #a80d0d, #f67777);
+	background-image: linear-gradient(to bottom, #a80d0d 0%, #f67777 100%);
 }

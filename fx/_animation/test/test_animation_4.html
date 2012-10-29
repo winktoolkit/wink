@@ -136,7 +136,7 @@
 							delay: delay,
 							func: 'linear'
 						});
-						sp.node.style["-webkit-backface-visibility"] = "hidden";
+						wink.fx.apply(sp.node, { "backface-visibility": "hidden" });
 						animGroup.addAnimation(sp.node, anim);
 					}
 				}

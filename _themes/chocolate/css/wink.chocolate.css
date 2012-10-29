@@ -11,6 +11,7 @@
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#F7E1A7), to(#FFF7D2), color-stop(50%, #FFF7D2));
 	background-image: -moz-linear-gradient(top, #F7E1A7, #FFF7D2, #FFF7D2 50%);
+	background-image: linear-gradient(to bottom, #F7E1A7 0%, #FFF7D2 50%, #FFF7D2 100%);
 	background-repeat: no-repeat;
 	
 	color: #190800;
@@ -29,6 +30,7 @@
 	
 	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.12, #311713),color-stop(0.79, #532821),color-stop(0.98, #9D8480),color-stop(0.99, #8D706C));
 	background-image: -moz-linear-gradient(center bottom,#311713 12%,#532821 79%,#9D8480 98%,#8D706C 99%);
+	background-image: linear-gradient(to top, #311713 12%, #532821 79%, #9D8480 98%, #8D706C 99%);
   	
   	color: #F7E1A7;
 }
@@ -39,6 +41,7 @@
 	
 	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.12, #8E7040),color-stop(0.24, #AE9669),color-stop(0.78, #C5AF80),color-stop(0.91, #E8D29D));
 	background-image: -moz-linear-gradient(center bottom,#8E7040 12%,#AE9669 24%,#C5AF80 78%,#E8D29D 91%);
+	background-image: linear-gradient(to top, #8E7040 12%, #AE9669 24%, #C5AF80 78%, #E8D29D 91%);
 	
 	color:  #190800;
 }
@@ -54,12 +57,14 @@
 	color: #C5AF80;
 	text-shadow: 0px 1px  1px #8E7040, 0px -1px #E8D29D;
 	
+	box-shadow: -5px 3px 5px rgba(25, 8, 0, 0.7);
 	-webkit-box-shadow: -5px 3px 5px rgba(25, 8, 0, 0.7);
 	-moz-box-shadow: -5px 3px 5px rgba(25, 8, 0, 0.7);
 }
 
 .chocolate .w_window
 {
+	box-shadow: 0px 2px 6px rgba(25, 8, 0, 0.5);
 	-webkit-box-shadow: 0px 2px 6px rgba(25, 8, 0, 0.5);
 	-moz-box-shadow: 0px 2px 6px rgba(25, 8, 0, 0.5);
 }
@@ -78,6 +83,7 @@
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#532821), to(#3F1E19));
 	background-image: -moz-linear-gradient(top, #532821, #3F1E19);
+	background-image: linear-gradient(to bottom, #532821 0%, #3F1E19 100%);
 }
 
 /* icons */
@@ -93,6 +99,7 @@
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#7D4F38), to(#94705A));
 	background-image: -moz-linear-gradient(top, #7D4F38, #94705A);
+	background-image: linear-gradient(to bottom, #7D4F38 0%, #94705A 100%);
 }
 
 .chocolate .w_bar .w_bar_progress
@@ -101,4 +108,5 @@
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#a80d0d), to(#f67777));
 	background-image: -moz-linear-gradient(top, #a80d0d, #f67777);
+	background-image: linear-gradient(to bottom, #a80d0d 0%, #f67777 100%);
 }

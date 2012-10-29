@@ -33,6 +33,7 @@
 .tc_tabs_items .tc_on
 {
 	border: none;
+	box-shadow: -6px 2px 3px rgba(0, 0, 0, 0.5);
 	-webkit-box-shadow: -6px 2px 3px rgba(0, 0, 0, 0.5);
 }
 

@@ -9,6 +9,7 @@
 {
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#747678), to(#909193));
 	background-image: -moz-linear-gradient(top, #747678, #909193);
+	background-image: linear-gradient(to bottom, #747678 0%, #909193 100%);
 	
 	height: 7px;	
 }
@@ -62,6 +63,7 @@
 	
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
+	border-radius: 3px;
 }
 
 .ca_dot.ca_selected
@@ -73,6 +75,7 @@
 {
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#909193), to(#747678));
 	background-image: -moz-linear-gradient(top, #909193, #747678);
+	background-image: linear-gradient(to bottom, #909193 0%, #747678 100%);
 	
 	height: 7px;	
 }

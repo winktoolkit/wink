@@ -31,6 +31,9 @@
 	right: 0;
 	
 	overflow: hidden;
+	
+	transform: rotateY(360deg);
+	backface-visibility: hidden;
 
 	-webkit-transform: rotateY(360deg);
 	-webkit-backface-visibility: hidden;
@@ -47,6 +50,9 @@
 	right: 0;
 	
 	overflow: hidden;
+	
+	transform: rotateY(180deg);
+	backface-visibility: hidden;
 
 	-webkit-transform: rotateY(180deg);
 	-webkit-backface-visibility: hidden;
