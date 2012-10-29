@@ -190,7 +190,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 			 */
 			init: function() {
 				wp.each([
-					"pop", "push", "reverse", "shift", "sort", "splice", "unshift", "slice", "indexOf", "lastIndexOf"
+					"pop", "push", "reverse", "shift", "sort", "splice", "unshift", "slice", "indexOf", "lastIndexOf", "forEach"
 				], function(i, name) {
 					wp[name] = [][name];
 				});
@@ -568,7 +568,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 				
 				var result = target && target.apply(source, args);
 
-				var i, cbs = _source.cbs, l = cbs.length;
+				var i, cbs = _source.cbs.slice(0), l = cbs.length;
 				for (i = 0; i < l; i++)
 				{
 					var cb = cbs[i];
