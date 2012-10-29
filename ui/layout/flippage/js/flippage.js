@@ -435,7 +435,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 		 */
 		_initListeners: function()
 		{
-			wink.ux.touch.addListener(this._domNode, 'start', { context: this, method: '_touchStart' });
+			wink.ux.touch.addListener(this._domNode, 'start', { context: this, method: '_touchStart' }, { touchAction: "double-tap-zoom" });
 			if (!this.wkArMove) {
 				wink.ux.touch.addListener(this._domNode, 'move', { context: this, method: '_touchMove' });
 			}

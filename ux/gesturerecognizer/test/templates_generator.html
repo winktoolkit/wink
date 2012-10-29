@@ -47,7 +47,7 @@
 			init = function()
 			{
 
-				wink.ux.touch.addListener(document, "start", { context: window, method: "start", arguments: null }, { preventDefault: true });
+				wink.ux.touch.addListener(document, "start", { context: window, method: "start", arguments: null }, { preventDefault: true, touchAction: "double-tap-zoom" });
 				wink.ux.touch.addListener(document, "move", { context: window, method: "move", arguments: null }, { preventDefault: true });
 				wink.ux.touch.addListener(document, "end", { context: window, method: "end", arguments: null }, { preventDefault: true });
 

@@ -27,7 +27,6 @@
 				width: 20%;
 				height: 20%;
 				background-color: #6584F3;
-				-webkit-user-select: none;
 			}
 		</style>
 		
@@ -112,7 +111,7 @@
 				
 				var boxTracker = new BoxTracker(box);
 				
-				wink.ux.touch.addListener(box, "start", { context: boxTracker, method: "handleBoxStart" });
+				wink.ux.touch.addListener(box, "start", { context: boxTracker, method: "handleBoxStart" }, { touchAction: "double-tap-zoom" });
 			};
 		</script>
 	</head>

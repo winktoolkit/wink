@@ -121,8 +121,10 @@
 				node.parentNode.appendChild(clone.copy.container.node);
 				node.style.opacity = 0;
 
-				clone.copy.container.node.style["-webkit-perspective"] = 300;
-				clone.copy.container.node.style["-webkit-transform-style"] = 'preserve-3d';
+				wink.fx.apply(clone.copy.container.node, {
+					"perspective": 300,
+					"transform-style": 'preserve-3d'
+				});
 
 				var animGroup = new wink.fx.animation.AnimationGroup();
 				for (var i = 0; i < rows; i++) {
@@ -146,14 +148,14 @@
 						];
 						
 						anim.addStep({
-							property: '-webkit-transform',
+							property: 'transform',
 							value: { context: transformer, method: 'transform', arguments: [ transformations1 ] },
 							duration: 1000,
 							delay: delay,
 							func: 'default'
 						});
 						anim.addStep({
-							property: '-webkit-transform',
+							property: 'transform',
 							value: { context: transformer, method: 'transform', arguments: [ transformations2 ] },
 							duration: 1000,
 							delay: 0,

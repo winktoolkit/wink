@@ -29,7 +29,13 @@ define(['../../../_amd/core'], function()
 			gs: "gesturestart",
 			gc: "gesturechange",
 			ge: "gestureend",
-			tre: "transitionend"
+			tre: "transitionend",
+			msd: "mspointerdown",
+			msm: "mspointermove",
+			msu: "mspointerup",
+			msgs: "msgesturestart",
+			msgc: "msgesturechange",
+			msge: "msgestureend"
 		};
 
 	function hasEvent(name) {
@@ -44,30 +50,48 @@ define(['../../../_amd/core'], function()
 	inquireMap({
 		"touchstart": function() {
 			var ts = hasEvent("ts");
-			setProp(events.ts, ts ? events.ts : 'mousedown');
+			if (ts) {
+				setProp(events.ts, events.ts);
+			} else {
+				ts = winkhas("mspointer") && hasEvent("msd");
+				setProp(events.ts, ts ? 'MSPointerDown' : 'mousedown');
+			}
 			return ts;
 		},
 		"touchmove": function() {
 			var ts = hasEvent("tm");
-			setProp(events.tm, ts ? events.tm : 'mousemove');
+			if (ts) {
+				setProp(events.tm, events.tm);
+			} else {
+				ts = winkhas("mspointer") && hasEvent("msm");
+				setProp(events.tm, ts ? 'MSPointerMove' : 'mousemove');
+			}
 			return ts;
 		},
 		"touchend": function() {
 			var ts = hasEvent("te");
-			setProp(events.te, ts ? events.te : 'mouseup');
+			if (ts) {
+				setProp(events.te, events.te);
+			} else {
+				ts = winkhas("mspointer") && hasEvent("msu");
+				setProp(events.te, ts ? 'MSPointerUp' : 'mouseup');
+			}
 			return ts;
 		},
 		"touch": function() {
 			return winkhas(events.ts) && winkhas(events.tm) && winkhas(events.te);
 		},
+		"mspointer": function() {
+			return (w.navigator.msPointerEnabled === true);
+		},
 		"gesturestart": function() {
-			return hasEvent("gs");
+			return hasEvent("gs") || hasEvent("msgs");
 		},
 		"gesturechange": function() {
-			return hasEvent("gc");
+			return hasEvent("gc") || hasEvent("msgc");
 		},
 		"gestureend": function() {
-			return hasEvent("ge");
+			return hasEvent("ge") || hasEvent("msge");
 		},
 		"gesture": function() {
 			return winkhas(events.gs) && winkhas(events.gc) && winkhas(events.ge);

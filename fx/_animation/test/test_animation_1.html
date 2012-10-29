@@ -87,13 +87,13 @@
 				_step3: function()
 				{
 					var anim = wink.fx.animate(null, { 
-							property: '-webkit-transform', 
+							property: 'transform', 
 							value: { context: this, method: '_translateRotate', arguments: [ 100, 100, 180 ] }, 
 							duration: 500, 
 							delay: 0 
 					}, { start: false })
 					.chain(wink.fx.animate(null, { 
-						property: '-webkit-transform', 
+						property: 'transform', 
 						value: { context: this, method: '_translateRotate', arguments: [ 100, 100, 360 ] }, 
 						duration: 500, 
 						delay: 0 
@@ -107,7 +107,7 @@
 				{
 					var anim = wink.fx.fadeIn(wink.byId('text2'), { start: false });
 					anim.chain(wink.fx.animate(null, { 
-						property: '-webkit-transform', 
+						property: 'transform', 
 						value: { context: this, method: '_translateRotate', arguments: [ 20, 0, 0 ] }, 
 						duration: 500
 					}, { start: false }));

@@ -9,6 +9,7 @@
 	
 	overflow: hidden;
 	
+	perspective: 500px;
 	-webkit-perspective: 500;
 	-webkit-transform-style: preserve-3d;
 	

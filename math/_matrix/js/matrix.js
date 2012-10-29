@@ -261,7 +261,7 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_valuesToCssMatrix: function(values)
 		{
-			var cssMatrix = new WebKitCSSMatrix();
+			var cssMatrix = new window[wink.has.prop("cssmatrix")]();
 			
 			cssMatrix.m11 = values[0];
 			cssMatrix.m12 = values[1];

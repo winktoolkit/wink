@@ -10,16 +10,23 @@
 
 	text-align: center;
 	
+	perspective: 500px;
     -webkit-transform-style: preserve-3d;
     -webkit-perspective: 500;
     
+    transition-property: transform;
     -webkit-transition-property: -webkit-transform;
-	-webkit-transform: translate3d(0, 0, 0.1)
+    
+    transform: translate3d(0, 0, 0.1);
+	-webkit-transform: translate3d(0, 0, 0.1);
 }
 
 .vp_video
 {
 	position: relative;
+	
+	transition-property: transform;
+	transform: rotateY(0deg);
 	
 	-webkit-transition-property: -webkit-transform;
     -webkit-transform: rotateY(0deg);
@@ -27,8 +34,11 @@
 
 .vp_player
 {	
+	transition-property: transform;
+	transform: translate3d(0, 0, 0.2);
+	
 	-webkit-transition-property: -webkit-transform;
-	-webkit-transform: translate3d(0, 0, 0.2)
+	-webkit-transform: translate3d(0, 0, 0.2);
 }
 
 .vp_progress_container

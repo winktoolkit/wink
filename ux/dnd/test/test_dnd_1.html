@@ -70,10 +70,11 @@
 
 				source1.getAvatar = function()
 				{
-					var avatar = wink.byId(this.id).cloneNode(true);
+					var src = wink.byId(this.id);
+					var avatar = src.cloneNode(true);
 					
-					avatar.style.height = avatar.height * 3 + 'px';
-					avatar.style.width = avatar.width * 3 + 'px';
+					avatar.style.height = src.offsetHeight * 3 + 'px';
+					avatar.style.width = src.offsetWidth * 3 + 'px';
 					avatar.style.opacity = 0.5;
 
 					return avatar;

@@ -26,6 +26,7 @@
 {
 	display: -webkit-box;
 	display: -moz-box;
+	display: -ms-flexbox;
 	
 	background: transparent;
 	
@@ -39,8 +40,12 @@
 	
 	-webkit-box-align: center;
 	-moz-box-align: center;
+	-ms-flex-align: center;
 	
 	-moz-box-pack: center;
+	-ms-flex-pack: center;
+	
+	-ms-flex-direction: column;
 }
 
 .ca_dot

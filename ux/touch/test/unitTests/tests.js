@@ -23,7 +23,7 @@ doh.register("wink.ux.touch",
 	 			
 	 			wink.byId('test').style.backgroundColor = 'red';
 	 			
-	 			if ( !wink.isInteger(params.x) || !wink.isInteger(params.y) || wink.isUndefined(params.target) )
+	 			if ( !wink.isNumber(params.x) || !wink.isNumber(params.y) || wink.isUndefined(params.target) )
 	 			{
 	 				this.d.errback(new Error("Event: wrong position parameters"));
 	 			}
@@ -33,7 +33,7 @@ doh.register("wink.ux.touch",
 	 		{
 	 			wink.byId('test').style.backgroundColor = 'yellow';
 	 			
-	 			if ( !wink.isInteger(params.x) || !wink.isInteger(params.y) || wink.isUndefined(params.target) )
+	 			if ( !wink.isNumber(params.x) || !wink.isNumber(params.y) || wink.isUndefined(params.target) )
 	 			{
 	 				this.d.errback(new Error("Event: wrong position parameters"));
 	 			}
@@ -45,7 +45,7 @@ doh.register("wink.ux.touch",
 			{
 	 			this.d = new doh.Deferred();
 	 			
-	 			wink.ux.touch.addListener(wink.byId('test'), "start", { context: this, method: "handleTouchStart", arguments: null }, { preventDefault: true });
+	 			wink.ux.touch.addListener(wink.byId('test'), "start", { context: this, method: "handleTouchStart", arguments: null }, { preventDefault: true, touchAction: "none" });
 	 			wink.ux.touch.addListener(wink.byId('test'), "end", { context: this, method: "handleTouchEnd", arguments: null }, { preventDefault: true });
 	 			
 	 			return this.d;
@@ -77,7 +77,7 @@ doh.register("wink.ux.touch",
 	 		
 	 		handleTouchMove: function(params)
 	 		{
-	 			if ( !wink.isInteger(params.x) || !wink.isInteger(params.y) || wink.isUndefined(params.target) )
+	 			if ( !wink.isNumber(params.x) || !wink.isNumber(params.y) || wink.isUndefined(params.target) )
 	 			{
 	 				this.d.errback(new Error("Event: wrong position parameters"));
 	 			}
@@ -108,7 +108,7 @@ doh.register("wink.ux.touch",
 			{
 	 			this.d = new doh.Deferred();
 	 			
-	 			wink.ux.touch.addListener(wink.byId('sandbox'), "start", { context: this, method: "handleTouchStart", arguments: null }, { preventDefault: true });
+	 			wink.ux.touch.addListener(wink.byId('sandbox'), "start", { context: this, method: "handleTouchStart", arguments: null }, { preventDefault: true, touchAction: "none" });
 	 			wink.ux.touch.addListener(wink.byId('sandbox'), "move", { context: this, method: "handleTouchMove", arguments: null }, { preventDefault: true });
 	 			wink.ux.touch.addListener(wink.byId('sandbox'), "end", { context: this, method: "handleTouchEnd", arguments: null }, { preventDefault: true });
 	 			
@@ -165,7 +165,7 @@ doh.register("wink.ux.touch",
 			{
 	 			this.d = new doh.Deferred();
 	 			
-	 			wink.ux.touch.addListener(wink.byId('test'), "gesturestart", { context: this, method: "handleGestureStart", arguments: null }, { preventDefault: true });
+	 			wink.ux.touch.addListener(wink.byId('test'), "gesturestart", { context: this, method: "handleGestureStart", arguments: null }, { preventDefault: true, touchAction: "none" });
 	 			wink.ux.touch.addListener(wink.byId('test'), "gesturechange", { context: this, method: "handleGestureChange", arguments: null }, { preventDefault: true });
 	 			wink.ux.touch.addListener(wink.byId('test'), "gestureend", { context: this, method: "handleGestureEnd", arguments: null }, { preventDefault: true });
 	 			

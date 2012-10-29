@@ -422,9 +422,10 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_initListeners: function()
 		{
-			wink.ux.touch.addListener(wink.isSet(this.zone)?this.zone:document, "start", { context: this, method: "_startDrag", arguments: null }, { preventDefault: true, tracking: false });
-			wink.ux.touch.addListener(wink.isSet(this.zone)?this.zone:document, "move", { context: this, method: "_drag", arguments: null }, { preventDefault: true });
-			wink.ux.touch.addListener(wink.isSet(this.zone)?this.zone:document, "end", { context: this, method: "_endDrag", arguments: null }, { preventDefault: true });
+			var body = document.body;
+			wink.ux.touch.addListener(wink.isSet(this.zone)?this.zone:body, "start", { context: this, method: "_startDrag", arguments: null }, { preventDefault: true, tracking: false, touchAction: "double-tap-zoom" });
+			wink.ux.touch.addListener(wink.isSet(this.zone)?this.zone:body, "move", { context: this, method: "_drag", arguments: null }, { preventDefault: true });
+			wink.ux.touch.addListener(wink.isSet(this.zone)?this.zone:body, "end", { context: this, method: "_endDrag", arguments: null }, { preventDefault: true });
 		}
 	};
 	

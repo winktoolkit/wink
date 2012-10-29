@@ -27,7 +27,6 @@
 				width: 30%;
 				height: 30%;
 				background-color: #6584F3;
-				-webkit-user-select: none;
 			}
 		</style>
 		
@@ -92,7 +91,7 @@
 				
 				var boxMover = new BoxMover(box);
 				
-				wink.ux.touch.addListener(box, "start", { context: boxMover, method: "handleBoxStart" });
+				wink.ux.touch.addListener(box, "start", { context: boxMover, method: "handleBoxStart" }, { touchAction: "double-tap-zoom" });
 				wink.ux.touch.addListener(box, "move", { context: boxMover, method: "handleBoxMove" });
 				wink.ux.touch.addListener(box, "end", { context: boxMover, method: "handleBoxEnd" });
 			};

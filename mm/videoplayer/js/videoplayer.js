@@ -828,7 +828,7 @@ define(['../../../_amd/core'], function(wink)
 				// Cursor
 				if ( this.displayCursor == 1 )
 				{	
-					wink.ux.touch.addListener(this._cursor, "start", { context: this, method: "_touchStart", arguments: null }, { preventDefault: true });
+					wink.ux.touch.addListener(this._cursor, "start", { context: this, method: "_touchStart", arguments: null }, { preventDefault: true, touchAction: "double-tap-zoom" });
 					wink.ux.touch.addListener(this._cursor, "move", { context: this, method: "_touchMove", arguments: null }, { preventDefault: true });
 					wink.ux.touch.addListener(this._cursor, "end", { context: this, method: "_touchEnd", arguments: null }, { preventDefault: true });
 				}

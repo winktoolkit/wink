@@ -19,6 +19,7 @@
 .stl_section.loading .stl_label.loading {
 	display: -webkit-box;
 	display: -moz-box;
+	display: -ms-flexbox;
 }
 
 .stl_section.wait .stl_sp_box {

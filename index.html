@@ -592,6 +592,18 @@
 				wink.byId(theme + '_theme').checked = true;
 				
 				var pageId = wink.ua.isIE ? 'page_ie' : null;
+				
+				if (wink.ua.isIE && wink.ua.browserVersion >= 10) {
+					pageId = null;
+					var testM = tests['Multimedia'];
+					for (var i in testM) {
+						if (testM[i].name == 'mediawheel_audio') {
+							testM[i].page = testM[i].page_ie;
+							break;
+						}
+					}
+				}
+				
 				for(sectionLabel in tests)
 				{
 					var section = tests[sectionLabel];
@@ -677,19 +689,24 @@
 					disableTestPage('slidingpanels');
 				}
 				
-				if ( !wink.has('css-perspective'))
+				if ( !wink.has('preserve3d'))
 				{
-					disableTestPage('animation3d');
 					disableTestPage('coverflow');
 					disableTestPage('cube');
 					disableTestPage('flippage');
 					disableTestPage('flipdisc');
-					disableTestPage('opener');
-					disableTestPage('wall');
 					disableTestPage('windows');
+					
+					if ( !wink.has('css-matrix'))
+					{
+						disableTestPage('animation3d');
+						disableTestPage('tagcloud');
+						disableTestPage('opener');
+						disableTestPage('wall');
+					}
 				}
 				
-				if ( !wink.has('gesture'))
+				if ( !wink.has('gesture') || (wink.ua.isIE) )
 				{
 					disableTestPage('animationGesture');
 					disableTestPage('gesture');
@@ -718,7 +735,12 @@
 				}
 
 				// iOS
-				if (wink.ua.isIOS || (wink.ua.isBlackBerry && wink.ua.browserVersion >= 7 ) || (wink.ua.isAndroid && wink.ua.osVersion >= 3 ) || wink.ua.isTizen)
+				if (wink.ua.isIOS 
+					|| (wink.ua.isBlackBerry && wink.ua.browserVersion >= 7 ) 
+					|| (wink.ua.isAndroid && wink.ua.osVersion >= 3 ) 
+					|| wink.ua.isTizen
+					|| (wink.ua.isIE && wink.ua.browserVersion >= 10)
+					)
 				{
 					var ipod_or_iphone = (wink.ua.isIPhone || wink.ua.isIPod);
 					var ipad = wink.ua.isIPad;
@@ -743,6 +765,10 @@
 					disableTestPage('videoplayer');
 					disableTestPage('mediawheel_audio');
 					disableTestPage('mediawheel_video');
+				}
+				
+				if (!wink.ua.isIOS)
+				{
 					disableTestPage('popup_add');
 				}
 

@@ -87,6 +87,15 @@ define(['../../../_amd/core'], function()
 		for (p in properties)
 		{
 			var styleResolved = getprop(p);
+			
+			if (wink.ua.isIE && p == "perspective")
+			{
+				var v = properties[p];
+				if (("" + parseFloat(v)).length == ("" + v).length)
+				{
+					properties[p] = v + "px";
+				}
+			}
 			s[styleResolved] = properties[p];
 		}
 	};
@@ -199,7 +208,7 @@ define(['../../../_amd/core'], function()
 			{
 				transform = "";
 			}
-			var transformMatrix = new WebKitCSSMatrix(transform);
+			var transformMatrix = new window[wink.has.prop("cssmatrix")](transform);
 			result.x = transformMatrix.m41;
 			result.y = transformMatrix.m42;
 		}

@@ -383,7 +383,7 @@ define(['../../../../_amd/core'], function(wink)
 		_initListeners: function() 
 		{
 			var n = this._domNode;
-			wink.ux.touch.addListener(n, "start", { context: this, method: "_start" }, { preventDefault: true });
+			wink.ux.touch.addListener(n, "start", { context: this, method: "_start" }, { preventDefault: true, touchAction: "double-tap-zoom" });
 			wink.ux.touch.addListener(n, "move", { context: this, method: "_move" });
 			wink.ux.touch.addListener(n, "end", { context: this, method: "_end" });
 		}

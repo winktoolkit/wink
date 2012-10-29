@@ -278,3 +278,7 @@ Release 1.4.3 [xx/xx/xxxx]
 	- New search feature in the documentation
 	- Listen to both resize and orientationchange events in wink.ux.window
 	- iOS6 compatibility
+	- Corrected bug on wink.connect: clone callbacks to prevent dynamic changes with disconnect
+	- Added forEach method to the QueryWrapper
+	- Windows Phone 8 compatibility (feat, ua, touch, CSS)
+	

@@ -6,6 +6,7 @@
 	
 	min-height: 900px;
 	
+	perspective: 1000px;
 	-webkit-perspective: 1000;
 }
 

@@ -16,8 +16,9 @@ html, body
 	width: 100%;
 	
 	user-select: none;
-	
 	-webkit-user-select: none;
+	-ms-user-select: none;
+	
 	-webkit-touch-callout: none;
 	-webkit-text-size-adjust:none;
 }
@@ -112,6 +113,7 @@ input[type="text"], input[type="password"], input[type="number"], input[type="te
 {
 	display: -webkit-box;
 	display: -moz-box;
+	display: -ms-flexbox;
 	
 	width: 100%;
 }
@@ -120,12 +122,14 @@ input[type="text"], input[type="password"], input[type="number"], input[type="te
 {
 	-webkit-box-flex: 0;
 	-moz-box-flex: 0;
+	-ms-flex: 0 0 auto
 }
 
 .w_layout_box .w_expand, .w_layout_box .w_tablet_left
 {
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
+	-ms-flex: 1 0 auto
 }
 
 /* header & footer */

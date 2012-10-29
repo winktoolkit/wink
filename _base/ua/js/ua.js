@@ -12,7 +12,7 @@
  */
 define(['../../../_amd/core'], function()
 {
-	var a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, t, u, v, w, bb, ba, op, ie, ti;
+	var a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, t, u, v, w, bb, ba, op, ie, ti, ms;
 	a = b = c = d = e = f = g = h = bb = ba = op = ie = false;
 	i = j= k = l = m = n = o = p = q = r = 0;
 	
@@ -75,6 +75,7 @@ define(['../../../_amd/core'], function()
 	ba = regTest(/bada/gi, u);
 	op = regTest(/Opera/gi, u);
 	ti = regTest(/Tizen/gi, u);
+	ms = regTest(/IEMobile/gi, u);
 		
 	if (isSet(v))
 	{
@@ -121,12 +122,12 @@ define(['../../../_amd/core'], function()
 		}
 	}
 	
-	if (!g && !a)
+	if (!g && !a && !ie)
 	{
 		h = regTest(/mozilla/i, u);
 	}
 	
-	b = c || d || f || bb || ba || ti || regTest(" Mobile/", u);
+	b = c || d || f || bb || ba || ti || ms || regTest(" Mobile/", u);
 	
 	if (a)
 	{

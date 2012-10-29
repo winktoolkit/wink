@@ -405,7 +405,7 @@
 						this.key1Activated = false;
 						this.key2Activated = false;
 
-						var pwt = '-webkit-transform';
+						var pwt = 'transform';
 						var getCb = function(x, y, angle) {
 							return { context: lockManager, method: '_transform', arguments: [ x, y, angle ] };
 						};
@@ -457,7 +457,7 @@
 					this.key1.style.display = 'none';
 					this.key2.style.display = 'none';
 					
-					var pwt = '-webkit-transform';
+					var pwt = 'transform';
 					var getCb = function(x, y, angle, sx, sy) {
 						return { context: lockManager, method: '_transform', arguments: [ x, y, angle, sx, sy ] };
 					};

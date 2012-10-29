@@ -150,7 +150,7 @@ define(['../../../_amd/core', '../../../fx/_xyz/js/3dfx', '../../../math/_geomet
 					width: (this.height/2) + 'px ',
 					'transform-origin': (this.height/2 +1) + 'px ' +  (this.height/2) + 'px'
 				};
-				if ( wink.has('css-perspective') )
+				if ( wink.has('preserve3d') )
 				{
 					petalStyle['transform-style'] = 'preserve-3d';
 				}
@@ -194,7 +194,7 @@ define(['../../../_amd/core', '../../../fx/_xyz/js/3dfx', '../../../math/_geomet
 		 */
 		_initListeners: function()
 		{
-			wink.ux.touch.addListener(this._domNode, 'start', { context: this, method: '_touchStart', arguments: null }, { preventDefault: true });
+			wink.ux.touch.addListener(this._domNode, 'start', { context: this, method: '_touchStart', arguments: null }, { preventDefault: true, touchAction: "double-tap-zoom" });
 			wink.ux.touch.addListener(this._domNode, 'move', { context: this, method: '_touchMove', arguments: null }, { preventDefault: true });
 			wink.ux.touch.addListener(this._domNode, 'end', { context: this, method: '_touchEnd', arguments: null }, { preventDefault: true });
 		},

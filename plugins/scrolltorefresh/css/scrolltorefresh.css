@@ -34,6 +34,7 @@
 .str_section.released .str_label.released {
 	display: -webkit-box;
 	display: -moz-box;
+	display: -ms-flexbox;
 }
 
 .str_section .str_sp_box {

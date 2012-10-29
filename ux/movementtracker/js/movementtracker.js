@@ -236,7 +236,7 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_initListeners: function()
 		{
-			wink.ux.touch.addListener(this._target, "start", { context: this, method: "_handleTouchStart" }, { preventDefault: this._params.preventStart, captureFlow: this._params.captureFlow });
+			wink.ux.touch.addListener(this._target, "start", { context: this, method: "_handleTouchStart" }, { preventDefault: this._params.preventStart, captureFlow: this._params.captureFlow, touchAction: "double-tap-zoom" });
 			wink.ux.touch.addListener(this._target, "move", { context: this, method: "_handleTouchMove" }, { preventDefault: this._params.preventMove, captureFlow: this._params.captureFlow });
 			wink.ux.touch.addListener(this._target, "end", { context: this, method: "_handleTouchEnd" }, { captureFlow: this._params.captureFlow });
 		},

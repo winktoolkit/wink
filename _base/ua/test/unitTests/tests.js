@@ -38,34 +38,40 @@ doh.register("wink._base.ua",
         // Test isMobile
         function isMobile(t)
         {
-			var check = function(mobile, android, ios, blackberry, bada) {
+			var check = function(mobile, android, ios, blackberry, bada, ie) {
 				doh.is(mobile, wink.ua.isMobile);
 				doh.is(android, wink.ua.isAndroid);
 				doh.is(ios, wink.ua.isIOS);
 				doh.is(blackberry, wink.ua.isBlackBerry);
 				doh.is(bada, wink.ua.isBada);
+				doh.is(ie, wink.ua.isIE);
 			};
 			
 			if (confirm("Are you running this test on a mobile device ?"))
 			{
 				if (confirm("Are you running this test on an Android device ?"))
 				{
-					check(true, true, false, false, false);
+					check(true, true, false, false, false, false);
 					return;
 				}
 				if (confirm("Are you running this test on iOS ?"))
 				{
-					check(true, false, true, false, false);
+					check(true, false, true, false, false, false);
 					return;
 				}
 				if (confirm("Are you running this test on BlackBerry ?"))
 				{
-					check(true, false, false, true, false);
+					check(true, false, false, true, false, false);
 					return;
 				}
 				if (confirm("Are you running this test on Bada ?"))
 				{
-					check(true, false, false, false, true);
+					check(true, false, false, false, true, false);
+					return;
+				}
+				if (confirm("Are you running this test on IE ?"))
+				{
+					check(true, false, false, false, false, true);
 					return;
 				}
 				return;

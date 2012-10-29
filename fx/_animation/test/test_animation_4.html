@@ -117,8 +117,10 @@
 			};
 
 			var rotateParts = function(clone, angle, duration, delay, onEnd) {
-				clone.copy.container.node.style["-webkit-perspective"] = 500;
-				clone.copy.container.node.style["-webkit-transform-style"] = 'preserve-3d';
+				wink.fx.apply(clone.copy.container.node, {
+					"perspective": 500,
+					"transform-style": 'preserve-3d'
+				});
 				
 				var animGroup = new wink.fx.animation.AnimationGroup();
 
@@ -128,7 +130,7 @@
 						
 						var anim = new wink.fx.animation.Animation();
 						anim.addStep({
-							property: '-webkit-transform',
+							property: 'transform',
 							value: { context: transformer, method: 'transform', arguments: [ [{ type: "rotate", x: 1, y: 1, z: 0, angle: angle }] ] },
 							duration: duration,
 							delay: delay,
@@ -180,7 +182,7 @@
 		
 			var init = function() {
 				window.scrollTo(0,0);
-
+				
 				wink.error.logLevel = 1;
 				animStep1(wink.byId('page1'), wink.byId('page2'), 6, 6, 1500);
 			};

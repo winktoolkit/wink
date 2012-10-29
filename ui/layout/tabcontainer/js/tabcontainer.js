@@ -653,7 +653,7 @@ define(['../../../../_amd/core'], function(wink)
 		{
 			wink.ux.touch.addListener(this._leftArrowNode, "start", { context: this, method: "_handleLeftArrowPressed", arguments: null }, { preventDefault: false });
 			wink.ux.touch.addListener(this._rightArrowNode, "start", { context: this, method: "_handleRightArrowPressed", arguments: null }, { preventDefault: false });
-			wink.ux.touch.addListener(this._moveableNode, "start", { context: this, method: "_handleTouchStart", arguments: null }, { preventDefault: false });
+			wink.ux.touch.addListener(this._moveableNode, "start", { context: this, method: "_handleTouchStart", arguments: null }, { preventDefault: false, touchAction: "double-tap-zoom" });
 			
 			wink.ux.touch.addListener(this._moveableNode, "move", { context: this, method: "_handleTouchMove", arguments: null }, { preventDefault: false });
 			

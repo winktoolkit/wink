@@ -48,7 +48,8 @@ define(['../../../_amd/core'], function()
 			t: "user-select",
 			bg: "background-image",
 			tr: "transition",
-			an: "animation"
+			an: "animation",
+			cm: "cssmatrix"
 		};
 	
 	function normalizeKey(key) {
@@ -100,6 +101,7 @@ define(['../../../_amd/core'], function()
 	deferProp(cssKeys.q, cssKeys.o);
 	deferProp(cssKeys.tr, cssKeys.n);
 	deferProp(cssKeys.an, "css-animation");
+	deferProp(cssKeys.cm, "css-matrix");
 	
 	function singleProp(p) {
 		return function() {
@@ -114,10 +116,9 @@ define(['../../../_amd/core'], function()
 		"css-transform": function() {
 			var support = hasCss(cssKeys.m);
 			
-			var pr = wink.has.prefix;
-	    	var trp = cssKeys.m;
-	    	if (pr != null) {
-	    		trp = (pr + trp);
+			var trp = cssKeys.m;
+	    	if (typeof style[trp] != stringV) {
+	    		trp = (wink.has.prefix + trp);
 	    	}
 
 	    	if (!support) {
@@ -175,6 +176,11 @@ define(['../../../_amd/core'], function()
 	    },
 	    "css-perspective": function() {
 	    	var prs = hasCss(cssKeys.j) && hasCss(cssKeys.k) && hasCss(cssKeys.l) && hasCss(cssKeys.q);
+	    	
+	    	var ua = wink.ua;
+	    	if (ua.isIE) {
+	    		return prs;
+	    	}
 	    	prs = prs && hasCss(cssKeys.k + "-x") && hasCss(cssKeys.k + "-y") && hasCss(cssKeys.k + "-z");
 	    	if (!prs) {
 	    		return false;
@@ -191,9 +197,16 @@ define(['../../../_amd/core'], function()
 	    	return result;
 	    },
 	    "css-matrix": function() {
-	    	var wcm = w["WebKitCSSMatrix"];
+	    	var objName = "WebKitCSSMatrix",
+	    		wcm = w[objName];
+	    	setProp(cssKeys.cm, objName);
 	    	if (typeof wcm == "undefined") {
-	    		return false;
+	    		objName = "MSCSSMatrix";
+	    		wcm = w[objName];
+	    		setProp(cssKeys.cm, objName);
+	    		if (typeof wcm == "undefined") {
+	    			return false;
+	    		}
 	    	}
 	    	var m = new wcm("matrix(1,0,0,1,6,7)");
 	    	var sp = (m.m41 == 6 && m.m42 == 7) && (m.m41 == m.e && m.m42 == m.f);
@@ -212,6 +225,17 @@ define(['../../../_amd/core'], function()
 	    	var v = ua.isIOS ? parseInt("" + ua.osVersion + ua.osMinorVersion + ua.osUpdateVersion) : 500;
 	    	var vandroid = ua.isAndroid ? parseInt("" + ua.osVersion + ua.osMinorVersion + ua.osUpdateVersion) : 300;
 	    	return (v < 421 || vandroid < 300);
+	    },
+	    "preserve3d": function() {
+	    	if (!winkhas("css-perspective")) {
+	    		return false;
+	    	}
+	    	var p = winkhas.prop(cssKeys.l),
+	    		v = "preserve-3d";
+	    	style[p] = v;
+	    	var t = (style[p] == v);
+	    	style[p] = "";
+	    	return t;
 	    },
 	    "css-position-fixed": function() {
 	    	var ua = wink.ua;
@@ -257,6 +281,9 @@ define(['../../../_amd/core'], function()
 	    },
 	    "css-overflow-scrolling": function() {
 	    	return hasCss("overflow-scrolling");
+	    },
+	    "css-touch-action": function() {
+	    	return hasCss("touch-action");
 	    }
 	});
 	

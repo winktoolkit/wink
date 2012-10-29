@@ -95,7 +95,8 @@ define(['../../../_amd/core'], function()
 		var opts = {
 			preventDefault: options.preventDefault === true ? true : false,
 			tracking: options.tracking === false ? false : true,
-			captureFlow: options.captureFlow === true ? true : false
+			captureFlow: options.captureFlow === true ? true : false,
+			touchAction: options.touchAction
 		};
 		
 		var touchElement = null;
@@ -119,6 +120,7 @@ define(['../../../_amd/core'], function()
 				};
 			}
 			touchElement.eventCaptures[eventType] = opts.captureFlow;
+			touchElement.setTouchAction(opts.touchAction);
 			touchElement.domNode.addEventListener(_MAP[eventType], touchElement.eventHandler, touchElement.eventCaptures[eventType]);
 		}
 		touchElement.addEventCallback(eventType, callback, opts.preventDefault);
@@ -144,6 +146,10 @@ define(['../../../_amd/core'], function()
 			touchElement.removeEventCallback(eventType, callback);
 			if (!touchElement.isListening(eventType))
 			{
+				if (touchElement.touchAction) {
+					
+					touchElement.setTouchAction("");
+				}
 				touchElement.domNode.removeEventListener(_MAP[eventType], touchElement.eventHandler, touchElement.eventCaptures[eventType]);
 			}
 		}
@@ -228,8 +234,8 @@ define(['../../../_amd/core'], function()
 		{
 			properties.timestamp = new Date().getTime();
 		}
-		
-		if (wink.has("touch"))
+
+		if (wink.has("touch") && !wink.has("mspointer"))
 		{
 			if (type == _GS_SE 
 			 || type == _GS_CE
@@ -273,7 +279,7 @@ define(['../../../_amd/core'], function()
 				}
 			}
 		}
-		else 
+		else
 		{
 			var props = getTouchProperties(e);
 			properties.x = props.x;
@@ -335,6 +341,8 @@ define(['../../../_amd/core'], function()
 		this.eventHandler		= null;
 		this.eventCaptures		= {};
 		this._els				= {}; // events listened
+		this.touchAction		= false;
+		
 		wink.mixin(this, properties);
 		
 		if (this._validateProperties() === false) return;
@@ -456,6 +464,20 @@ define(['../../../_amd/core'], function()
 				{
 					wink.call(callbacks[j], uxEvent);
 				}
+			}
+		},
+		
+		/**
+		 * Allows to handle the touch-action style
+		 * 
+		 * @param {string value The touch action value
+		 */
+		setTouchAction: function(value)
+		{
+			if (wink.has("css-touch-action") && !wink.isUndefined(value))
+			{
+				wink.fx.apply(this.domNode, { '-ms-touch-action': value });
+				this.touchAction = (value !== "");
 			}
 		},
 	

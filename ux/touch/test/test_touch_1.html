@@ -118,7 +118,7 @@
 				
 				var object = wink.byId("canvas");
 
-				wink.ux.touch.addListener(object, "start", { context: drawer, method: "_handleTouchStart", arguments: null }, { preventDefault: true });
+				wink.ux.touch.addListener(object, "start", { context: drawer, method: "_handleTouchStart", arguments: null }, { preventDefault: true, touchAction: "double-tap-zoom" });
 				wink.ux.touch.addListener(object, "start", { context: drawer, method: "_handleTouchStart2", arguments: null });
 				wink.ux.touch.addListener(object, "move", { context: drawer, method: "_handleTouchMove", arguments: null });
 				wink.ux.touch.addListener(object, "end", { context: drawer, method: "_handleTouchEnd", arguments: null });

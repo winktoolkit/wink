@@ -134,7 +134,7 @@
 
 				var anim = new wink.fx.animation.Animation();
 				anim.addStep({
-					property: '-webkit-transform',
+					property: 'transform',
 					value: { context: transformer, method: 'transform', arguments: [ trf ] },
 					duration: delay,
 					delay: 0,
@@ -147,7 +147,7 @@
 				];
 				var anim2 = new wink.fx.animation.Animation();
 				anim2.addStep({
-					property: '-webkit-transform',
+					property: 'transform',
 					value: { context: transformer, method: 'transform', arguments: [ trf2 ] },
 					duration: duration,
 					delay: 0,
@@ -190,8 +190,10 @@
 				duration = ipad ? 120000 : 80000;
 				delayNext = ipad ? 5000 : 5000;
 
-				wink.byId('container').style["-webkit-perspective"] = 400;
-				wink.byId('container').style["-webkit-transform-style"] = 'preserve-3d';
+				wink.fx.apply(wink.byId('container'), {
+					"perspective": 400,
+					"transform-style": 'preserve-3d'
+				});
 
 				nodeList = [ wink.byId('page1'), wink.byId('page2'), wink.byId('page3'), wink.byId('page4'), wink.byId('page5'), wink.byId('page6'), wink.byId('page7'), wink.byId('page8'), wink.byId('page9') ];
 

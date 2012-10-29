@@ -376,7 +376,7 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx', '../../../../fx/
 		 */
 		_organizeDepth: function()
 		{
-			if (wink.has("css-perspective")) {
+			if (wink.has("preserve3d")) {
 				return;
 			}
 			var zIndexForeground = this._Z_INDEX_BACKGROUND + this.images.length;
