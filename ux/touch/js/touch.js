@@ -470,7 +470,7 @@ define(['../../../_amd/core'], function()
 		/**
 		 * Allows to handle the touch-action style
 		 * 
-		 * @param {string value The touch action value
+		 * @param {string} value The touch action value
 		 */
 		setTouchAction: function(value)
 		{
