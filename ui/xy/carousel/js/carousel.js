@@ -575,7 +575,9 @@ define(['../../../../_amd/core'], function(wink)
 			// Check if a click event must be generated
 			if ( ((this._endEvent.timestamp-this._startEvent.timestamp) < 250) && (Math.abs(_ec - _sc) < 20))
 			{
-				this._endEvent.dispatch(this._endEvent.target, 'click');
+				if (!wink.ua.isIE) {
+					this._endEvent.dispatch(this._endEvent.target, 'click');
+				}
 				return;
 			}
 			

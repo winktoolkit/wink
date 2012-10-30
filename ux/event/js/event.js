@@ -198,6 +198,8 @@ define(['../../../_amd/core'], function()
 			eventInterface = "MouseEvent";
 		} else if (/touch(start|move|end|cancel)/i.test(type)) {
 			eventInterface = "TouchEvent";
+		} else if (/MSPointer/i.test(type)) {
+			eventInterface = "MSPointerEvent";
 		}
 		
 		var event = document.createEvent(eventInterface);
@@ -218,6 +220,8 @@ define(['../../../_amd/core'], function()
 			event.initMouseEvent(type, s.bubbles, s.cancelable, document.defaultView, s.detail, sx, sy, cx, cy, s.ctrlKey, s.altKey, s.shiftKey, s.metaKey, s.button, s.relatedTarget);
 		} else if (eventInterface == "TouchEvent") {
 			event.initTouchEvent(type, s.bubbles, s.cancelable, window, s.detail, s.screenX, s.screenY, s.clientX, s.clientY, s.ctrlKey, s.altKey, s.shiftKey, s.metaKey, s.touches, s.targetTouches, ct, s.scale, s.rotation);
+		} else if (eventInterface == "MSPointerEvent") {
+			event.initPointerEvent(type, s.bubbles, s.cancelable, window, s.detail, s.screenX, s.screenY, s.clientX, s.clientY, s.ctrlKey, s.altKey, s.shiftKey, s.metaKey, s.button, s.relatedTarget, s.offsetX, s.offsetY, s.width, s.height, s.pressure, s.rotation, s.tiltX, s.tiltY, s.pointerId, s.pointerType, s.hwTimestamp, s.isPrimary);
 		}
 		
 		return event;

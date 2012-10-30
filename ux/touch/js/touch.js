@@ -494,6 +494,50 @@ define(['../../../_amd/core'], function()
 			}
 		}
 	};
+	
+	/**
+	 * Handles click in order to prevent a click event when a move is performed.
+	 * 
+	 * @function
+	 * 
+	 * @param {boolean} toHandle Whether that must be managed
+	 */
+	wink.ux.touch.handleClick = handleClick;
+	function handleClick(toHandle) {
+		if (wink.isUndefined(handleClick.active)) {
+			handleClick.hdl = {
+				s: function(e) {
+					this.a = e;
+				},
+				e: function(e) {
+					var dx = Math.abs(e.x - this.a.x),
+						dy = Math.abs(e.y - this.a.y),
+						d = Math.sqrt((dx * dx) + (dy * dy));
+					
+					if (d > 20) {
+						var ch =  function(e) {
+							e.stopPropagation();
+							window.removeEventListener('click', ch, true);
+						};
+						window.addEventListener('click', ch, true);
+					}
+				}
+			};
+		}
+		
+		if (handleClick.active !== toHandle) {
+			var fn = addListener;
+			if (!toHandle) {
+				fn = removeListener;
+			}
+			fn(window, "start", { context: handleClick.hdl, method: "s" }, { captureFlow: true });
+			fn(window, "end", { context: handleClick.hdl, method: "e" }, { captureFlow: true });
+		}
+		handleClick.active = toHandle;
+	}
+	if (wink.ua.isIE || !wink.ua.isMobile) {
+		handleClick(true);
+	}
 
 	return wink.ux.touch;
 });
