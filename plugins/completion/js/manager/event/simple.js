@@ -235,7 +235,9 @@ define(['../../../../../_amd/core'], function(wink)
 	     */
 	    _onInputFocus: function(event)
 	    {
-	    	this._component._domManager.updatePositions();
+	    	if (!wink.isNull(this._component._domManager._referenceDomNode)) {
+	    		this._component._domManager.updatePositions();
+	    	}
 	    },
 	    
 	    /**
