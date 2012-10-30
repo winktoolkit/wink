@@ -787,7 +787,9 @@ define(['../../../../_amd/core', '../../../../ux/inertia/js/inertia'], function(
 			}
 			
 			if (wink.has("touch")) {
-				uxEvent.dispatch(properTarget, "click");
+				if (!wink.ua.isIE) {
+					uxEvent.dispatch(properTarget, "click");
+				}
 			}
 		},
 		/**
