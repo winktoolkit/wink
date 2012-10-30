@@ -468,7 +468,10 @@
             "name": "completion",
             "modules": [ 
                 "completion_core"
-            ]
+            ],
+            "css": [
+			    "plugins/completion/css/completion.css"
+			]
         },
         // --- Core
         {
