@@ -276,7 +276,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 			 * @ignore
 			 */
 			each: function(list, callback) {
-				for (i in list) {
+				for (var i in list) {
 					var li = list[i];
 					callback.call(li, i, li);
 				}
