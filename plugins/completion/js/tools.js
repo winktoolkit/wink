@@ -22,7 +22,7 @@ define(['../../../_amd/core'], function(wink)
 	 *
 	 * This javascript contain a set of general function
 	 * that is used by the completion component and can 
-	 * be used by other code
+	 * be used by other code 
 	 *
 	 */
 	wink.plugins.completion.tools = 
