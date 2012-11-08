@@ -1,3 +1,21 @@
 [submodule "plugins/gestures"]
 	path = plugins/gestures
 	url = https://github.com/winktoolkit/plugin-gestures
+[submodule "plugins/motion"]
+	path = plugins/motion
+	url = https://github.com/winktoolkit/plugin-motion
+[submodule "plugins/topbottom"]
+	path = plugins/topbottom
+	url = https://github.com/winktoolkit/plugin-topbottom.git
+[submodule "plugins/featdetectstorage"]
+	path = plugins/featdetectstorage
+	url = https://github.com/winktoolkit/plugin-storefeaturedetection.git
+[submodule "plugins/simplestorage"]
+	path = plugins/simplestorage
+	url = https://github.com/winktoolkit/plugin-simplestorage.git
+[submodule "plugins/visualfeedback"]
+	path = plugins/visualfeedback
+	url = https://github.com/winktoolkit/plugin-visualfeedback.git
+[submodule "plugins/winkjquery"]
+	path = plugins/winkjquery
+	url = https://github.com/winktoolkit/plugin-jquery.git
