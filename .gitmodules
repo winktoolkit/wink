@@ -1,0 +1,3 @@
+[submodule "plugins/gestures"]
+	path = plugins/gestures
+	url = https://github.com/winktoolkit/plugin-gestures
