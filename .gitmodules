@@ -19,3 +19,18 @@
 [submodule "plugins/winkjquery"]
 	path = plugins/winkjquery
 	url = https://github.com/winktoolkit/plugin-jquery.git
+[submodule "plugins/completion"]
+	path = plugins/completion
+	url = https://github.com/winktoolkit/plugin-completion.git
+[submodule "plugins/asyncpanels"]
+	path = plugins/asyncpanels
+	url = https://github.com/winktoolkit/plugin-asyncpanels.git
+[submodule "plugins/scrolltoload"]
+	path = plugins/scrolltoload
+	url = https://github.com/winktoolkit/plugin-scrolltoload.git
+[submodule "plugins/scrolltorefresh"]
+	path = plugins/scrolltorefresh
+	url = https://github.com/winktoolkit/plugin-scrolltorefresh.git
+[submodule "plugins/sharingwheel"]
+	path = plugins/sharingwheel
+	url = https://github.com/winktoolkit/plugin-sharingwheel.git
