@@ -50,7 +50,7 @@ define(['../../../../_amd/core', '../../../../ux/window/js/window'], function(wi
 	 * 
 	 * fixedlayout = new wink.ui.layout.FixedLayout(properties);
 	 * 
-	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Windows Phone 8
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/layout/fixedlayout/test/test_fixedlayout_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/layout/fixedlayout/test/test_fixedlayout_2.html" target="_blank">Test page (opacity)</a>

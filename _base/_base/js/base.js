@@ -8,7 +8,7 @@
 /**
  * @fileOverview Wink main object and core methods
  * 
- * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+ * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5, Windows Phone 8
  * @author Jerome GIRAUD
  */
 
@@ -32,9 +32,9 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * 
 	 * @compatibility 
 	 * 
-	 * <b>2D fx</b> iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, Bada 1.0, Windows Phone 7.5
+	 * <b>2D fx</b> iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, Bada 1.0, Windows Phone 7.5, Windows Phone 8
 	 * <br />
-	 * <b>3D fx</b> iOS2, iOS3, iOS4, iOS5, iOS6, Android 3.0, Android 3.1, Android 4.0, BlackBerry 7
+	 * <b>3D fx</b> iOS2, iOS3, iOS4, iOS5, iOS6, Android 3.0, Android 3.1, Android 4.0, BlackBerry 7, Windows Phone 8
 	 * 
 	 * @see <a href="WINK_ROOT_URL/fx/_xy/test/test_xy_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/fx/_xy/test/test_xy_2.html" target="_blank">Test page (transition)</a>
@@ -47,11 +47,11 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * 
 	 * @compatibility
 	 * 
-	 * <b>basics</b> iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * <b>basics</b> iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5, Windows Phone 8
 	 * <br />
-	 * <b>geometrics</b> iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * <b>geometrics</b> iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5, Windows Phone 8
 	 * <br />
-	 * <b>matrix</b> iOS2, iOS3, iOS4, iOS5, iOS6, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0
+	 * <b>matrix</b> iOS2, iOS3, iOS4, iOS5, iOS6, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 8
 	 * 
 	 * @see <a href="WINK_ROOT_URL/math/_basics/test/test_basics.html" target="_blank">Test page (basics)</a>
 	 * @see <a href="WINK_ROOT_URL/math/_geometric/test/test_geometric.html" target="_blank">Test page (geometric)</a>

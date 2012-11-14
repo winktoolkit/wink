@@ -81,7 +81,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * var tagcloud = new wink.ui.xyz.TagCloud(properties);
 	 * container.appendChild(tagcloud.getDomNode());
 	 * 
-	 * @compatibility iOS2 (slow), iOS3, iOS4, iOS5, iOS6, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7 (very slow), Bada 1.0 (slow)
+	 * @compatibility iOS2 (slow), iOS3, iOS4, iOS5, iOS6, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7 (very slow), Bada 1.0 (slow), Windows Phone 8 (partial)
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/tagcloud/test/test_tagcloud_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/tagcloud/test/test_tagcloud_2.html" target="_blank">Test page (images)</a>

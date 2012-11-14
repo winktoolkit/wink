@@ -45,7 +45,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric'], fu
 	 * 	space: 20
 	 * }
 	 * 
-	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, Bada 1.0, Windows Phone 7.5, Windows Phone 8
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xy/cspinner/test/test_cspinner_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xy/cspinner/test/test_cspinner_2.html" target="_blank">Test page (custom)</a>
