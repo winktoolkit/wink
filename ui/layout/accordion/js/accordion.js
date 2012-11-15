@@ -58,6 +58,14 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		this.autoScroll           = true;
 		
+		/**
+		 * Animate the accordion height to follow the opening
+		 * 
+		 * @property smoothOpening
+		 * @type boolean
+		 */
+		this.smoothOpening        = false;
+		
 		this._sectionsList        = [];
 		
 		this._selectedSection     = 0;
@@ -107,11 +115,11 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		deleteSection: function(sectionId)
 		{
-			var f = -1;
-			var p = -1;
-			var q = -1;
-			var l = this._sectionsList.length;
-			var uid;
+			var f = -1,
+				p = -1,
+				q = -1,
+				l = this._sectionsList.length,
+				uid;
 			
 			for (var i = 0; i < l; i++) 
 			{
@@ -152,7 +160,10 @@ define(['../../../../_amd/core'], function(wink)
 			
 			this._updateHeight();
 			
-			this.selectSection(uid);
+			if ( sectionId == this._selectedSection)
+			{
+				this.selectSection(uid);
+			}
 		},
 	
 		/**
@@ -162,42 +173,60 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		selectSection: function(sectionId)
 		{
-			var l = this._sectionsList.length;
-			var f = -1;
+			var s = this._sectionsList,
+				l = s.length,
+				h = this._visibleContent,
+				f;
+			
 			this._visibleContent = 0;
 			
 			for ( var i = 0 ; i < l ; i++)
 			{
-				if (this._sectionsList[i].uId == sectionId) 
+				if (s[i].uId == sectionId) 
 				{
 					f = i;
 					
-					this._sectionsList[i].show(this._visibleContent);
+					s[i].show(this._visibleContent);
 					this._selectedSection = sectionId;
 					
-					if ( this._sectionsList[i].opened == true )
+					if ( s[i].opened == true )
 					{
-						this._visibleContent += this._sectionsList[i].contentNode.scrollHeight; 
+						this._visibleContent += s[i].contentNode.scrollHeight; 
 					}
 					
 				} else
 				{
-					this._sectionsList[i].hide(this._visibleContent);
+					s[i].hide(this._visibleContent);
 					
-					if ( this.openMultipleSections && this._sectionsList[i].opened == true )
+					if ( this.openMultipleSections && s[i].opened == true )
 					{
-						this._visibleContent += this._sectionsList[i].contentNode.scrollHeight; 
+						this._visibleContent += s[i].contentNode.scrollHeight; 
 					}
 				}
 			}
 
-			if ( !this._animated )
+			if ( this.smoothOpening )
 			{
-				wink.fx.applyTransition(this._domNode, 'height', this.DURATION + 'ms', '', 'ease-in-out');
-				this._animated = true;
+				if ( !this._animated )
+				{
+					wink.fx.applyTransition(this._domNode, 'height', this.DURATION + 'ms', '', 'ease-in-out');
+					this._animated = true;
+				}
+				
+				this._updateHeight();
+			} else
+			{
+				if ( h > this._visibleContent )
+				{
+					if(wink.has('css-transition'))
+					{
+						wink.fx.onTransitionEnd( s[f].contentNode, wink.bind(this._updateHeight, this));
+					}
+				} else
+				{
+					this._updateHeight();
+				}
 			}
-			
-			this._updateHeight();
 		},
 		
 		/**
@@ -205,7 +234,26 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		refreshContentHeight: function()
 		{
-			this.selectSection(this._selectedSection);
+			var s = this._sectionsList,
+				l = s.length;
+		
+			this._visibleContent = 0;
+			
+			for ( var i = 0 ; i < l ; i++)
+			{
+				if ( s[i].opened == true )
+				{
+					s[i].opened = false;
+					s[i].show(this._visibleContent);
+					
+					this._visibleContent += s[i].contentNode.scrollHeight;
+				} else
+				{
+					s[i].hide(this._visibleContent);
+				}
+			}
+			
+			this._updateHeight();
 		},
 	
 		/**
@@ -229,17 +277,18 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		_updateHeight: function()
 		{
-			var h = 0;
-			var l = this._sectionsList.length;
+			var h = 0,
+				s = this._sectionsList
+				l = s.length;
 			
 			for ( var i=0; i<l; i++ )
 			{
-				if ( this._sectionsList[i].contentNode.offsetHeight != 0 )
+				if ( s[i].contentNode.offsetHeight != 0 )
 				{
-					h += this._sectionsList[i].titleNodeContainer.offsetHeight;
+					h += s[i].titleNodeContainer.offsetHeight;
 				} else
 				{
-					h += (this._sectionsList[i].TITLE_HEIGHT + this._sectionsList[i].PADDING);
+					h += (s[i].TITLE_HEIGHT + s[i].PADDING);
 				}
 			}
 			
@@ -312,7 +361,7 @@ define(['../../../../_amd/core'], function(wink)
 		 * @property title
 		 * @type string
 		 */
-		this.title         = properties.title;
+		this.title;
 		
 		/**
 		 * The content of the section
@@ -320,7 +369,7 @@ define(['../../../../_amd/core'], function(wink)
 		 * @property content
 		 * @type string|HTMLElement
 		 */
-		this.content       = properties.content;
+		this.content;
 		
 		/**
 		 * The position of the section in the list of sections
@@ -328,7 +377,7 @@ define(['../../../../_amd/core'], function(wink)
 		 * @property position
 		 * @type integer
 		 */
-		this.position      = properties.position;
+		this.position;
 		
 		/**
 		 * Indicates whether the section is opened or closed
@@ -374,8 +423,15 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		this.containerNode = null;
 		
-		this._accordion    = properties.accordion;
+		/**
+		 * The parent accordion
+		 * 
+		 * @property accordion
+		 * @type wink.ui.layout.Accordion
+		 */
+		this.accordion;
 		
+		wink.mixin(this, properties);
 		
 		if  ( this._validateProperties() ===  false )return;
 		
@@ -401,27 +457,30 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		show: function(position)
 		{
-			wink.fx.translate(this.containerNode, 0, position);
-			wink.fx.rotate(this.chevronNode, 0);
+			var c = this.contentNode,
+				ch = this.chevronNode,
+				a = this.accordion;
 			
-			if(wink.has('css-transition') && this._accordion.autoScroll)
+			wink.fx.translate(this.containerNode, 0, position);
+			
+			if(wink.has('css-transition') && a.autoScroll)
 			{
-				wink.fx.onTransitionEnd(this.contentNode, wink.bind(this._scroll, this));
+				wink.fx.onTransitionEnd(c, wink.bind(this._scroll, this));
 			}
 			
 			if ( this.opened === false )
 			{
-				wink.fx.translate(this.contentNode, 0, this.contentNode.scrollHeight);
-				wink.fx.rotate(this.chevronNode, 90);
+				wink.fx.translate(c, 0, c.scrollHeight);
+				wink.fx.rotate(ch, 90);
 				this.opened = true;
 			} else
 			{
-				wink.fx.translate(this.contentNode, 0, 0);
-				wink.fx.rotate(this.chevronNode, 0);
+				wink.fx.translate(c, 0, 0);
+				wink.fx.rotate(ch, 0);
 				this.opened = false;
 			}
 			
-			if(!wink.has('css-transition') && this._accordion.autoScroll)
+			if(!wink.has('css-transition') && a.autoScroll)
 			{
 				this._scroll();
 			}
@@ -436,7 +495,7 @@ define(['../../../../_amd/core'], function(wink)
 		{
 			wink.fx.translate(this.containerNode, 0, position);
 			
-			if ( !this._accordion.openMultipleSections )
+			if ( !this.accordion.openMultipleSections )
 			{
 				this.opened = false;
 				wink.fx.translate(this.contentNode, 0, 0);
@@ -449,7 +508,7 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		_scroll: function()
 		{
-			this._accordion._updateHeight();
+			this.accordion._updateHeight();
 			
 			scrollTo(0, wink.getTopPosition(this.titleNode, null, true));
 		},
@@ -520,9 +579,9 @@ define(['../../../../_amd/core'], function(wink)
 			
 			this.titleNode.onclick = wink.bind(function()
 			{
-				this._accordion._selectSection(this.uId);
+				this.accordion._selectSection(this.uId);
 				
-				wink.publish('/section/events/selectsection', {sectionId: this.uId, accordionId: this._accordion.uId});
+				wink.publish('/section/events/selectsection', {sectionId: this.uId, accordionId: this.accordion.uId});
 			}, this);
 			
 			this.chevronNode = document.createElement('div');

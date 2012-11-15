@@ -72,7 +72,7 @@
 			
 			init = function()
 			{
-				accordion = new wink.ui.layout.Accordion({autoScroll: false});
+				accordion = new wink.ui.layout.Accordion({autoScroll: false, smoothOpening: true});
 				
 				wink.byId('output').appendChild(accordion.getDomNode());
 				
