@@ -32,7 +32,8 @@
 				"colorpicker", "datepicker", "menu", "newsticker", "popup", "progressbar", "slideshow", "spinner", "cspinner", "trace",
 				"togglebutton", "wall", "coverflow", "cube", "flipdisc", "opener", "tagcloud",
 				// PLUGINS
-				"asyncpanels", "sharingwheel", "scrolltorefresh", "scrolltoload"
+				"asyncpanels", "simplestorage", "featdetectstorage", "gestures", "motion", "scrolltoload", "scrolltorefresh",
+				"sharingwheel", "topbottom", "visualfeedback", "winkjquery"
 			],
 			"css": [
 				"_themes/wink.css",

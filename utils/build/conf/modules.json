@@ -7,7 +7,6 @@
 		        "amd",
 		        "kernel",
 		        "base",
-		        "dom",
 		        "error",
 		        "json",
 		        "topics",
@@ -49,10 +48,6 @@
 			//		"excludeDefault": false
 			//	}
 			//]
-		},
-		{
-			"name": "dom",
-			"defaultImpl": "_base/_dom/js/dom.js"
 		},
 		{
 			"name": "error",
@@ -443,10 +438,22 @@
 			]
 		},
 		{
-			"name": "sharingwheel",
-			"defaultImpl": "plugins/sharingwheel/js/sharingwheel.js",
+			"name": "featdetectstorage",
+			"defaultImpl": "plugins/featdetectstorage/js/featdetectstorage.js"
+		},
+		{
+			"name": "gestures",
+			"defaultImpl": "plugins/gestures/js/gesture.js"
+		},
+		{
+			"name": "motion",
+			"defaultImpl": "plugins/motion/js/motion.js"
+		},
+		{
+			"name": "scrolltoload",
+			"defaultImpl": "plugins/scrolltoload/js/scrolltoload.js",
 			"css": [
-			    "plugins/sharingwheel/css/sharingwheel.css"
+			    "plugins/scrolltoload/css/scrolltoload.css"
 			]
 		},
 		{
@@ -457,12 +464,29 @@
 			]
 		},
 		{
-			"name": "scrolltoload",
-			"defaultImpl": "plugins/scrolltoload/js/scrolltoload.js",
+			"name": "sharingwheel",
+			"defaultImpl": "plugins/sharingwheel/js/sharingwheel.js",
 			"css": [
-			    "plugins/scrolltoload/css/scrolltoload.css"
+			    "plugins/sharingwheel/css/sharingwheel.css"
 			]
 		},
+		{
+			"name": "simplestorage",
+			"defaultImpl": "plugins/simplestorage/js/simplestorage.js"
+		},
+		{
+			"name": "topbottom",
+			"defaultImpl": "plugins/topbottom/js/topbottom.js"
+		},
+		{
+			"name": "visualfeedback",
+			"defaultImpl": "plugins/visualfeedback/js/visualfeedback.js"
+		},
+		{
+			"name": "winkjquery",
+			"defaultImpl": "plugins/winkjquery/js/winkjquery.js"
+		},
+		
 		// -------------- Completion 
         {
             "name": "completion",
