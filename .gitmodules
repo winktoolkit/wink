@@ -34,3 +34,6 @@
 [submodule "plugins/sharingwheel"]
 	path = plugins/sharingwheel
 	url = https://github.com/winktoolkit/plugin-sharingwheel.git
+[submodule "plugins/parallax"]
+	path = plugins/parallax
+	url = https://github.com/ke20/wink-plugin-parallax.git
