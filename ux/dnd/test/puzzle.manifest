@@ -26,7 +26,6 @@ CACHE MANIFEST
 ./img/piece24.jpg
 ./img/piece25.jpg
 ../../../_base/_base/js/base.js
-../../../_base/_dom/js/dom.js
 ../../../_base/topics/js/topics.js
 ../../../_base/error/js/error.js
 ../../../_base/json/js/json.js

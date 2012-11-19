@@ -35,7 +35,6 @@ if (typeof wink == 'undefined')
  * var resources =
  * [
  * 	{ url: '../../_base/_base/js/base.js', type: 'js', group: 0 },
- * 	{ url: '../../_base/_dom/js/dom.js', type: 'js', group: 1 },
  * 	{ url: '../../_base/error/js/error.js', type: 'js', group: 1 },
  * 	{ url: '../../_base/json/js/json.js', type: 'js', group: 1 },
  * 	{ url: '../../_base/topics/js/topics.js', type: 'js', group: 1 },
