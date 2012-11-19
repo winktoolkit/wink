@@ -37,3 +37,6 @@
 [submodule "plugins/parallax"]
 	path = plugins/parallax
 	url = https://github.com/ke20/wink-plugin-parallax.git
+[submodule "plugins/projection"]
+	path = plugins/projection
+	url = https://github.com/ke20/wink-plugin-projection.git
