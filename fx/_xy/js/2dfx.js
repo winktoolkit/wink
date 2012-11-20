@@ -86,7 +86,7 @@ define(['../../../_amd/core'], function()
 		var p, s = node.style;
 		for (p in properties)
 		{
-			var styleResolved = getprop(p);
+			var styleResolved = camelCase(getprop(p));
 			
 			if (wink.ua.isIE && p == "perspective")
 			{
@@ -455,6 +455,22 @@ define(['../../../_amd/core'], function()
 		}
 		
 		return propertyResolved;
+	};
+	/**
+	 * @param {string} str The string
+	 * @returns {string} The result
+	 */
+	var camelCase = function(str)
+	{
+		return str.replace(/-([a-z])/gi, camelCaseHandler);
+	};
+	/**
+	 * @param {string} all 
+	 * @param {string} letter
+	 */
+	var camelCaseHandler = function(all, letter)
+	{
+		return (letter + "").toUpperCase();
 	};
 	
 	/**
