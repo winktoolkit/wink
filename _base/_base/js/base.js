@@ -641,7 +641,7 @@ define(['../../_kernel/js/kernel'], function(wink)
 	 * 
 	 * @param {object} context The execution context of the method to call 
 	 * @param {string} method The method to call
-	 * @param {integer} delay Time (in milleseconds) to wait before calling method
+	 * @param {integer} delay Time (in milliseconds) to wait before calling method
 	 * @param {object} [arguments] A list of caller arguments
 	 * 
 	 * @returns {object} The timeout object
@@ -657,11 +657,11 @@ define(['../../_kernel/js/kernel'], function(wink)
 	};
 	
 	/**
-	 * Calls a method to a regular interval.
+	 * Calls a method periodically at the provided frequency
 	 * 
 	 * @param {object} context The execution context of the method to call 
 	 * @param {string} method The method to call
-	 * @param {integer} delay Time (in milleseconds) to wait before calling method
+	 * @param {integer} delay Time (in milliseconds) to wait before calling method again
 	 * @param {object} [arguments] A list of caller arguments
 	 * 
 	 * @returns {object} The interval object
