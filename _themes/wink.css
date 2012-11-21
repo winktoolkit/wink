@@ -216,7 +216,7 @@ input[type="text"], input[type="password"], input[type="number"], input[type="te
 	
 	text-indent: 0;
 	line-height: 20px;
-	padding: 10px;
+	padding: 12px 10px 11px 10px;
 	white-space: normal;
 }
 
