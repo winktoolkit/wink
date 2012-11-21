@@ -7,7 +7,7 @@ of the mobile environment.
 Components
 ----------
 
-View the index.html file to have an overview of the  various components included in Wink.
+View the index.html file to have an overview of the various components included in Wink.
 
 
 Build
@@ -22,14 +22,17 @@ use in your project.
 The core is composed of:
 
 - _amd
-- _base/_base
-- _base/_dom
-- _base/_feat
 - _base/_kernel
+- _base/_base
 - _base/error
 - _base/json
 - _base/topics
 - _base/ua
+- _base/_feat
+- _base/_feat/featjson
+- _base/_feat/featcss
+- _base/_feat/featevent
+- _base/_feat/featdom
 - fx/_xy
 - net/xhr
 - math/_basics
@@ -40,6 +43,17 @@ The core is composed of:
 If you want to build your own version of wink and add some more components,
 you should first modify the "profiles.json" file to fit your needs and then just
 run the default target of the build ("called "build_wink")
+
+Builder
+-------
+
+You will also find a build utility in the utils/builder folder. It's a graphical web interface
+where you can pick and choose the modules you want to build. The builder will generate the minified JS
+and CSS files for you and give you the choice between downloading them as a ZIP file or 
+retrieve them via a local address.
+
+The builder generates a build url that you can also use to always work with a minifed version 
+while under development.
 
 
 Documentation
