@@ -24,7 +24,7 @@
  * @param {HTMLElement} param.target The target of the movement
  */
 
-define(['../../../_amd/core', '../../movementtracker/js/movementtracker'], function(wink)
+define(['../../../_amd/core', '../../../ux/movementtracker/js/movementtracker'], function(wink)
 {
 	/**
 	 * @class The Inertia component provides, through collaboration with a Movement Tracker, datas calculated from the inertia of a movement.
