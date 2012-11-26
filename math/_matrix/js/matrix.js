@@ -138,7 +138,7 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		loadCssTransform: function(transformation)
 		{
-			if (isString(transformation))
+			if (wink.isString(transformation))
 			{
 				var search = "matrix3d";
 				var chaine = transformation;
