@@ -25,7 +25,7 @@ try
     if($languages == FALSE 
     || is_array($languages) == FALSE
     || count($languages) == 0)
-        throw new Exception('A language must to be defined');
+        throw new Exception('A language must be defined');
 
     // Get existing list module for references
     $list_modules = parseJsonFile(WINK_PATH_JSON_MODULES);
@@ -61,10 +61,10 @@ try
         // -----------------------------------------
         $tmp_directory   = PROJECT_TMP_DIR.'/'.uniqid(time());
         if(!is_dir($tmp_directory) && !mkdir($tmp_directory, 0777))
-             throw new Exception('Echec : Can\'t create the folder '.$tmp_directory);
+             throw new Exception('Failure : Can\'t create the folder '.$tmp_directory);
 
         if(!is_dir($build_directory) && !mkdir($build_directory, 0777))
-             throw new Exception('Echec : Can\'t create the folder '.$tmp_directory);
+             throw new Exception('Failure : Can\'t create the folder '.$tmp_directory);
 
         // Move build files in the new directory
         $list_copies = array(
@@ -76,7 +76,7 @@ try
 
         foreach ($list_copies as $source => $dest) {
             if(copy($source, $dest) === FALSE)
-                throw new Exception('Echec : the copy failed for '.basename($source));
+                throw new Exception('Failure : the copy failed for '.basename($source));
         }
 
         // -------------------------------
@@ -140,7 +140,7 @@ try
 
         $res = writeJsonFile($list_copies[WINK_PATH_JSON_PROFILES], $profile_data);
         if($res === FALSE)
-            throw new Exception('The write json file has failed');
+            throw new Exception('Writing json file failed');
 
         // Run the ant build
         exec('ant -buildfile "'.$list_copies[WINK_PATH_XML_BUILD].'"');

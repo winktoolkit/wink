@@ -1,11 +1,3 @@
-/* 
-    Document   : main
-    Created on : 17 oct. 2012, 15:52:07
-    Author     : wdvq9874
-    Description:
-        Purpose of the stylesheet follows.
-*/
-
 /* --------- GENERAL styles --------- */
 body {
 	font-family: 'Open Sans', sans-serif;
@@ -93,7 +85,6 @@ h4 {
 h1#header_title {
     float: right;
     margin-right: 35px;
-    margin-top: 20px;
 }
 
 /* tag : inputs --------- */

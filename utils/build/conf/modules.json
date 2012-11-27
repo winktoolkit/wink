@@ -4,42 +4,42 @@
 		{
 		    "name": "core",
 		    "modules": [ 
-		        "amd",
-		        "kernel",
-		        "base",
-		        "error",
-		        "json",
-		        "topics",
-		        "ua",
+		        "_amd",
+		        "_base/_kernel",
+		        "_base/_base",
+		        "_base/error",
+		        "_base/json",
+		        "_base/topics",
+		        "_base/ua",
 		        "feature",
-		        "2dfx",
-		        "math_basics",
-		        "event",
-		        "touch",
-		        "xhr",
-		        "layer"
+		        "fx/2dfx",
+		        "math/basics",
+		        "ux/event",
+		        "ux/touch",
+		        "net/xhr",
+		        "ui/xy/layer"
 		    ]
 		},
 		{
 		    "name": "feature",
 		    "modules": [ 
-		        "feat",
-		        "featjson",
-		        "featcss",
-		        "featevent",
-		        "featdom"
+		        "_base/_feat",
+		        "_base/_feat/featjson",
+		        "_base/_feat/featcss",
+		        "_base/_feat/featevent",
+		        "_base/_feat/featdom"
 		    ]
 		},
 		{
-			"name": "amd",
+			"name": "_amd",
 			"defaultImpl": "_amd/js/amd.js"
 		},
 		{
-			"name": "kernel",
+			"name": "_base/_kernel",
 			"defaultImpl": "_base/_kernel/js/kernel.js"
 		},
 		{
-			"name": "base",
+			"name": "_base/_base",
 			"defaultImpl": "_base/_base/js/base.js"
 			//,"subImpls": [
 			//	{
@@ -50,147 +50,149 @@
 			//]
 		},
 		{
-			"name": "error",
+			"name": "_base/error",
 			"defaultImpl": "_base/error/js/error.js"
 		},
 		{
-			"name": "json",
+			"name": "_base/json",
 			"defaultImpl": "_base/json/js/json.js"
 		},
 		{
-			"name": "topics",
+			"name": "_base/topics",
 			"defaultImpl": "_base/topics/js/topics.js"
 		},
 		{
-			"name": "ua",
+			"name": "_base/ua",
 			"defaultImpl": "_base/ua/js/ua.js"
 		},
 		{
-			"name": "feat",
+			"name": "_base/_feat",
 			"defaultImpl": "_base/_feat/js/feat.js"
 		},
 		{
-			"name": "featapi",
+			"name": "_base/_feat/featapi",
 			"defaultImpl": "_base/_feat/js/feat_api.js"
 		},
 		{
-			"name": "featjson",
+			"name": "_base/_feat/featjson",
 			"defaultImpl": "_base/_feat/js/feat_json.js"
 		},
 		{
-			"name": "featcss",
+			"name": "_base/_feat/featcss",
 			"defaultImpl": "_base/_feat/js/feat_css.js"
 		},
 		{
-			"name": "featevent",
+			"name": "_base/_feat/featevent",
 			"defaultImpl": "_base/_feat/js/feat_event.js"
 		},
 		{
-			"name": "featgraphic",
+			"name": "_base/_feat/featgraphic",
 			"defaultImpl": "_base/_feat/js/feat_graphic.js"
 		},
 		{
-			"name": "featdom",
+			"name": "_base/_feat/featdom",
 			"defaultImpl": "_base/_feat/js/feat_dom.js"
 		},
 		{
-			"name": "2dfx",
+			"name": "fx/2dfx",
 			"defaultImpl": "fx/_xy/js/2dfx.js"
 		},
 		{
-			"name": "math_basics",
+			"name": "math/basics",
 			"defaultImpl": "math/_basics/js/basics.js"
 		},
 		{
-			"name": "event",
+			"name": "ux/event",
 			"defaultImpl": "ux/event/js/event.js"
 		},
 		{
-			"name": "touch",
+			"name": "ux/touch",
 			"defaultImpl": "ux/touch/js/touch.js"
 		},
 		{
-			"name": "xhr",
+			"name": "net/xhr",
 			"defaultImpl": "net/xhr/js/xhr.js"
 		},
 		{
-			"name": "layer",
+			"name": "ui/xy/layer",
 			"defaultImpl": "ui/xy/layer/js/layer.js"
 		},
 		
 		// -------------- JSON
 		{
-			"name": "jsonextended",
+			"name": "_base/json/jsonextended",
 			"defaultImpl": "_base/json/js/json.extended.js"
+		},
+		
+		// -------------- Easy Caching
+		{
+			"name": "_cache",
+			"defaultImpl": "_cache/js/wink.cache.js"
 		},
 		
 		// -------------- API
 		{
-			"name": "geolocation",
+			"name": "api/geolocation",
 			"defaultImpl": "api/geolocation/js/geolocation.js"
 		},
 		{
-			"name": "storage",
+			"name": "api/storage",
 			"defaultImpl": "api/storage/js/storage.js"
 		},
 		{
-			"name": "safaridb",
+			"name": "api/safaridb",
 			"defaultImpl": "api/storage/js/safaridb.js"
 		},
 		{
-			"name": "gearsdb",
+			"name": "api/gearsdb",
 			"defaultImpl": "api/storage/js/gearsdb.js"
-		},
-		{
-			"name": "cache",
-			"defaultImpl": "_cache/js/wink.cache.js"
 		},
 		
 		// -------------- FX
 		{
-			"name": "3dfx",
+			"name": "fx/3dfx",
 			"defaultImpl": "fx/_xyz/js/3dfx.js"
 		},
 		{
-			"name": "animation",
+			"name": "fx/animation",
 			"defaultImpl": "fx/_animation/js/animation.js"
 		},
 		
 		// -------------- MATH
 		{
-			"name": "geometric",
+			"name": "math/geometric",
 			"defaultImpl": "math/_geometric/js/geometric.js"
 		},
 		{
-			"name": "matrix",
+			"name": "math/matrix",
 			"defaultImpl": "math/_matrix/js/matrix.js"
 		},
 		
 		// -------------- NET
 		{
-			"name": "cssloader",
+			"name": "net/cssloader",
 			"defaultImpl": "net/cssloader/js/cssloader.js"
 		},
 		{
-			"name": "imagesloader",
+			"name": "net/imagesloader",
 			"defaultImpl": "net/imagesloader/js/imagesloader.js"
 		},
 		{
-			"name": "jsloader",
+			"name": "net/jsloader",
 			"defaultImpl": "net/jsloader/js/jsloader.js"
 		},
 		{
-			"name": "smartloader",
+			"name": "net/smartloader",
 			"defaultImpl": "net/smartloader/js/smartloader.js"
 		},
 		{
-			"name": "tracking",
+			"name": "net/tracking",
 			"defaultImpl": "net/tracking/js/tracking.js"
 		},
 		
 		// -------------- MULTIMEDIA
 		{
-			"name": "audioplayer",
+			"name": "mm/audioplayer",
 			"defaultImpl": "mm/audioplayer/js/audioplayer.js",
 			"i18n": [
 				{ "en_EN": "mm/audioplayer/resources/en_EN/audioplayer.js" },
@@ -201,7 +203,7 @@
 			]
 		},
 		{
-			"name": "videoplayer",
+			"name": "mm/videoplayer",
 			"defaultImpl": "mm/videoplayer/js/videoplayer.js",
 			"i18n": [
 				{ "en_EN": "mm/videoplayer/resources/en_EN/videoplayer.js" },
@@ -212,7 +214,7 @@
 			]
 		},
 		{
-			"name": "mediawheel",
+			"name": "mm/mediawheel",
 			"defaultImpl": "mm/mediawheel/js/mediawheel.js",
 			"css": [
 			    "mm/mediawheel/css/mediawheel.css"
@@ -221,87 +223,87 @@
 		
 		// -------------- UX
 		{
-			"name": "history",
+			"name": "ux/history",
 			"defaultImpl": "ux/history/js/history.js"
 		},
 		{
-			"name": "dnd",
+			"name": "ux/dnd",
 			"defaultImpl": "ux/dnd/js/dnd.js"
 		},
 		{
-			"name": "gesture",
+			"name": "ux/gesture",
 			"defaultImpl": "ux/gesture/js/gesture.js"
 		},
 		{
-			"name": "gesturerecognizer",
+			"name": "ux/gesturerecognizer",
 			"defaultImpl": "ux/gesturerecognizer/js/gesturerecognizer.js"
 		},
 		{
-			"name": "inertia",
+			"name": "ux/inertia",
 			"defaultImpl": "ux/inertia/js/inertia.js"
 		},
 		{
-			"name": "movementtracker",
+			"name": "ux/movementtracker",
 			"defaultImpl": "ux/movementtracker/js/movementtracker.js"
 		},
 		{
-			"name": "search",
+			"name": "ux/search",
 			"defaultImpl": "ux/search/js/search.js"
 		},
 		{
-			"name": "window",
+			"name": "ux/window",
 			"defaultImpl": "ux/window/js/window.js"
 		},
 		
 		// -------------- UI
 		{
-			"name": "accordion",
+			"name": "ui/layout/accordion",
 			"defaultImpl": "ui/layout/accordion/js/accordion.js",
 			"css": [
 			    "ui/layout/accordion/css/accordion.css"
 			]
 		},
 		{
-			"name": "fixedlayout",
+			"name": "ui/layout/fixedlayout",
 			"defaultImpl": "ui/layout/fixedlayout/js/fixedlayout.js",
 			"css": [
 			    "ui/layout/fixedlayout/css/fixedlayout.css"
 			]
 		},
 		{
-			"name": "scroller",
+			"name": "ui/layout/scroller",
 			"defaultImpl": "ui/layout/scroller/js/scroller.js"
 		},
 		{
-			"name": "slidingpanels",
+			"name": "ui/layout/slidingpanels",
 			"defaultImpl": "ui/layout/slidingpanels/js/slidingpanels.js",
 			"css": [
 			    "ui/layout/slidingpanels/css/slidingpanels.css"
 			]
 		},
 		{
-			"name": "tabcontainer",
+			"name": "ui/layout/tabcontainer",
 			"defaultImpl": "ui/layout/tabcontainer/js/tabcontainer.js",
 			"css": [
 			    "ui/layout/tabcontainer/css/tabcontainer.css"
 			]
 		},
 		{
-			"name": "modalwindow",
+			"name": "ui/layout/modalwindow",
 			"defaultImpl": "ui/layout/modalwindow/js/modalwindow.js",
 			"css": [
 			    "ui/layout/modalwindow/css/modalwindow.css"
 			]
 		},
 		{
-			"name": "flippage",
+			"name": "ui/layout/flippage",
 			"defaultImpl": "ui/layout/flippage/js/flippage.js",
 			"css": [
 			    "ui/layout/flippage/css/flippage.css"
 			]
 		},
 		{
-			"name": "windows",
+			"name": "ui/layout/windows",
 			"defaultImpl": "ui/layout/windows/js/windows.js",
 			"css": [
 			    "ui/layout/windows/css/windows.css"
@@ -309,28 +311,28 @@
 		},
 		
 		{
-			"name": "input",
+			"name": "ui/form/input",
 			"defaultImpl": "ui/form/input/js/input.js",
 			"css": [
 			    "ui/form/input/css/input.css"
 			]
 		},
 		{
-			"name": "carousel",
+			"name": "ui/xy/carousel",
 			"defaultImpl": "ui/xy/carousel/js/carousel.js",
 			"css": [
 			    "ui/xy/carousel/css/carousel.css"
 			]
 		},
 		{
-			"name": "colorpicker",
+			"name": "ui/xy/colorpicker",
 			"defaultImpl": "ui/xy/colorpicker/js/colorpicker.js",
 			"css": [
 			    "ui/xy/colorpicker/css/colorpicker.css"
 			]
 		},
 		{
-			"name": "datepicker",
+			"name": "ui/xy/datepicker",
 			"defaultImpl": "ui/xy/datepicker/js/datepicker.js",
 			"i18n": [
 				{ "en_EN": "ui/xy/datepicker/resources/en_EN/datepicker.js" },
@@ -341,21 +343,21 @@
 			]
 		},
 		{
-			"name": "menu",
+			"name": "ui/xy/menu",
 			"defaultImpl": "ui/xy/menu/js/menu.js",
 			"css": [
 			    "ui/xy/menu/css/menu.css"
 			]
 		},
 		{
-			"name": "newsticker",
+			"name": "ui/xy/newsticker",
 			"defaultImpl": "ui/xy/newsticker/js/newsticker.js",
 			"css": [
 			    "ui/xy/newsticker/css/newsticker.css"
 			]
 		},
 		{
-			"name": "popup",
+			"name": "ui/xy/popup",
 			"defaultImpl": "ui/xy/popup/js/popup.js",
 			"i18n": [
 				{ "en_EN": "ui/xy/popup/resources/en_EN/popup.js" },
@@ -366,127 +368,128 @@
 			]
 		},
 		{
-			"name": "progressbar",
+			"name": "ui/xy/progressbar",
 			"defaultImpl": "ui/xy/progressbar/js/progressbar.js"
 		},
 		{
-			"name": "slideshow",
+			"name": "ui/xy/slideshow",
 			"defaultImpl": "ui/xy/slideshow/js/slideshow.js",
 			"css": [
 			    "ui/xy/slideshow/css/slideshow.css"
 			]
 		},
 		{
-			"name": "spinner",
+			"name": "ui/xy/spinner",
 			"defaultImpl": "ui/xy/spinner/js/spinner.js",
 			"css": [
 			    "ui/xy/spinner/css/spinner.css"
 			]
 		},
 		{
-			"name": "cspinner",
+			"name": "ui/xy/cspinner",
 			"defaultImpl": "ui/xy/cspinner/js/cspinner.js"
 		},
 		{
-			"name": "trace",
+			"name": "ui/xy/trace",
 			"defaultImpl": "ui/xy/trace/js/trace.js"
 		},
 		{
-			"name": "togglebutton",
+			"name": "ui/xy/togglebutton",
 			"defaultImpl": "ui/xy/togglebutton/js/togglebutton.js",
 			"css": [
 			    "ui/xy/togglebutton/css/togglebutton.css"
 			]
 		},
 		{
-			"name": "wall",
+			"name": "ui/xyz/wall",
 			"defaultImpl": "ui/xyz/wall/js/wall.js",
 			"css": [
 			    "ui/xyz/wall/css/wall.css"
 			]
 		},
 		{
-			"name": "coverflow",
+			"name": "ui/xyz/coverflow",
 			"defaultImpl": "ui/xyz/coverflow/js/coverflow.js"
 		},
 		{
-			"name": "cube",
+			"name": "ui/xyz/cube",
 			"defaultImpl": "ui/xyz/cube/js/cube.js"
 		},
 		{
-			"name": "flipdisc",
+			"name": "ui/xyz/flipdisc",
 			"defaultImpl": "ui/xyz/flipdisc/js/flipdisc.js"
 		},
 		{
-			"name": "opener",
+			"name": "ui/xyz/opener",
 			"defaultImpl": "ui/xyz/opener/js/opener.js",
 			"css": [
 			    "ui/xyz/opener/css/opener.css"
 			]
 		},
 		{
-			"name": "tagcloud",
+			"name": "ui/xyz/tagcloud",
 			"defaultImpl": "ui/xyz/tagcloud/js/tagcloud.js"
 		},
 		
 		// -------------- PLUGINS
 		{
-			"name": "asyncpanels",
+			"name": "plugins/asyncpanels",
 			"defaultImpl": "plugins/asyncpanels/js/asyncpanels.js",
 			"css": [
 			    "plugins/asyncpanels/css/asyncpanels.css"
 			]
 		},
 		{
-			"name": "featdetectstorage",
+			"name": "plugins/featdetectstorage",
 			"defaultImpl": "plugins/featdetectstorage/js/featdetectstorage.js"
 		},
 		{
-			"name": "gestures",
+			"name": "plugins/gestures",
 			"defaultImpl": "plugins/gestures/js/gesture.js"
 		},
 		{
-			"name": "motion",
+			"name": "plugins/motion",
 			"defaultImpl": "plugins/motion/js/motion.js"
 		},
 		{
-			"name": "scrolltoload",
+			"name": "plugins/scrolltoload",
 			"defaultImpl": "plugins/scrolltoload/js/scrolltoload.js",
 			"css": [
 			    "plugins/scrolltoload/css/scrolltoload.css"
 			]
 		},
 		{
-			"name": "scrolltorefresh",
+			"name": "plugins/scrolltorefresh",
 			"defaultImpl": "plugins/scrolltorefresh/js/scrolltorefresh.js",
 			"css": [
 			    "plugins/scrolltorefresh/css/scrolltorefresh.css"
 			]
 		},
 		{
-			"name": "sharingwheel",
+			"name": "plugins/sharingwheel",
 			"defaultImpl": "plugins/sharingwheel/js/sharingwheel.js",
 			"css": [
 			    "plugins/sharingwheel/css/sharingwheel.css"
 			]
 		},
 		{
-			"name": "simplestorage",
+			"name": "plugins/simplestorage",
 			"defaultImpl": "plugins/simplestorage/js/simplestorage.js"
 		},
 		{
-			"name": "topbottom",
+			"name": "plugins/topbottom",
 			"defaultImpl": "plugins/topbottom/js/topbottom.js"
 		},
 		{
-			"name": "visualfeedback",
+			"name": "plugins/visualfeedback",
 			"defaultImpl": "plugins/visualfeedback/js/visualfeedback.js"
 		},
 		{
-			"name": "winkjquery",
+			"name": "plugins/winkjquery",
 			"defaultImpl": "plugins/winkjquery/js/winkjquery.js"
-		},
+		}
 		
+		/*
 		// -------------- Completion 
         {
             "name": "completion",
@@ -581,6 +584,7 @@
         {
             "name": "completion_localstoragehandler",
             "defaultImpl": "plugins/completion/js/manager/history/handler/localstorage.js"
-        }  
+        } 
+        */ 
 	]
 }

@@ -12,28 +12,28 @@
 				// CORE
 				"core",
 				// FEATURE EXTENDED
-				"featapi", "featgraphic",
+				"_base/_feat/featapi", "_base/_feat/featgraphic",
 				// JSON
-				"jsonextended",
+				"_base/json/jsonextended",
 				// API
-				"geolocation", "storage", "safaridb", "gearsdb",
+				"api/geolocation", "api/storage", "api/safaridb", "api/gearsdb",
 				// FX
-				"3dfx", "animation",
+				"fx/3dfx", "fx/animation",
 				// MATH
-				"geometric", "matrix",
+				"math/geometric", "math/matrix",
 				// NET
-				"cssloader", "imagesloader", "jsloader", "smartloader", "tracking",
+				"net/cssloader", "net/imagesloader", "net/jsloader", "net/smartloader", "net/tracking",
 				// MULTIMEDIA
-				"audioplayer", "videoplayer", "mediawheel",
+				"mm/audioplayer", "mm/videoplayer", "mm/mediawheel",
 				// UX
-				"history", "dnd", "gesture", "gesturerecognizer", "inertia", "movementtracker", "search", "window",
+				"ux/history", "ux/dnd", "ux/gesture", "ux/gesturerecognizer", "ux/inertia", "ux/movementtracker", "ux/search", "ux/window",
 				// UI
-				"accordion", "fixedlayout", "scroller", "slidingpanels", "tabcontainer", "modalwindow", "flippage", "windows", "input", "carousel",
-				"colorpicker", "datepicker", "menu", "newsticker", "popup", "progressbar", "slideshow", "spinner", "cspinner", "trace",
-				"togglebutton", "wall", "coverflow", "cube", "flipdisc", "opener", "tagcloud",
+				"ui/layout/accordion", "ui/layout/fixedlayout", "ui/layout/scroller", "ui/layout/slidingpanels", "ui/layout/tabcontainer", "ui/layout/modalwindow", "ui/layout/flippage", "ui/layout/windows", "ui/form/input", "ui/xy/carousel",
+				"ui/xy/colorpicker", "ui/xy/datepicker", "ui/xy/menu", "ui/xy/newsticker", "ui/xy/popup", "ui/xy/progressbar", "ui/xy/slideshow", "ui/xy/spinner", "ui/xy/cspinner", "ui/xy/trace",
+				"ui/xy/togglebutton", "ui/xyz/wall", "ui/xyz/coverflow", "ui/xyz/cube", "ui/xyz/flipdisc", "ui/xyz/opener", "ui/xyz/tagcloud",
 				// PLUGINS
-				"asyncpanels", "simplestorage", "featdetectstorage", "gestures", "motion", "scrolltoload", "scrolltorefresh",
-				"sharingwheel", "topbottom", "visualfeedback", "winkjquery"
+				"plugins/asyncpanels", "plugins/simplestorage", "plugins/featdetectstorage", "plugins/gestures", "plugins/motion", "plugins/scrolltoload", "plugins/scrolltorefresh",
+				"plugins/sharingwheel", "plugins/topbottom", "plugins/visualfeedback", "plugins/winkjquery"
 			],
 			"css": [
 				"_themes/wink.css",
@@ -57,7 +57,7 @@
 		{
 			"name": "easycaching",
 			"modules": [
-				"cache"
+				"_cache"
 			]
 		}
 	]

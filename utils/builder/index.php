@@ -11,6 +11,8 @@
         <title>The wink builder</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" >
+        
         <link rel="stylesheet" type="text/css" href="web/css/main.css" />
     </head>
     <body class="homepage">
@@ -27,8 +29,8 @@
             <div id="main_content" class="bg_white">
                 
                 <p class="description">
-                    Use this builder for generate your custom Wink files with
-                    the modules whose you only need.
+                    Use this tool to generate your custom Wink build containing
+                    only the modules your web app needs.
                 </p>
                 
                 <p id="error" class="msg_error" style="display: none">
@@ -83,7 +85,7 @@
                     <div class="action" id="modules">
                         <label>Modules: </label>
                         <div class="fields" id="tree">
-                            Chargement en cours des modules wink...
+                            Loading Wink modules...
                         </div>
                     </div>
                     <div class="action btn">
