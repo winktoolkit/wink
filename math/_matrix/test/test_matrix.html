@@ -45,10 +45,14 @@
 				
 				var rotationMatrix = wink.math.createTransformMatrix();
 				rotationMatrix.rotateAxisAngle(0, 1, 0, 45);
+				
+				var matrix2 = wink.math.createTransformMatrix("matrix3d(1,0,0, 0, 0,1,0,0, 0,0,1,0, 0,0, 0,1)");
 
 				var desc = "a rotation matrix (45 degrees) takes the value : <br/>" + rotationMatrix.getValues();
 				desc += "<br />";
 				desc += "or <br />" + rotationMatrix.getCssMatrix();
+				desc += "<br />Identity is: " + matrix2.getCssMatrix();
+				desc += "<br />or <br />Identity values are: " + matrix2.getValues();
 				wink.byId('container').innerHTML = desc;
 			};
 		</script>

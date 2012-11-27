@@ -15,7 +15,7 @@ define(['../../../_amd/core'], function(wink)
 	/**
 	 * Creates a transformation matrix with the given css transform
 	 * 
-	 * @param {string|WebKitCSSMatrix} [cssTransform] The css transform which will initialize the matrix
+	 * @param {string|WebKitCSSMatrix|MSCSSMatrix} [cssTransform] The css transform which will initialize the matrix
 	 * 
 	 * @returns {wink.math.Matrix} The corresponding wink.math.Matrix
 	 * 
@@ -134,11 +134,11 @@ define(['../../../_amd/core'], function(wink)
 		/**
 		 * Load the given transformation
 		 * 
-		 * @param {string|WebKitCSSMatrix} transformation The css transform
+		 * @param {string|WebKitCSSMatrix|MSCSSMatrix} transformation The css transform
 		 */
 		loadCssTransform: function(transformation)
 		{
-			if (isString(transformation))
+			if (wink.isString(transformation))
 			{
 				var search = "matrix3d";
 				var chaine = transformation;
@@ -146,7 +146,7 @@ define(['../../../_amd/core'], function(wink)
 				if (index != -1)
 				{
 					var matriceS = chaine.substring((search.length + 1), (chaine.length - 1));
-					var matValues = matriceS.split(", ");
+					var matValues = matriceS.split(",");
 					var m = [];
 					for ( var i = 0; i < matValues.length; i++) {
 						m[i] = matValues[i] * 1;
@@ -157,10 +157,10 @@ define(['../../../_amd/core'], function(wink)
 			else
 			{
 				try {
-					var values = this._cssMatrixToValues(transformation); // WebKitCSSMatrix
+					var values = this._cssMatrixToValues(transformation); // WebKitCSSMatrix, MSCSSMatrix
 					this._load(values);
 				} catch (e) {
-					wink.log('[Matrix] Error: bad WebKitCSSMatrix');
+					wink.log('[Matrix] Error: bad CSSMatrix');
 				}
 			}
 		},
@@ -174,9 +174,9 @@ define(['../../../_amd/core'], function(wink)
 			return this._values;
 		},
 		/**
-		 * Return the corresponding WebKitCSSMatrix
+		 * Return the corresponding CSSMatrix
 		 * 
-		 * @returns {WebkitCSSMatrix} The WebKitCSSMatrix
+		 * @returns {WebkitCSSMatrix|MSCSSMatrix} The CSSMatrix
 		 */
 		getCssMatrix: function()
 		{
@@ -184,7 +184,7 @@ define(['../../../_amd/core'], function(wink)
 		},
 		
 		/**
-		 * Return the string value of the WebKitCSSMatrix
+		 * Return the string value of the CSSMatrix
 		 * 
 		 * @returns {String} The value of the matrix
 		 */
@@ -253,11 +253,11 @@ define(['../../../_amd/core'], function(wink)
 			this._cssMatrix = this._valuesToCssMatrix(this._values);
 		},
 		/**
-		 * Returns a WebKitCSSMatrix with the given array of values
+		 * Returns a CSSMatrix with the given array of values
 		 * 
 		 * @param {array} values An array of 16 matrix values
 		 * 
-		 * @returns {WebkitCSSMatrix} The WebKitCSSMatrix
+		 * @returns {WebkitCSSMatrix|MSCSSMatrix} The CSSMatrix
 		 */
 		_valuesToCssMatrix: function(values)
 		{
@@ -286,9 +286,9 @@ define(['../../../_amd/core'], function(wink)
 			return cssMatrix;
 		},
 		/**
-		 * Returns an array of values with the given WebKitCSSMatrix
+		 * Returns an array of values with the given CSSMatrix
 		 * 
-		 * @param {WebkitCSSMatrix} cssMatrix The WebKitCSSMatrix
+		 * @param {WebkitCSSMatrix|MSCSSMatrix} cssMatrix The CSSMatrix
 		 * 
 		 * @returns {array} The value of the Matrix
 		 */
