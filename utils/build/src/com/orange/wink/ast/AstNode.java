@@ -11,7 +11,6 @@
 package com.orange.wink.ast;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mozilla.javascript.FunctionNode;
@@ -21,6 +20,7 @@ import org.mozilla.javascript.Token;
 
 import com.orange.wink.Constants;
 import com.orange.wink.exception.WinkAstException;
+import com.orange.wink.util.Common;
 
 /**
  * @author Sylvain Lalande
@@ -34,7 +34,7 @@ public class AstNode {
 	/**
 	 * 
 	 */
-	private final List<AstNode> childs;
+	private List<AstNode> childs;
 	/**
 	 * 
 	 */
@@ -140,14 +140,18 @@ public class AstNode {
 			isFunction = true;
 		}
 		if (type == Token.OBJECTLIT) {
-			objectIds = new ArrayList<String>();
+			objectIds = Common.newArrayList(1);
 			final Object[] props = (Object[]) node.getProp(Node.OBJECT_IDS_PROP);
 			for (final Object p : props) {
 				final String pName = (String) p;
 				objectIds.add(pName);
 			}
+			Common.trimList(objectIds);
+			if (objectIds.size() == 0) {
+				objectIds = null;
+			}
 		}
-		childs = new ArrayList<AstNode>();
+		childs = Common.newArrayList(1);
 
 		if (lineStart == -1) {
 			System.err.println("WARN - Ast Node without line number : " + this);
@@ -161,7 +165,11 @@ public class AstNode {
 		final List<Node> nodeChilds = getChilds(node);
 
 		if (type == Token.OBJECTLIT) {
-			if (objectIds.size() != nodeChilds.size()) {
+			List<String> oids = objectIds;
+			if (oids == null) {
+				oids = Common.newArrayList(0);
+			}
+			if (oids.size() != nodeChilds.size()) {
 				throw new WinkAstException("OBJECTLIT Node: props and childs count are not equal");
 			}
 		}
@@ -176,6 +184,10 @@ public class AstNode {
 			final AstNode child = new AstNode(cidentified, this);
 			childs.add(child);
 			child.expand();
+		}
+		Common.trimList(childs);
+		if (childs.size() == 0) {
+			childs = null;
 		}
 	}
 
@@ -336,10 +348,11 @@ public class AstNode {
 	 * @return
 	 */
 	private List<Node> getChilds(final Node n) {
-		final List<Node> nodes = new ArrayList<Node>();
+		final List<Node> nodes = Common.newArrayList(1);
 		for (Node child = n.getFirstChild(); child != null; child = child.getNext()) {
 			nodes.add(child);
 		}
+		Common.trimList(nodes);
 		return nodes;
 	}
 
@@ -348,7 +361,7 @@ public class AstNode {
 	 * @return
 	 */
 	private List<String> getParams(final ScriptOrFnNode n) {
-		final List<String> params = new ArrayList<String>();
+		final List<String> params = Common.newArrayList(1);
 		final int pvc = n.getParamAndVarCount();
 		if (pvc > 0) {
 			final int pc = n.getParamCount();
@@ -359,6 +372,10 @@ public class AstNode {
 				}
 			}
 		}
+		Common.trimList(params);
+		if (params.size() == 0) {
+			return null;
+		}
 		return params;
 	}
 
@@ -367,7 +384,7 @@ public class AstNode {
 	 * @return
 	 */
 	private List<String> getLocalVars(final ScriptOrFnNode n) {
-		final List<String> vars = new ArrayList<String>();
+		final List<String> vars = Common.newArrayList(1);
 		final int pvc = n.getParamAndVarCount();
 		if (pvc > 0) {
 			final int pc = n.getParamCount();
@@ -378,6 +395,10 @@ public class AstNode {
 				}
 			}
 		}
+		Common.trimList(vars);
+		if (vars.size() == 0) {
+			return null;
+		}
 		return vars;
 	}
 
@@ -386,13 +407,6 @@ public class AstNode {
 	 */
 	public Node getNode() {
 		return node;
-	}
-
-	/**
-	 * @return the childs
-	 */
-	public List<AstNode> getChilds() {
-		return childs;
 	}
 
 	/**
@@ -462,6 +476,9 @@ public class AstNode {
 	 * @return the parameters
 	 */
 	public List<String> getParameters() {
+		if (parameters == null) {
+			return Common.newArrayList(0);
+		}
 		return parameters;
 	}
 
@@ -469,7 +486,20 @@ public class AstNode {
 	 * @return the localVars
 	 */
 	public List<String> getLocalVars() {
+		if (localVars == null) {
+			return Common.newArrayList(0);
+		}
 		return localVars;
+	}
+
+	/**
+	 * @return the childs
+	 */
+	public List<AstNode> getChilds() {
+		if (childs == null) {
+			return Common.newArrayList(0);
+		}
+		return childs;
 	}
 
 	/**

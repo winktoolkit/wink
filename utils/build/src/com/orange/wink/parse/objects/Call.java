@@ -10,7 +10,6 @@
  */
 package com.orange.wink.parse.objects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mozilla.javascript.Token;
@@ -20,6 +19,7 @@ import com.orange.wink.ast.Ast;
 import com.orange.wink.ast.AstNode;
 import com.orange.wink.exception.WinkUnmanagedSyntaxException;
 import com.orange.wink.model.Namespace;
+import com.orange.wink.util.Common;
 
 /**
  * @author Sylvain Lalande
@@ -50,7 +50,7 @@ public class Call extends ParseObject {
 	public Call(final AstNode n) throws WinkUnmanagedSyntaxException {
 		super(n);
 
-		parameters = new ArrayList<Namespace>();
+		parameters = Common.newArrayList(1);
 
 		final AstNode callnode = n;
 
@@ -90,6 +90,7 @@ public class Call extends ParseObject {
 				parameters.add(ns);
 			}
 		}
+		Common.trimList(parameters);
 	}
 
 	/**

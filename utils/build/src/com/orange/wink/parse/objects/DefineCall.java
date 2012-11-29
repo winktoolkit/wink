@@ -10,7 +10,6 @@
  */
 package com.orange.wink.parse.objects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mozilla.javascript.Token;
@@ -18,6 +17,7 @@ import org.mozilla.javascript.Token;
 import com.orange.wink.ast.AstNode;
 import com.orange.wink.exception.WinkUnmanagedSyntaxException;
 import com.orange.wink.model.Namespace;
+import com.orange.wink.util.Common;
 
 /**
  * @author Sylvain Lalande
@@ -31,7 +31,7 @@ public class DefineCall extends Call {
 	public DefineCall(final AstNode n) throws WinkUnmanagedSyntaxException {
 		super(n);
 
-		parameters = new ArrayList<Namespace>();
+		parameters = Common.newArrayList(0);
 
 		final AstNode callnode = n;
 		final List<AstNode> childsCall = callnode.getChilds();

@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,6 +22,7 @@ import org.mozilla.javascript.ErrorReporter;
 import org.mozilla.javascript.Parser;
 import org.mozilla.javascript.ScriptOrFnNode;
 
+import com.orange.wink.Constants;
 import com.orange.wink.ast.Ast;
 import com.orange.wink.ast.AstBuilder;
 import com.orange.wink.exception.WinkAstException;
@@ -31,6 +31,9 @@ import com.orange.wink.model.FunctionObject;
 import com.orange.wink.model.GlobalObject;
 import com.orange.wink.model.LiteralObject;
 import com.orange.wink.model.ScriptObject;
+import com.orange.wink.util.Common;
+import com.orange.wink.util.FileManager;
+import com.orange.wink.util.FileObject;
 import com.orange.wink.util.WinkJsFile;
 
 /**
@@ -54,6 +57,10 @@ public class WinkParser {
 	 * 
 	 */
 	private final List<WinkJsFile> jsFiles;
+	/**
+	 * 
+	 */
+	private GlobalObject globalScope;
 
 	/**
 	 * 
@@ -62,7 +69,7 @@ public class WinkParser {
 		compilerEnv = new CompilerEnvirons();
 		errorReporter = compilerEnv.getErrorReporter();
 		parser = new Parser(compilerEnv, errorReporter);
-		jsFiles = new ArrayList<WinkJsFile>();
+		jsFiles = Common.newArrayList(1);
 	}
 
 	/**
@@ -124,11 +131,17 @@ public class WinkParser {
 	 * @throws WinkParseException
 	 */
 	private void addJsFile(final String filename, final GlobalObject scope) throws WinkParseException {
-		if (jsFiles.size() > 0) {
-			final WinkJsFile topScript = jsFiles.get(0);
-			scope.setParent(topScript.getScope());
+		scope.setParent(getGlobalScope());
+
+		if (globalScope == null) {
+			globalScope = scope;
 		}
-		jsFiles.add(new WinkJsFile(filename, scope));
+		if (Constants.optimDontKeepJsFile) {
+
+		} else {
+			jsFiles.add(new WinkJsFile(filename, scope));
+		}
+
 		scope.setSourceName(filename);
 		scope.interpret();
 	}
@@ -150,10 +163,10 @@ public class WinkParser {
 	 * @return
 	 */
 	public GlobalObject getGlobalScope() {
-		if (jsFiles.size() > 0) {
-			return jsFiles.get(0).getScope();
-		}
-		return null;
+		// if (jsFiles.size() > 0) {
+		// return jsFiles.get(0).getScope();
+		// }
+		return globalScope;
 	}
 
 	/**
@@ -168,10 +181,13 @@ public class WinkParser {
 			final String sourceName = f.getGlobalScope().getSourceName();
 			f.setSourceName(sourceName);
 
-			final WinkJsFile jf = getJsFile(sourceName);
 			String fsource;
 			try {
-				fsource = jf.getLinesAsString(f.getLineStart(), f.getLineEnd());
+				if (Constants.optimDontKeepJsFile) {
+					fsource = FileManager.getFileObject(sourceName).getLinesAsString(f.getLineStart(), f.getLineEnd());
+				} else {
+					fsource = getJsFile(sourceName).getLinesAsString(f.getLineStart(), f.getLineEnd());
+				}
 				ParserUtils.updateFunctionInfo(f, fsource);
 			} catch (final IOException e) {
 				throw new WinkParseException(e);
@@ -212,17 +228,45 @@ public class WinkParser {
 			}
 
 			if (!lt.isVirtual()) {
-				final WinkJsFile jf = getJsFile(sourceName);
+				FileObject fo = null;
+				WinkJsFile jf = null;
 				String ltSource;
+				int linesSize = -1;
+
 				try {
+					if (Constants.optimDontKeepJsFile) {
+						fo = FileManager.getFileObject(sourceName);
+						if ((lt.getLineEnd() == -1)) {
+							linesSize = fo.getLines().size();
+						}
+					} else {
+						jf = getJsFile(sourceName);
+						if ((lt.getLineEnd() == -1)) {
+							linesSize = jf.getLines().size();
+						}
+					}
+
 					final int lns = (lt.getLineStart() == -1) ? 1 : lt.getLineStart();
-					final int lne = (lt.getLineEnd() == -1) ? jf.getLines().size() : lt.getLineEnd();
-					ltSource = jf.getLinesAsString(lns, lne);
+					final int lne = (lt.getLineEnd() == -1) ? linesSize : lt.getLineEnd();
+
+					if (Constants.optimDontKeepJsFile) {
+						ltSource = fo.getLinesAsString(lns, lne);
+					} else {
+						ltSource = jf.getLinesAsString(lns, lne);
+					}
+
 					ParserUtils.updateLiteralLines(lt, ltSource, lns);
 					if (lt.getLineStart() == -1 || lt.getLineEnd() == -1) {
 						throw new WinkParseException("Bad literal lines [" + lt.getNamespace() + "] identified (L:" + lt.getLineStart() + ", " + lt.getLineEnd() + ")");
 					}
-					ParserUtils.updateLiteralChars(lt, jf.getLinesAsString(lt.getLineStart(), lt.getLineEnd()));
+
+					String las;
+					if (Constants.optimDontKeepJsFile) {
+						las = fo.getLinesAsString(lt.getLineStart(), lt.getLineEnd());
+					} else {
+						las = jf.getLinesAsString(lt.getLineStart(), lt.getLineEnd());
+					}
+					ParserUtils.updateLiteralChars(lt, las);
 				} catch (final IOException e) {
 					throw new WinkParseException(e);
 				}
@@ -253,10 +297,18 @@ public class WinkParser {
 			return;
 		}
 		if (!(o instanceof GlobalObject)) {
-			final WinkJsFile jf = getJsFile(o.getSourceName());
+			WinkJsFile jf;
+			FileObject fo;
 			String lines, source;
 			try {
-				lines = jf.getLinesAsString(o.getLineStart(), o.getLineEnd());
+				if (Constants.optimDontKeepJsFile) {
+					fo = FileManager.getFileObject(o.getSourceName());
+					lines = fo.getLinesAsString(o.getLineStart(), o.getLineEnd());
+				} else {
+					jf = getJsFile(o.getSourceName());
+					lines = jf.getLinesAsString(o.getLineStart(), o.getLineEnd());
+				}
+
 				System.out.println("------------ " + o);
 				if (!o.isVirtual()) {
 					source = lines.substring(o.getCharStart(), o.getCharEnd());
@@ -297,9 +349,7 @@ public class WinkParser {
 		// }
 
 		System.out.println("\n------------ MODEL");
-		if (jsFiles.size() > 0) {
-			System.out.println(scope.toStringRecursive(null, 0));
-		}
+		System.out.println(scope.toStringRecursive(null, 0));
 
 		// System.out.println("\n------------ SOURCES");
 		// printSource(scope);

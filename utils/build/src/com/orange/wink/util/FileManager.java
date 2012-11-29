@@ -21,8 +21,9 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.StringReader;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
+
+import com.orange.wink.Constants;
 
 /**
  * @author Sylvain Lalande
@@ -40,7 +41,7 @@ public class FileManager {
 	/**
 	 * 
 	 */
-	private static List<FileObject> files = new ArrayList<FileObject>();
+	private static List<FileObject> files = Common.newArrayList(1);
 
 	/**
 	 * @param filename
@@ -86,10 +87,15 @@ public class FileManager {
 		if (fo == null) {
 			fo = new FileObject(new File(filename).getCanonicalPath());
 			files.add(fo);
+			if (!Constants.fileInMemory) {
+				fo.setEncoding(FileUtil.getEncoding(fo.getFilename()));
+			}
 		}
-		if (fo.getContent() == null) {
-			fo.setEncoding(FileUtil.getEncoding(fo.getFilename()));
-			fo.setContent(getBufferedFileContent(fo.getFilename(), fo.getEncoding()));
+		if (Constants.fileInMemory) {
+			if (fo.getContent() == null) {
+				fo.setEncoding(FileUtil.getEncoding(fo.getFilename()));
+				fo.setContent(getBufferedFileContent(fo.getFilename(), fo.getEncoding()));
+			}
 		}
 		return fo.getContent();
 	}
@@ -127,7 +133,7 @@ public class FileManager {
 	 * @param filename
 	 * @return
 	 */
-	private static StringBuffer getBufferedFileContent(final String filename, final String encoding) throws IOException {
+	public static StringBuffer getBufferedFileContent(final String filename, final String encoding) throws IOException {
 		// System.out.println("READ ACCESS TO: " + filename + ", " + encoding);
 		final File fin = new File(filename);
 		final InputStreamReader in = new InputStreamReader(new FileInputStream(fin), Charset.forName(encoding));
@@ -171,7 +177,9 @@ public class FileManager {
 		final FileObject foOut = new FileObject(filenamec);
 		files.add(foOut);
 		foOut.setEncoding(OUTPUT_ENCODING);
-		foOut.setContent(new StringBuffer().append(content));
+		if (Constants.fileInMemory) {
+			foOut.setContent(new StringBuffer().append(content));
+		}
 	}
 
 	/**

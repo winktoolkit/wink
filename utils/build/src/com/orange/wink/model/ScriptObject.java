@@ -10,7 +10,6 @@
  */
 package com.orange.wink.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +24,7 @@ import com.orange.wink.parse.ParserUtils;
 import com.orange.wink.parse.objects.ParseObject;
 import com.orange.wink.parse.objects.SetName;
 import com.orange.wink.parse.objects.SetProp;
+import com.orange.wink.util.Common;
 
 /**
  * @author Sylvain Lalande
@@ -98,10 +98,10 @@ public abstract class ScriptObject implements ScriptElement {
 	protected AstNode node;
 
 	public ScriptObject() {
-		literals = new HashMap<String, LiteralObject>();
-		functions = new HashMap<String, FunctionObject>();
-		properties = new HashMap<String, DefaultObject>();
-		extensions = new ArrayList<ScriptObject>();
+		literals = new HashMap<String, LiteralObject>(0);
+		functions = new HashMap<String, FunctionObject>(0);
+		properties = new HashMap<String, DefaultObject>(0);
+		extensions = Common.newArrayList(0);
 		namespace = new Namespace();
 		parent = null;
 		isVirtual = false;
@@ -122,9 +122,10 @@ public abstract class ScriptObject implements ScriptElement {
 	 * @throws WinkParseException
 	 */
 	protected List<ParseObject> retrieveParseObjects() throws WinkParseException {
-		final List<ParseObject> result = new ArrayList<ParseObject>();
+		final List<ParseObject> result = Common.newArrayList(1);
 		result.addAll(getSetName(getNode()));
 		result.addAll(retrieveSetProp(getNode()));
+		Common.trimList(result);
 		return result;
 	}
 
@@ -168,8 +169,9 @@ public abstract class ScriptObject implements ScriptElement {
 	 * @throws WinkParseException
 	 */
 	protected List<SetName> getSetName(final AstNode headNode) throws WinkParseException {
-		final List<SetName> setnames = new ArrayList<SetName>();
+		final List<SetName> setnames = Common.newArrayList(1);
 		ParserUtils.getSetName(headNode, setnames);
+		Common.trimList(setnames);
 		return setnames;
 	}
 
@@ -193,8 +195,9 @@ public abstract class ScriptObject implements ScriptElement {
 	 * @throws WinkParseException
 	 */
 	protected List<SetProp> retrieveSetProp(final AstNode headNode) throws WinkParseException {
-		final List<SetProp> setprops = new ArrayList<SetProp>();
+		final List<SetProp> setprops = Common.newArrayList(1);
 		ParserUtils.getSetProp(headNode, setprops);
+		Common.trimList(setprops);
 		return setprops;
 	}
 
@@ -629,6 +632,7 @@ public abstract class ScriptObject implements ScriptElement {
 	/**
 	 * @return the node
 	 */
+	@Override
 	public AstNode getNode() {
 		return node;
 	}

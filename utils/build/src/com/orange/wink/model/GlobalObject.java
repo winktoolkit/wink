@@ -10,7 +10,6 @@
  */
 package com.orange.wink.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +26,7 @@ import com.orange.wink.parse.objects.Function;
 import com.orange.wink.parse.objects.ParseObject;
 import com.orange.wink.parse.objects.SetName;
 import com.orange.wink.parse.objects.SetProp;
+import com.orange.wink.util.Common;
 
 /**
  * @author Sylvain Lalande
@@ -105,10 +105,13 @@ public class GlobalObject extends LiteralObject {
 	 */
 	@Override
 	protected List<ParseObject> retrieveParseObjects() throws WinkParseException {
-		final List<ParseObject> result = new ArrayList<ParseObject>();
+		final List<ParseObject> result = Common.newArrayList(5);
 		result.addAll(super.retrieveParseObjects());
 		result.addAll(getRootFunctions(node));
 		result.addAll(getExprResultCall(node));
+
+		Common.trimList(result);
+
 		return result;
 	}
 
@@ -118,8 +121,9 @@ public class GlobalObject extends LiteralObject {
 	 * @throws WinkParseException
 	 */
 	private List<Function> getRootFunctions(final AstNode headNode) throws WinkParseException {
-		final List<Function> functions = new ArrayList<Function>();
+		final List<Function> functions = Common.newArrayList(5);
 		ParserUtils.getFunctions(headNode, functions);
+		Common.trimList(functions);
 		for (final Function f : functions) {
 			f.setRootFunction(true);
 		}
@@ -143,7 +147,7 @@ public class GlobalObject extends LiteralObject {
 	 * @throws WinkParseException
 	 */
 	private List<ExprResultCall> getExprResultCall(final AstNode headNode) throws WinkParseException {
-		final List<ExprResultCall> calls = new ArrayList<ExprResultCall>();
+		final List<ExprResultCall> calls = Common.newArrayList(5);
 		ParserUtils.getExprResultCall(headNode, calls);
 		return calls;
 	}

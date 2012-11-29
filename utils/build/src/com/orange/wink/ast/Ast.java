@@ -10,7 +10,6 @@
  */
 package com.orange.wink.ast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mozilla.javascript.FunctionNode;
@@ -18,6 +17,7 @@ import org.mozilla.javascript.ScriptOrFnNode;
 import org.mozilla.javascript.Token;
 
 import com.orange.wink.exception.WinkAstException;
+import com.orange.wink.util.Common;
 
 /**
  * @author Sylvain Lalande
@@ -113,10 +113,12 @@ public class Ast {
 	 * @return
 	 */
 	public static List<AstNode> getNodesByType(final AstNode top, final int type, final int depth) {
-		final List<AstNode> result = new ArrayList<AstNode>();
+		final List<AstNode> result = Common.newArrayList(1);
+
 		for (final AstNode an : top.getChilds()) {
 			getNodesByTypeR(an, type, depth, 1, result);
 		}
+		Common.trimList(result);
 		return result;
 	}
 

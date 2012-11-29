@@ -18,7 +18,6 @@ import java.io.PrintStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -38,6 +37,7 @@ import com.orange.wink.exception.WinkBuildException;
 import com.orange.wink.parse.ParserUtils;
 import com.orange.wink.parse.WinkJsModel;
 import com.orange.wink.parse.WinkParser;
+import com.orange.wink.util.Common;
 import com.orange.wink.util.FileManager;
 import com.orange.wink.util.FileObject;
 import com.orange.wink.util.FileUtil;
@@ -277,9 +277,10 @@ public class WinkBuilderHelper {
 		final List<String> filesToParse = convertNativeArrayIntoList((NativeArray) args[0]);
 		final List<String> dependencies = convertNativeArrayIntoList((NativeArray) args[1]);
 
-		final List<String> files = new ArrayList<String>();
+		final List<String> files = Common.newArrayList(1);
 		files.addAll(dependencies);
 		files.addAll(filesToParse);
+		Common.trimList(files);
 
 		final WinkParser wp = new WinkParser();
 		wp.parse(files);
@@ -619,13 +620,15 @@ public class WinkBuilderHelper {
 	 * @return
 	 */
 	private static List<String> convertNativeArrayIntoList(final NativeArray na) {
-		final List<String> list = new ArrayList<String>();
+		final List<String> list = Common.newArrayList(1);
 
 		final Object[] naIds = na.getIds();
 		for (final Object o : naIds) {
 			final String value = (String) na.get((Integer) o, na);
 			list.add(value);
 		}
+		Common.trimList(list);
+
 		return list;
 	}
 }

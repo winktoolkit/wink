@@ -10,10 +10,10 @@
  */
 package com.orange.wink.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.orange.wink.Constants;
+import com.orange.wink.util.Common;
 
 /**
  * @author Sylvain Lalande
@@ -33,7 +33,7 @@ public class Namespace {
 	 * 
 	 */
 	public Namespace() {
-		names = new ArrayList<String>();
+		names = Common.newArrayList(1);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class Namespace {
 		if (!isThisReferenced(this)) {
 			return;
 		}
-		final List<String> newNames = new ArrayList<String>();
+		final List<String> newNames = Common.newArrayList(1);
 
 		for (final String name : names) {
 			if (name.equals(Constants.THIS_TOKEN)) {
@@ -86,6 +86,9 @@ public class Namespace {
 				newNames.add(name);
 			}
 		}
+		Common.trimList(newNames);
+		names.clear();
+		names = null;
 		names = newNames;
 	}
 

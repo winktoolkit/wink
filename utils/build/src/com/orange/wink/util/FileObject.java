@@ -16,6 +16,8 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.orange.wink.Constants;
+
 /**
  * @author Sylvain Lalande
  * 
@@ -52,7 +54,10 @@ public class FileObject {
 	/**
 	 * @return the lines
 	 */
-	public List<String> getLines() {
+	public List<String> getLines() throws IOException {
+		if (!Constants.fileInMemory) {
+			return readLines();
+		}
 		if (lines == null) {
 			throw new IllegalStateException("lines of " + filename + " not initialized");
 		}
@@ -122,8 +127,31 @@ public class FileObject {
 	/**
 	 * @return the content
 	 */
-	public StringBuffer getContent() {
+	public StringBuffer getContent() throws IOException {
+		if (!Constants.fileInMemory) {
+			return FileManager.getBufferedFileContent(filename, encoding);
+		}
 		return content;
+	}
+
+	/**
+	 * 
+	 * @return lines
+	 * @throws IOException
+	 */
+	public ArrayList<String> readLines() throws IOException {
+		final ArrayList<String> lines = Common.newArrayList(20);
+		final BufferedReader br = new BufferedReader(new StringReader(getContent().toString()));
+		int ln = 0;
+		String line = null;
+		while ((line = br.readLine()) != null) {
+			lines.add(ln, line);
+			ln++;
+		}
+		br.close();
+		Common.trimList(lines);
+
+		return lines;
 	}
 
 	/**
@@ -133,7 +161,7 @@ public class FileObject {
 	public void setContent(final StringBuffer content) throws IOException {
 		this.content = content;
 
-		lines = new ArrayList<String>();
+		lines = Common.newArrayList(20);
 		final BufferedReader br = new BufferedReader(new StringReader(content.toString()));
 		int ln = 0;
 		String line = null;
@@ -142,6 +170,7 @@ public class FileObject {
 			ln++;
 		}
 		br.close();
+		Common.trimList(lines);
 	}
 
 	/**

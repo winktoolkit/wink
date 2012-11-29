@@ -11,7 +11,6 @@
 package com.orange.wink.parse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,6 +23,7 @@ import com.orange.wink.model.FunctionObject;
 import com.orange.wink.model.GlobalObject;
 import com.orange.wink.model.LiteralObject;
 import com.orange.wink.model.ScriptObject;
+import com.orange.wink.util.Common;
 import com.orange.wink.util.FileManager;
 import com.orange.wink.util.WinkJsFile;
 
@@ -119,8 +119,9 @@ public class WinkJsModel extends ScriptableObject {
 	 */
 	private void initFunctions() {
 		if (functions == null) {
-			functions = new ArrayList<FunctionObject>();
+			functions = Common.newArrayList(1);
 			getFunctions(functions, scope);
+			Common.trimList(functions);
 		}
 	}
 
@@ -129,8 +130,9 @@ public class WinkJsModel extends ScriptableObject {
 	 */
 	private void initLiterals() {
 		if (literals == null) {
-			literals = new ArrayList<LiteralObject>();
+			literals = Common.newArrayList(1);
 			getLiterals(literals, scope);
+			Common.trimList(literals);
 		}
 	}
 
@@ -167,7 +169,7 @@ public class WinkJsModel extends ScriptableObject {
 		initFunctions();
 		initLiterals();
 
-		final List<Object> names = new ArrayList<Object>();
+		final List<Object> names = Common.newArrayList(1);
 		for (final FunctionObject f : functions) {
 			final List<ScriptObject> exts = f.getExtensions();
 			if (exts.size() > 0) {
@@ -181,6 +183,7 @@ public class WinkJsModel extends ScriptableObject {
 			}
 		}
 
+		Common.trimList(names);
 		// System.out.println("getDuplicateFunctions:" + names.size());
 		final Scriptable ar = cx.newArray(this, names.toArray());
 		return ar;
@@ -216,7 +219,7 @@ public class WinkJsModel extends ScriptableObject {
 		initLiterals();
 
 		final ScriptObject so = getScriptObjectByName(name);
-		final List<ScriptObject> toRemove = new ArrayList<ScriptObject>();
+		final List<ScriptObject> toRemove = Common.newArrayList(1);
 
 		toRemove.add(so);
 
@@ -226,6 +229,7 @@ public class WinkJsModel extends ScriptableObject {
 				toRemove.add(exts.get(i));
 			}
 		}
+		Common.trimList(toRemove);
 
 		for (final ScriptObject tr : toRemove) {
 			removeFromFile(tr);
@@ -242,10 +246,12 @@ public class WinkJsModel extends ScriptableObject {
 			return;
 		}
 
-		final List<FunctionObject> fnChilds = new ArrayList<FunctionObject>();
+		final List<FunctionObject> fnChilds = Common.newArrayList(1);
 		getFunctions(fnChilds, so);
-		final List<LiteralObject> ltChilds = new ArrayList<LiteralObject>();
+		final List<LiteralObject> ltChilds = Common.newArrayList(1);
 		getLiterals(ltChilds, so);
+		Common.trimList(fnChilds);
+		Common.trimList(ltChilds);
 
 		for (final FunctionObject fnchild : fnChilds) {
 			removeFromFile(fnchild);

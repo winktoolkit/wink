@@ -25,6 +25,7 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.orange.wink.exception.WinkBuildException;
+import com.orange.wink.util.Common;
 
 /**
  * @author Sylvain LALANDE
@@ -49,6 +50,10 @@ public class WinkBuilder {
 		Constants.failOnUnresolvedNamespace = Boolean.valueOf(getProperty(Constants.OPTION_FAIL_ON_UNRESOLVED_NAMESPACE));
 		Constants.fromWinkPath = Boolean.valueOf(getProperty(Constants.OPTION_FROM_WINK_PATH));
 		Constants.relativePath = getProperty(Constants.OPTION_RELATIVE_PATH);
+
+		if (getProperty(Constants.OPTION_FILE_IN_MEMORY) != "") {
+			Constants.fileInMemory = Boolean.valueOf(getProperty(Constants.OPTION_FILE_IN_MEMORY));
+		}
 
 		final Context cx = Context.enter();
 		cx.setOptimizationLevel(-1);
@@ -134,6 +139,7 @@ public class WinkBuilder {
 						tokens.add(token.trim());
 					}
 				}
+				Common.trimList(tokens);
 				final Scriptable sctArray = cx.newArray(scope, tokens.toArray());
 				ScriptableObject.putProperty(sctConf, key, sctArray);
 			} else {

@@ -26,7 +26,7 @@ public class Launcher {
 		final String buildPath = rootBuildPath + "js";
 
 		final String[] arguments = new String[] {
-		//
+				//
 				"-JS_PATH=../wink/utils/build/scripts",
 				//
 				"-JS_MAIN_FILE=build.js",
@@ -56,13 +56,13 @@ public class Launcher {
 				"-OPTION_PRINT_EXTENSIONS=true",
 				//
 				"-OPTION_PRINT_MODEL=false",
-				// 
+				//
 				"-OPTION_FAIL_ON_UNMANAGED_SYNTAX=true",
-				// 
+				//
 				"-OPTION_WARN_ON_UNMANAGED_SYNTAX=false",
-				// 
+				//
 				"-OPTION_FAIL_ON_UNRESOLVED_NAMESPACE=false",
-				// 
+				//
 				"-OPTION_DELETE_VALIDATE_PROPERTIES=true" };
 
 		new File(rootBuildPath).mkdir();

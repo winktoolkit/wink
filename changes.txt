@@ -274,6 +274,7 @@ Release 1.4.3 [xx/xx/xxxx]
 	- Corrected bug on slideshow: freezing after next/previous calls due to no notification of activity
 	- Build system: option build.js.options.warninglevel added, preprocessing steps added to skip jsdoc's parsing errors
 	- Build system: dom removed and plugins added
+	- Build system: memory consumption optimization
 	- Added property hideMode to wink.ui.layout.FixedLayout to allow to adapt the behavior of the bars to a specific mode (move or hide)
 	- Corrected minor bug on feature detection
 	- New search feature in the documentation

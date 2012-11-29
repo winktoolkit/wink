@@ -10,7 +10,6 @@
  */
 package com.orange.wink.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.orange.wink.ast.AstNode;
@@ -18,6 +17,7 @@ import com.orange.wink.exception.WinkParseException;
 import com.orange.wink.parse.ParserUtils;
 import com.orange.wink.parse.objects.ParseObject;
 import com.orange.wink.parse.objects.SetProp;
+import com.orange.wink.util.Common;
 
 /**
  * @author Sylvain Lalande
@@ -43,8 +43,8 @@ public class FunctionObject extends ScriptObject {
 	 */
 	public FunctionObject(final AstNode n) {
 		super(n);
-		parameters = new ArrayList<String>();
-		localVarNames = new ArrayList<String>();
+		parameters = Common.newArrayList(0);
+		localVarNames = Common.newArrayList(0);
 	}
 
 	/**
@@ -61,6 +61,8 @@ public class FunctionObject extends ScriptObject {
 	public void populateParams() throws WinkParseException {
 		parameters.addAll(node.getParameters());
 		localVarNames.addAll(node.getLocalVars());
+		Common.trimList(parameters);
+		Common.trimList(localVarNames);
 	}
 
 	/**
@@ -145,9 +147,10 @@ public class FunctionObject extends ScriptObject {
 	 */
 	@Override
 	protected List<ParseObject> retrieveParseObjects() throws WinkParseException {
-		final List<ParseObject> result = new ArrayList<ParseObject>();
+		final List<ParseObject> result = Common.newArrayList(1);
 		result.addAll(super.retrieveParseObjects());
 		result.addAll(getChildSetProp());
+		Common.trimList(result);
 		return result;
 	}
 
@@ -158,9 +161,11 @@ public class FunctionObject extends ScriptObject {
 	 */
 	@Override
 	protected List<SetProp> retrieveSetProp(final AstNode headNode) throws WinkParseException {
-		final List<SetProp> setprops = new ArrayList<SetProp>();
+		final List<SetProp> setprops = Common.newArrayList(1);
 		ParserUtils.getSetProp(headNode, setprops);
-		final List<SetProp> result = new ArrayList<SetProp>();
+		Common.trimList(setprops);
+
+		final List<SetProp> result = Common.newArrayList(1);
 
 		for (final SetProp sp : setprops) {
 			final Namespace spns = sp.getNamespace();
@@ -168,6 +173,8 @@ public class FunctionObject extends ScriptObject {
 				result.add(sp);
 			}
 		}
+		Common.trimList(result);
+
 		return result;
 	}
 
@@ -176,11 +183,15 @@ public class FunctionObject extends ScriptObject {
 	 * @throws WinkParseException
 	 */
 	private List<SetProp> getChildSetProp() throws WinkParseException {
-		final List<SetProp> setprops = new ArrayList<SetProp>();
+		final List<SetProp> setprops = Common.newArrayList(1);
 		final List<AstNode> childs = node.getChilds();
+		Common.trimList(childs);
+
 		for (final AstNode n : childs) {
 			setprops.addAll(retrieveSetProp(n));
 		}
+		Common.trimList(setprops);
+
 		return setprops;
 	}
 
