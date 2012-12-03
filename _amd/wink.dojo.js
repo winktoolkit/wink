@@ -46,7 +46,7 @@ define(
 		var wd = window;
 		
 		/***** wink/base *****/
-		wink.version = '1.4.3';
+		wink.version = '1.4.4';
 		
 		wink.api = {};
 		wink.fx = {};
