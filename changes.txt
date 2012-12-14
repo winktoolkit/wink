@@ -285,3 +285,4 @@ Release 1.4.3 [03/12/2012]
 	- Windows Phone 8 compatibility (feat, ua, touch, CSS)
 	- Added the builder web interface
 	
+Release 1.4.4 [xx/xx/xxxx]
