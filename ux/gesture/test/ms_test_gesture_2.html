@@ -12,6 +12,10 @@
 		<title>test_gesture_box</title>
 
 		<style>
+            body {
+                -ms-touch-action: none;
+            }
+            
 			#container 
 			{
 				position: relative;
@@ -25,6 +29,9 @@
 				left: 10%;
 				top: 10%;
 				background-color: #333;
+                color: #fff;
+                
+                -ms-user-select: none;
 			}
 		</style>
 		
@@ -53,7 +60,7 @@
 		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
 		<!-- END CORE -->
 		
-		<script type="text/javascript" src="../js/gesture.js"></script>
+		<script type="text/javascript" src="../js/ms_gesture.js"></script>
 		
 		<script type="text/javascript">
 			var Box = function(node)

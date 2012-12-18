@@ -115,9 +115,13 @@ define(['../../../_amd/core'], function(wink)
 			{
 				gestureElement = this._createGestureElement(domNode, opts.preventDefault);
 				this._gestureElements.push(gestureElement);
+                
+                // Add MSGesture on the element
+                gestureElement.boxGesture = new MSGesture();
+                gestureElement.boxGesture.target = domNode;
 				
 				wink.ux.touch.addListener(gestureElement.domNode, "start", { context: this, method: "_handleStart", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault, tracking: false });
-				wink.ux.touch.addListener(gestureElement.domNode, "gesturestart", { context: this, method: "_handleGestureStart", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+                wink.ux.touch.addListener(gestureElement.domNode, "gesturestart", { context: this, method: "_handleGestureStart", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
 			}
 			else
 			{
@@ -172,7 +176,19 @@ define(['../../../_amd/core'], function(wink)
 				multitouchEndTime: null,
 				scale: 1.0,
 				rotation: 0,
+                boxGesture: null,
 				gestureHandlers: [], // gesture, callbacks
+                addDigit: function(event) {
+                    this.digits.push(event);
+                },
+                removeDigit: function(pointerId) {
+                    for(var i=0, l=this.digits.length; i<l; i++) {
+                        if(this.digits[i].pointerId == pointerId) {
+                            this.digits.splice(i, 1);
+                            return;
+                        }
+                    }
+                },
 				getGestureHandler: function(gesture)
 				{
 					for (var i = 0; i < this.gestureHandlers.length; i++)
@@ -292,36 +308,40 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_handleStart: function(uxEvent, gestureElement)
 		{
-			gestureElement.reset();
+			//gestureElement.reset();
 			if (gestureElement.checkTimer)
 			{
 				clearTimeout(gestureElement.checkTimer);
 			}
+            
+            gestureElement.boxGesture.addPointer(uxEvent.srcEvent.pointerId);
+			gestureElement.addDigit(this._getDigit(uxEvent.srcEvent, uxEvent));
 			
-			var nbTouches = 0;
-			if (wink.isSet(uxEvent.srcEvent.targetTouches))
-			{
-				nbTouches = uxEvent.srcEvent.targetTouches.length;
-			}
-			
-			if (nbTouches == 2)
+			var nbTouches = gestureElement.digits.length;
+            
+            if(wink.byId('box1') != null)
+			wink.byId('box1').innerHTML += 
+                'press: '+uxEvent.srcEvent.pointerId+' --> ' + 
+                'length: '+gestureElement.digits.length+'<br /> ';
+            
+            if (nbTouches == 2)
 			{
 				gestureElement.multitouch = true;
 				gestureElement.multitouchStartTime = this._getTimeStamp();
-				
-				gestureElement.digits.push(this._getDigit(uxEvent.srcEvent.targetTouches[0], uxEvent));
-				gestureElement.digits.push(this._getDigit(uxEvent.srcEvent.targetTouches[1], uxEvent));
-				
-				wink.ux.touch.addListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
-				wink.ux.touch.addListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
+                
+                // For each touch add "end" and "move" event 
+                wink.ux.touch.addListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+                wink.ux.touch.addListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
 				
 				gestureElement.checkTimer = wink.setTimeout(this, "_checkTwoDigitsPressed", this.TWO_DIGITS_PRESS_MIN_DURATION, gestureElement);
 			}
 			else
 			{
 				gestureElement.multitouch = false;
-				wink.ux.touch.removeListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] });
-				wink.ux.touch.removeListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
+                
+                // For each touch add "end" and "move" event 
+                wink.ux.touch.addListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+                wink.ux.touch.addListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
 			}
 		},
 		/**
@@ -332,17 +352,10 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_handleMove: function(uxEvent, gestureElement)
 		{
-			var nbTouches = 0;
-			if (wink.isSet(uxEvent.srcEvent.targetTouches))
-			{
-				nbTouches = uxEvent.srcEvent.targetTouches.length;
-			}
-			
-			if (nbTouches == 2)
-			{
-				gestureElement.digits = [];
-				gestureElement.digits.push(this._getDigit(uxEvent.srcEvent.targetTouches[0], uxEvent));
-				gestureElement.digits.push(this._getDigit(uxEvent.srcEvent.targetTouches[1], uxEvent));
+			var nbTouches = gestureElement.digits.length;	
+			if (nbTouches == 2) {
+                gestureElement.removeDigit(uxEvent.srcEvent.pointerId);
+                gestureElement.addDigit(uxEvent.srcEvent);
 			}
 		},
 		/**
@@ -353,34 +366,53 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_handleEnd: function(uxEvent, gestureElement)
 		{
+            if(wink.byId('box1') != null) {
+                wink.byId('box1').innerHTML += 
+                    'remove: '+uxEvent.srcEvent.pointerId+' --> ' + 
+                    'length: '+gestureElement.digits.length+' (';
+                
+                for(var i=0, l=gestureElement.digits.length; i < l; i++) {
+                    wink.byId('box1').innerHTML += i == 0 ? '' : ', ';
+                    wink.byId('box1').innerHTML += gestureElement.digits[i].pointerId;
+                }
+                
+                wink.byId('box1').innerHTML += ') <br />';
+            }
+            
+            
+            gestureElement.removeDigit(uxEvent.srcEvent.pointerId);
+            
 			if (gestureElement.multitouch == true)
 			{
-				var nbTouches = 0;
-				if (wink.isSet(uxEvent.srcEvent.targetTouches))
-				{
-					nbTouches = uxEvent.srcEvent.targetTouches.length;
-				}
+                var nbTouches = gestureElement.digits.length;
 				if (nbTouches != 2)
 				{
-					gestureElement.multitouch = false;
+//                    gestureElement.multitouch = false;
 				}
-				
+                
 				if (nbTouches == 0)
 				{
+                    // Stop gesture
+                    gestureElement.boxGesture.stop();
+                    
 					wink.ux.touch.removeListener(gestureElement.domNode, "move", { context: this, method: "_handleMove" });
 					wink.ux.touch.removeListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd" });
 					
 					gestureElement.multitouchEndTime = this._getTimeStamp();
 					var multitouchDuration = gestureElement.multitouchEndTime - gestureElement.multitouchStartTime;
 					
-					if (multitouchDuration < this.TWO_DIGITS_CLICK_MAX_DURATION)
+					if (multitouchDuration < this.TWO_DIGITS_CLICK_MAX_DURATION
+                    && gestureElement.scale == 1.0)
 					{
 						var gestureInfos = {
 							digit1: gestureElement.digits[0],
 							digit2: gestureElement.digits[1]
 						};
 						this._notifyGesture("two_digits_click", gestureElement, gestureInfos);
+                        clearTimeout(gestureElement.checkTimer);
 					}
+                    
+                    gestureElement.reset();
 				}
 			}
 		},
@@ -391,7 +423,8 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_checkTwoDigitsPressed: function(gestureElement)
 		{
-			if (gestureElement.multitouch == true)
+			if(gestureElement.multitouch == true
+            && gestureElement.scale == 1.0)
 			{
 				var gestureInfos = {
 					digit1: gestureElement.digits[0],
@@ -408,6 +441,9 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_handleGestureStart: function(uxEvent, gestureElement)
 		{
+            if(wink.byId('box') != null)
+                wink.byId('box').innerHTML = '';
+            
 			wink.ux.touch.addListener(gestureElement.domNode, "gesturechange", { context: this, method: "_handleGestureChange", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
 			wink.ux.touch.addListener(gestureElement.domNode, "gestureend", { context: this, method: "_handleGestureEnd", arguments: [ gestureElement ] });
 			
@@ -421,10 +457,16 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_handleGestureChange: function(uxEvent, gestureElement)
 		{
+            if(gestureElement.digits.length < 2)
+                return;
+            if(wink.byId('box') != null)
+                wink.byId('box').innerHTML += uxEvent.srcEvent.scale+' - '+gestureElement.scale+'<br />';
+            
+            
 			if (gestureElement.multitouch == true)
 			{
-				var scaleAmplitude = uxEvent.srcEvent.scale - gestureElement.scale;
-				var rotationAmplitude = uxEvent.srcEvent.rotation - gestureElement.rotation;
+				var scaleAmplitude = uxEvent.srcEvent.scale/* - gestureElement.scale*/;
+				var rotationAmplitude = uxEvent.srcEvent.rotation/* - gestureElement.rotation*/;
 				
 				var scaleGestureInfos = {
 					digit1: gestureElement.digits[0],
@@ -443,7 +485,7 @@ define(['../../../_amd/core'], function(wink)
 					gestureElement.scale = uxEvent.srcEvent.scale;
 	
 					var currentGesture = null;
-					if (scaleAmplitude > 0)
+					if (uxEvent.srcEvent.scale >= 1)
 					{
 						currentGesture = "enlargement";
 					}
@@ -491,6 +533,7 @@ define(['../../../_amd/core'], function(wink)
 		{
 			var props = wink.ux.touch.getTouchProperties(touch);
 			var digit = {
+                pointerId: touch.pointerId,
 				x: props.x,
 				y: props.y,
 				timestamp: uxEvent.timestamp,

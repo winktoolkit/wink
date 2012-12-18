@@ -12,6 +12,9 @@
 		<title>test_gesture</title>
 
 		<style>		
+            body {
+                -ms-touch-action: none;
+            }
 			#container 
 			{
 				position: relative;
@@ -26,6 +29,8 @@
 				height: 47%;
 				left: 2%;
 				top: 2%;
+                
+                -ms-user-select: none;
 			}
 			
 			#box2 
@@ -35,6 +40,8 @@
 				height: 47%;
 				left: 2%;
 				top: 52%;
+                
+                -ms-user-select: none;
 			}
 			
 			#digit1 
@@ -95,7 +102,7 @@
 		<script type="text/javascript" src="../../../ux/touch/js/touch.js"></script>
 		<!-- END CORE -->
 		
-		<script type="text/javascript" src="../js/gesture.js"></script>
+		<script type="text/javascript" src="../js/ms_gesture.js"></script>
 		
 		<script type="text/javascript">
 			var BoxListener = function()
