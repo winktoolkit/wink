@@ -59,14 +59,14 @@ define(['../../../_amd/core'], function(wink)
     {
         _gestureElements				: [],
         _knownGestures					: [
-            "two_digits_click", 	// { digit1, digit2 }
-            "two_digits_press", 	// { digit1, digit2 }
-            "enlargement",			// { digit1, digit2, scale }
-            "narrowing",			// { digit1, digit2, scale }
-            "rotation",				// { digit1, digit2, rotation }
-            "instant_scale",		// { digit1, digit2, scale }
-            "instant_rotation",		// { digit1, digit2, rotation }
-            "gesture_end"			// { gestureDuration }
+            "two_digits_click",     // { digit1, digit2 }
+            "two_digits_press",     // { digit1, digit2 }
+            "enlargement",          // { digit1, digit2, scale }
+            "narrowing",            // { digit1, digit2, scale }
+            "rotation",             // { digit1, digit2, rotation }
+            "instant_scale",        // { digit1, digit2, scale }
+            "instant_rotation",     // { digit1, digit2, rotation }
+            "gesture_end"           // { gestureDuration }
         ],
         
         _evtKey                     : wink.has('mspointer') ? 'ms' : 'touch',
@@ -76,14 +76,14 @@ define(['../../../_amd/core'], function(wink)
             "_handleEnd"            : { 'touch': "_handleEnd",   'ms': "_MShandleEnd" },
             
             "_handleGestureStart"   : { 'touch': "_handleGestureStart",  'ms': "_handleGestureStart" },
-            "_handleGestureChange"  : { 'touch': "_handleGestureChange", 'ms': "_MShandleGestureChange" },
+            "_handleGestureChange"  : { 'touch': "_handleGestureChange", 'ms': "_handleGestureChange" },
             "_handleGestureEnd"     : { 'touch': "_handleGestureEnd",    'ms': "_handleGestureEnd" }
         },
         
-        TWO_DIGITS_CLICK_MAX_DURATION   : 350,		// ms
-        TWO_DIGITS_PRESS_MIN_DURATION   : 400,		// ms
-        SCALE_MIN_VALUE                 : 0.2,		// ratio
-        ROTATION_MIN_VALUE              : 5, 		// degree
+        TWO_DIGITS_CLICK_MAX_DURATION   : 350,      // ms
+        TWO_DIGITS_PRESS_MIN_DURATION   : 400,      // ms
+        SCALE_MIN_VALUE                 : 0.2,      // ratio
+        ROTATION_MIN_VALUE              : 5,        // degree
         
         /**
          * Allows to listen for a specific gesture on a dom Node
@@ -557,27 +557,35 @@ define(['../../../_amd/core'], function(wink)
         {
             if (gestureElement.multitouch == true)
             {
-                var scaleAmplitude = uxEvent.srcEvent.scale - gestureElement.scale;
-                var rotationAmplitude = uxEvent.srcEvent.rotation - gestureElement.rotation;
+                var scaleValue          = uxEvent.srcEvent.scale,
+                    rotateValue         = uxEvent.srcEvent.rotation,
+                    scaleAmplitude      = scaleValue,
+                    rotationAmplitude   = rotateValue;
+                    
+                if(wink.has('touch') && !wink.has('mspointer')) {
+                    scaleAmplitude      -= gestureElement.scale;
+                    rotationAmplitude   -= gestureElement.rotation;
+                }
                 
                 var scaleGestureInfos = {
                     digit1: gestureElement.digits[0],
                     digit2: gestureElement.digits[1],
-                    scale: wink.math.round(uxEvent.srcEvent.scale, 2)
+                    scale: wink.math.round(scaleValue, 2)
                 };
                 
                 var rotationGestureInfos = {
                     digit1: gestureElement.digits[0],
                     digit2: gestureElement.digits[1],
-                    rotation: wink.math.round(uxEvent.srcEvent.rotation, 2)
+                    rotation: wink.math.round(rotateValue, 2)
                 };
                 
                 if (Math.abs(scaleAmplitude) > this.SCALE_MIN_VALUE)
                 {
-                    gestureElement.scale = uxEvent.srcEvent.scale;
+                    gestureElement.scale = scaleValue;
                     
-                    var currentGesture = null;
-                    if (scaleAmplitude > 0)
+                    var currentGesture  = null;
+                    if((wink.has('touch') && !wink.has('mspointer') && scaleAmplitude > 0)
+                    || (wink.has('mspointer') && scaleValue >= 1))
                     {
                         currentGesture = "enlargement";
                     }
@@ -590,57 +598,7 @@ define(['../../../_amd/core'], function(wink)
                 
                 if (Math.abs(rotationAmplitude) > this.ROTATION_MIN_VALUE)
                 {
-                    gestureElement.rotation = uxEvent.srcEvent.rotation;
-                    this._notifyGesture("rotation", gestureElement, rotationGestureInfos);
-                }
-                
-                this._notifyGesture("instant_scale", gestureElement, scaleGestureInfos);
-                this._notifyGesture("instant_rotation", gestureElement, rotationGestureInfos);
-            }
-        },
-        /**
-         * An implementation for the mspointer
-         * 
-         * @see wink.ux.gesture._handleGestureChange
-         */
-        _MShandleGestureChange: function(uxEvent, gestureElement)
-        {
-            if (gestureElement.multitouch == true)
-            {
-                var scaleAmplitude = uxEvent.srcEvent.scale;
-                var rotationAmplitude = uxEvent.srcEvent.rotation;
-                
-                var scaleGestureInfos = {
-                    digit1: gestureElement.digits[0],
-                    digit2: gestureElement.digits[1],
-                    scale: wink.math.round(scaleAmplitude, 2)
-                };
-                
-                var rotationGestureInfos = {
-                    digit1: gestureElement.digits[0],
-                    digit2: gestureElement.digits[1],
-                    rotation: wink.math.round(rotationAmplitude, 2)
-                };
-                
-                if (Math.abs(scaleAmplitude) > this.SCALE_MIN_VALUE)
-                {
-                    gestureElement.scale = scaleAmplitude;
-                    
-                    var currentGesture = null;
-                    if (uxEvent.srcEvent.scale >= 1)
-                    {
-                        currentGesture = "enlargement";
-                    }
-                    else
-                    {
-                        currentGesture = "narrowing";
-                    }
-                    this._notifyGesture(currentGesture, gestureElement, scaleGestureInfos);
-                }
-                
-                if (Math.abs(rotationAmplitude) > this.ROTATION_MIN_VALUE)
-                {
-                    gestureElement.rotation = rotationAmplitude;
+                    gestureElement.rotation = rotateValue;
                     this._notifyGesture("rotation", gestureElement, rotationGestureInfos);
                 }
                 
@@ -695,7 +653,7 @@ define(['../../../_amd/core'], function(wink)
             return new Date().getTime();
         },
         /**
-         * @param {string} The default method name
+         * @param {string} eventType, the default method name
          * @returns {string} The good method according to the OS
          */
         _getEvtKey: function(eventType) {
