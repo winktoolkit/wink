@@ -124,12 +124,7 @@ define(['../../../_amd/core'], function(wink)
 			var index = this._getGestureElementIndex(domNode);
 			if (index == null) 
 			{
-                // Detect the good function
-                var createMethod = wink.has('touch') && !wink.has('mspointer') ? 
-                    '_createGestureElement' : 
-                    '_MScreateGestureElement';
-				
-                gestureElement = this[createMethod](domNode, opts.preventDefault);
+                gestureElement = this._createGestureElement(domNode, opts.preventDefault);
 				this._gestureElements.push(gestureElement);
 				
                 // MS pointer compatibility
@@ -271,28 +266,28 @@ define(['../../../_amd/core'], function(wink)
 					_t.rotation = 0;
 				}
 			};
+            
+            // Add mspointer compatibility
+            if(wink.has('mspointer')) 
+            {
+                gestureElement.boxGesture = null;
+                
+                gestureElement.addDigit = function(event) {
+                    this.digits.push(event);
+                };
+
+                gestureElement.removeDigit = function(pointerId) {
+                    for(var i=0, l=this.digits.length; i<l; i++) {
+                        if(this.digits[i].pointerId == pointerId) {
+                            this.digits.splice(i, 1);
+                            return;
+                        }
+                    }
+                };
+            }
+            
 			return gestureElement;
 		},
-        _MScreateGestureElement: function(domNode, preventDefault) 
-        {
-            var gestureElement = this._createGestureElement(domNode, preventDefault);
-            gestureElement.boxGesture = null;
-            
-            gestureElement.addDigit = function(event) {
-                this.digits.push(event);
-            };
-            
-            gestureElement.removeDigit = function(pointerId) {
-                for(var i=0, l=this.digits.length; i<l; i++) {
-                    if(this.digits[i].pointerId == pointerId) {
-                        this.digits.splice(i, 1);
-                        return;
-                    }
-                }
-            };
-            
-            return gestureElement;
-        },
 		/**
 		 * @param {string} gesture The gesture name to check
 		 */
@@ -374,6 +369,11 @@ define(['../../../_amd/core'], function(wink)
 				this._removeListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
 			}
 		},
+        /**
+         * An implementation for the mspointer
+         * 
+         * @see wink.ux.gesture._handleStart
+         */
         _MShandleStart: function(uxEvent, gestureElement) {
             if (gestureElement.checkTimer)
 			{
@@ -422,6 +422,11 @@ define(['../../../_amd/core'], function(wink)
 				gestureElement.digits.push(this._getDigit(uxEvent.srcEvent.targetTouches[1], uxEvent));
 			}
 		},
+        /**
+         * An implementation for the mspointer
+         * 
+         * @see wink.ux.gesture._handleMove
+         */
         _MShandleMove: function(uxEvent, gestureElement)
 		{
 			var nbTouches = gestureElement.digits.length;	
@@ -469,6 +474,11 @@ define(['../../../_amd/core'], function(wink)
 				}
 			}
 		},
+        /**
+         * An implementation for the mspointer
+         * 
+         * @see wink.ux.gesture._handleEnd
+         */
         _MShandleEnd: function(uxEvent, gestureElement)
 		{
             gestureElement.removeDigit(uxEvent.srcEvent.pointerId);
@@ -585,6 +595,11 @@ define(['../../../_amd/core'], function(wink)
 				this._notifyGesture("instant_rotation", gestureElement, rotationGestureInfos);
 			}
 		},
+        /**
+         * An implementation for the mspointer
+         * 
+         * @see wink.ux.gesture._handleGestureChange
+         */
         _MShandleGestureChange: function(uxEvent, gestureElement)
 		{
 			if (gestureElement.multitouch == true)
@@ -676,6 +691,10 @@ define(['../../../_amd/core'], function(wink)
 		{
 			return new Date().getTime();
 		},
+        /**
+         * @param {string} The default method name
+         * @returns {string} The good method according to the OS
+         */
         _getEvtKey: function(eventType) {
             return this._mappingMethods[eventType][this._evtKey];
         }
