@@ -12,6 +12,9 @@
 		<title>test_gesture</title>
 
 		<style>		
+            body {
+                -ms-touch-action: none;
+            }
 			#container 
 			{
 				position: relative;
@@ -36,6 +39,10 @@
 				left: 2%;
 				top: 52%;
 			}
+            
+            #box1, #box2 {
+                -ms-user-select: none;
+            }
 			
 			#digit1 
 			{

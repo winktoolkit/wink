@@ -14,7 +14,7 @@
  * @author Sylvain LALANDE
  */
 define(['../../../_amd/core'], function(wink)
-{
+{   
 	/**
 	 * @namespace 
 	 * 
@@ -68,12 +68,23 @@ define(['../../../_amd/core'], function(wink)
 			"instant_rotation",		// { digit1, digit2, rotation }
 			"gesture_end"			// { gestureDuration }
 		],
+        
+        _evtKey                     : wink.has('mspointer') ? 'ms' : 'touch',
+        _mappingMethods : {
+            "_handleStart"          : { 'touch': "_handleStart", 'ms': "_MShandleStart" },
+            "_handleMove"           : { 'touch': "_handleMove",  'ms': "_MShandleMove" },
+            "_handleEnd"            : { 'touch': "_handleEnd",   'ms': "_MShandleEnd" },
+            
+            "_handleGestureStart"   : { 'touch': "_handleGestureStart",  'ms': "_handleGestureStart" },
+            "_handleGestureChange"  : { 'touch': "_handleGestureChange", 'ms': "_MShandleGestureChange" },
+            "_handleGestureEnd"     : { 'touch': "_handleGestureEnd",    'ms': "_handleGestureEnd" }
+        },
 		
 		TWO_DIGITS_CLICK_MAX_DURATION	: 350,		// ms
 		TWO_DIGITS_PRESS_MIN_DURATION	: 400,		// ms
 		SCALE_MIN_VALUE					: 0.2,		// ratio
 		ROTATION_MIN_VALUE				: 5, 		// degree
-		
+        
 		/**
 		 * Allows to listen for a specific gesture on a dom Node
 		 * 
@@ -113,11 +124,22 @@ define(['../../../_amd/core'], function(wink)
 			var index = this._getGestureElementIndex(domNode);
 			if (index == null) 
 			{
-				gestureElement = this._createGestureElement(domNode, opts.preventDefault);
+                // Detect the good function
+                var createMethod = wink.has('touch') && !wink.has('mspointer') ? 
+                    '_createGestureElement' : 
+                    '_MScreateGestureElement';
+				
+                gestureElement = this[createMethod](domNode, opts.preventDefault);
 				this._gestureElements.push(gestureElement);
 				
-				wink.ux.touch.addListener(gestureElement.domNode, "start", { context: this, method: "_handleStart", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault, tracking: false });
-				wink.ux.touch.addListener(gestureElement.domNode, "gesturestart", { context: this, method: "_handleGestureStart", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+                // MS pointer compatibility
+                if(wink.has('mspointer')) {
+                    gestureElement.boxGesture = new MSGesture();
+                    gestureElement.boxGesture.target = domNode;
+                }
+                
+				this._addListener(gestureElement.domNode, "start", { context: this, method: "_handleStart", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault, tracking: false });
+				this._addListener(gestureElement.domNode, "gesturestart", { context: this, method: "_handleGestureStart", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
 			}
 			else
 			{
@@ -153,6 +175,14 @@ define(['../../../_amd/core'], function(wink)
 			gestureElement = this._gestureElements[index];
 			gestureElement.removeCallback(gesture, callback);
 		},
+        _addListener: function(domnode, type, callback, opts) {
+            callback.method = this._getEvtKey(callback.method);
+            wink.ux.touch.addListener(domnode, type, callback, opts);
+        },
+        _removeListener: function(domnode, type, callback, opts) {
+            callback.method = this._getEvtKey(callback.method);
+            wink.ux.touch.removeListener(domnode, type, callback, opts);
+        },
 		/**
 		 *
 		 * @param {HTMLElement} domNode The gesture element dom node
@@ -243,6 +273,26 @@ define(['../../../_amd/core'], function(wink)
 			};
 			return gestureElement;
 		},
+        _MScreateGestureElement: function(domNode, preventDefault) 
+        {
+            var gestureElement = this._createGestureElement(domNode, preventDefault);
+            gestureElement.boxGesture = null;
+            
+            gestureElement.addDigit = function(event) {
+                this.digits.push(event);
+            };
+            
+            gestureElement.removeDigit = function(pointerId) {
+                for(var i=0, l=this.digits.length; i<l; i++) {
+                    if(this.digits[i].pointerId == pointerId) {
+                        this.digits.splice(i, 1);
+                        return;
+                    }
+                }
+            };
+            
+            return gestureElement;
+        },
 		/**
 		 * @param {string} gesture The gesture name to check
 		 */
@@ -312,18 +362,45 @@ define(['../../../_amd/core'], function(wink)
 				gestureElement.digits.push(this._getDigit(uxEvent.srcEvent.targetTouches[0], uxEvent));
 				gestureElement.digits.push(this._getDigit(uxEvent.srcEvent.targetTouches[1], uxEvent));
 				
-				wink.ux.touch.addListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
-				wink.ux.touch.addListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
+				this._addListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+				this._addListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
 				
 				gestureElement.checkTimer = wink.setTimeout(this, "_checkTwoDigitsPressed", this.TWO_DIGITS_PRESS_MIN_DURATION, gestureElement);
 			}
 			else
 			{
 				gestureElement.multitouch = false;
-				wink.ux.touch.removeListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] });
-				wink.ux.touch.removeListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
+				this._removeListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] });
+				this._removeListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
 			}
 		},
+        _MShandleStart: function(uxEvent, gestureElement) {
+            if (gestureElement.checkTimer)
+			{
+				clearTimeout(gestureElement.checkTimer);
+			}
+            
+            gestureElement.boxGesture.addPointer(uxEvent.srcEvent.pointerId);
+			gestureElement.addDigit(this._getDigit(uxEvent.srcEvent, uxEvent));
+            
+			var nbTouches = gestureElement.digits.length;
+            if (nbTouches == 2)
+			{
+				gestureElement.multitouch = true;
+				gestureElement.multitouchStartTime = this._getTimeStamp();
+                
+                this._addListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+                this._addListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
+				
+				gestureElement.checkTimer = wink.setTimeout(this, "_checkTwoDigitsPressed", this.TWO_DIGITS_PRESS_MIN_DURATION, gestureElement);
+			}
+			else
+			{
+				gestureElement.multitouch = false;
+                this._addListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+                this._addListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
+			}
+        },
 		/**
 		 * Handle touch move
 		 * 
@@ -343,6 +420,14 @@ define(['../../../_amd/core'], function(wink)
 				gestureElement.digits = [];
 				gestureElement.digits.push(this._getDigit(uxEvent.srcEvent.targetTouches[0], uxEvent));
 				gestureElement.digits.push(this._getDigit(uxEvent.srcEvent.targetTouches[1], uxEvent));
+			}
+		},
+        _MShandleMove: function(uxEvent, gestureElement)
+		{
+			var nbTouches = gestureElement.digits.length;	
+			if (nbTouches == 2) {
+                gestureElement.removeDigit(uxEvent.srcEvent.pointerId);
+                gestureElement.addDigit(uxEvent.srcEvent);
 			}
 		},
 		/**
@@ -367,8 +452,8 @@ define(['../../../_amd/core'], function(wink)
 				
 				if (nbTouches == 0)
 				{
-					wink.ux.touch.removeListener(gestureElement.domNode, "move", { context: this, method: "_handleMove" });
-					wink.ux.touch.removeListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd" });
+					this._removeListener(gestureElement.domNode, "move", { context: this, method: "_handleMove" });
+					this._removeListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd" });
 					
 					gestureElement.multitouchEndTime = this._getTimeStamp();
 					var multitouchDuration = gestureElement.multitouchEndTime - gestureElement.multitouchStartTime;
@@ -384,6 +469,37 @@ define(['../../../_amd/core'], function(wink)
 				}
 			}
 		},
+        _MShandleEnd: function(uxEvent, gestureElement)
+		{
+            gestureElement.removeDigit(uxEvent.srcEvent.pointerId);
+            gestureElement.boxGesture.stop();
+            
+			if (gestureElement.multitouch == true)
+			{
+                var nbTouches = gestureElement.digits.length;
+                if (nbTouches == 0)
+				{
+					this._removeListener(gestureElement.domNode, "move", { context: this, method: "_handleMove" });
+					this._removeListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd" });
+					
+					gestureElement.multitouchEndTime = this._getTimeStamp();
+					var multitouchDuration = gestureElement.multitouchEndTime - gestureElement.multitouchStartTime;
+					
+					if (multitouchDuration < this.TWO_DIGITS_CLICK_MAX_DURATION
+                    && gestureElement.scale == 1.0)
+					{
+						var gestureInfos = {
+							digit1: gestureElement.digits[0],
+							digit2: gestureElement.digits[1]
+						};
+						this._notifyGesture("two_digits_click", gestureElement, gestureInfos);
+                        clearTimeout(gestureElement.checkTimer);
+					}
+                    
+                    gestureElement.reset();
+				}
+			}
+		},
 		/**
 		 * Check if two digits are pressed on the given gesture element.
 		 * 
@@ -391,7 +507,12 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_checkTwoDigitsPressed: function(gestureElement)
 		{
-			if (gestureElement.multitouch == true)
+            var isValid = gestureElement.multitouch == true;
+            if(wink.has('mspointer')) {
+                isValid = isValid && gestureElement.scale == 1;
+            }
+            
+			if (isValid)
 			{
 				var gestureInfos = {
 					digit1: gestureElement.digits[0],
@@ -408,8 +529,8 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_handleGestureStart: function(uxEvent, gestureElement)
 		{
-			wink.ux.touch.addListener(gestureElement.domNode, "gesturechange", { context: this, method: "_handleGestureChange", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
-			wink.ux.touch.addListener(gestureElement.domNode, "gestureend", { context: this, method: "_handleGestureEnd", arguments: [ gestureElement ] });
+			this._addListener(gestureElement.domNode, "gesturechange", { context: this, method: "_handleGestureChange", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+			this._addListener(gestureElement.domNode, "gestureend", { context: this, method: "_handleGestureEnd", arguments: [ gestureElement ] });
 			
 			gestureElement.gestureStartTime = this._getTimeStamp();
 		},
@@ -464,6 +585,51 @@ define(['../../../_amd/core'], function(wink)
 				this._notifyGesture("instant_rotation", gestureElement, rotationGestureInfos);
 			}
 		},
+        _MShandleGestureChange: function(uxEvent, gestureElement)
+		{
+			if (gestureElement.multitouch == true)
+			{
+				var scaleAmplitude = uxEvent.srcEvent.scale;
+				var rotationAmplitude = uxEvent.srcEvent.rotation;
+				
+				var scaleGestureInfos = {
+					digit1: gestureElement.digits[0],
+					digit2: gestureElement.digits[1],
+					scale: wink.math.round(scaleAmplitude, 2)
+				};
+				
+				var rotationGestureInfos = {
+					digit1: gestureElement.digits[0],
+					digit2: gestureElement.digits[1],
+					rotation: wink.math.round(rotationAmplitude, 2)
+				};
+				
+				if (Math.abs(scaleAmplitude) > this.SCALE_MIN_VALUE)
+				{
+					gestureElement.scale = scaleAmplitude;
+	
+					var currentGesture = null;
+					if (uxEvent.srcEvent.scale >= 1)
+					{
+						currentGesture = "enlargement";
+					}
+					else
+					{
+						currentGesture = "narrowing";
+					}
+					this._notifyGesture(currentGesture, gestureElement, scaleGestureInfos);
+				}
+	
+				if (Math.abs(rotationAmplitude) > this.ROTATION_MIN_VALUE)
+				{
+					gestureElement.rotation = rotationAmplitude;
+					this._notifyGesture("rotation", gestureElement, rotationGestureInfos);
+				}
+				
+				this._notifyGesture("instant_scale", gestureElement, scaleGestureInfos);
+				this._notifyGesture("instant_rotation", gestureElement, rotationGestureInfos);
+			}
+		},
 		/**
 		 * Handle gesture end
 		 * 
@@ -472,8 +638,8 @@ define(['../../../_amd/core'], function(wink)
 		 */
 		_handleGestureEnd: function(uxEvent, gestureElement)
 		{
-			wink.ux.touch.removeListener(gestureElement.domNode, "gesturechange", { context: this, method: "_handleGestureChange" });
-			wink.ux.touch.removeListener(gestureElement.domNode, "gestureend", { context: this, method: "_handleGestureEnd" });
+			this._removeListener(gestureElement.domNode, "gesturechange", { context: this, method: "_handleGestureChange" });
+			this._removeListener(gestureElement.domNode, "gestureend", { context: this, method: "_handleGestureEnd" });
 			
 			gestureElement.gestureEndTime = this._getTimeStamp();
 			var gestureDuration = gestureElement.gestureEndTime - gestureElement.gestureStartTime;
@@ -496,6 +662,11 @@ define(['../../../_amd/core'], function(wink)
 				timestamp: uxEvent.timestamp,
 				target: props.target
 			};
+            
+            if(wink.has('mspointer')) {
+                digit.pointerId = touch.pointerId;
+            }
+            
 			return digit;
 		},
 		/**
@@ -504,7 +675,10 @@ define(['../../../_amd/core'], function(wink)
 		_getTimeStamp: function()
 		{
 			return new Date().getTime();
-		}
+		},
+        _getEvtKey: function(eventType) {
+            return this._mappingMethods[eventType][this._evtKey];
+        }
 	};
 	
 	return wink.ux.gesture;
