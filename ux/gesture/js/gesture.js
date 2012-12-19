@@ -14,7 +14,7 @@
  * @author Sylvain LALANDE
  */
 define(['../../../_amd/core'], function(wink)
-{   
+{
 	/**
 	 * @namespace 
 	 * 
@@ -50,7 +50,7 @@ define(['../../../_amd/core'], function(wink)
 	 * var node = wink.byId("nodeId");
 	 * wink.ux.gesture.listenTo(node, "two_digits_click", { context: window, method: "twoDigitsClick" }, { preventDefault: true });
 	 * 
-	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, WP7
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ux/gesture/test/test_gesture_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ux/gesture/test/test_gesture_2.html" target="_blank">Test page (box)</a>
