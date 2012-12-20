@@ -69,15 +69,19 @@ define(['../../../_amd/core'], function(wink)
             "gesture_end"           // { gestureDuration }
         ],
         
-        _evtKey                     : wink.has('mspointer') ? 'ms' : 'touch',
+        _evtKey                     : (function() {
+                                            var type = 'touch';
+                                            if(wink.has('mspointer')) { type = 'pointer'; }
+                                            return type;
+                                        })(),
         _mappingMethods : {
-            "_handleStart"          : { 'touch': "_handleStart", 'ms': "_MShandleStart" },
-            "_handleMove"           : { 'touch': "_handleMove",  'ms': "_MShandleMove" },
-            "_handleEnd"            : { 'touch': "_handleEnd",   'ms': "_MShandleEnd" },
+            "_handleStart"          : { 'touch': "_handleStart", 'pointer': "_PointerHandleStart" },
+            "_handleMove"           : { 'touch': "_handleMove",  'pointer': "_PointerHandleMove" },
+            "_handleEnd"            : { 'touch': "_handleEnd",   'pointer': "_PointerHandleEnd" },
             
-            "_handleGestureStart"   : { 'touch': "_handleGestureStart",  'ms': "_handleGestureStart" },
-            "_handleGestureChange"  : { 'touch': "_handleGestureChange", 'ms': "_handleGestureChange" },
-            "_handleGestureEnd"     : { 'touch': "_handleGestureEnd",    'ms': "_handleGestureEnd" }
+            "_handleGestureStart"   : { 'touch': "_handleGestureStart",  'pointer': "_handleGestureStart" },
+            "_handleGestureChange"  : { 'touch': "_handleGestureChange", 'pointer': "_handleGestureChange" },
+            "_handleGestureEnd"     : { 'touch': "_handleGestureEnd",    'pointer': "_handleGestureEnd" }
         },
         
         TWO_DIGITS_CLICK_MAX_DURATION   : 350,      // ms
@@ -133,8 +137,8 @@ define(['../../../_amd/core'], function(wink)
                     gestureElement.boxGesture.target = domNode;
                 }
                 
-                this._addListener(gestureElement.domNode, "start", { context: this, method: "_handleStart", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault, tracking: false });
-                this._addListener(gestureElement.domNode, "gesturestart", { context: this, method: "_handleGestureStart", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+                wink.ux.touch.addListener(gestureElement.domNode, "start", { context: this, method: this._getEvtKey("_handleStart"), arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault, tracking: false });
+                wink.ux.touch.addListener(gestureElement.domNode, "gesturestart", { context: this, method: this._getEvtKey("_handleGestureStart"), arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
             }
             else
             {
@@ -169,14 +173,6 @@ define(['../../../_amd/core'], function(wink)
             }
             gestureElement = this._gestureElements[index];
             gestureElement.removeCallback(gesture, callback);
-        },
-        _addListener: function(domnode, type, callback, opts) {
-            callback.method = this._getEvtKey(callback.method);
-            wink.ux.touch.addListener(domnode, type, callback, opts);
-        },
-        _removeListener: function(domnode, type, callback, opts) {
-            callback.method = this._getEvtKey(callback.method);
-            wink.ux.touch.removeListener(domnode, type, callback, opts);
         },
         /**
          *
@@ -360,16 +356,16 @@ define(['../../../_amd/core'], function(wink)
                 gestureElement.digits.push(this._getDigit(uxEvent.srcEvent.targetTouches[0], uxEvent));
                 gestureElement.digits.push(this._getDigit(uxEvent.srcEvent.targetTouches[1], uxEvent));
                 
-                this._addListener(gestureElement.domNode, "move", {context: this, method: "_handleMove", arguments: [ gestureElement ]}, {preventDefault: gestureElement.preventDefault});
-                this._addListener(gestureElement.domNode, "end",  {context: this, method: "_handleEnd",  arguments: [ gestureElement ]});
+                wink.ux.touch.addListener(gestureElement.domNode, "move", {context: this, method: this._getEvtKey("_handleMove"), arguments: [ gestureElement ]}, {preventDefault: gestureElement.preventDefault});
+                wink.ux.touch.addListener(gestureElement.domNode, "end",  {context: this, method: this._getEvtKey("_handleEnd"),  arguments: [ gestureElement ]});
                 
                 gestureElement.checkTimer = wink.setTimeout(this, "_checkTwoDigitsPressed", this.TWO_DIGITS_PRESS_MIN_DURATION, gestureElement);
             }
             else
             {
                 gestureElement.multitouch = false;
-                this._removeListener(gestureElement.domNode, "move", {context: this, method: "_handleMove", arguments: [ gestureElement ]});
-                this._removeListener(gestureElement.domNode, "end", {context: this,  method: "_handleEnd",  arguments: [ gestureElement ]});
+                wink.ux.touch.removeListener(gestureElement.domNode, "move", {context: this, method: this._getEvtKey("_handleMove"), arguments: [ gestureElement ]});
+                wink.ux.touch.removeListener(gestureElement.domNode, "end", {context: this,  method: this._getEvtKey("_handleEnd"),  arguments: [ gestureElement ]});
             }
         },
         /**
@@ -377,7 +373,7 @@ define(['../../../_amd/core'], function(wink)
          * 
          * @see wink.ux.gesture._handleStart
          */
-        _MShandleStart: function(uxEvent, gestureElement) {
+        _PointerHandleStart: function(uxEvent, gestureElement) {
             if (gestureElement.checkTimer)
             {
                 clearTimeout(gestureElement.checkTimer);
@@ -392,16 +388,16 @@ define(['../../../_amd/core'], function(wink)
                 gestureElement.multitouch = true;
                 gestureElement.multitouchStartTime = this._getTimeStamp();
                 
-                this._addListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
-                this._addListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
+                wink.ux.touch.addListener(gestureElement.domNode, "move", { context: this, method: this._getEvtKey("_handleMove"), arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+                wink.ux.touch.addListener(gestureElement.domNode, "end", { context: this, method: this._getEvtKey("_handleEnd"), arguments: [ gestureElement ] });
                 
                 gestureElement.checkTimer = wink.setTimeout(this, "_checkTwoDigitsPressed", this.TWO_DIGITS_PRESS_MIN_DURATION, gestureElement);
             }
             else
             {
                 gestureElement.multitouch = false;
-                this._addListener(gestureElement.domNode, "move", { context: this, method: "_handleMove", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
-                this._addListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd", arguments: [ gestureElement ] });
+                wink.ux.touch.addListener(gestureElement.domNode, "move", { context: this, method: this._getEvtKey("_handleMove"), arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+                wink.ux.touch.addListener(gestureElement.domNode, "end", { context: this, method: this._getEvtKey("_handleEnd"), arguments: [ gestureElement ] });
             }
         },
         /**
@@ -430,7 +426,7 @@ define(['../../../_amd/core'], function(wink)
          * 
          * @see wink.ux.gesture._handleMove
          */
-        _MShandleMove: function(uxEvent, gestureElement)
+        _PointerHandleMove: function(uxEvent, gestureElement)
         {
             var nbTouches = gestureElement.digits.length;	
             if (nbTouches == 2) {
@@ -460,8 +456,8 @@ define(['../../../_amd/core'], function(wink)
                 
                 if (nbTouches == 0)
                 {
-                    this._removeListener(gestureElement.domNode, "move", { context: this, method: "_handleMove" });
-                    this._removeListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd" });
+                    wink.ux.touch.removeListener(gestureElement.domNode, "move", { context: this, method: this._getEvtKey("_handleMove") });
+                    wink.ux.touch.removeListener(gestureElement.domNode, "end", { context: this, method: this._getEvtKey("_handleEnd") });
                     
                     gestureElement.multitouchEndTime = this._getTimeStamp();
                     var multitouchDuration = gestureElement.multitouchEndTime - gestureElement.multitouchStartTime;
@@ -482,7 +478,7 @@ define(['../../../_amd/core'], function(wink)
          * 
          * @see wink.ux.gesture._handleEnd
          */
-        _MShandleEnd: function(uxEvent, gestureElement)
+        _PointerHandleEnd: function(uxEvent, gestureElement)
         {
             gestureElement.removeDigit(uxEvent.srcEvent.pointerId);
             gestureElement.boxGesture.stop();
@@ -492,8 +488,8 @@ define(['../../../_amd/core'], function(wink)
                 var nbTouches = gestureElement.digits.length;
                 if (nbTouches == 0)
                 {
-                    this._removeListener(gestureElement.domNode, "move", { context: this, method: "_handleMove" });
-                    this._removeListener(gestureElement.domNode, "end", { context: this, method: "_handleEnd" });
+                    wink.ux.touch.removeListener(gestureElement.domNode, "move", { context: this, method: this._getEvtKey("_handleMove") });
+                    wink.ux.touch.removeListener(gestureElement.domNode, "end", { context: this, method: this._getEvtKey("_handleEnd") });
                     
                     gestureElement.multitouchEndTime = this._getTimeStamp();
                     var multitouchDuration = gestureElement.multitouchEndTime - gestureElement.multitouchStartTime;
@@ -542,8 +538,8 @@ define(['../../../_amd/core'], function(wink)
          */
         _handleGestureStart: function(uxEvent, gestureElement)
         {
-            this._addListener(gestureElement.domNode, "gesturechange", { context: this, method: "_handleGestureChange", arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
-            this._addListener(gestureElement.domNode, "gestureend", { context: this, method: "_handleGestureEnd", arguments: [ gestureElement ] });
+            wink.ux.touch.addListener(gestureElement.domNode, "gesturechange", { context: this, method: this._getEvtKey("_handleGestureChange"), arguments: [ gestureElement ] }, { preventDefault: gestureElement.preventDefault });
+            wink.ux.touch.addListener(gestureElement.domNode, "gestureend", { context: this, method: this._getEvtKey("_handleGestureEnd"), arguments: [ gestureElement ] });
             
             gestureElement.gestureStartTime = this._getTimeStamp();
         },
@@ -614,8 +610,8 @@ define(['../../../_amd/core'], function(wink)
          */
         _handleGestureEnd: function(uxEvent, gestureElement)
         {
-            this._removeListener(gestureElement.domNode, "gesturechange", { context: this, method: "_handleGestureChange" });
-            this._removeListener(gestureElement.domNode, "gestureend", { context: this, method: "_handleGestureEnd" });
+            wink.ux.touch.removeListener(gestureElement.domNode, "gesturechange", { context: this, method: this._getEvtKey("_handleGestureChange") });
+            wink.ux.touch.removeListener(gestureElement.domNode, "gestureend", { context: this, method: this._getEvtKey("_handleGestureEnd") });
             
             gestureElement.gestureEndTime = this._getTimeStamp();
             var gestureDuration = gestureElement.gestureEndTime - gestureElement.gestureStartTime;
