@@ -16,28 +16,28 @@
 define(['../../../_amd/core'], function()
 {
 	var winkhas = wink.has,
-		inquireMap = winkhas.inquireMap,
-		setProp = winkhas.setProp,
-		deferProp = winkhas.deferProp,
-		w = window,
-		d = w.document,
-		de = d.documentElement,
-		events = {
-			ts: "touchstart",
-			tm: "touchmove",
-			te: "touchend",
-			gs: "gesturestart",
-			gc: "gesturechange",
-			ge: "gestureend",
-			tre: "transitionend",
-			msd: "mspointerdown",
-			msm: "mspointermove",
-			msu: "mspointerup",
-			msgs: "msgesturestart",
-			msgc: "msgesturechange",
-			msge: "msgestureend"
-		};
-
+	inquireMap = winkhas.inquireMap,
+	setProp = winkhas.setProp,
+	deferProp = winkhas.deferProp,
+	w = window,
+	d = w.document,
+	de = d.documentElement,
+	events = {
+		ts: "touchstart",
+		tm: "touchmove",
+		te: "touchend",
+		gs: "gesturestart",
+		gc: "gesturechange",
+		ge: "gestureend",
+		tre: "transitionend",
+		msd: "mspointerdown",
+		msm: "mspointermove",
+		msu: "mspointerup",
+		msgs: "msgesturestart",
+		msgc: "msgesturechange",
+		msge: "msgestureend"
+	};
+		
 	function hasEvent(name) {
 		return (('on' + events[name]) in de);
 	}
@@ -45,6 +45,9 @@ define(['../../../_amd/core'], function()
 	deferProp(events.ts, events.ts);
 	deferProp(events.tm, events.tm);
 	deferProp(events.te, events.te);
+	deferProp(events.gs, events.gs);
+	deferProp(events.gc, events.gc);
+	deferProp(events.ge, events.ge);
 	deferProp(events.tre, events.tre);
 	
 	inquireMap({
@@ -85,13 +88,34 @@ define(['../../../_amd/core'], function()
 			return (w.navigator.msPointerEnabled === true);
 		},
 		"gesturestart": function() {
-			return hasEvent("gs") || hasEvent("msgs");
+			var gs = hasEvent("gs");
+			if(gs) {
+				setProp(events.gs, events.gs);
+			} else {
+				gs = winkhas("mspointer") && hasEvent("msgs");
+				setProp(events.gs, gs ? 'MSGestureStart': 'gesturestart');
+			}
+			return gs;
 		},
 		"gesturechange": function() {
-			return hasEvent("gc") || hasEvent("msgc");
+			var gc = hasEvent("gc");
+			if(gc) {
+				setProp(events.gc, events.gc);
+			} else {
+				gc = winkhas("mspointer") && hasEvent("msgc");
+				setProp(events.gc, gc ? 'MSGestureChange': 'gesturechange');
+			}
+			return gc;
 		},
 		"gestureend": function() {
-			return hasEvent("ge") || hasEvent("msge");
+			var ge = hasEvent("ge");
+			if(ge) {
+				setProp(events.ge, events.ge);
+			} else {
+				ge = winkhas("mspointer") && hasEvent("msge");
+				setProp(events.ge, ge ? 'MSGestureEnd': 'gestureend');
+			}
+			return ge;
 		},
 		"gesture": function() {
 			return winkhas(events.gs) && winkhas(events.gc) && winkhas(events.ge);
