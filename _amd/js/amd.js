@@ -21,43 +21,46 @@
  * 
  * @see For more information <a href="http://www.commonjs.org/" target="_blank">commmonJS</a>
  */
-define = function(mid, dependencies, factory)
+if (typeof define === 'undefined') 
 {
-	//--> DUMB AMD define IMPLEMENTATION
-	if (typeof wink == 'undefined')
+	define = function(mid, dependencies, factory)
 	{
-		wink = {};
-	}
-
-	var args = arguments, 
-		arity = args.length, 
-		f, 
-		d = null;
-	
-	if ( arity == 1 )
-	{
-		f = args[0];
-	}
-	else if (  arity == 2 )
-	{
-		f = args[1];
-		if (typeof args[0] == "array" || args[0] instanceof Array)
+		//--> DUMB AMD define IMPLEMENTATION
+		if (typeof wink == 'undefined')
 		{
-			d = args[0];
+			wink = {};
 		}
-	}
-	else
-	{
-		f = args[2];
-		d = args[1];
-	}
 	
-	return f(wink);
-	//<-- DUMB AMD define IMPLEMENTATION
-};
-
-
-define.amd =
-{
-	vendor: 'winktoolkit.org'
-};
+		var args = arguments, 
+			arity = args.length, 
+			f, 
+			d = null;
+		
+		if ( arity == 1 )
+		{
+			f = args[0];
+		}
+		else if (  arity == 2 )
+		{
+			f = args[1];
+			if (typeof args[0] == "array" || args[0] instanceof Array)
+			{
+				d = args[0];
+			}
+		}
+		else
+		{
+			f = args[2];
+			d = args[1];
+		}
+		
+		return f(wink);
+		//<-- DUMB AMD define IMPLEMENTATION
+	};
+	
+	
+	define.amd =
+	{
+		vendor: 'winktoolkit.org'
+	};
+}
