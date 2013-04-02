@@ -95,6 +95,11 @@ define(['../../../_amd/core'], function()
 		{
 			bb = true;
 		}
+		if (regTest(/BB10/i, v))
+		{
+			bb = true;
+			c = d = e = false;
+		}
 	}
 
 	if (isSet(w))
