@@ -69,7 +69,7 @@ define(['../../../_amd/core'], function(wink)
 	 * 
 	 * wink.byId('video').appendChild(videoPlayer.getDomNode());
 	 * 
-	 * @compatibility Ipad, BlackBerry 7
+	 * @compatibility Ipad, BlackBerry 7, BB10
 	 * 
 	 * @see <a href="WINK_ROOT_URL/mm/videoplayer/test/test_videoplayer.html" target="_blank">Test page</a>
 	 */ 

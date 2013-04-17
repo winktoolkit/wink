@@ -57,7 +57,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * opener = new wink.ui.xyz.Opener(properties);
 	 * wink.byId('content').appendChild(opener.getDomNode());
 	 * 
-	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 3.0, Android 3.1, Android 4.0, BlackBerry 7
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 3.0, Android 3.1, Android 4.0, BlackBerry 7, BB10
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/opener/test/test_opener_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/opener/test/test_opener_2.html" target="_blank">Test page</a>

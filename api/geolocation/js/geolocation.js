@@ -25,7 +25,7 @@ define(['../../../_amd/core'], function(wink)
 	 * geoloc.addListener({ context: window, method: "accuratePositionChanged" }, 60000, true, true);
 	 * geoloc.addListener({ context: window, method: "positionChanged" }, 10000, true, false);
 	 * 
-	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, Windows Phone 7.5, Windows Phone 8
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BB10, Windows Phone 7.5, Windows Phone 8
 	 * 
 	 * @see <a href="WINK_ROOT_URL/api/geolocation/test/test_geolocation.html" target="_blank">Test page</a>
 	 */
