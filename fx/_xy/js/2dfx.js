@@ -36,10 +36,16 @@ define(['../../../_amd/core'], function()
 	wink.fx.addClass = addClass;
 	function addClass(node, classStr) 
 	{
-		var cls = node.className;
-		if ((" " + cls + " ").indexOf(" " + classStr + " ") < 0)
+		if ( wink.has("classlist") )
 		{
-			node.className = cls + (cls ? ' ' : '') + classStr;
+			node.classList.add(classStr);
+		} else
+		{
+			var cls = node.className;
+			if ((" " + cls + " ").indexOf(" " + classStr + " ") < 0)
+			{
+				node.className = cls + (cls ? ' ' : '') + classStr;
+			}
 		}
 	};
 	/**
@@ -53,10 +59,16 @@ define(['../../../_amd/core'], function()
 	wink.fx.removeClass = removeClass;
 	function removeClass(node, classStr)
 	{
-		var t = wink.trim((" " + node.className + " ").replace(" " + classStr + " ", " "));
-		if (node.className != t)
+		if ( wink.has("classlist") )
 		{
-			node.className = t;
+			node.classList.remove(classStr);
+		} else
+		{
+			var t = wink.trim((" " + node.className + " ").replace(" " + classStr + " ", " "));
+			if (node.className != t)
+			{
+				node.className = t;
+			}
 		}
 	};
 	/**
@@ -70,7 +82,13 @@ define(['../../../_amd/core'], function()
 	wink.fx.hasClass = hasClass;
 	function hasClass(node, classStr)
 	{
-	   return ((" "+ node.className +" ").indexOf(" " + classStr + " ") >= 0);
+	   	if ( wink.has("classlist") )
+		{
+			return node.classList.contains(classStr);
+		} else
+		{
+	   		return ((" "+ node.className +" ").indexOf(" " + classStr + " ") >= 0);
+	   	}
 	};
 	/**
 	 * Apply styles to a given node
@@ -96,6 +114,12 @@ define(['../../../_amd/core'], function()
 					properties[p] = v + "px";
 				}
 			}
+
+			if (wink.ua.isIE && p == "-ms-touch-action")
+			{
+				styleResolved = p
+			}
+
 			s[styleResolved] = properties[p];
 		}
 	};

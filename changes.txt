@@ -289,3 +289,5 @@ Release 1.4.4 [xx/xx/xxxx]
 	- Added compatibility with Windows phone 8 on wink.ux.gesture
 	- Updated wink.ua to detect BB10 devices correctly
 	- Added compatibility with BB10
+	- Corrected bug on Windows Phone 8 (ms-touch-action property not taken into account in wink.fx.apply)
+	- Added feature detection and support for classList

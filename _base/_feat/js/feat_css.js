@@ -49,7 +49,8 @@ define(['../../../_amd/core'], function()
 			bg: "background-image",
 			tr: "transition",
 			an: "animation",
-			cm: "cssmatrix"
+			cm: "cssmatrix",
+			cl: "classList"
 		};
 	
 	function normalizeKey(key) {
@@ -102,6 +103,7 @@ define(['../../../_amd/core'], function()
 	deferProp(cssKeys.tr, cssKeys.n);
 	deferProp(cssKeys.an, "css-animation");
 	deferProp(cssKeys.cm, "css-matrix");
+	deferProp(cssKeys.cl, cssKeys.cl);
 	
 	function singleProp(p) {
 		return function() {
@@ -284,6 +286,9 @@ define(['../../../_amd/core'], function()
 	    },
 	    "css-touch-action": function() {
 	    	return hasCss("touch-action");
+	    },
+	    "classlist": function() {
+	    	return cssKeys.cl in el;
 	    }
 	});
 	
