@@ -38,7 +38,14 @@ define(['../../../_amd/core'], function()
 	{
 		if ( wink.has("classlist") )
 		{
-			node.classList.add(classStr);
+			var cls = classStr.split(" "),
+				l = cls.length;
+
+			for ( var i=0; i<l; i++ )
+			{
+				node.classList.add(cls[i]);
+			}
+			
 		} else
 		{
 			var cls = node.className;
@@ -61,7 +68,13 @@ define(['../../../_amd/core'], function()
 	{
 		if ( wink.has("classlist") )
 		{
-			node.classList.remove(classStr);
+			var cls = classStr.split(" "),
+				l = cls.length;
+
+			for ( var i=0; i<l; i++ )
+			{
+				node.classList.remove(cls[i]);
+			}
 		} else
 		{
 			var t = wink.trim((" " + node.className + " ").replace(" " + classStr + " ", " "));

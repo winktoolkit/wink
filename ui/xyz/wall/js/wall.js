@@ -81,7 +81,7 @@ define(['../../../../_amd/core', '../../../../fx/_xyz/js/3dfx'], function(wink)
 	 * document.body.appendChild(wall.getDomNodes().leftPad);
 	 * document.body.appendChild(wall.getDomNodes().rightPad);
 	 * 
-	 * @compatibility iOS2 (slow), iOS3, iOS4, iOS5, iOS6, Android 4.0, BlackBerry 7, BB10, Windows Phone 8
+	 * @compatibility iOS2 (slow), iOS3, iOS4, iOS5, iOS6, Android 4.0, Android 4.1.2 (slow), BlackBerry 7, BB10, Windows Phone 8
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/wall/test/test_wall.html" target="_blank">Test page</a>
 	 */

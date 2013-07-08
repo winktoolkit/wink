@@ -68,7 +68,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * cube = new wink.ui.xyz.Cube(properties);
 	 * wink.byId("container").appendChild(cube.getDomNode());
 	 * 
-	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 3.0, Android 3.1, Android 4.0, BlackBerry 7, BB10
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 3.0, Android 3.1, Android 4.0, Android 4.1.2, BlackBerry 7, BB10
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/cube/test/test_cube_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/xyz/cube/test/test_cube_2.html" target="_blank">Test page (actu)</a>

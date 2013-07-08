@@ -240,8 +240,7 @@
 						name: 'carousel',
 						label: 'Vertical carousel',
 						page: './ui/xy/carousel/test/test_carousel_2.html',
-						page_ie: './ui/xy/carousel/test/test_carousel_2_ie.html',
-						/*isNew: false*/
+						page_ie: './ui/xy/carousel/test/test_carousel_2_ie.html'
 					},
 					{
 						name: 'colorpicker',
@@ -256,8 +255,8 @@
 					{
 						name: 'mask',
 						label: 'Mask',
-						page: './ui/xy/mask/test/test_mask.html',
-						isNew: true
+						page: './ui/xy/mask/test/test_mask.html'
+						/*isNew: true*/
 					},
 					{
 						name: 'menu',
@@ -751,8 +750,8 @@
 						disableTestPage('mediawheel_audio');
 					}
 					
-					// Not IPad nor bb7
-					if ( !ipad && !(wink.ua.isBlackBerry && wink.ua.browserVersion >= 7 ))
+					// Not IPad nor bb7 nor Android 4.1.2+
+					if ( !ipad && !(wink.ua.isBlackBerry && wink.ua.browserVersion >= 7 ) && !(wink.ua.isAndroid && wink.ua.osVersion == 4 && wink.ua.osUpdateVersion >= 1 ) && !(wink.ua.isAndroid && wink.ua.osVersion > 4 ))
 					{
 						disableTestPage('videoplayer');
 						disableTestPage('mediawheel_video');

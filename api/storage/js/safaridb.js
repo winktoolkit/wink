@@ -15,7 +15,7 @@ define(['../../../_amd/core', './storage'], function(wink)
 	/**
 	 * @class Implements the database management methods for the Iphone
 	 * 
-	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, BlackBerry 6, BlackBerry 7, BB10, Bada 1.0
+	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, Android 4.1.2, BlackBerry 6, BlackBerry 7, BB10, Bada 1.0
 	 */
 	wink.api.storage.SafariDb = function()
 	{
