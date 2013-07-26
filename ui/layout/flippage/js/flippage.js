@@ -41,7 +41,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 	 * flipPage = new wink.ui.layout.FlipPage(properties);
 	 * document.body.appendChild(flipPage.getDomNode());
 	 * 
-	 * @compatibility iOS3, iOS4, iOS5, iOS6, BlackBerry 7 (partial), BB10 (partial)
+	 * @compatibility iOS3, iOS4, iOS5, iOS6, Android 4.1.2, BlackBerry 7 (partial), BB10 (partial)
 	 * 
 	 * @see <a href="WINK_ROOT_URL/ui/layout/flippage/test/test_flippage_1.html" target="_blank">Test page</a>
 	 * @see <a href="WINK_ROOT_URL/ui/layout/flippage/test/test_flippage_2.html" target="_blank">Test page (with history)</a>
@@ -167,7 +167,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			if ( this._currentPageIndex < (this._pagesList.length-2))
 			{
 				this._currentPageIndex++;
-				this._pagesList[this._currentPageIndex].setPosition(0);
+				this._pagesList[this._currentPageIndex].animate(0);
 				this._currentPage = this._pagesList[this._currentPageIndex];
 	
 				wink.publish('/flippage/events/flipstart', {'id': this.pages[this._currentPageIndex], 'direction': 1});
@@ -186,7 +186,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 		{
 			if ( this._currentPageIndex != 0 )
 			{			
-				this._pagesList[this._currentPageIndex].setPosition(1);
+				this._pagesList[this._currentPageIndex].animate(1);
 				this._currentPageIndex--;
 				this._currentPage = this._pagesList[this._currentPageIndex];
 	
@@ -403,7 +403,7 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 				
 				this._domNode.appendChild(page.getDomNode());
 	
-				wink.fx.applyTransformTransition(page.getDomNode(), this.duration + 'ms', '0ms', 'ease-in-out');
+				wink.fx.applyTransformTransition(page.getDomNode(), this.duration/2 + 'ms', '0ms', 'linear');
 				
 				this._pagesList.push(page);
 			}
@@ -582,6 +582,65 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			
 			wink.fx.applyComposedTransform(this._domNode);
 		},
+
+		/**
+		 * Set the current position of the page
+		 * 
+		 * @param {integer} position 0: page is flipped ; 1: page is not flipped
+		 */
+		animate: function(position)
+		{
+			this.position = position;
+			this._rotateHalf();
+		},
+
+		/**
+		 * Set the current position of the page
+		 */
+		_rotateHalf: function()
+		{
+			wink.fx.onTransitionEnd(this._domNode, wink.bind(this._rotateFull, this));
+			wink.fx.initComposedTransform(this._domNode, false);
+			
+			wink.fx.setTransformPart(this._domNode, 1, { type: 'rotate', x: 0, y: 1, z: 0, angle: -90 });
+			
+			wink.fx.applyComposedTransform(this._domNode);
+		},
+
+		/**
+		 * Set the current position of the page
+		 */
+		_rotateFull: function()
+		{
+			wink.fx.onTransitionEnd(this._domNode, wink.bind(this._rotateEnd, this));
+			wink.fx.initComposedTransform(this._domNode, false);
+			
+			if ( this.position == 0 )
+			{
+				wink.fx.setTransformPart(this._domNode, 1, { type: 'rotate', x: 0, y: 1, z: 0, angle: -179.999 });
+				this._domNode.style.zIndex = 1000 - this.zIndex;
+			} else
+			{
+				wink.fx.setTransformPart(this._domNode, 1, { type: 'rotate', x: 0, y: 1, z: 0, angle: 0 });
+				this._domNode.style.zIndex = this.zIndex;
+			}
+			
+			wink.fx.applyComposedTransform(this._domNode);
+		},
+
+		/**
+		 * Set the current position of the page
+		 */
+		_rotateEnd: function()
+		{
+			if ( this.position == 0 )
+			{
+				wink.publish('/flippage/events/flipend', {'id': this._backId});
+			} else
+			{
+				wink.publish('/flippage/events/flipend', {'id': this._frontId});
+			}
+		},
 		
 		/**
 		 * Initialize the Page node
@@ -605,18 +664,6 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			
 			this._domNode.appendChild(this._frontNode);
 			this._domNode.appendChild(this._backNode);
-			
-			var onFlipEnd = wink.bind(function()
-			{
-				if ( this.position == 0 )
-				{
-					wink.publish('/flippage/events/flipend', {'id': this._backId});
-				} else
-				{
-					wink.publish('/flippage/events/flipend', {'id': this._frontId});
-				}
-			}, this);
-			wink.fx.onTransitionEnd(this._domNode, onFlipEnd, true);
 			
 			wink.isNull(this._frontContent)?this._frontId = '':this._frontId = this._frontContent.id;
 			wink.isNull(this._backContent)?this._backId = '':this._backId = this._backContent.id;
