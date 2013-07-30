@@ -285,7 +285,7 @@ Release 1.4.3 [03/12/2012]
 	- Windows Phone 8 compatibility (feat, ua, touch, CSS)
 	- Added the builder web interface
 	
-Release 1.4.4 [xx/xx/xxxx]
+Release 1.4.4 [30/07/2013]
 	- Added compatibility with Windows phone 8 on wink.ux.gesture
 	- Updated wink.ua to detect BB10 devices correctly
 	- Added compatibility with BB10
