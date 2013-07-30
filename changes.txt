@@ -292,3 +292,5 @@ Release 1.4.4 [30/07/2013]
 	- Corrected bug on Windows Phone 8 (ms-touch-action property not taken into account in wink.fx.apply)
 	- Added feature detection and support for classList
 	- Improved wink.ui.layout.Flippage to work on chrome
+
+Release 1.4.5 [xx/xx/xxxx]
