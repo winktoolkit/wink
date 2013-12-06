@@ -263,6 +263,15 @@ define(['../../../../_amd/core', '../../../../math/_geometric/js/geometric', '..
 			{
 				return
 			}
+
+			if ( ((this._endTime - this._startTime) < 250) && (Math.abs(this._endX - this._startX) < 20) && (Math.abs(this._endY - this._startY) < 20))
+			{
+				if (!wink.ua.isIE) 
+				{
+					e.dispatch(e.target, 'click');
+				}
+				return;
+			}
 			
 			if ( Math.abs(this._endY - this._startY) > 30 || Math.abs(this._endX - this._startX) < 30 )
 			{
