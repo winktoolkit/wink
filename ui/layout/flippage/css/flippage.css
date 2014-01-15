@@ -32,10 +32,10 @@
 	
 	overflow: hidden;
 	
-	transform: rotateY(360deg);
+	transform: rotateY(0deg);
 	backface-visibility: hidden;
 
-	-webkit-transform: rotateY(360deg);
+	-webkit-transform: rotateY(0deg);
 	-webkit-backface-visibility: hidden;
 }
 
