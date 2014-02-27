@@ -102,10 +102,10 @@ define(['../../../_amd/core'], function()
 	 */
 	var _dispatch = function(topic, parameters)
 	{
-		var i, l = _subscribed_topics.length;
+		var i, topics = _subscribed_topics.slice(); l = topics.length;
 		for (i = 0; i < l; i++) 
 		{
-			var sti = _subscribed_topics[i];
+			var sti = topics[i];
 			if (sti && sti[0] == topic) 
 			{
 				if ( wink.isSet(sti[1])) 
