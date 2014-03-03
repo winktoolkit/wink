@@ -30,6 +30,9 @@ define(['../../../_amd/core'], function()
 		gc: "gesturechange",
 		ge: "gestureend",
 		tre: "transitionend",
+		pd: "pointerdown",
+		pm: "pointermove",
+		pu: "pointerup",
 		msd: "mspointerdown",
 		msm: "mspointermove",
 		msu: "mspointerup",
@@ -56,8 +59,13 @@ define(['../../../_amd/core'], function()
 			if (ts) {
 				setProp(events.ts, events.ts);
 			} else {
-				ts = winkhas("mspointer") && hasEvent("msd");
-				setProp(events.ts, ts ? 'MSPointerDown' : 'mousedown');
+				ts = winkhas("mspointer") && hasEvent("pd");
+				if ( ts ) {
+					setProp(events.ts, 'pointerdown');
+				} else {
+					ts = winkhas("mspointer") && hasEvent("msd");
+					setProp(events.ts, ts ? 'MSPointerDown' : 'mousedown');
+				}
 			}
 			return ts;
 		},
@@ -66,8 +74,13 @@ define(['../../../_amd/core'], function()
 			if (ts) {
 				setProp(events.tm, events.tm);
 			} else {
-				ts = winkhas("mspointer") && hasEvent("msm");
-				setProp(events.tm, ts ? 'MSPointerMove' : 'mousemove');
+				ts = winkhas("mspointer") && hasEvent("pm");
+				if ( ts ) {
+					setProp(events.tm, 'pointermove');
+				} else {
+					ts = winkhas("mspointer") && hasEvent("msm");
+					setProp(events.tm, ts ? 'MSPointerMove' : 'mousemove');
+				}
 			}
 			return ts;
 		},
@@ -76,8 +89,13 @@ define(['../../../_amd/core'], function()
 			if (ts) {
 				setProp(events.te, events.te);
 			} else {
-				ts = winkhas("mspointer") && hasEvent("msu");
-				setProp(events.te, ts ? 'MSPointerUp' : 'mouseup');
+				ts = winkhas("mspointer") && hasEvent("pu");
+				if ( ts ) {
+					setProp(events.te, 'pointerup');
+				} else {
+					ts = winkhas("mspointer") && hasEvent("msu");
+					setProp(events.te, ts ? 'MSPointerUp' : 'mouseup');
+				}
 			}
 			return ts;
 		},
