@@ -28,9 +28,9 @@ define(['../../../../_amd/core'], function(wink)
 	 * 
 	 * @compatibility iOS2, iOS3, iOS4, iOS5, iOS6, Android 1.1, Android 1.5, Android 2.1, Android 2.2, Android 2.3, Android 3.0, Android 3.1, Android 4.0, Android 4.1.2, BlackBerry 6, BlackBerry 7, BB10, Bada 1.0, Windows Phone 7.5, Windows Phone 8
 	 * 
-	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/layout/test/test_accordion_1.html" target="_blank">Test page</a>
-	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/layout/test/test_accordion_2.html" target="_blank">Test page (advanced)</a>
-	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/layout/test/test_accordion_3.html" target="_blank">Test page (section titles with margins)</a>
+	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/test/test_accordion_1.html" target="_blank">Test page</a>
+	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/test/test_accordion_2.html" target="_blank">Test page (advanced)</a>
+	 * @see <a href="WINK_ROOT_URL/ui/layout/accordion/test/test_accordion_3.html" target="_blank">Test page (section titles with margins)</a>
 	 */
 	wink.ui.layout.Accordion = function(properties)
 	{
