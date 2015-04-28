@@ -30,6 +30,7 @@ define(['../../../_amd/core'], function()
 		gc: "gesturechange",
 		ge: "gestureend",
 		tre: "transitionend",
+		ane: "animationend",
 		pd: "pointerdown",
 		pm: "pointermove",
 		pu: "pointerup",
@@ -52,6 +53,7 @@ define(['../../../_amd/core'], function()
 	deferProp(events.gc, events.gc);
 	deferProp(events.ge, events.ge);
 	deferProp(events.tre, events.tre);
+	deferProp(events.ane, events.ane);
 	
 	inquireMap({
 		"touchstart": function() {
@@ -148,6 +150,20 @@ define(['../../../_amd/core'], function()
 					val = "oTransitionEnd";
 				}
 				setProp(events.tre, val);
+				return true;
+			}
+			return false;
+		},
+		"animationend": function() {
+			if (winkhas("css-animation")) {
+				var prefix = wink.has.prefix;
+				var val = events.ane;
+				if (prefix == "-webkit-") {
+					val = "webkitAnimationEnd";
+				} else if (prefix == "-o-") {
+					val = "oAnimationEnd";
+				}
+				setProp(events.ane, val);
 				return true;
 			}
 			return false;

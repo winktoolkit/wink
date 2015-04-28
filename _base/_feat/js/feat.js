@@ -70,6 +70,7 @@ define(['../../../_amd/core'], function()
 	 * gesturestart, 
 	 * gesturechange, 
 	 * transitionend, 
+	 * animationend, 
 	 * gestureend, 
 	 * gesture, 
 	 * json-parse

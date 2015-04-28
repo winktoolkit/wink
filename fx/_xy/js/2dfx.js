@@ -208,6 +208,31 @@ define(['../../../_amd/core'], function()
 		return postwork;
 	};
 	/**
+	 * Connect a function to the end of an animation on the given node.
+	 * returns the listener in order to be able to remove it.
+	 * 
+	 * @function
+	 * 
+	 * @param {HTMLElement} node The node on which an animation is applied
+	 * @param {string} func The function to connect
+	 * @param {boolean} [persistent=false] Specify that the listener must be kept
+	 * 
+	 * @returns {function} The aniùation end listener
+	 */
+	wink.fx.onAnimationEnd = onAnimationEnd;
+	function onAnimationEnd(node, func, persistent)
+	{
+		var trend = getprop("animationend");
+		var postwork = function(e) {
+			if (persistent !== true) {
+				node.removeEventListener(trend, postwork, false);
+			}
+			func(e);
+		};
+		node.addEventListener(trend, postwork, false);
+		return postwork;
+	};
+	/**
 	 * Returns the instantaneous position of the node, even during a transition.
 	 * 
 	 * @function
