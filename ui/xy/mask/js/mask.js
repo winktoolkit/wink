@@ -170,10 +170,10 @@ define(['../../../../_amd/core'], function(wink)
 		 */
 		update: function()
 		{
-			wink.fx.apply(_container, {
+			wink.fx.apply(this._containerNode, {
 				"z-index": this.zIndex
 			});
-			wink.fx.apply(_sublayer, {
+			wink.fx.apply(this._sublayerNode, {
 				backgroundColor: this.color,
 				opacity: this.opacity
 			});
